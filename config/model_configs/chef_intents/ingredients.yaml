@@ -1,0 +1,249 @@
+# Master Chef - Ingredient Database
+# Comprehensive ingredient categorization for recipe matching
+
+version: "1.0"
+
+# Ingredient categories
+categories:
+  proteins:
+    meat:
+      - chicken
+      - beef
+      - pork
+      - lamb
+      - turkey
+      - duck
+      - veal
+      
+    seafood:
+      - salmon
+      - tuna
+      - shrimp
+      - cod
+      - tilapia
+      - crab
+      - lobster
+      - mussels
+      - clams
+      
+    plant_based:
+      - tofu
+      - tempeh
+      - seitan
+      - lentils
+      - chickpeas
+      - black beans
+      - kidney beans
+      - edamame
+      
+    dairy:
+      - eggs
+      - milk
+      - cheese
+      - yogurt
+      - butter
+      - cream
+      
+  vegetables:
+    leafy_greens:
+      - spinach
+      - lettuce
+      - kale
+      - arugula
+      - chard
+      - cabbage
+      
+    root_vegetables:
+      - potato
+      - sweet potato
+      - carrot
+      - onion
+      - garlic
+      - ginger
+      - beet
+      - turnip
+      - radish
+      
+    cruciferous:
+      - broccoli
+      - cauliflower
+      - brussels sprouts
+      
+    nightshades:
+      - tomato
+      - bell pepper
+      - eggplant
+      - chili pepper
+      
+    squash:
+      - zucchini
+      - cucumber
+      - pumpkin
+      - butternut squash
+      
+  grains:
+    - rice
+    - pasta
+    - bread
+    - quinoa
+    - oats
+    - barley
+    - couscous
+    - noodles
+    
+  fruits:
+    citrus:
+      - lemon
+      - lime
+      - orange
+      - grapefruit
+      
+    berries:
+      - strawberry
+      - blueberry
+      - raspberry
+      - blackberry
+      
+    tropical:
+      - banana
+      - mango
+      - pineapple
+      - coconut
+      
+    stone_fruits:
+      - apple
+      - pear
+      - peach
+      - plum
+      - cherry
+      
+  herbs_spices:
+    herbs:
+      - basil
+      - parsley
+      - cilantro
+      - thyme
+      - rosemary
+      - oregano
+      - mint
+      - dill
+      
+    spices:
+      - salt
+      - pepper
+      - paprika
+      - cumin
+      - coriander
+      - turmeric
+      - cinnamon
+      - nutmeg
+      - cayenne
+      
+  condiments_sauces:
+    - olive oil
+    - vegetable oil
+    - soy sauce
+    - vinegar
+    - mustard
+    - ketchup
+    - mayonnaise
+    - hot sauce
+    
+  baking:
+    - flour
+    - sugar
+    - baking powder
+    - baking soda
+    - vanilla extract
+    - chocolate
+    - cocoa powder
+    
+  nuts_seeds:
+    - almonds
+    - walnuts
+    - cashews
+    - peanuts
+    - sunflower seeds
+    - chia seeds
+    - sesame seeds
+
+# Ingredient properties
+properties:
+  chicken:
+    category: "proteins.meat"
+    allergens: []
+    vegetarian: false
+    vegan: false
+    gluten_free: true
+    common_substitutes: ["turkey", "tofu"]
+    
+  eggs:
+    category: "proteins.dairy"
+    allergens: ["eggs"]
+    vegetarian: true
+    vegan: false
+    gluten_free: true
+    common_substitutes: ["flax eggs", "applesauce"]
+    
+  milk:
+    category: "proteins.dairy"
+    allergens: ["dairy"]
+    vegetarian: true
+    vegan: false
+    gluten_free: true
+    common_substitutes: ["almond milk", "soy milk", "oat milk"]
+    
+  pasta:
+    category: "grains"
+    allergens: ["gluten"]
+    vegetarian: true
+    vegan: true
+    gluten_free: false
+    common_substitutes: ["rice noodles", "zucchini noodles"]
+    
+  shrimp:
+    category: "proteins.seafood"
+    allergens: ["shellfish"]
+    vegetarian: false
+    vegan: false
+    gluten_free: true
+    common_substitutes: ["chicken", "tofu"]
+    
+  nuts:
+    category: "nuts_seeds"
+    allergens: ["nuts"]
+    vegetarian: true
+    vegan: true
+    gluten_free: true
+    common_substitutes: ["seeds", "coconut flakes"]
+
+# Ingredient combinations (commonly used together)
+common_combinations:
+  italian:
+    - [tomato, basil, garlic, olive oil]
+    - [pasta, cheese, tomato]
+    - [chicken, tomato, basil, cheese]
+    
+  mexican:
+    - [beans, rice, tomato, onion]
+    - [chicken, chili pepper, lime, cilantro]
+    - [beef, onion, garlic, cumin]
+    
+  asian:
+    - [rice, soy sauce, ginger, garlic]
+    - [chicken, soy sauce, vegetables]
+    - [shrimp, garlic, ginger, vegetables]
+    
+  mediterranean:
+    - [olive oil, lemon, garlic, herbs]
+    - [chickpeas, tomato, cucumber, olive oil]
+    - [fish, lemon, olive oil, herbs]
+
+# Minimum ingredients for dish types
+minimum_ingredients:
+  main_dish: 3
+  soup: 4
+  salad: 3
+  dessert: 3
+  snack: 1
+  beverage: 2

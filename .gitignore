@@ -1,0 +1,167 @@
+# ============================================================
+# Python
+# ============================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ============================================================
+# Virtual Environments
+# ============================================================
+chatbot-env/
+marker-env/
+venv/
+ENV/
+env/
+.venv
+
+# ============================================================
+# 12-Factor: Environment Variables (NEVER commit!)
+# ============================================================
+.env
+.env.local
+.env.*.local
+
+# ============================================================
+# Data (12-Factor: Backing Services)
+# ============================================================
+data/raw/*
+data/processed/*
+data/embeddings/*
+data/external/*
+# Keep AIML knowledge bases in version control
+!data/knowledge_bases/
+data/hf_cache/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/embeddings/.gitkeep
+
+# ============================================================
+# Models (12-Factor: Build Artifacts)
+# ============================================================
+models/aiml/*
+models/dialogpt/*
+models/transformer/*
+models/cache/*
+!models/aiml/.gitkeep
+!models/dialogpt/.gitkeep
+!models/transformer/.gitkeep
+*.pth
+*.pt
+*.bin
+*.h5
+*.pkl
+*.pickle
+
+# ============================================================
+# Logs (12-Factor: Treat logs as streams)
+# ============================================================
+logs/
+*.log
+
+# ============================================================
+# Jupyter Notebooks
+# ============================================================
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+*.ipynb_checkpoints/
+
+# Notebook outputs (keep notebooks but clean outputs)
+# Uncomment if you want to ignore outputs:
+# notebooks/**/*-checkpoint.ipynb
+
+# ============================================================
+# IDE Settings
+# ============================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ============================================================
+# Testing
+# ============================================================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# ============================================================
+# Documentation Build
+# ============================================================
+docs/_build/
+docs/.doctrees/
+
+# ============================================================
+# LaTeX
+# ============================================================
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.fdb_latexmk
+paper/*.fls
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
+paper/*.toc
+paper/*.pdf
+!paper/main.pdf
+
+# ============================================================
+# Temporary Files
+# ============================================================
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+
+# ============================================================
+# OS Files
+# ============================================================
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# ============================================================
+# HuggingFace Cache
+# ============================================================
+.cache/
+transformers_cache/
+
+# ============================================================
+# Generated Files
+# ============================================================
+requirements_installed.txt
+requirements_full.txt
+
+# ============================================================
+# Ignore old structure files (migration)
+# ============================================================
+src/data/preprocessor.py.backup

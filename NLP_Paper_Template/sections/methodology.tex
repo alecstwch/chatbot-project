@@ -1,0 +1,33 @@
+\section{Method}
+\label{sec:method}
+In case you’re presenting a survey: explain main methodologies and selection process (i.e. you are surveying either chronologically, or in order of SOTA achievements), discuss advantages and disadvantages to the methods used and introduced
+ 
+In the case of presenting specific applications: describe the method, compare it with other results in the field
+
+\subsection{Dataset}
+\label{subsec:dataset}
+
+What does it look like? How was this data obtained? Was it annotated manually/automatically? What is the data distribution? What do you expect to be relevant for your model considering the data?
+
+\subsection{Preprocessing}
+\label{subsec:preprocessing}
+
+What preprocessing methods did you try? Why did you chose them? How did they affect the model?
+
+\subsection{Method}
+\label{subsec:method}
+
+Models you are using: why did you chose them, how do they work, why did you chose those hyperparameters. Mention if you modified an already existing model, how and why.
+
+Experiments: compare your experiments with the already existing SOTA. Explain the context briefly.
+
+Scores are irrelevant unless compared with a baseline. If all experiments have 98\% accuracy, either the dataset was bad or your implementation has a grave mistake. Don't get happy too quickly.
+
+Feature Importance: can you manually interpret the result in any way? If not, why?
+
+Some resources to get you started:
+
+\begin{itemize}
+    \item \href{https://www.tensorflow.org/tutorials/keras/text_classification#download_and_explore_the_imdb_dataset}{feed-forward NN}, \href{https://colab.research.google.com/github/Hvass-Labs/TensorFlow-Tutorials/blob/master/20_Natural_Language_Processing.ipynb}{recurrent NN}
+    \item \href{https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/classify_text_with_bert.ipynb}{transformers}, \href{https://colab.research.google.com/github/tensorflow/text/blob/master/docs/tutorials/fine_tune_bert.ipynb}{transformers}
+\end{itemize}

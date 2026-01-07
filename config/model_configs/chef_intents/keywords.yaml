@@ -1,0 +1,272 @@
+# Master Chef - Intent Keywords
+# Keyword patterns for conversational recipe recommendation
+
+version: "1.0"
+
+keywords:
+  identify_ingredients:
+    primary:
+      - have
+      - got
+      - available
+      - ingredients
+      - using
+      
+    phrases:
+      - "i have"
+      - "i've got"
+      - "i can use"
+      - "available ingredients"
+      - "what i have"
+      
+  identify_constraints:
+    allergies:
+      - allergic
+      - allergy
+      - allergies
+      - "can't eat"
+      - intolerant
+      - sensitive
+      
+    dietary:
+      - vegetarian
+      - vegan
+      - pescatarian
+      - gluten-free
+      - dairy-free
+      - nut-free
+      - low-carb
+      - keto
+      - paleo
+      
+    health:
+      - calories
+      - low-fat
+      - low-sodium
+      - diabetic
+      - heart-healthy
+      - diet
+      - healthy
+      
+    phrases:
+      - "allergic to"
+      - "can't have"
+      - "need to avoid"
+      - "dietary restrictions"
+      - "watching calories"
+      
+  identify_dish_type:
+    breakfast_keywords:
+      - breakfast
+      - morning
+      - brunch
+      - pancakes
+      - eggs
+      
+    lunch_keywords:
+      - lunch
+      - sandwich
+      - wrap
+      - salad
+      
+    dinner_keywords:
+      - dinner
+      - supper
+      - main course
+      - entrée
+      
+    type_keywords:
+      - snack
+      - appetizer
+      - soup
+      - salad
+      - main dish
+      - side dish
+      - dessert
+      - drink
+      - beverage
+      
+    phrases:
+      - "looking for"
+      - "want to make"
+      - "in the mood for"
+      
+  identify_cuisine:
+    cuisines:
+      - italian
+      - mexican
+      - chinese
+      - japanese
+      - thai
+      - indian
+      - french
+      - mediterranean
+      - american
+      - greek
+      - korean
+      - vietnamese
+      
+    phrases:
+      - "style food"
+      - "cuisine"
+      - "type of food"
+      
+  identify_complexity:
+    time_references:
+      - quick
+      - fast
+      - easy
+      - simple
+      - minutes
+      - hour
+      - time
+      - slow
+      - elaborate
+      
+    skill_references:
+      - beginner
+      - easy
+      - simple
+      - advanced
+      - gourmet
+      - complex
+      
+    phrases:
+      - "how long"
+      - "how much time"
+      - "quick recipe"
+      - "easy to make"
+      - "don't have much time"
+      
+  modify_recipe:
+    primary:
+      - substitute
+      - replace
+      - instead
+      - alternative
+      - swap
+      - change
+      - modify
+      - adjust
+      
+    phrases:
+      - "can i use"
+      - "instead of"
+      - "substitute for"
+      - "don't have"
+      - "without the"
+      
+  cooking_help:
+    techniques:
+      - how
+      - bake
+      - fry
+      - boil
+      - sauté
+      - grill
+      - roast
+      - steam
+      
+    questions:
+      - "how to"
+      - "how do i"
+      - "what does"
+      - "what is"
+      - "help with"
+      
+  greeting:
+    primary:
+      - hello
+      - hi
+      - hey
+      - greetings
+      - good morning
+      - good afternoon
+      
+    phrases:
+      - "help me"
+      - "find a recipe"
+      - "what can you do"
+      
+  farewell:
+    primary:
+      - bye
+      - goodbye
+      - thanks
+      - thank you
+      - done
+      - finished
+      
+    phrases:
+      - "that's all"
+      - "no more"
+      - "talk later"
+
+# Common ingredient mentions (for extraction)
+ingredient_keywords:
+  # This will be automatically populated from ingredients.yaml
+  # but can have aliases here
+  aliases:
+    chicken_breast: chicken
+    ground_beef: beef
+    cherry_tomatoes: tomato
+    red_onion: onion
+    white_onion: onion
+    yellow_onion: onion
+    green_onion: onion
+    scallion: onion
+    spaghetti: pasta
+    penne: pasta
+    linguine: pasta
+    fettuccine: pasta
+
+# Number words for ingredient counting
+number_words:
+  one: 1
+  two: 2
+  three: 3
+  four: 4
+  five: 5
+  six: 6
+  seven: 7
+  eight: 8
+  nine: 9
+  ten: 10
+  couple: 2
+  few: 3
+  several: 4
+
+# Measurement units (for parsing ingredient amounts)
+measurements:
+  volume:
+    - cup
+    - cups
+    - tablespoon
+    - tablespoons
+    - tbsp
+    - teaspoon
+    - teaspoons
+    - tsp
+    - liter
+    - ml
+    - fluid ounce
+    
+  weight:
+    - pound
+    - pounds
+    - lb
+    - lbs
+    - ounce
+    - ounces
+    - oz
+    - gram
+    - grams
+    - kg
+    - kilogram
+    
+  count:
+    - piece
+    - pieces
+    - whole
+    - clove
+    - cloves

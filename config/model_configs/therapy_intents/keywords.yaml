@@ -1,0 +1,239 @@
+# Therapy Intent Keywords Configuration
+# Keyword patterns for fallback classification when ML model is unavailable
+
+version: "1.0"
+domain: "therapy"
+
+keywords:
+  depression:
+    primary:
+      - depressed
+      - sad
+      - hopeless
+      - worthless
+      - empty
+      - despair
+      - miserable
+      - unhappy
+      
+    secondary:
+      - crying
+      - tears
+      - lonely
+      - alone
+      - isolated
+      - numb
+      - lifeless
+      
+    phrases:
+      - "don't want to live"
+      - "can't go on"
+      - "no point"
+      - "give up"
+      - "end it all"
+      
+  anxiety:
+    primary:
+      - anxious
+      - anxiety
+      - worried
+      - nervous
+      - panic
+      - fear
+      - scared
+      - terrified
+      
+    secondary:
+      - overwhelming
+      - tense
+      - restless
+      - on edge
+      - frightened
+      - uneasy
+      
+    phrases:
+      - "panic attack"
+      - "can't breathe"
+      - "heart racing"
+      - "scared all the time"
+      
+  stress:
+    primary:
+      - stress
+      - stressed
+      - overwhelmed
+      - pressure
+      - exhausted
+      - burnout
+      - overworked
+      
+    secondary:
+      - tired
+      - drained
+      - swamped
+      - busy
+      - hectic
+      
+    phrases:
+      - "too much"
+      - "can't handle"
+      - "breaking point"
+      - "so much to do"
+      
+  grief:
+    primary:
+      - grief
+      - loss
+      - died
+      - death
+      - mourning
+      - bereaved
+      
+    secondary:
+      - miss
+      - lost
+      - gone
+      - funeral
+      
+    phrases:
+      - "passed away"
+      - "lost someone"
+      - "died recently"
+      - "missing them"
+      
+  relationship:
+    primary:
+      - relationship
+      - partner
+      - spouse
+      - marriage
+      - boyfriend
+      - girlfriend
+      - husband
+      - wife
+      
+    secondary:
+      - divorce
+      - breakup
+      - arguing
+      - conflict
+      - fighting
+      - cheating
+      
+    phrases:
+      - "relationship problems"
+      - "breaking up"
+      - "not working out"
+      - "constant fights"
+      
+  self_esteem:
+    primary:
+      - confidence
+      - self-esteem
+      - insecure
+      - inadequate
+      - not good enough
+      
+    secondary:
+      - ugly
+      - stupid
+      - failure
+      - loser
+      - worthless
+      
+    phrases:
+      - "hate myself"
+      - "not worthy"
+      - "always fail"
+      - "never good enough"
+      
+  trauma:
+    primary:
+      - trauma
+      - ptsd
+      - flashback
+      - nightmare
+      - abuse
+      
+    secondary:
+      - triggered
+      - violated
+      - hurt
+      - damaged
+      
+    phrases:
+      - "can't forget"
+      - "keeps happening"
+      - "haunts me"
+      - "traumatic experience"
+      
+  addiction:
+    primary:
+      - addiction
+      - addict
+      - drinking
+      - drugs
+      - substance
+      - alcohol
+      
+    secondary:
+      - craving
+      - relapse
+      - withdrawal
+      - sober
+      - recovery
+      
+    phrases:
+      - "can't stop"
+      - "drinking too much"
+      - "using again"
+      - "need help quitting"
+      
+  greeting:
+    primary:
+      - hello
+      - hi
+      - hey
+      - greetings
+      
+    secondary:
+      - good morning
+      - good afternoon
+      - good evening
+      - howdy
+      
+    phrases:
+      - "how are you"
+      - "nice to meet"
+      
+  farewell:
+    primary:
+      - bye
+      - goodbye
+      - farewell
+      - thanks
+      - thank you
+      
+    secondary:
+      - see you
+      - take care
+      - quit
+      - exit
+      - done
+      
+    phrases:
+      - "talk later"
+      - "thanks for help"
+      - "appreciate it"
+
+# Keyword weights (higher = stronger indicator)
+weights:
+  primary: 2.0
+  secondary: 1.0
+  phrases: 3.0
+
+# Multi-word phrase matching settings
+phrase_matching:
+  exact_match: true
+  case_insensitive: true
+  allow_partial: false

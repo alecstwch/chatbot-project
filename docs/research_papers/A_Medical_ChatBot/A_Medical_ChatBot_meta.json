@@ -1,0 +1,679 @@
+{
+  "table_of_contents": [
+    {
+      "title": "A Medical ChatBot",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          201.91939546599497,
+          74.97773820124665
+        ],
+        [
+          393.3299748110831,
+          74.97773820124665
+        ],
+        [
+          393.3299748110831,
+          94.560546875
+        ],
+        [
+          201.91939546599497,
+          94.560546875
+        ]
+      ]
+    },
+    {
+      "title": "Abstract",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          70.55919395465995,
+          169.44968833481744
+        ],
+        [
+          107.34005037783375,
+          168.1533203125
+        ],
+        [
+          107.34005037783375,
+          177.69723953695458
+        ],
+        [
+          70.55919395465995,
+          177.69723953695458
+        ]
+      ]
+    },
+    {
+      "title": "I. INTRODUCTION",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          134.36272040302265,
+          477.3251953125
+        ],
+        [
+          231.1939546599496,
+          477.3251953125
+        ],
+        [
+          231.1939546599496,
+          486.60552092609083
+        ],
+        [
+          133.8671875,
+          486.60552092609083
+        ]
+      ]
+    },
+    {
+      "title": "II. LITERATURE REVIEW",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          348.927734375,
+          531.5921638468388
+        ],
+        [
+          478.9017632241813,
+          531.5921638468388
+        ],
+        [
+          478.9017632241813,
+          540.6396484375
+        ],
+        [
+          348.927734375,
+          540.6396484375
+        ]
+      ]
+    },
+    {
+      "title": "III. PROPOSED SYSTEM",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          123.099609375,
+          440.3232421875
+        ],
+        [
+          239.67921447753906,
+          440.3232421875
+        ],
+        [
+          239.67921447753906,
+          452.1802978515625
+        ],
+        [
+          121.935546875,
+          452.1802978515625
+        ]
+      ]
+    },
+    {
+      "title": "A. User Login to System",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          310.22265625,
+          73.5927734375
+        ],
+        [
+          414.5654296875,
+          71.9482421875
+        ],
+        [
+          414.5654296875,
+          83.68115234375
+        ],
+        [
+          309.05859375,
+          83.68115234375
+        ]
+      ]
+    },
+    {
+      "title": "B. Ask some Questions",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          309.05859375,
+          132.384765625
+        ],
+        [
+          411.80523681640625,
+          130.740234375
+        ],
+        [
+          411.80523681640625,
+          142.9208984375
+        ],
+        [
+          309.05859375,
+          142.9208984375
+        ]
+      ]
+    },
+    {
+      "title": "C. Age based Medicine dosage details",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          309.640625,
+          212.14453125
+        ],
+        [
+          469.3052673339844,
+          210.5
+        ],
+        [
+          469.3052673339844,
+          222.2408447265625
+        ],
+        [
+          308.4765625,
+          222.2408447265625
+        ]
+      ]
+    },
+    {
+      "title": "D. Get Medicine Details on medicine name",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          309.640625,
+          331.2615966796875
+        ],
+        [
+          491.2654724121094,
+          329.728515625
+        ],
+        [
+          491.2654724121094,
+          341.2815856933594
+        ],
+        [
+          308.4765625,
+          341.2815856933594
+        ]
+      ]
+    },
+    {
+      "title": "E. Disease Prediction",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          310.22265625,
+          383.17578125
+        ],
+        [
+          403.52520751953125,
+          383.17578125
+        ],
+        [
+          403.52520751953125,
+          394.22149658203125
+        ],
+        [
+          310.22265625,
+          394.22149658203125
+        ]
+      ]
+    },
+    {
+      "title": "F. Online API",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          310.513671875,
+          632.7333984375
+        ],
+        [
+          374.04998779296875,
+          632.7333984375
+        ],
+        [
+          374.04998779296875,
+          644.8616180419922
+        ],
+        [
+          310.513671875,
+          644.8616180419922
+        ]
+      ]
+    },
+    {
+      "title": "IV. PROPOSED METHOD",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          122.960205078125,
+          117.9951171875
+        ],
+        [
+          244.0249786376953,
+          117.9951171875
+        ],
+        [
+          244.0249786376953,
+          128.21856689453125
+        ],
+        [
+          121.935546875,
+          128.21856689453125
+        ]
+      ]
+    },
+    {
+      "title": "A. Support Vector Machine Algorithm(SVM):",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          71.0078125,
+          141.0185546875
+        ],
+        [
+          267.573974609375,
+          141.0185546875
+        ],
+        [
+          267.573974609375,
+          151.19781494140625
+        ],
+        [
+          69.84375,
+          151.19781494140625
+        ]
+      ]
+    },
+    {
+      "title": "C. Word Order Similarity among Sentences:",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          309.931640625,
+          445.75823974609375
+        ],
+        [
+          499.1202392578125,
+          444.4345703125
+        ],
+        [
+          499.1202392578125,
+          455.7782287597656
+        ],
+        [
+          309.931640625,
+          455.7782287597656
+        ]
+      ]
+    },
+    {
+      "title": "V. EXPERIMENTAL RESULTS",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          110.876953125,
+          356.5980529785156
+        ],
+        [
+          255.72500610351562,
+          355.6298828125
+        ],
+        [
+          255.72500610351562,
+          366.6180725097656
+        ],
+        [
+          109.712890625,
+          366.6180725097656
+        ]
+      ]
+    },
+    {
+      "title": "VII. CONCLUSION",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          371.3359375,
+          638.4892578125
+        ],
+        [
+          460.96875,
+          638.4892578125
+        ],
+        [
+          460.96875,
+          650.3785400390625
+        ],
+        [
+          371.3359375,
+          650.3785400390625
+        ]
+      ]
+    },
+    {
+      "title": "FUTURE SCOPE",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          143.1796875,
+          142.6630859375
+        ],
+        [
+          220.79371643066406,
+          141.0185546875
+        ],
+        [
+          220.79371643066406,
+          152.69854736328125
+        ],
+        [
+          143.1796875,
+          152.69854736328125
+        ]
+      ]
+    },
+    {
+      "title": "REFERENCES",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          148.639892578125,
+          221.63836669921875
+        ],
+        [
+          218.40505981445312,
+          220.7783203125
+        ],
+        [
+          218.40505981445312,
+          231.65838623046875
+        ],
+        [
+          148.639892578125,
+          231.65838623046875
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          121
+        ],
+        [
+          "Span",
+          80
+        ],
+        [
+          "Text",
+          11
+        ],
+        [
+          "SectionHeader",
+          4
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          197
+        ],
+        [
+          "Line",
+          93
+        ],
+        [
+          "Text",
+          12
+        ],
+        [
+          "SectionHeader",
+          7
+        ],
+        [
+          "PageFooter",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Picture",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "PictureGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          200
+        ],
+        [
+          "Line",
+          87
+        ],
+        [
+          "Text",
+          12
+        ],
+        [
+          "ListItem",
+          7
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "PageFooter",
+          3
+        ],
+        [
+          "Figure",
+          2
+        ],
+        [
+          "Caption",
+          2
+        ],
+        [
+          "FigureGroup",
+          2
+        ],
+        [
+          "ListGroup",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          122
+        ],
+        [
+          "TableCell",
+          86
+        ],
+        [
+          "Line",
+          59
+        ],
+        [
+          "Text",
+          10
+        ],
+        [
+          "Caption",
+          3
+        ],
+        [
+          "PageFooter",
+          3
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Table",
+          2
+        ],
+        [
+          "Figure",
+          2
+        ],
+        [
+          "FigureGroup",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Equation",
+          1
+        ],
+        [
+          "TableGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          127
+        ],
+        [
+          "Line",
+          53
+        ],
+        [
+          "ListItem",
+          10
+        ],
+        [
+          "Text",
+          2
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "PageFooter",
+          2
+        ],
+        [
+          "ListGroup",
+          2
+        ],
+        [
+          "PageHeader",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data\\A_Medical_ChatBot"
+}

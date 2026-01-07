@@ -1,0 +1,1122 @@
+{
+  "table_of_contents": [
+    {
+      "title": "Review",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          54.65189743041992,
+          143.5892333984375
+        ],
+        [
+          95.74189758300781,
+          142.60693359375
+        ],
+        [
+          95.74189758300781,
+          157.5892333984375
+        ],
+        [
+          54.65189743041992,
+          157.5892333984375
+        ]
+      ]
+    },
+    {
+      "title": "Conversational agents in healthcare: a systematic review",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          54.65189743041992,
+          171.66357421875
+        ],
+        [
+          460.677734375,
+          170.13427734375
+        ],
+        [
+          459.513671875,
+          186.713623046875
+        ],
+        [
+          53.837890625,
+          186.713623046875
+        ]
+      ]
+    },
+    {
+      "title": "ABSTRACT",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          54.419921875,
+          323.82861328125
+        ],
+        [
+          97.2753677368164,
+          323.82861328125
+        ],
+        [
+          97.2753677368164,
+          333.4530334472656
+        ],
+        [
+          53.255859375,
+          333.4530334472656
+        ]
+      ]
+    },
+    {
+      "title": "INTRODUCTION",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          54.65189743041992,
+          597.57275390625
+        ],
+        [
+          132.2166748046875,
+          597.57275390625
+        ],
+        [
+          132.2166748046875,
+          609.0726165771484
+        ],
+        [
+          53.546875,
+          609.0726165771484
+        ]
+      ]
+    },
+    {
+      "title": "METHODS",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          54.65189743041992,
+          431.26171875
+        ],
+        [
+          105.638671875,
+          431.26171875
+        ],
+        [
+          105.23240661621094,
+          444.2096252441406
+        ],
+        [
+          53.837890625,
+          444.2096252441406
+        ]
+      ]
+    },
+    {
+      "title": "Search strategy",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          54.65189743041992,
+          663.71484375
+        ],
+        [
+          120.33209228515625,
+          663.71484375
+        ],
+        [
+          120.33209228515625,
+          674.5069198608398
+        ],
+        [
+          54.65189743041992,
+          674.5069198608398
+        ]
+      ]
+    },
+    {
+      "title": "Study selection criteria",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          305.56640625,
+          119.28515625
+        ],
+        [
+          402.5621643066406,
+          117.755859375
+        ],
+        [
+          402.5621643066406,
+          129.4613037109375
+        ],
+        [
+          305.56640625,
+          129.4613037109375
+        ]
+      ]
+    },
+    {
+      "title": "Screening, data extraction, and synthesis",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          304.40234375,
+          357.47314453125
+        ],
+        [
+          478.83990478515625,
+          355.94384765625
+        ],
+        [
+          478.83990478515625,
+          366.551025390625
+        ],
+        [
+          304.40234375,
+          366.551025390625
+        ]
+      ]
+    },
+    {
+      "title": "Box 2. Example of technical evaluation measures for conversational agents and their individual modules",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          59.29974811083123,
+          373.5
+        ],
+        [
+          426.337890625,
+          372.3837890625
+        ],
+        [
+          425.6070528967254,
+          381.0
+        ],
+        [
+          59.076171875,
+          381.5595703125
+        ]
+      ]
+    },
+    {
+      "title": "RESULTS",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          53.29471032745592,
+          681.68408203125
+        ],
+        [
+          99.8337531486146,
+          680.15478515625
+        ],
+        [
+          99.8337531486146,
+          690.75
+        ],
+        [
+          53.255859375,
+          690.75
+        ]
+      ]
+    },
+    {
+      "title": "Description of conversational agents",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          306.25692695214104,
+          686.25
+        ],
+        [
+          460.88664987405537,
+          686.25
+        ],
+        [
+          460.88664987405537,
+          695.25
+        ],
+        [
+          306.1484375,
+          696.21240234375
+        ]
+      ]
+    },
+    {
+      "title": "Description of included studies",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          302.65625,
+          342.94482421875
+        ],
+        [
+          435.9224853515625,
+          342.94482421875
+        ],
+        [
+          435.9224853515625,
+          354.4188232421875
+        ],
+        [
+          302.65625,
+          354.4188232421875
+        ]
+      ]
+    },
+    {
+      "title": "Evaluation measures",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          306.439453125,
+          674.03759765625
+        ],
+        [
+          394.54949951171875,
+          674.03759765625
+        ],
+        [
+          394.54949951171875,
+          685.5053253173828
+        ],
+        [
+          306.439453125,
+          685.5053253173828
+        ]
+      ]
+    },
+    {
+      "title": "DISCUSSION",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          54.419921875,
+          602.92529296875
+        ],
+        [
+          117.62753295898438,
+          602.92529296875
+        ],
+        [
+          117.62753295898438,
+          614.7418365478516
+        ],
+        [
+          53.255859375,
+          614.7418365478516
+        ]
+      ]
+    },
+    {
+      "title": "Main findings",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          54.65189743041992,
+          619.365234375
+        ],
+        [
+          112.33203125,
+          619.365234375
+        ],
+        [
+          112.125,
+          630.5132293701172
+        ],
+        [
+          54.12890625,
+          630.5132293701172
+        ]
+      ]
+    },
+    {
+      "title": "Comparisons with existing literature",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          306.1484375,
+          400.29345703125
+        ],
+        [
+          458.640625,
+          398.76416015625
+        ],
+        [
+          458.640625,
+          410.54473876953125
+        ],
+        [
+          306.1484375,
+          410.54473876953125
+        ]
+      ]
+    },
+    {
+      "title": "Standards for reporting the evaluation of\nconversational agents in healthcare\nTechnical and user experience evaluation",
+      "heading_level": null,
+      "page_id": 8,
+      "polygon": [
+        [
+          54.419921875,
+          350.208984375
+        ],
+        [
+          226.119140625,
+          348.6796875
+        ],
+        [
+          225.30181884765625,
+          383.1065673828125
+        ],
+        [
+          53.255859375,
+          383.1065673828125
+        ]
+      ]
+    },
+    {
+      "title": "Health research evaluation",
+      "heading_level": null,
+      "page_id": 8,
+      "polygon": [
+        [
+          54.12890625,
+          586.86767578125
+        ],
+        [
+          146.36839294433594,
+          586.86767578125
+        ],
+        [
+          146.36839294433594,
+          597.6873321533203
+        ],
+        [
+          54.12890625,
+          597.6873321533203
+        ]
+      ]
+    },
+    {
+      "title": "Implications for healthcare, public health, and future\nresearch",
+      "heading_level": null,
+      "page_id": 8,
+      "polygon": [
+        [
+          304.693359375,
+          255.77490234375
+        ],
+        [
+          524.911865234375,
+          255.77490234375
+        ],
+        [
+          524.911865234375,
+          278.5066223144531
+        ],
+        [
+          304.693359375,
+          278.5066223144531
+        ]
+      ]
+    },
+    {
+      "title": "Strengths and limitations",
+      "heading_level": null,
+      "page_id": 9,
+      "polygon": [
+        [
+          54.65189743041992,
+          170.5166015625
+        ],
+        [
+          160.28489685058594,
+          168.9873046875
+        ],
+        [
+          160.28489685058594,
+          180.14483642578125
+        ],
+        [
+          54.65189743041992,
+          180.14483642578125
+        ]
+      ]
+    },
+    {
+      "title": "CONCLUSION",
+      "heading_level": null,
+      "page_id": 9,
+      "polygon": [
+        [
+          54.65189743041992,
+          506.57958984375
+        ],
+        [
+          122.10657501220703,
+          506.57958984375
+        ],
+        [
+          122.10657501220703,
+          518.0805053710938
+        ],
+        [
+          53.837890625,
+          518.0805053710938
+        ]
+      ]
+    },
+    {
+      "title": "COMPETING INTERESTS",
+      "heading_level": null,
+      "page_id": 9,
+      "polygon": [
+        [
+          54.65189743041992,
+          628.15869140625
+        ],
+        [
+          173.19911193847656,
+          628.15869140625
+        ],
+        [
+          173.19911193847656,
+          639.8001251220703
+        ],
+        [
+          53.837890625,
+          639.8001251220703
+        ]
+      ]
+    },
+    {
+      "title": "FUNDING",
+      "heading_level": null,
+      "page_id": 9,
+      "polygon": [
+        [
+          54.12890625,
+          683.21337890625
+        ],
+        [
+          101.39636993408203,
+          683.21337890625
+        ],
+        [
+          101.39636993408203,
+          695.4725112915039
+        ],
+        [
+          54.12890625,
+          695.4725112915039
+        ]
+      ]
+    },
+    {
+      "title": "CONTRIBUTORS",
+      "heading_level": null,
+      "page_id": 9,
+      "polygon": [
+        [
+          306.1484375,
+          58.49560546875
+        ],
+        [
+          386.46875,
+          56.96630859375
+        ],
+        [
+          386.46875,
+          69.24273681640625
+        ],
+        [
+          306.1484375,
+          69.24273681640625
+        ]
+      ]
+    },
+    {
+      "title": "SUPPLEMENTARY MATERIAL",
+      "heading_level": null,
+      "page_id": 9,
+      "polygon": [
+        [
+          305.275390625,
+          155.98828125
+        ],
+        [
+          447.873046875,
+          154.458984375
+        ],
+        [
+          447.6173400878906,
+          167.03802490234375
+        ],
+        [
+          304.111328125,
+          167.03802490234375
+        ]
+      ]
+    },
+    {
+      "title": "ACKNOWLEDGEMENTS",
+      "heading_level": null,
+      "page_id": 9,
+      "polygon": [
+        [
+          306.1484375,
+          220.60107421875
+        ],
+        [
+          421.9070739746094,
+          220.60107421875
+        ],
+        [
+          421.9070739746094,
+          231.89471435546875
+        ],
+        [
+          306.1484375,
+          231.89471435546875
+        ]
+      ]
+    },
+    {
+      "title": "REFERENCES",
+      "heading_level": null,
+      "page_id": 9,
+      "polygon": [
+        [
+          305.857421875,
+          274.5087890625
+        ],
+        [
+          371.1825256347656,
+          274.5087890625
+        ],
+        [
+          371.1825256347656,
+          285.469482421875
+        ],
+        [
+          304.693359375,
+          285.469482421875
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          136
+        ],
+        [
+          "Line",
+          55
+        ],
+        [
+          "Text",
+          16
+        ],
+        [
+          "SectionHeader",
+          4
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Picture",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          245
+        ],
+        [
+          "Line",
+          117
+        ],
+        [
+          "Text",
+          12
+        ],
+        [
+          "SectionHeader",
+          4
+        ],
+        [
+          "PageHeader",
+          3
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          93
+        ],
+        [
+          "Span",
+          93
+        ],
+        [
+          "Text",
+          36
+        ],
+        [
+          "PageHeader",
+          3
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "Footnote",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          298
+        ],
+        [
+          "Line",
+          72
+        ],
+        [
+          "Text",
+          8
+        ],
+        [
+          "PageHeader",
+          3
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Figure",
+          1
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "FigureGroup",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "TableCell",
+          105
+        ],
+        [
+          "Line",
+          56
+        ],
+        [
+          "Span",
+          9
+        ],
+        [
+          "Text",
+          4
+        ],
+        [
+          "PageHeader",
+          3
+        ],
+        [
+          "Caption",
+          2
+        ],
+        [
+          "Table",
+          1
+        ],
+        [
+          "Figure",
+          1
+        ],
+        [
+          "TableGroup",
+          1
+        ],
+        [
+          "FigureGroup",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          519
+        ],
+        [
+          "Line",
+          233
+        ],
+        [
+          "TableCell",
+          60
+        ],
+        [
+          "PageHeader",
+          3
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "Table",
+          1
+        ],
+        [
+          "Text",
+          1
+        ],
+        [
+          "Footnote",
+          1
+        ],
+        [
+          "TableGroup",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 6,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          488
+        ],
+        [
+          "Line",
+          229
+        ],
+        [
+          "TableCell",
+          47
+        ],
+        [
+          "PageHeader",
+          3
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "Table",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "TableGroup",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 7,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          332
+        ],
+        [
+          "Line",
+          137
+        ],
+        [
+          "TableCell",
+          26
+        ],
+        [
+          "Text",
+          9
+        ],
+        [
+          "PageHeader",
+          3
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "Table",
+          1
+        ],
+        [
+          "TableGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 8,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          272
+        ],
+        [
+          "Line",
+          119
+        ],
+        [
+          "Text",
+          10
+        ],
+        [
+          "PageHeader",
+          3
+        ],
+        [
+          "SectionHeader",
+          3
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 9,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          305
+        ],
+        [
+          "Line",
+          109
+        ],
+        [
+          "ListItem",
+          17
+        ],
+        [
+          "Text",
+          9
+        ],
+        [
+          "SectionHeader",
+          8
+        ],
+        [
+          "PageHeader",
+          3
+        ],
+        [
+          "ListGroup",
+          1
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 10,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          232
+        ],
+        [
+          "Span",
+          134
+        ],
+        [
+          "ListItem",
+          43
+        ],
+        [
+          "PageHeader",
+          3
+        ],
+        [
+          "ListGroup",
+          2
+        ],
+        [
+          "Reference",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data\\ocy072"
+}

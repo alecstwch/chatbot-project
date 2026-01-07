@@ -1,0 +1,119 @@
+# Therapy Intent Classifier Configuration
+# Following 12-Factor App principles - all configuration externalized
+
+version: "1.0"
+domain: "therapy"
+description: "Mental health and psychotherapy intent classification"
+
+# Core therapy intents
+intents:
+  depression:
+    display_name: "Depression"
+    description: "Expressions of sadness, hopelessness, or depressive symptoms"
+    priority: high
+    requires_professional_followup: true
+    
+  anxiety:
+    display_name: "Anxiety"
+    description: "Worry, nervousness, panic, or anxiety symptoms"
+    priority: high
+    requires_professional_followup: true
+    
+  stress:
+    display_name: "Stress"
+    description: "Overwhelm, pressure, burnout, or stress-related concerns"
+    priority: medium
+    requires_professional_followup: false
+    
+  grief:
+    display_name: "Grief and Loss"
+    description: "Mourning, bereavement, or loss-related emotions"
+    priority: high
+    requires_professional_followup: true
+    
+  relationship:
+    display_name: "Relationship Issues"
+    description: "Partner conflicts, marriage, divorce, or interpersonal problems"
+    priority: medium
+    requires_professional_followup: false
+    
+  self_esteem:
+    display_name: "Self-Esteem"
+    description: "Self-worth, confidence, or identity concerns"
+    priority: medium
+    requires_professional_followup: false
+    
+  trauma:
+    display_name: "Trauma"
+    description: "Past traumatic experiences or PTSD symptoms"
+    priority: high
+    requires_professional_followup: true
+    crisis_keywords: ["abuse", "assault", "ptsd"]
+    
+  addiction:
+    display_name: "Addiction"
+    description: "Substance abuse or behavioral addiction concerns"
+    priority: high
+    requires_professional_followup: true
+    
+  general:
+    display_name: "General Mental Health"
+    description: "General wellbeing or unclassified mental health topics"
+    priority: low
+    requires_professional_followup: false
+    
+  greeting:
+    display_name: "Greeting"
+    description: "Initial greetings and conversation starters"
+    priority: low
+    requires_professional_followup: false
+    
+  farewell:
+    display_name: "Farewell"
+    description: "Conversation endings and goodbyes"
+    priority: low
+    requires_professional_followup: false
+
+# Crisis detection
+crisis_intents:
+  - depression
+  - trauma
+  - addiction
+
+# Intent relationships (for multi-intent scenarios)
+intent_relationships:
+  depression:
+    often_co_occurs_with: ["anxiety", "self_esteem"]
+    may_escalate_to: ["trauma"]
+  
+  anxiety:
+    often_co_occurs_with: ["stress", "depression"]
+    
+  stress:
+    may_escalate_to: ["anxiety", "depression"]
+
+# Response templates by intent (for AIML fallback)
+response_templates:
+  depression:
+    - "I hear that you're feeling {emotion}. That must be really difficult."
+    - "It's important to acknowledge these feelings. How long have you been experiencing this?"
+    
+  anxiety:
+    - "Anxiety can feel overwhelming. What triggers these feelings for you?"
+    - "Let's explore some coping strategies that might help with your anxiety."
+    
+  stress:
+    - "It sounds like you have a lot on your plate. What's been most stressful recently?"
+    - "Managing stress is important. Have you tried any stress-reduction techniques?"
+
+# Confidence thresholds
+thresholds:
+  high_confidence: 0.85  # Very confident in classification
+  medium_confidence: 0.65  # Moderately confident
+  low_confidence: 0.45  # Low confidence, may need clarification
+  
+# Fallback behavior
+fallback:
+  use_keyword_matching: true
+  use_general_intent_below_threshold: 0.45
+  ask_for_clarification_below: 0.30

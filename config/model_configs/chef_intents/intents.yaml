@@ -1,0 +1,237 @@
+# Master Chef Intent Classifier Configuration
+# Recipe recommendation through conversational Q&A funnel
+
+version: "1.0"
+domain: "culinary"
+description: "Recipe recommendation based on ingredients and constraints"
+
+# Funnel stages for recipe recommendation
+funnel_stages:
+  stage_1_ingredient_check:
+    question: "What main ingredients do you have available?"
+    intent: "identify_ingredients"
+    max_responses: 10
+    
+  stage_2_dietary_constraints:
+    question: "Do you have any dietary restrictions or allergies?"
+    intent: "identify_constraints"
+    optional: true
+    
+  stage_3_dish_type:
+    question: "What type of dish are you looking for?"
+    intent: "identify_dish_type"
+    
+  stage_4_cuisine_preference:
+    question: "Any cuisine preference?"
+    intent: "identify_cuisine"
+    optional: true
+    
+  stage_5_complexity:
+    question: "How much time do you have for cooking?"
+    intent: "identify_complexity"
+    optional: true
+
+# Intent definitions
+intents:
+  identify_ingredients:
+    display_name: "Ingredient Identification"
+    description: "User specifying available ingredients"
+    stage: 1
+    required: true
+    
+  identify_constraints:
+    display_name: "Dietary Constraints"
+    description: "Allergies, dietary restrictions, calorie limits"
+    stage: 2
+    required: false
+    
+  identify_dish_type:
+    display_name: "Dish Type Selection"
+    description: "Type of meal: snack, soup, main dish, dessert, etc."
+    stage: 3
+    required: true
+    
+  identify_cuisine:
+    display_name: "Cuisine Preference"
+    description: "Preferred cuisine style: Italian, Mexican, Asian, etc."
+    stage: 4
+    required: false
+    
+  identify_complexity:
+    display_name: "Cooking Complexity"
+    description: "Time availability and cooking skill level"
+    stage: 5
+    required: false
+    
+  provide_recipe:
+    display_name: "Recipe Suggestion"
+    description: "Final recipe recommendations"
+    stage: 6
+    required: false
+    
+  modify_recipe:
+    display_name: "Recipe Modification"
+    description: "User wants to adjust or substitute ingredients"
+    stage: null
+    required: false
+    
+  cooking_help:
+    display_name: "Cooking Assistance"
+    description: "Questions about cooking techniques or procedures"
+    stage: null
+    required: false
+    
+  greeting:
+    display_name: "Greeting"
+    description: "Initial greeting"
+    stage: 0
+    required: false
+    
+  farewell:
+    display_name: "Farewell"
+    description: "End conversation"
+    stage: null
+    required: false
+
+# Dish types
+dish_types:
+  breakfast:
+    display_name: "Breakfast"
+    typical_time: "morning"
+    examples: ["pancakes", "eggs", "oatmeal", "smoothie"]
+    
+  snack:
+    display_name: "Snack/Appetizer"
+    typical_time: "anytime"
+    examples: ["chips", "dip", "crackers", "fruit"]
+    
+  soup:
+    display_name: "Soup"
+    typical_time: "lunch or dinner"
+    examples: ["chicken soup", "tomato soup", "minestrone"]
+    
+  salad:
+    display_name: "Salad"
+    typical_time: "lunch or dinner"
+    examples: ["caesar salad", "greek salad", "pasta salad"]
+    
+  main_dish:
+    display_name: "Main Dish/Entrée"
+    typical_time: "lunch or dinner"
+    examples: ["pasta", "steak", "curry", "stir-fry"]
+    
+  side_dish:
+    display_name: "Side Dish"
+    typical_time: "with main meal"
+    examples: ["rice", "vegetables", "bread"]
+    
+  dessert:
+    display_name: "Dessert"
+    typical_time: "after meal"
+    examples: ["cake", "cookies", "ice cream", "pie"]
+    
+  beverage:
+    display_name: "Beverage/Drink"
+    typical_time: "anytime"
+    examples: ["smoothie", "juice", "tea", "cocktail"]
+
+# Dietary constraints
+dietary_constraints:
+  allergies:
+    - nuts
+    - dairy
+    - eggs
+    - gluten
+    - shellfish
+    - soy
+    - fish
+    
+  dietary_restrictions:
+    - vegetarian
+    - vegan
+    - pescatarian
+    - halal
+    - kosher
+    - low-carb
+    - keto
+    - paleo
+    
+  health_goals:
+    - low-calorie
+    - high-protein
+    - low-fat
+    - low-sodium
+    - diabetic-friendly
+    - heart-healthy
+
+# Cuisine styles
+cuisines:
+  - Italian
+  - Mexican
+  - Chinese
+  - Japanese
+  - Thai
+  - Indian
+  - French
+  - Mediterranean
+  - American
+  - Greek
+  - Middle Eastern
+  - Korean
+  - Vietnamese
+
+# Complexity levels
+complexity_levels:
+  quick:
+    display_name: "Quick & Easy"
+    time_range: "< 20 minutes"
+    skill_level: "beginner"
+    
+  moderate:
+    display_name: "Moderate"
+    time_range: "20-45 minutes"
+    skill_level: "intermediate"
+    
+  complex:
+    display_name: "Complex/Gourmet"
+    time_range: "45+ minutes"
+    skill_level: "advanced"
+
+# Recipe matching rules
+matching_rules:
+  min_ingredient_match_percent: 60  # At least 60% of recipe ingredients available
+  max_missing_ingredients: 2  # Allow up to 2 missing ingredients
+  prioritize_exact_matches: true
+  
+# Response templates
+response_templates:
+  greeting:
+    - "Hello! I'm your culinary assistant. Ready to find the perfect recipe?"
+    - "Hi there! Let's create something delicious. What ingredients do you have?"
+    
+  ingredient_request:
+    - "Great! What {number} main ingredients do you have available?"
+    - "Please list your available ingredients (up to 10)."
+    
+  constraint_request:
+    - "Do you have any dietary restrictions, allergies, or calorie limits?"
+    - "Any ingredients you need to avoid?"
+    
+  dish_type_request:
+    - "What type of dish are you in the mood for? (e.g., main dish, soup, dessert)"
+    - "Are you looking for breakfast, lunch, dinner, or a snack?"
+    
+  recipe_found:
+    - "I found {count} recipes that match your criteria!"
+    - "Here are some delicious options for you:"
+    
+  no_recipe_found:
+    - "I couldn't find an exact match, but here are some similar recipes..."
+    - "With a few substitutions, you could make these dishes:"
+
+# Funnel configuration
+funnel_config:
+  max_questions: 5
+  allow_skip: true
+  require_confirmation: true
+  enable_backtracking: true

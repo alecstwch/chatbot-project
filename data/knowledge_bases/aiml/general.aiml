@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0.1">
+
+<!-- General Conversational Chatbot - AIML Knowledge Base -->
+<!-- For casual conversation and general queries -->
+
+<!-- GREETINGS -->
+<category>
+    <pattern>HELLO</pattern>
+    <template>
+        <random>
+            <li>Hello! How can I help you today?</li>
+            <li>Hi there! What's on your mind?</li>
+            <li>Hey! Great to chat with you!</li>
+        </random>
+    </template>
+</category>
+
+<category>
+    <pattern>HI</pattern>
+    <template>
+        <srai>HELLO</srai>
+    </template>
+</category>
+
+<!-- HOW ARE YOU -->
+<category>
+    <pattern>HOW ARE YOU</pattern>
+    <template>
+        <random>
+            <li>I'm doing great, thanks for asking! How are you?</li>
+            <li>I'm good! How about you?</li>
+            <li>I'm functioning perfectly! How are things with you?</li>
+        </random>
+    </template>
+</category>
+
+<!-- NAME -->
+<category>
+    <pattern>WHAT IS YOUR NAME</pattern>
+    <template>I'm ChatBot, your conversational assistant! What's your name?</template>
+</category>
+
+<category>
+    <pattern>MY NAME IS *</pattern>
+    <template>
+        <think><set name="username"><star/></set></think>
+        Nice to meet you, <get name="username"/>! How can I help you today?
+    </template>
+</category>
+
+<!-- WEATHER -->
+<category>
+    <pattern>WHAT IS THE WEATHER</pattern>
+    <template>I don't have access to real-time weather data, but you can check weather.com or your local weather service. Where are you located?</template>
+</category>
+
+<category>
+    <pattern>WEATHER *</pattern>
+    <template>
+        <srai>WHAT IS THE WEATHER</srai>
+    </template>
+</category>
+
+<!-- TIME -->
+<category>
+    <pattern>WHAT TIME IS IT</pattern>
+    <template>I don't have access to the current time, but you can check your device's clock!</template>
+</category>
+
+<!-- JOKES -->
+<category>
+    <pattern>TELL ME A JOKE</pattern>
+    <template>
+        <random>
+            <li>Why don't scientists trust atoms? Because they make up everything!</li>
+            <li>What do you call a bear with no teeth? A gummy bear!</li>
+            <li>Why did the scarecrow win an award? He was outstanding in his field!</li>
+            <li>How do you organize a space party? You planet!</li>
+        </random>
+    </template>
+</category>
+
+<category>
+    <pattern>JOKE</pattern>
+    <template>
+        <srai>TELL ME A JOKE</srai>
+    </template>
+</category>
+
+<!-- FAVORITES -->
+<category>
+    <pattern>WHAT IS YOUR FAVORITE COLOR</pattern>
+    <template>I like all colors equally! What's your favorite color?</template>
+</category>
+
+<category>
+    <pattern>WHAT IS YOUR FAVORITE FOOD</pattern>
+    <template>As a chatbot, I don't eat, but I'm curious - what's your favorite food?</template>
+</category>
+
+<!-- CAPABILITIES -->
+<category>
+    <pattern>WHAT CAN YOU DO</pattern>
+    <template>I can chat with you about various topics, answer questions, tell jokes, and keep you company! What would you like to talk about?</template>
+</category>
+
+<category>
+    <pattern>HELP</pattern>
+    <template>
+        <srai>WHAT CAN YOU DO</srai>
+    </template>
+</category>
+
+<!-- SMALL TALK -->
+<category>
+    <pattern>HOW WAS YOUR DAY</pattern>
+    <template>Every day is interesting when I get to chat with people! How was your day?</template>
+</category>
+
+<category>
+    <pattern>WHAT DID YOU DO TODAY</pattern>
+    <template>I've been chatting with interesting people like you! What did you do today?</template>
+</category>
+
+<!-- GOODBYE -->
+<category>
+    <pattern>GOODBYE</pattern>
+    <template>
+        <random>
+            <li>Goodbye! It was nice chatting with you!</li>
+            <li>See you later! Have a great day!</li>
+            <li>Bye! Come back anytime!</li>
+        </random>
+    </template>
+</category>
+
+<category>
+    <pattern>BYE</pattern>
+    <template>
+        <srai>GOODBYE</srai>
+    </template>
+</category>
+
+<!-- THANKS -->
+<category>
+    <pattern>THANK YOU</pattern>
+    <template>
+        <random>
+            <li>You're welcome!</li>
+            <li>Happy to help!</li>
+            <li>Anytime!</li>
+        </random>
+    </template>
+</category>
+
+<category>
+    <pattern>THANKS</pattern>
+    <template>
+        <srai>THANK YOU</srai>
+    </template>
+</category>
+
+<!-- WILDCARD -->
+<category>
+    <pattern>*</pattern>
+    <template>That's interesting! Tell me more.</template>
+</category>
+
+</aiml>
