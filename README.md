@@ -42,21 +42,21 @@ This repository contains the implementation of **two conversational agents** bui
 ├── src/                       # Source code (DDD layers)
 │   ├── domain/                # Domain layer
 │   │   └── services/
-│   │       └── text_preprocessor.py  # [DONE] Complete with tests
+│   │       └── text_preprocessor.py  # Complete with tests
 │   ├── application/           # Application layer
 │   ├── infrastructure/        # Infrastructure layer
 │   └── interfaces/            # Interface layer (CLI/API)
 ├── tests/                     # Test suite (separated from code)
 │   ├── unit/
 │   │   └── domain/
-│   │       └── test_text_preprocessor.py  # [DONE] 27 tests, 100% coverage
+│   │       └── test_text_preprocessor.py  # 27 tests, 100% coverage
 │   ├── integration/
 │   ├── e2e/
 │   └── conftest.py
 ├── models/                    # Trained model checkpoints
 ├── logs/                      # Application logs
 ├── scripts/                   # Utility scripts
-│   └── setup_nltk_data.py     # [DONE] NLTK data setup
+│   └── setup_nltk_data.py     # NLTK data setup
 ├── NLP_Paper_Template/        # LaTeX paper
 │   ├── main.tex
 │   ├── sections/
@@ -151,44 +151,44 @@ chatbot = pipeline("conversational", model="microsoft/DialoGPT-small")
 - GPT-2 for response generation
 - Hybrid approach combining rule-based + transformer
 
-## 🔬 NLP Techniques Demonstrated
+##  NLP Techniques Demonstrated
 
-- [DONE] Tokenization (NLTK word_tokenize)
-- [DONE] Stopword removal (comparison analysis)
-- [DONE] Stemming (Porter Stemmer)
-- [DONE] Lemmatization (WordNet Lemmatizer)
-- [DONE] TF-IDF vectorization
-- [DONE] Word embeddings (Word2Vec, GloVe)
-- [DONE] Contextual embeddings (BERT, DistilBERT)
-- [DONE] Intent classification
-- [DONE] Response generation
-- [DONE] Dialogue management
+- Tokenization (NLTK word_tokenize)
+- Stopword removal (comparison analysis)
+- Stemming (Porter Stemmer)
+- Lemmatization (WordNet Lemmatizer)
+- TF-IDF vectorization
+- Word embeddings (Word2Vec, GloVe)
+- Contextual embeddings (BERT, DistilBERT)
+- Intent classification
+- Response generation
+- Dialogue management
 
-## 📈 Evaluation Metrics
+##  Evaluation Metrics
 
 - **Classification**: Accuracy, Precision, Recall, F1-Score
 - **Generation**: BLEU, ROUGE, Perplexity
 - **Dialogue**: Task completion rate, response appropriateness
 - **Explainability**: LIME, attention visualization
 
-## 📄 Documentation
+##  Documentation
 
 - **[PROJECT_PLAN.md](PROJECT_PLAN.md)** - Complete project overview and methodology
 - **[QUICKSTART_7DAY.md](QUICKSTART_7DAY.md)** - Day-by-day implementation guide
 - **paper/main.tex** - Research paper (ACL 2023 format)
 
-## 🎓 Course Requirements Met
+##  Course Requirements Met
 
-- [DONE] Data analysis with visualizations
-- [DONE] Multiple preprocessing methods compared
-- [DONE] Different embedding techniques (static + contextual)
-- [DONE] 3 model types: Traditional, Neural, Transformer
-- [DONE] Hyperparameter tuning documented
-- [DONE] Testing on 2 datasets (cross-domain)
-- [DONE] Explainability analysis
-- [DONE] Error analysis
-- [DONE] LaTeX documentation
-- [DONE] Complete implementation code
+- Data analysis with visualizations
+- Multiple preprocessing methods compared
+- Different embedding techniques (static + contextual)
+- 3 model types: Traditional, Neural, Transformer
+- Hyperparameter tuning documented
+- Testing on 2 datasets (cross-domain)
+- Explainability analysis
+- Error analysis
+- LaTeX documentation
+- Complete implementation code
 
 ## Technologies Used
 
@@ -211,7 +211,7 @@ chatbot = pipeline("conversational", model="microsoft/DialoGPT-small")
 - **Paper**: Overleaf (LaTeX)
 - **Datasets**: HuggingFace Hub
 
-## 📝 Usage Examples
+##  Usage Examples
 
 ### Therapy Chatbot
 ```python
@@ -282,8 +282,7 @@ For questions about this project, please contact [your email].
 
 ## Timeline
 
-- **Day 1** (Jan 6): Setup & Data [DONE]
-- **Day 2** (Jan 7): AIML Therapy Bot
+- **Day 1** (Jan 6): Setup & Data - **Day 2** (Jan 7): AIML Therapy Bot
 - **Day 3** (Jan 8): DialoGPT Chatbot
 - **Day 4** (Jan 9): Transformer Integration
 - **Day 5** (Jan 10): Evaluation

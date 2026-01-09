@@ -42,9 +42,9 @@ def create_directory_structure():
     
     for directory in directories:
         os.makedirs(directory, exist_ok=True)
-        print(f"[OK] Created: {directory}")
+        print(f"Created: {directory}")
     
-    print("\n[DONE] Directory structure created successfully!")
+    print("\nDirectory structure created successfully!")
 
 def download_nltk_resources():
     """Download all necessary NLTK data"""
@@ -72,11 +72,11 @@ def download_nltk_resources():
     for resource in resources:
         try:
             nltk.download(resource, quiet=True)
-            print(f"[OK] Downloaded: {resource}")
+            print(f"Downloaded: {resource}")
         except Exception as e:
-            print(f"[FAIL] Failed to download {resource}: {e}")
+            print(f"Failed to download {resource}: {e}")
     
-    print("\n[DONE] NLTK resources downloaded successfully!")
+    print("\nNLTK resources downloaded successfully!")
 
 def download_spacy_model():
     """Download spaCy English model"""
@@ -87,10 +87,10 @@ def download_spacy_model():
             [sys.executable, "-m", "spacy", "download", "en_core_web_sm"],
             check=True
         )
-        print("[OK] Downloaded: en_core_web_sm")
-        print("\n[DONE] spaCy model downloaded successfully!")
+        print("Downloaded: en_core_web_sm")
+        print("\nspaCy model downloaded successfully!")
     except subprocess.CalledProcessError as e:
-        print(f"[FAIL] Failed to download spaCy model: {e}")
+        print(f"Failed to download spaCy model: {e}")
         print("You can manually install it later with: python -m spacy download en_core_web_sm")
 
 def download_datasets():
@@ -105,30 +105,30 @@ def download_datasets():
         try:
             therapy_data = load_dataset("Amod/mental_health_counseling_conversations")
             therapy_data.save_to_disk("./data/raw/therapy")
-            print("[OK] Therapy dataset downloaded and saved")
+            print("Therapy dataset downloaded and saved")
         except Exception as e:
-            print(f"[WARNING] Therapy dataset not available, trying alternative...")
+            print(f"Therapy dataset not available, trying alternative...")
             # Fallback to a different dataset
             try:
                 therapy_data = load_dataset("hellaswag")  # Placeholder
-                print("[OK] Using alternative dataset")
+                print("Using alternative dataset")
             except:
-                print("[FAIL] Could not download therapy dataset. You'll need to find one manually.")
+                print("Could not download therapy dataset. You'll need to find one manually.")
         
         # Download dialog dataset
         print("Downloading daily dialog dataset...")
         try:
             dialog_data = load_dataset("daily_dialog")
             dialog_data.save_to_disk("./data/raw/dialogs")
-            print("[OK] Dialog dataset downloaded and saved")
+            print("Dialog dataset downloaded and saved")
         except Exception as e:
-            print(f"[WARNING] Daily dialog dataset issue: {e}")
+            print(f"Daily dialog dataset issue: {e}")
             print("  Trying to continue anyway...")
         
-        print("\n[DONE] Datasets downloaded successfully!")
+        print("\nDatasets downloaded successfully!")
         
     except Exception as e:
-        print(f"[FAIL] Failed to download datasets: {e}")
+        print(f"Failed to download datasets: {e}")
         print("You can download them manually later using the code in Day 1 of QUICKSTART guide")
 
 def create_init_files():
@@ -146,9 +146,9 @@ def create_init_files():
     for location in init_locations:
         with open(location, 'w') as f:
             f.write('"""Package initialization"""\n')
-        print(f"[OK] Created: {location}")
+        print(f"Created: {location}")
     
-    print("\n[DONE] Python packages initialized!")
+    print("\nPython packages initialized!")
 
 def create_gitignore():
     """Create .gitignore file"""
@@ -237,15 +237,15 @@ paper/*.synctex.gz
     with open('.gitignore', 'w') as f:
         f.write(gitignore_content)
     
-    print("[OK] Created: .gitignore")
-    print("\n[DONE] .gitignore created successfully!")
+    print("Created: .gitignore")
+    print("\n.gitignore created successfully!")
 
 def print_next_steps():
     """Print next steps for the user"""
     print("\n" + "="*60)
     print(" SETUP COMPLETE! ")
     print("="*60)
-    print("\n📋 NEXT STEPS:\n")
+    print("\n NEXT STEPS:\n")
     print("1. Activate your environment:")
     print("   conda activate chatbot")
     print("\n2. Verify installation:")
@@ -287,10 +287,10 @@ def main():
         print_next_steps()
         
     except KeyboardInterrupt:
-        print("\n\n[WARNING] Setup interrupted by user. You can run this script again to continue.")
+        print("\n\nSetup interrupted by user. You can run this script again to continue.")
         sys.exit(1)
     except Exception as e:
-        print(f"\n\n[FAILED] Setup failed with error: {e}")
+        print(f"\n\nSetup failed with error: {e}")
         print("Please check the error message and try again.")
         sys.exit(1)
 

@@ -76,7 +76,7 @@ class ChatbotCLI:
         self.chatbot.reset()
         self.chatbot.load_aiml_files()
         self.conversation_history.clear()
-        print("\n[OK] Conversation reset successfully.\n")
+        print("\nConversation reset successfully.\n")
     
     def run(self) -> None:
         """

@@ -32,16 +32,16 @@ def test_imports():
     for name, module in packages.items():
         try:
             __import__(module)
-            print(f"[OK] {name}")
+            print(f"{name}")
         except ImportError as e:
-            print(f"[FAIL] {name} - {e}")
+            print(f"{name} - {e}")
             failed.append(name)
     
     print(f"\n{'='*50}")
     if not failed:
-        print("[OK] ALL PACKAGES IMPORTED SUCCESSFULLY!")
+        print("ALL PACKAGES IMPORTED SUCCESSFULLY!")
     else:
-        print(f"[FAIL] Failed to import: {', '.join(failed)}")
+        print(f"Failed to import: {', '.join(failed)}")
     print(f"{'='*50}\n")
     
     return len(failed) == 0
@@ -60,21 +60,21 @@ def test_nltk_data():
         # Test tokenization
         text = "Hello, how are you doing today?"
         tokens = word_tokenize(text)
-        print(f"[OK] Tokenization works: {tokens[:3]}...")
+        print(f"Tokenization works: {tokens[:3]}...")
         
         # Test stopwords
         stop_words = stopwords.words('english')
-        print(f"[OK] Stopwords loaded: {len(stop_words)} words")
+        print(f"Stopwords loaded: {len(stop_words)} words")
         
         # Test lemmatization
         lemmatizer = WordNetLemmatizer()
         lemma = lemmatizer.lemmatize("running", pos='v')
-        print(f"[OK] Lemmatization works: 'running' -> '{lemma}'")
+        print(f"Lemmatization works: 'running' -> '{lemma}'")
         
-        print("\n[OK] All NLTK data tests passed!\n")
+        print("\nAll NLTK data tests passed!\n")
         return True
     except Exception as e:
-        print(f"\n[FAIL] NLTK data test failed: {e}\n")
+        print(f"\nNLTK data test failed: {e}\n")
         return False
 
 
@@ -88,13 +88,13 @@ def test_spacy():
         nlp = spacy.load('en_core_web_sm')
         doc = nlp("Apple is looking at buying U.K. startup for $1 billion")
         
-        print(f"[OK] spaCy model loaded: en_core_web_sm")
-        print(f"[OK] Entities found: {[(ent.text, ent.label_) for ent in doc.ents]}")
+        print(f"spaCy model loaded: en_core_web_sm")
+        print(f"Entities found: {[(ent.text, ent.label_) for ent in doc.ents]}")
         
-        print("\n[OK] spaCy test passed!\n")
+        print("\nspaCy test passed!\n")
         return True
     except Exception as e:
-        print(f"\n[FAIL] spaCy test failed: {e}\n")
+        print(f"\nspaCy test failed: {e}\n")
         return False
 
 
@@ -109,12 +109,12 @@ def test_transformers():
         classifier = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
         result = classifier("I love this chatbot project!")
         
-        print(f"[OK] Sentiment analysis works: {result[0]}")
+        print(f"Sentiment analysis works: {result[0]}")
         
-        print("\n[OK] Transformers test passed!\n")
+        print("\nTransformers test passed!\n")
         return True
     except Exception as e:
-        print(f"\n[FAIL] Transformers test failed: {e}\n")
+        print(f"\nTransformers test failed: {e}\n")
         print("Note: First run downloads models, this is normal\n")
         return False
 
@@ -126,17 +126,17 @@ def test_pytorch():
     import torch
     
     try:
-        print(f"[OK] PyTorch version: {torch.__version__}")
-        print(f"[OK] CUDA available: {torch.cuda.is_available()}")
+        print(f"PyTorch version: {torch.__version__}")
+        print(f"CUDA available: {torch.cuda.is_available()}")
         
         # Create a simple tensor
         x = torch.tensor([1, 2, 3])
-        print(f"[OK] Tensor creation works: {x}")
+        print(f"Tensor creation works: {x}")
         
-        print("\n[OK] PyTorch test passed!\n")
+        print("\nPyTorch test passed!\n")
         return True
     except Exception as e:
-        print(f"\n[FAIL] PyTorch test failed: {e}\n")
+        print(f"\nPyTorch test failed: {e}\n")
         return False
 
 
@@ -148,7 +148,7 @@ def test_aiml():
     
     try:
         kernel = aiml.Kernel()
-        print(f"[OK] AIML kernel created")
+        print(f"AIML kernel created")
         
         # Simple test pattern
         kernel.learn("""
@@ -161,12 +161,12 @@ def test_aiml():
         """)
         
         response = kernel.respond("hello")
-        print(f"[OK] AIML pattern matching works: 'hello' -> '{response}'")
+        print(f"AIML pattern matching works: 'hello' -> '{response}'")
         
-        print("\n[OK] python-aiml test passed!\n")
+        print("\npython-aiml test passed!\n")
         return True
     except Exception as e:
-        print(f"\n[FAIL] python-aiml test failed: {e}\n")
+        print(f"\npython-aiml test failed: {e}\n")
         return False
 
 
@@ -202,9 +202,9 @@ def main():
     
     for test_name, result in results:
         if result is True:
-            status = "[OK] PASS"
+            status = "PASS"
         elif result is False:
-            status = "[FAIL] FAIL"
+            status = "FAIL"
         else:
             status = "⊘ SKIP"
         print(f"{status:8} - {test_name}")
@@ -220,7 +220,7 @@ def main():
         print("\n ENVIRONMENT IS READY TO USE! ")
         print("\nYou can start working on your chatbot project!")
     else:
-        print("\n[WARNING] SOME TESTS FAILED")
+        print("\nSOME TESTS FAILED")
         print("Please check the error messages above")
     
     print(f"{'='*50}\n")

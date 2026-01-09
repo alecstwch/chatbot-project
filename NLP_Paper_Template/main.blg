@@ -1,0 +1,56 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+The style file: acl_natbib.bst
+Reallocating 'glb_str_end' (item size: 4) to 20 items.
+Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
+Reallocating 'global_strs' (item size: 1) to 4000000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Database file #1: references.bib
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Warning--empty booktitle in fitzpatrick2017delivering
+Warning--can't use both volume and number fields in fitzpatrick2017delivering
+You've used 12 entries,
+            3571 wiz_defined-function locations,
+            774 strings with 9041 characters,
+and the built_in function-call counts, 10768 in all, are:
+= -- 905
+> -- 571
+< -- 14
++ -- 185
+- -- 171
+* -- 725
+:= -- 1566
+add.period$ -- 48
+call.type$ -- 12
+change.case$ -- 127
+chr.to.int$ -- 12
+cite$ -- 14
+duplicate$ -- 715
+empty$ -- 750
+format.name$ -- 207
+if$ -- 2385
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 144
+newline$ -- 63
+num.names$ -- 48
+pop$ -- 318
+preamble$ -- 1
+purify$ -- 103
+quote$ -- 0
+skip$ -- 506
+stack$ -- 0
+substring$ -- 438
+swap$ -- 397
+text.length$ -- 10
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 108
+warning$ -- 2
+while$ -- 64
+width$ -- 0
+write$ -- 157
+(There were 2 warnings)

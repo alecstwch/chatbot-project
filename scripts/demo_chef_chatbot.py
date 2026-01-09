@@ -46,7 +46,7 @@ def main():
     print("Loading AI model (this may take a moment)...\n")
     chef.load_model()
     
-    print("✓ Chef assistant ready!\n")
+    print("Chef assistant ready!\n")
     print("=" * 70)
     
     # Demo conversation with all 5 questions
@@ -92,7 +92,7 @@ def main():
             
             # Show collected context
             context = chef.get_context()
-            print(f"\n✓ Collected all preferences through the funnel!\n")
+            print(f"\nCollected all preferences through the funnel!\n")
             print(f"Summary: {context.get_summary()}\n")
             
             # Show detailed breakdown

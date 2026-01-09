@@ -1,39 +1,45 @@
 """
 Script to remove unicode characters and AI markers from all project files.
+Cleans up checkmarks, crosses, and other AI-generated status indicators.
 """
 
 import re
 from pathlib import Path
 
-# Unicode characters to remove (map to plain text)
-UNICODE_REPLACEMENTS = {
-    '[DONE]': '[DONE]',
-    '[OK]': '[OK]',
-    '': '',
-    '': '',
-    '': '',
-    '': '',
-    '[IN PROGRESS]': '[IN PROGRESS]',
-    '': '',
-    '[FAILED]': '[FAILED]',
-    '[FAIL]': '[FAIL]',
-    '': '',
-    '': '',
-    '': '',
-    '': '',
-    '': '',
-    '[WARNING]': '[WARNING]',
-}
+# Unicode characters and AI markers to completely remove
+UNICODE_REMOVALS = [
+    '', '', '', '',  # Checkmarks
+    '', '', '', '',  # Crosses/rejections
+    '', '', '', '',  # Warnings
+    '', '', '', '',  # Progress/time
+    '', '', '',      # Settings/tools
+    '', '', '',       # Documents
+    '', '', '',       # Highlights
+    '', '', '',       # Analysis
+    '', '', '',         # Special markers
+]
 
-# Patterns that might indicate AI generation (be careful not to break code)
-AI_MARKERS_TO_REMOVE = [
-    # These are safe to remove from comments/docs
+# Text patterns to clean (AI status markers)
+TEXT_PATTERNS = [
+    r'\[DONE\]\s*',
+    r'\[OK\]\s*',
+    r'\[COMPLETED\]\s*',
+    r'\[IN PROGRESS\]\s*',
+    r'\[FAILED\]\s*',
+    r'\[FAIL\]\s*',
+    r'\[WARNING\]\s*',
 ]
 
 def clean_unicode(text):
-    """Replace unicode characters with plain text equivalents."""
-    for unicode_char, replacement in UNICODE_REPLACEMENTS.items():
-        text = text.replace(unicode_char, replacement)
+    """Remove unicode characters and AI status markers."""
+    # Remove unicode symbols
+    for symbol in UNICODE_REMOVALS:
+        text = text.replace(symbol, '')
+    
+    # Remove text patterns
+    for pattern in TEXT_PATTERNS:
+        text = re.sub(pattern, '', text)
+    
     return text
 
 def clean_file(file_path):

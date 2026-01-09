@@ -1,4 +1,4 @@
-# [DONE] Virtual Environment Setup Complete!
+# Virtual Environment Setup Complete!
 
 ## Summary
 
@@ -16,30 +16,30 @@ Your `chatbot-env` virtual environment has been successfully set up with **Pytho
    - Virtual environment: `chatbot-env`
 
 ### 3. **Installed All Required Packages**
-   - [DONE] Core NLP: nltk, spacy, transformers, datasets
-   - [DONE] Deep Learning: torch (PyTorch 2.9.1)
-   - [DONE] ML Libraries: scikit-learn, scipy
-   - [DONE] Data: pandas, numpy
-   - [DONE] Visualization: matplotlib, seaborn, plotly
-   - [DONE] Explainability: lime, shap
-   - [DONE] Jupyter: notebook, jupyterlab, ipywidgets
-   - [DONE] Chatbot: python-aiml
-   - [DONE] Additional: sentence-transformers, gensim
+   - Core NLP: nltk, spacy, transformers, datasets
+   - Deep Learning: torch (PyTorch 2.9.1)
+   - ML Libraries: scikit-learn, scipy
+   - Data: pandas, numpy
+   - Visualization: matplotlib, seaborn, plotly
+   - Explainability: lime, shap
+   - Jupyter: notebook, jupyterlab, ipywidgets
+   - Chatbot: python-aiml
+   - Additional: sentence-transformers, gensim
 
 ### 4. **Downloaded Required Data**
-   - [DONE] NLTK corpora (punkt, stopwords, wordnet, etc.)
-   - [DONE] spaCy model (en_core_web_sm)
+   - NLTK corpora (punkt, stopwords, wordnet, etc.)
+   - spaCy model (en_core_web_sm)
 
 ---
 
-## [WARNING] Important Note: ChatterBot
+## Important Note: ChatterBot
 
 **ChatterBot was NOT installed** due to incompatibility with Python 3.11.
 
 **Good news:** You don't need it! Your project requires 3 model types:
-1. [DONE] **Rule-based:** python-aiml (installed)
-2. [DONE] **Neural:** DialoGPT/BlenderBot via transformers (installed)
-3. [DONE] **Transformer:** DistilBERT/GPT-2 via transformers (installed)
+1. **Rule-based:** python-aiml (installed)
+2. **Neural:** DialoGPT/BlenderBot via transformers (installed)
+3. **Transformer:** DistilBERT/GPT-2 via transformers (installed)
 
 See [SETUP_NOTES.md](SETUP_NOTES.md) for detailed information.
 
@@ -57,21 +57,21 @@ You'll see `(chatbot-env)` in your prompt when activated.
 
 ---
 
-## [DONE] Verification
+## Verification
 
 All core packages tested and working:
-- [DONE] NLTK
-- [DONE] spaCy
-- [DONE] Transformers
-- [DONE] PyTorch
-- [DONE] scikit-learn
-- [DONE] pandas & numpy
-- [DONE] matplotlib
-- [DONE] python-aiml
+- NLTK
+- spaCy
+- Transformers
+- PyTorch
+- scikit-learn
+- pandas & numpy
+- matplotlib
+- python-aiml
 
 ---
 
-## 📋 Quick Start Commands
+##  Quick Start Commands
 
 ### Test the environment
 ```powershell
@@ -105,10 +105,10 @@ You're ready to start **Day 1** of your 7-day sprint!
 According to your [QUICKSTART_7DAY.md](QUICKSTART_7DAY.md):
 
 ### Day 1 Tasks (6-8 hours)
-- [x] Set up Python environment [DONE] **DONE**
-- [x] Install all libraries [DONE] **DONE**
-- [x] Download NLTK data [DONE] **DONE**
-- [x] Download spaCy model [DONE] **DONE**
+- [x] Set up Python environment **DONE**
+- [x] Install all libraries **DONE**
+- [x] Download NLTK data **DONE**
+- [x] Download spaCy model **DONE**
 - [ ] Download datasets from HuggingFace
 - [ ] Quick EDA: dataset statistics, visualizations
 - [ ] Data preprocessing: tokenization, cleaning
@@ -154,7 +154,7 @@ Your development environment is **100% ready** for building your dual chatbot pr
 **Environment:** Python 3.11.9 with all required packages  
 **Models:** 3 types ready (AIML, Neural, Transformer)  
 **Data Tools:** NLTK, spaCy, Transformers  
-**Status:** [DONE] **READY TO CODE**
+**Status:** **READY TO CODE**
 
 ---
 

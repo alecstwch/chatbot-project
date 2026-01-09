@@ -9,7 +9,7 @@ Write-Host ""
 
 # Check if virtual environment exists
 if (Test-Path ".\chatbot-env\Scripts\Activate.ps1") {
-    Write-Host "[OK] Found chatbot-env virtual environment" -ForegroundColor Green
+    Write-Host "Found chatbot-env virtual environment" -ForegroundColor Green
     Write-Host ""
     
     # Activate the environment
@@ -17,7 +17,7 @@ if (Test-Path ".\chatbot-env\Scripts\Activate.ps1") {
     & .\chatbot-env\Scripts\Activate.ps1
     
     Write-Host ""
-    Write-Host "[OK] Environment activated successfully!" -ForegroundColor Green
+    Write-Host "Environment activated successfully!" -ForegroundColor Green
     Write-Host ""
     Write-Host "Python version:" -ForegroundColor Cyan
     python --version
@@ -32,7 +32,7 @@ if (Test-Path ".\chatbot-env\Scripts\Activate.ps1") {
     Write-Host ""
     
 } else {
-    Write-Host "[FAIL] ERROR: chatbot-env not found!" -ForegroundColor Red
+    Write-Host "ERROR: chatbot-env not found!" -ForegroundColor Red
     Write-Host ""
     Write-Host "Please run setup first:" -ForegroundColor Yellow
     Write-Host "  py -3.11 -m venv chatbot-env" -ForegroundColor White

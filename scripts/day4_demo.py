@@ -54,7 +54,7 @@ def demo_aiml_chatbot():
         # Initialize AIML chatbot
         bot = AimlChatbot(aiml_dir=Path("data/knowledge_bases/aiml"))
         num_files = bot.load_aiml_files()
-        print(f"✓ Loaded {num_files} AIML files\n")
+        print(f"Loaded {num_files} AIML files\n")
         
         # Test cases
         test_inputs = [
@@ -70,10 +70,10 @@ def demo_aiml_chatbot():
             print(f"  You: {user_input}")
             print(f"  Bot: {response}\n")
         
-        print("✓ AIML chatbot demo complete")
+        print("AIML chatbot demo complete")
         
     except Exception as e:
-        print(f"✗ Error: {e}")
+        print(f"Error: {e}")
 
 
 def demo_dialogpt_chatbot():
@@ -87,7 +87,7 @@ def demo_dialogpt_chatbot():
         print("Loading DialoGPT model (this may take a moment)...")
         bot = DialoGPTChatbot(model_name="microsoft/DialoGPT-small")
         bot.load_model()
-        print("✓ DialoGPT model loaded\n")
+        print("DialoGPT model loaded\n")
         
         # Test conversation
         test_inputs = [
@@ -102,10 +102,10 @@ def demo_dialogpt_chatbot():
             print(f"  You: {user_input}")
             print(f"  Bot: {response}\n")
         
-        print("✓ DialoGPT chatbot demo complete")
+        print("DialoGPT chatbot demo complete")
         
     except Exception as e:
-        print(f"✗ Error: {e}")
+        print(f"Error: {e}")
         print("Note: DialoGPT requires transformers library and model download")
 
 
@@ -120,7 +120,7 @@ def demo_intent_classification():
         print("Loading intent classifier (this may take a moment)...")
         classifier = IntentClassificationService()
         classifier.load_model()
-        print("✓ Intent classifier loaded\n")
+        print("Intent classifier loaded\n")
         
         # Test cases
         test_inputs = [
@@ -138,10 +138,10 @@ def demo_intent_classification():
             print(f"  Intent: {result.intent} (confidence: {result.confidence:.2f})")
             print()
         
-        print("✓ Intent classification demo complete")
+        print("Intent classification demo complete")
         
     except Exception as e:
-        print(f"✗ Error: {e}")
+        print(f"Error: {e}")
         print("Note: Intent classification requires transformers library")
 
 
@@ -156,7 +156,7 @@ def demo_response_generation():
         print("Loading GPT-2 model (this may take a moment)...")
         generator = ResponseGenerationService(model_name="gpt2")
         generator.load_model()
-        print("✓ GPT-2 model loaded\n")
+        print("GPT-2 model loaded\n")
         
         # Test therapy responses
         test_cases = [
@@ -172,10 +172,10 @@ def demo_response_generation():
             print(f"  Intent: {intent or 'not specified'}")
             print(f"  Therapist: {response}\n")
         
-        print("✓ Response generation demo complete")
+        print("Response generation demo complete")
         
     except Exception as e:
-        print(f"✗ Error: {e}")
+        print(f"Error: {e}")
         print("Note: Response generation requires transformers and torch")
 
 
@@ -194,7 +194,7 @@ def demo_hybrid_chatbot():
             use_intent_classification=True
         )
         bot.initialize()
-        print("✓ Hybrid chatbot initialized\n")
+        print("Hybrid chatbot initialized\n")
         
         # Test cases - mix of AIML patterns and complex queries
         test_inputs = [
@@ -221,10 +221,10 @@ def demo_hybrid_chatbot():
         print(f"  AIML responses: {stats['aiml_responses']}")
         print(f"  GPT-2 responses: {stats['gpt2_responses']}")
         
-        print("\n✓ Hybrid chatbot demo complete")
+        print("\nHybrid chatbot demo complete")
         
     except Exception as e:
-        print(f"✗ Error: {e}")
+        print(f"Error: {e}")
 
 
 def demo_transformer_enhanced():
@@ -238,7 +238,7 @@ def demo_transformer_enhanced():
         print("Loading transformer-enhanced chatbot...")
         bot = TransformerEnhancedChatbot(use_intent_classification=True)
         bot.load_models()
-        print("✓ Transformer-enhanced chatbot initialized\n")
+        print("Transformer-enhanced chatbot initialized\n")
         
         # Test conversation
         test_inputs = [
@@ -256,10 +256,10 @@ def demo_transformer_enhanced():
                 print(f"  Intent: {result['metadata']['intent']} ({result['metadata']['confidence']:.2f})")
             print()
         
-        print("✓ Transformer-enhanced chatbot demo complete")
+        print("Transformer-enhanced chatbot demo complete")
         
     except Exception as e:
-        print(f"✗ Error: {e}")
+        print(f"Error: {e}")
 
 
 def main():
@@ -320,13 +320,13 @@ def main():
     # Summary
     print_header("DEMO COMPLETE")
     print("\nAll three model types have been demonstrated:")
-    print("  ✓ Traditional (AIML) - Fast pattern matching")
-    print("  ✓ Neural (DialoGPT) - Contextual conversations")
-    print("  ✓ Transformer (Intent + GPT-2) - Adaptive, intent-aware responses")
+    print("  Traditional (AIML) - Fast pattern matching")
+    print("  Neural (DialoGPT) - Contextual conversations")
+    print("  Transformer (Intent + GPT-2) - Adaptive, intent-aware responses")
     print("\nDay 4 objectives achieved:")
-    print("  ✓ Intent classification with transformers")
-    print("  ✓ Response generation with GPT-2")
-    print("  ✓ Hybrid approach combining all techniques")
+    print("  Intent classification with transformers")
+    print("  Response generation with GPT-2")
+    print("  Hybrid approach combining all techniques")
     print("\nNext: Day 5 - Evaluation & Analysis")
     print("=" * 80 + "\n")
 

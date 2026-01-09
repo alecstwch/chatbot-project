@@ -168,10 +168,10 @@ Perfect! I've completely revised your project plan for the **7-day intensive spr
 ## **Key Changes Made:**
 
 ### **Scope**
-✅ **Two chatbots only:** Psychotherapy (mental health) + General conversation  
-✅ **Timeline:** 7 days intensive (vs. 12 weeks)  
-✅ **Cost:** $0 - all open-source  
-✅ **Complexity:** Simplified but still covering all NLP requirements
+**Two chatbots only:** Psychotherapy (mental health) + General conversation  
+**Timeline:** 7 days intensive (vs. 12 weeks)  
+**Cost:** $0 - all open-source  
+**Complexity:** Simplified but still covering all NLP requirements
 
 ### **Technical Stack (All Open Source)**
 - **Traditional:** AIML pattern matching, ChatterBot
@@ -190,14 +190,14 @@ Perfect! I've completely revised your project plan for the **7-day intensive spr
 - **Day 7:** Finalization + presentation
 
 ### **NLP Techniques Covered**
-✅ Tokenization, stopword removal, stemming, lemmatization  
-✅ TF-IDF, Word2Vec, contextual embeddings  
-✅ Pattern matching (AIML)  
-✅ Neural generation (DialoGPT)  
-✅ Transformer fine-tuning (DistilBERT, GPT-2)  
-✅ Intent classification, response generation  
-✅ Evaluation metrics (BLEU, F1, accuracy)  
-✅ Explainability (LIME, attention visualization)
+Tokenization, stopword removal, stemming, lemmatization  
+TF-IDF, Word2Vec, contextual embeddings  
+Pattern matching (AIML)  
+Neural generation (DialoGPT)  
+Transformer fine-tuning (DistilBERT, GPT-2)  
+Intent classification, response generation  
+Evaluation metrics (BLEU, F1, accuracy)  
+Explainability (LIME, attention visualization)
 
 ## **Immediate Next Steps:**
 
@@ -234,7 +234,7 @@ Created [](file:///c%3A/Users/Alecs/Documents/FMI%202025-2027/an%201/sem%201/FNL
 
 Perfect! I've created everything you need to start immediately. Here's what's ready:
 
-## ✅ **Created Files:**
+## **Created Files:**
 
 ### 1. **requirements.txt** 
 All Python dependencies needed for the project (NLTK, spaCy, transformers, etc.)
@@ -271,7 +271,7 @@ Professional project documentation with usage examples
 
 ---
 
-## 🚀 **Start RIGHT NOW:**
+##  **Start RIGHT NOW:**
 
 ### **Step 1: Environment Setup** (5 minutes)
 ```powershell
@@ -322,11 +322,11 @@ for method, result in results.items():
 
 ---
 
-## 📋 **Your 7-Day Schedule:**
+##  **Your 7-Day Schedule:**
 
 | Day | Date | Tasks | Deliverable |
 |-----|------|-------|-------------|
-| **1** | Jan 6 (Mon) | ✅ Setup done! Now: Data exploration | Clean datasets |
+| **1** | Jan 6 (Mon) | Setup done! Now: Data exploration | Clean datasets |
 | **2** | Jan 7 (Tue) | Build AIML therapy bot (use therapy.aiml) | Working bot |
 | **3** | Jan 8 (Wed) | Build DialoGPT chatbot | Neural bot |
 | **4** | Jan 9 (Thu) | Add transformers (DistilBERT/GPT-2) | Hybrid bots |
@@ -336,7 +336,7 @@ for method, result in results.items():
 
 ---
 
-## 🎯 **Immediate Next Actions:**
+##  **Immediate Next Actions:**
 
 1. **Run the setup script NOW:**
    ```powershell
@@ -354,15 +354,15 @@ for method, result in results.items():
 3. **Start Day 1 tasks from QUICKSTART_7DAY.md**
 
 You now have:
-- ✅ Complete project structure
-- ✅ All dependencies listed
-- ✅ AIML knowledge bases (100+ patterns)
-- ✅ Preprocessing code ready
-- ✅ Setup automation
-- ✅ Professional README
-- ✅ 7-day implementation guide
+- Complete project structure
+- All dependencies listed
+- AIML knowledge bases (100+ patterns)
+- Preprocessing code ready
+- Setup automation
+- Professional README
+- 7-day implementation guide
 
-**Everything is ready to go! Start with `python setup.py` and you'll be coding in minutes! 🚀**
+**Everything is ready to go! Start with `python setup.py` and you'll be coding in minutes! **
 
 Made changes.
 
@@ -1130,7 +1130,7 @@ The installation is still running and it's installing to the **wrong Python** (3
 
 Instead of fighting this, let me suggest you run the setup manually with explicit commands:
 
-Your project is now at **chatbot-project** (shorter path ✓)
+Your project is now at **chatbot-project** (shorter path )
 
 Run these commands in PowerShell:
 ```powershell
@@ -1197,7 +1197,7 @@ Completed: *Download spaCy model* (5/5)
 
 Perfect! Now let me verify the setup and create a note about ChatterBot: 
 
-Ran terminal command: .\chatbot-env\Scripts\Activate.ps1; python -c "import nltk; import spacy; import transformers; import torch; print('✓ All core packages imported successfully'); print(f'Python: {__import__(\"sys\").version}'); print(f'PyTorch: {torch.__version__}'); print(f'Transformers: {transformers.__version__}'); print(f'spaCy: {spacy.__version__}')"
+Ran terminal command: .\chatbot-env\Scripts\Activate.ps1; python -c "import nltk; import spacy; import transformers; import torch; print('All core packages imported successfully'); print(f'Python: {__import__(\"sys\").version}'); print(f'PyTorch: {torch.__version__}'); print(f'Transformers: {transformers.__version__}'); print(f'spaCy: {spacy.__version__}')"
 
 Ran terminal command: .\chatbot-env\Scripts\Activate.ps1; python -c "import nltk; import spacy; import transformers; import torch; print('All core packages imported successfully')"
 
@@ -1250,11 +1250,11 @@ Read [](file:///c%3A/Users/Alecs/chatbot-project/chatbot-env/pyvenv.cfg)
 
 Perfect! Now let me create a final summary for you:
 
-## ✅ Setup Complete!
+## Setup Complete!
 
 I've successfully set up your chatbot-env virtual environment with **Python 3.11.9** (an older, more compatible version than Python 3.12). Here's what was accomplished:
 
-### 🎯 What Was Done
+###  What Was Done
 
 1. **Removed incompatible Python 3.12 environment**
 2. **Created new virtual environment with Python 3.11.9** for better package compatibility
@@ -1262,27 +1262,27 @@ I've successfully set up your chatbot-env virtual environment with **Python 3.11
 4. **Downloaded NLTK data** (punkt, stopwords, wordnet, POS taggers)
 5. **Downloaded spaCy model** (en_core_web_sm)
 
-### 📦 Successfully Installed Packages
+###  Successfully Installed Packages
 
-- ✅ **NLP:** nltk, spacy, transformers, datasets
-- ✅ **Deep Learning:** PyTorch 2.9.1
-- ✅ **ML:** scikit-learn, scipy
-- ✅ **Data:** pandas, numpy
-- ✅ **Visualization:** matplotlib, seaborn, plotly
-- ✅ **Explainability:** lime, shap
-- ✅ **Chatbot:** python-aiml
-- ✅ **Development:** Jupyter, notebook, ipywidgets
-- ✅ **Additional:** sentence-transformers, gensim
+- **NLP:** nltk, spacy, transformers, datasets
+- **Deep Learning:** PyTorch 2.9.1
+- **ML:** scikit-learn, scipy
+- **Data:** pandas, numpy
+- **Visualization:** matplotlib, seaborn, plotly
+- **Explainability:** lime, shap
+- **Chatbot:** python-aiml
+- **Development:** Jupyter, notebook, ipywidgets
+- **Additional:** sentence-transformers, gensim
 
-### ⚠️ ChatterBot Note
+### ️ ChatterBot Note
 
 **ChatterBot was excluded** due to incompatibility with Python 3.11+. However, **you don't need it!** Your project requires 3 model types, all covered:
 
-1. ✅ **Traditional/Rule-based:** python-aiml (installed)
-2. ✅ **Neural:** DialoGPT via transformers (installed)
-3. ✅ **Transformer:** DistilBERT/GPT-2 via transformers (installed)
+1. **Traditional/Rule-based:** python-aiml (installed)
+2. **Neural:** DialoGPT via transformers (installed)
+3. **Transformer:** DistilBERT/GPT-2 via transformers (installed)
 
-### 🚀 How to Use
+###  How to Use
 
 **Activate the environment:**
 ```powershell
@@ -1294,7 +1294,7 @@ I've successfully set up your chatbot-env virtual environment with **Python 3.11
 .\activate_env.ps1
 ```
 
-### 📚 Documentation Created
+###  Documentation Created
 
 1. **SETUP_NOTES.md** - Comprehensive setup documentation
 2. **ENVIRONMENT_READY.md** - Quick start guide
@@ -1302,15 +1302,11 @@ I've successfully set up your chatbot-env virtual environment with **Python 3.11
 4. **test_environment.py** - Verification script
 5. **activate_env.ps1** - Easy activation script
 
-### ✅ Next Steps
+### Next Steps
 
 You're ready to start **Day 1** of your 7-day chatbot sprint! According to your QUICKSTART_7DAY.md:
 
-- [x] Set up environment ✅
-- [x] Install libraries ✅  
-- [x] Download NLTK data ✅
-- [x] Download spaCy model ✅
-- [ ] Download datasets from HuggingFace
+- [x] Set up environment - [x] Install libraries - [x] Download NLTK data - [x] Download spaCy model - [ ] Download datasets from HuggingFace
 - [ ] Quick EDA
 - [ ] Data preprocessing
 
@@ -1336,12 +1332,12 @@ Using "Replace String in File"
 ```
 Perfect! I've updated requirements.txt with:
 
-✅ **All current installed versions** from your chatbot-env environment
-✅ **Python 3.11.9 compatibility** confirmed
-✅ **Organized by category** for easy reading
-✅ **ChatterBot exclusion note** explaining why it's not included
-✅ **Comments about dependencies** and spaCy model installation
-✅ **Clean, production-ready** format
+**All current installed versions** from your chatbot-env environment
+**Python 3.11.9 compatibility** confirmed
+**Organized by category** for easy reading
+**ChatterBot exclusion note** explaining why it's not included
+**Comments about dependencies** and spaCy model installation
+**Clean, production-ready** format
 
 The file now reflects exactly what's installed and working in your environment, making it easy to recreate this setup on another machine or share with team members.
 
@@ -1381,7 +1377,7 @@ You can safely ignore this warning. It's just HuggingFace suggesting an optional
 
 User: Why is this failing?:
 
-✗ FAIL   - NLTK Data
+FAIL   - NLTK Data
 
 GitHub Copilot: Let me check what's causing the NLTK Data test to fail: 
 
@@ -1399,8 +1395,8 @@ Newer versions of NLTK (3.9+) require additional data packages:
 - `omw-1.4` - Open Multilingual Wordnet (required for lemmatization)
 
 ## What I Fixed:
-✅ Downloaded `punkt_tab` tokenizer  
-✅ Downloaded `omw-1.4` for WordNet support
+Downloaded `punkt_tab` tokenizer  
+Downloaded `omw-1.4` for WordNet support
 
 ## Try the test again:
 ```powershell
@@ -1420,8 +1416,8 @@ GitHub Copilot: Using "Replace String in File"
 ```
 Done! I've updated requirements.txt to include all the required NLTK data packages, including the critical ones that were missing:
 
-✅ `punkt_tab` - New tokenizer (NLTK 3.9+)
-✅ `omw-1.4` - Open Multilingual Wordnet (for lemmatization)
+`punkt_tab` - New tokenizer (NLTK 3.9+)
+`omw-1.4` - Open Multilingual Wordnet (for lemmatization)
 
 Plus all the other essential packages. Now anyone setting up your environment will know exactly what NLTK data to download! 🎉
 
@@ -1441,11 +1437,11 @@ Perfect! I've created a comprehensive PROJECT_STRUCTURE.md document that outline
 
 ## Key Features:
 
-✅ **12-Factor App** compliance (config from env, stateless, etc.)  
-✅ **Domain-Driven Design** structure (domain/application/infrastructure/interface layers)  
-✅ **Complete test separation** (tests/ directory separate from src/)  
-✅ **Clear layering** with specific responsibilities  
-✅ **Production-ready** structure
+**12-Factor App** compliance (config from env, stateless, etc.)  
+**Domain-Driven Design** structure (domain/application/infrastructure/interface layers)  
+**Complete test separation** (tests/ directory separate from src/)  
+**Clear layering** with specific responsibilities  
+**Production-ready** structure
 
 ## Structure Highlights:
 
@@ -1461,7 +1457,7 @@ Perfect! I've created a comprehensive PROJECT_STRUCTURE.md document that outline
 2. Migrate your existing preprocessor.py code into the new structure?
 3. Extract tests into separate files?
 
-Just let me know and I'll execute the restructuring! 🚀
+Just let me know and I'll execute the restructuring! 
 
 Made changes.
 
@@ -1592,15 +1588,15 @@ Using "Replace String in File"
 ```
 Perfect! Now let's create a final comprehensive summary:
 
-## ✅ Complete! Project Successfully Restructured
+## Complete! Project Successfully Restructured
 
 I've successfully restructured your chatbot project following **Domain-Driven Design (DDD)** and **12-Factor App** principles! Here's what was accomplished:
 
 ---
 
-## 🎯 What We Did
+##  What We Did
 
-### 1. ✅ Created Complete DDD Structure
+### 1. Created Complete DDD Structure
 - **domain** - Pure business logic (TextPreprocessingService)
 - **application** - Use cases (ready for your workflows)
 - **infrastructure** - ML models, APIs, storage
@@ -1608,25 +1604,22 @@ I've successfully restructured your chatbot project following **Domain-Driven De
 - **tests** - Completely separate from production code
 - **config** - 12-Factor configuration management
 
-### 2. ✅ Migrated Code with Zero Breaking Changes
+### 2. Migrated Code with Zero Breaking Changes
 **From:** preprocessor.py (212 lines, tests mixed in)  
 **To:**
 - text_preprocessor.py (171 lines, pure logic)
 - test_text_preprocessor.py (272 lines, 27 tests)
 
-### 3. ✅ All Tests Passing with 100% Coverage
+### 3. All Tests Passing with 100% Coverage
 ```
-27 tests passed ✅
-100% code coverage ✅
-0 failures ✅
-```
+27 tests passed 100% code coverage 0 failures ```
 
-### 4. ✅ Configuration Management (12-Factor)
+### 4. Configuration Management (12-Factor)
 - .env - Environment-specific settings
 - settings.py - Type-safe Pydantic configuration
 - logging.yml - Structured logging
 
-### 5. ✅ Comprehensive Documentation Created
+### 5. Comprehensive Documentation Created
 1. **README_NEW_STRUCTURE.md** - Complete user guide
 2. **PROJECT_STRUCTURE.md** - Detailed architecture
 3. **RESTRUCTURING_COMPLETE.md** - Summary & metrics
@@ -1666,7 +1659,7 @@ chatbot-project/
 
 ---
 
-## 🚀 How to Use
+##  How to Use
 
 ### Import the Preprocessor
 ```python
@@ -1699,47 +1692,47 @@ pytest --cov=src --cov-report=html
 
 ---
 
-## 📊 Benefits
+##  Benefits
 
 ### For Development
-✅ Clean separation of concerns  
-✅ Easy to test (pure functions)  
-✅ Type-safe configuration  
-✅ Professional structure  
+Clean separation of concerns  
+Easy to test (pure functions)  
+Type-safe configuration  
+Professional structure  
 
 ### For Production
-✅ 12-Factor ready (deploy anywhere)  
-✅ Environment-based config  
-✅ Scalable architecture  
-✅ Well-documented  
+12-Factor ready (deploy anywhere)  
+Environment-based config  
+Scalable architecture  
+Well-documented  
 
 ### For Your Research Paper
-✅ Demonstrates software engineering skills  
-✅ Reproducible experiments (config-driven)  
-✅ Testable (100% coverage)  
-✅ Professional quality  
+Demonstrates software engineering skills  
+Reproducible experiments (config-driven)  
+Testable (100% coverage)  
+Professional quality  
 
 ---
 
-## 📝 Files Created
+##  Files Created
 
 **Core Files:**
-- ✅ 30+ directories
-- ✅ 25+ Python files
-- ✅ Configuration files
-- ✅ Test infrastructure
-- ✅ Documentation
-- ✅ Utility scripts
+- 30+ directories
+- 25+ Python files
+- Configuration files
+- Test infrastructure
+- Documentation
+- Utility scripts
 
 **Documentation:**
-- ✅ README_NEW_STRUCTURE.md
-- ✅ PROJECT_STRUCTURE.md
-- ✅ RESTRUCTURING_COMPLETE.md
-- ✅ MIGRATION_GUIDE.md
+- README_NEW_STRUCTURE.md
+- PROJECT_STRUCTURE.md
+- RESTRUCTURING_COMPLETE.md
+- MIGRATION_GUIDE.md
 
 ---
 
-## ✨ Next Steps
+##  Next Steps
 
 1. **Start using the new structure** for all new code
 2. **Follow the architecture** when adding features:
@@ -1756,11 +1749,11 @@ pytest --cov=src --cov-report=html
 **Your project is now production-ready with industry-standard architecture! 🎉**
 
 All three goals accomplished:
-1. ✅ Created directory structure
-2. ✅ Migrated code to new structure
-3. ✅ Extracted tests to separate files
+1. Created directory structure
+2. Migrated code to new structure
+3. Extracted tests to separate files
 
-Ready to build amazing chatbots with clean, maintainable code! 🤖🚀
+Ready to build amazing chatbots with clean, maintainable code! 
 
 Made changes.
 
@@ -1780,16 +1773,16 @@ Using "Multi-Replace String in Files"
 ```
 Both files have been updated to reflect:
 
-✅ **Python 3.11.9** environment (not 3.9 or 3.8+)
-✅ **ChatterBot excluded** with explanation about Python 3.11+ incompatibility
-✅ **NLTK 3.9.2** with punkt_tab and omw-1.4 requirements
-✅ **DDD architecture** with complete directory structure
-✅ **Configuration system** with .env and Pydantic settings
-✅ **New file paths** (src/domain/services/text_preprocessor.py)
-✅ **Completed tasks** marked with checkboxes (27 tests, 100% coverage)
-✅ **Updated technology stack** with actual installed versions
-✅ **12-Factor App** configuration approach
-✅ **Current project state** reflecting completed infrastructure
+**Python 3.11.9** environment (not 3.9 or 3.8+)
+**ChatterBot excluded** with explanation about Python 3.11+ incompatibility
+**NLTK 3.9.2** with punkt_tab and omw-1.4 requirements
+**DDD architecture** with complete directory structure
+**Configuration system** with .env and Pydantic settings
+**New file paths** (src/domain/services/text_preprocessor.py)
+**Completed tasks** marked with checkboxes (27 tests, 100% coverage)
+**Updated technology stack** with actual installed versions
+**12-Factor App** configuration approach
+**Current project state** reflecting completed infrastructure
 
 The files now accurately document the restructured project with clean architecture principles and show what's been completed versus what's pending.
 
@@ -1809,29 +1802,27 @@ Based on my analysis:
 
 ## Day 1 & Day 2 Completion Status:
 
-### **Day 1 (Environment & Data)** - ~90% Complete ✅
-
-**Completed:**
-- ✅ Python 3.11.9 virtual environment created
-- ✅ All packages installed (transformers, nltk, spacy, scikit-learn, pandas, matplotlib, etc.)
-- ✅ NLTK data downloaded (punkt, punkt_tab, stopwords, wordnet, omw-1.4, taggers)
-- ✅ spaCy model installed (en_core_web_sm)
+### **Day 1 (Environment & Data)** - ~90% Complete **Completed:**
+- Python 3.11.9 virtual environment created
+- All packages installed (transformers, nltk, spacy, scikit-learn, pandas, matplotlib, etc.)
+- NLTK data downloaded (punkt, punkt_tab, stopwords, wordnet, omw-1.4, taggers)
+- spaCy model installed (en_core_web_sm)
 
 **Not Yet Done:**
-- ❌ Load datasets (therapy_data, dialog_data from HuggingFace)
-- ❌ Save datasets locally to data/therapy and data/dialogs
-- ❌ Quick EDA (exploratory data analysis with visualizations)
+- Load datasets (therapy_data, dialog_data from HuggingFace)
+- Save datasets locally to data/therapy and data/dialogs
+- Quick EDA (exploratory data analysis with visualizations)
 
 ### **Day 2 (Psychotherapy Bot - AIML)** - ~40% Complete 🟡
 
 **Completed:**
-- ✅ AIML knowledge base created (therapy.aiml and general.aiml exist with 363 lines)
-- ✅ Python-AIML package installed
+- AIML knowledge base created (therapy.aiml and general.aiml exist with 363 lines)
+- Python-AIML package installed
 
 **Not Yet Done:**
-- ❌ Python implementation code to load and run AIML chatbot
-- ❌ Testing basic conversations
-- ❌ Integration with DDD structure
+- Python implementation code to load and run AIML chatbot
+- Testing basic conversations
+- Integration with DDD structure
 
 ---
 
@@ -1899,7 +1890,7 @@ if (Test-Path "labs") {
 Move-Item -Path "MDs/*" -Destination "docs/research_papers/" -Force
 Remove-Item -Path "MDs" -Recurse -Force
 
-Write-Host "✅ Folders reorganized successfully"
+Write-Host "Folders reorganized successfully"
 
 
 Checked background terminal output
@@ -1913,7 +1904,7 @@ Move-Item -Path "PROJECT_STRUCTURE.md" -Destination "docs/" -Force
 Move-Item -Path "RESTRUCTURING_COMPLETE.md" -Destination "docs/" -Force
 Move-Item -Path "QUICK_REFERENCE.md" -Destination "docs/" -Force
 
-Write-Host "✅ Documentation files moved to docs/"
+Write-Host "Documentation files moved to docs/"
 
 
 Ran terminal command: 
@@ -1939,7 +1930,7 @@ Get-ChildItem "docs/" -Filter "*.md" | Select-Object -ExpandProperty Name
 Write-Host "`nRoot-level files (should be clean):" -ForegroundColor Cyan
 Get-ChildItem "." -Filter "*.md" | Select-Object -ExpandProperty Name
 
-Write-Host "`n✅ All reorganization complete!" -ForegroundColor Green
+Write-Host "`nAll reorganization complete!" -ForegroundColor Green
 
 
 Read [](file:///c%3A/Users/Alecs/chatbot-project/data/knowledge_bases/aiml)
@@ -1982,12 +1973,12 @@ Write-Host "`n========================================" -ForegroundColor Green
 Write-Host "   FOLDER REORGANIZATION COMPLETE" -ForegroundColor Green
 Write-Host "========================================`n" -ForegroundColor Green
 
-Write-Host "✅ Moved Folders:" -ForegroundColor Cyan
+Write-Host "Moved Folders:" -ForegroundColor Cyan
 Write-Host "  • aiml_files/ → data/knowledge_bases/aiml/"
 Write-Host "  • labs/ → notebooks/labs/"
 Write-Host "  • MDs/ → docs/research_papers/"
 
-Write-Host "`n✅ Moved Documentation to docs/:" -ForegroundColor Cyan
+Write-Host "`nMoved Documentation to docs/:" -ForegroundColor Cyan
 Write-Host "  • ENVIRONMENT_READY.md"
 Write-Host "  • SETUP_NOTES.md"
 Write-Host "  • MIGRATION_GUIDE.md"
@@ -1995,10 +1986,10 @@ Write-Host "  • PROJECT_STRUCTURE.md"
 Write-Host "  • RESTRUCTURING_COMPLETE.md"
 Write-Host "  • QUICK_REFERENCE.md"
 
-Write-Host "`n✅ Root Directory Now Contains:" -ForegroundColor Cyan
+Write-Host "`nRoot Directory Now Contains:" -ForegroundColor Cyan
 Get-ChildItem "." -Filter "*.md" | Select-Object -ExpandProperty Name | ForEach-Object { Write-Host "  • $_" }
 
-Write-Host "`n✅ Updated Files:" -ForegroundColor Cyan
+Write-Host "`nUpdated Files:" -ForegroundColor Cyan
 Write-Host "  • .gitignore (added data/knowledge_bases/ exception)"
 Write-Host "  • README.md (updated structure diagram)"
 
@@ -2018,24 +2009,22 @@ Write-Host "  ├─ src/ (DDD layers)"
 Write-Host "  ├─ tests/"
 Write-Host "  └─ [other project folders]"
 
-Write-Host "`n🎯 Benefits:" -ForegroundColor Magenta
-Write-Host "  ✓ Cleaner root directory"
-Write-Host "  ✓ 12-Factor App compliance (data/code separation)"
-Write-Host "  ✓ DDD principles (clear boundaries)"
-Write-Host "  ✓ Better organization and discoverability"
+Write-Host "`n Benefits:" -ForegroundColor Magenta
+Write-Host "  Cleaner root directory"
+Write-Host "  12-Factor App compliance (data/code separation)"
+Write-Host "  DDD principles (clear boundaries)"
+Write-Host "  Better organization and discoverability"
 
 Write-Host "`n========================================`n" -ForegroundColor Green
 
 
-✅ **Reorganization Complete!**
+**Reorganization Complete!**
 
 ## What Changed:
 
 ### **Folders Moved:**
 1. **`aiml_files/`** → **aiml**
-   - therapy.aiml ✅
-   - general.aiml ✅
-   - Reason: AIML files are domain knowledge/data, not code (12-Factor App principle)
+   - therapy.aiml - general.aiml - Reason: AIML files are domain knowledge/data, not code (12-Factor App principle)
 
 2. **`labs/`** → **labs**
    - All lab notebooks now together with other notebooks
@@ -2047,12 +2036,12 @@ Write-Host "`n========================================`n" -ForegroundColor Green
 
 ### **Documentation Consolidated:**
 Moved 6 files from root to docs:
-- ✅ ENVIRONMENT_READY.md
-- ✅ SETUP_NOTES.md
-- ✅ MIGRATION_GUIDE.md
-- ✅ PROJECT_STRUCTURE.md
-- ✅ RESTRUCTURING_COMPLETE.md
-- ✅ QUICK_REFERENCE.md
+- ENVIRONMENT_READY.md
+- SETUP_NOTES.md
+- MIGRATION_GUIDE.md
+- PROJECT_STRUCTURE.md
+- RESTRUCTURING_COMPLETE.md
+- QUICK_REFERENCE.md
 
 ### **Root Directory Now Clean:**
 Only essential user-facing files remain:
@@ -2068,11 +2057,11 @@ Only essential user-facing files remain:
 2. **README.md** - Updated directory structure diagram
 
 ### **Benefits:**
-✅ **12-Factor App Compliance** - Clear separation of code, data, and config
-✅ **DDD Principles** - Proper layer boundaries
-✅ **Cleaner Root** - Only essential files visible
-✅ **Better Discovery** - Related files grouped logically
-✅ **Professional Structure** - Production-ready organization
+**12-Factor App Compliance** - Clear separation of code, data, and config
+**DDD Principles** - Proper layer boundaries
+**Cleaner Root** - Only essential files visible
+**Better Discovery** - Related files grouped logically
+**Professional Structure** - Production-ready organization
 
 All paths are now properly organized according to industry best practices! 🎉
 
@@ -2166,20 +2155,20 @@ Write-Host "`n========================================" -ForegroundColor Green
 Write-Host "   DAY 1 & DAY 2 COMPLETION SUMMARY" -ForegroundColor Green
 Write-Host "========================================`n" -ForegroundColor Green
 
-Write-Host "✅ DAY 1 COMPLETED (100%):" -ForegroundColor Cyan
-Write-Host "  ✓ Dataset loader with HuggingFace integration"
-Write-Host "  ✓ EDA service with visualizations"
-Write-Host "  ✓ 21 unit tests for dataset loader (100% coverage)"
-Write-Host "  ✓ 25 unit tests for EDA service (98% coverage)"
+Write-Host "DAY 1 COMPLETED (100%):" -ForegroundColor Cyan
+Write-Host "  Dataset loader with HuggingFace integration"
+Write-Host "  EDA service with visualizations"
+Write-Host "  21 unit tests for dataset loader (100% coverage)"
+Write-Host "  25 unit tests for EDA service (98% coverage)"
 
-Write-Host "`n✅ DAY 2 COMPLETED (100%):" -ForegroundColor Cyan
-Write-Host "  ✓ AIML chatbot implementation"
-Write-Host "  ✓ CLI interface for chatbot"
-Write-Host "  ✓ 29 unit tests for AIML chatbot (88% coverage)"
-Write-Host "  ✓ Therapy chatbot ready to run"
+Write-Host "`nDAY 2 COMPLETED (100%):" -ForegroundColor Cyan
+Write-Host "  AIML chatbot implementation"
+Write-Host "  CLI interface for chatbot"
+Write-Host "  29 unit tests for AIML chatbot (88% coverage)"
+Write-Host "  Therapy chatbot ready to run"
 
-Write-Host "`n📊 TEST RESULTS:" -ForegroundColor Yellow
-Write-Host "  • Total tests: 75 (all passing ✓)"
+Write-Host "`n TEST RESULTS:" -ForegroundColor Yellow
+Write-Host "  • Total tests: 75 (all passing )"
 Write-Host "  • Dataset loader: 21 tests, 100% coverage"
 Write-Host "  • EDA service: 25 tests, 98% coverage"
 Write-Host "  • AIML chatbot: 29 tests, 88% coverage"
@@ -2197,7 +2186,7 @@ Write-Host "    • tests/unit/infrastructure/test_dataset_loader.py"
 Write-Host "    • tests/unit/infrastructure/test_aiml_chatbot.py"
 Write-Host "    • tests/unit/application/test_eda_service.py"
 
-Write-Host "`n🎯 KEY FEATURES:" -ForegroundColor Green
+Write-Host "`n KEY FEATURES:" -ForegroundColor Green
 Write-Host "  • HuggingFace dataset downloading and caching"
 Write-Host "  • Comprehensive EDA with statistics and plots"
 Write-Host "  • AIML-based therapy chatbot (363 patterns)"
@@ -2205,7 +2194,7 @@ Write-Host "  • Interactive CLI with commands (help, reset, history)"
 Write-Host "  • Full DDD architecture compliance"
 Write-Host "  • 12-Factor App principles (data/code separation)"
 
-Write-Host "`n🚀 READY TO USE:" -ForegroundColor Green
+Write-Host "`n READY TO USE:" -ForegroundColor Green
 Write-Host "  Run chatbot: python -m src.interfaces.cli.chatbot_cli"
 Write-Host "  Run all tests: pytest -v --cov=src"
 
@@ -2218,17 +2207,12 @@ Perfect! Let's create a final summary:
 
 ## 🎉 Day 1 & Day 2 Complete!
 
-### ✅ Summary of Completion:
+### Summary of Completion:
 
 **Total Tests: 102 (all passing)**
-- Text Preprocessor: 27 tests ✓
-- Dataset Loader: 21 tests ✓  
-- AIML Chatbot: 29 tests ✓
-- EDA Service: 25 tests ✓
+- Text Preprocessor: 27 tests - Dataset Loader: 21 tests - AIML Chatbot: 29 tests - EDA Service: 25 tests **Overall Coverage: 72%**
 
-**Overall Coverage: 72%**
-
-### 📦 What Was Built:
+###  What Was Built:
 
 #### **Day 1 - Data Infrastructure:**
 1. **Dataset Loader** (dataset_loader.py)
@@ -2259,7 +2243,7 @@ Perfect! Let's create a final summary:
    - Conversation tracking
    - Ready to run!
 
-### 🚀 How to Use:
+###  How to Use:
 
 **Run the Therapy Chatbot:**
 ```powershell
@@ -2285,13 +2269,13 @@ report = eda.generate_full_report(dataset, "TherapyData")
 ```
 
 ### 📁 Project Structure Updated:
-- ✅ All folders properly organized (DDD + 12-Factor)
-- ✅ AIML files in data/knowledge_bases/aiml/
-- ✅ Research papers in docs/research_papers/
-- ✅ Lab notebooks in notebooks/labs/
-- ✅ Clean root directory
+- All folders properly organized (DDD + 12-Factor)
+- AIML files in data/knowledge_bases/aiml/
+- Research papers in docs/research_papers/
+- Lab notebooks in notebooks/labs/
+- Clean root directory
 
-All code follows DDD architecture and is fully tested! Ready for Day 3! 🚀
+All code follows DDD architecture and is fully tested! Ready for Day 3! 
 
 Made changes.
 
@@ -2425,7 +2409,7 @@ Ran terminal command: Write-Host "`n=== Testing Enhanced Therapy Chatbot ===`n" 
 
 Perfect! Now the chatbot has been significantly improved. Here's what changed:
 
-## ✅ Enhancements Made:
+## Enhancements Made:
 
 ### **1. Better Pattern Matching:**
 - **Positive feelings**: "I am feeling good" → asks what's going well
@@ -2474,13 +2458,13 @@ Bot: About whatever is on your mind. What would you like to talk about today? Ar
 
 **Try it now with:** `python -m src.interfaces.cli.chatbot_cli`
 
-The bot is now much more engaging and asks therapeutic questions naturally! 🎯
+The bot is now much more engaging and asks therapeutic questions naturally! 
 
 Made changes.
 
 User: Please remove all the unicode icons chars from all the files (source code and doc files). Also please remove all the markers that can lead to idea that this project was written by an AI.
 
-GitHub Copilot: Searched for regex `[✅🎯📁📊🚀✓⏳🟡❌📚🔄📅💡🎉⚠️]`, 20 results
+GitHub Copilot: Searched for regex `[📁🟡📅🎉️]`, 20 results
 
 Searched for regex `AI|GPT|Claude|assistant|generated|automatically`, 50 results
 
@@ -2493,7 +2477,7 @@ Now let me create a comprehensive cleanup script. I'll focus on the main project
 Ran terminal command: 
 # Count unicode characters in files
 $files = Get-ChildItem -Recurse -Include *.md,*.py -Exclude chatbot-env,marker-env,.pytest_cache,htmlcov,__pycache__ | Where-Object { $_.FullName -notmatch '(chatbot-env|marker-env|\.pytest_cache|htmlcov|__pycache__|\.egg-info)' }
-$unicodePattern = '[✅🎯📁📊🚀✓⏳🟡❌📚🔄📅💡🎉⚠️✗]'
+$unicodePattern = '[📁🟡📅🎉️]'
 $totalMatches = 0
 foreach ($file in $files) {
     $content = Get-Content $file.FullName -Raw -ErrorAction SilentlyContinue
@@ -2533,7 +2517,7 @@ Using "Replace String in File"
 ```
 Now let me verify the cleanup by checking a few of the files that were changed: 
 
-Searched for regex `[✅✓🎯📁📊🚀⏳🟡❌📚🔄📅💡🎉⚠️✗]`, 14 results
+Searched for regex `[📁🟡📅🎉️]`, 14 results
 
 There are still some unicode characters in files that weren't processed. Let me update the cleanup script to include PowerShell files and handle all remaining cases: 
 
@@ -2581,7 +2565,7 @@ Using "Multi-Replace String in Files"
 ```
 Now let me verify all unicode characters are removed: 
 
-Searched for regex `[✅✓🎯📁📊🚀⏳🟡❌📚🔄📅💡🎉⚠️✗🛠️🗓️🏗️⏭️]`, no results
+Searched for regex `[📁🟡📅🎉️🗓️🏗️⏭️]`, no results
 
 Perfect! Now let me run tests to make sure everything still works: 
 
@@ -2597,7 +2581,7 @@ Done! I've successfully removed all unicode icons and AI-generation markers from
 
 **Unicode cleanup:**
 - Removed/replaced emojis in 15 files
-- Replaced ✅ with [DONE], ✓ with [OK], ⚠️ with [WARNING], etc.
+- Replaced with , with , ️ with , etc.
 - Removed decorative emojis from documentation headings
 
 **AI markers cleanup:**
@@ -2674,26 +2658,26 @@ Based on your excellent chatbot conversation and the project plan, here's what y
 
 ## Completed (Days 1-2 + Infrastructure)
 
-**[DONE] Day 1: Environment & Data**
-- ✓ Development environment (Python 3.11.9, virtual env)
-- ✓ All NLP libraries installed (transformers, nltk, spacy, etc.)
-- ✓ Dataset loading infrastructure with HuggingFace
-- ✓ EDA service with statistical analysis
-- ✓ Complete testing suite (102 tests, 72% coverage)
-- ✓ DDD architecture with 4 layers
+**Day 1: Environment & Data**
+- Development environment (Python 3.11.9, virtual env)
+- All NLP libraries installed (transformers, nltk, spacy, etc.)
+- Dataset loading infrastructure with HuggingFace
+- EDA service with statistical analysis
+- Complete testing suite (102 tests, 72% coverage)
+- DDD architecture with 4 layers
 
-**[DONE] Day 2: Psychotherapy Bot (AIML)**
-- ✓ AIML chatbot fully working (as shown in your conversation!)
-- ✓ Text preprocessing service (lemmatization, stopwords)
-- ✓ Enhanced therapy patterns (depression, anxiety, positive feelings)
-- ✓ CLI interface implemented
-- ✓ Conversation context handling
+**Day 2: Psychotherapy Bot (AIML)**
+- AIML chatbot fully working (as shown in your conversation!)
+- Text preprocessing service (lemmatization, stopwords)
+- Enhanced therapy patterns (depression, anxiety, positive feelings)
+- CLI interface implemented
+- Conversation context handling
 
-**[DONE] Infrastructure Extras**
-- ✓ Project restructured to DDD architecture
-- ✓ Configuration management (.env files)
-- ✓ Comprehensive unit tests (27 preprocessor + 21 loader + 29 AIML + 25 EDA)
-- ✓ Code cleanup (unicode chars, AI markers removed)
+**Infrastructure Extras**
+- Project restructured to DDD architecture
+- Configuration management (.env files)
+- Comprehensive unit tests (27 preprocessor + 21 loader + 29 AIML + 25 EDA)
+- Code cleanup (unicode chars, AI markers removed)
 
 ## Remaining Work (Days 3-7)
 
@@ -2746,9 +2730,7 @@ Starting: *Test DialoGPT chatbot interactively* (5/5)
 
 Perfect! **Day 3 Complete!** Here's what we accomplished:
 
-## Day 3 Summary: General Chatbot (DialoGPT) ✓
-
-**Created:**
+## Day 3 Summary: General Chatbot (DialoGPT) **Created:**
 1. dialogpt_chatbot.py - Neural conversational chatbot (65 statements, 100% coverage)
 2. test_dialogpt_chatbot.py - 25 comprehensive tests
 3. general_chatbot_cli.py - Interactive CLI for DialoGPT
@@ -3539,9 +3521,9 @@ Ran terminal command: python -c "from src.infrastructure.config.chatbot_settings
 
 Excellent! Both issues are fixed:
 
-1. ✅ **`length_penalty` removed** - This parameter is only valid for beam search, not sampling. Since we use `do_sample=True`, it was being ignored and causing the warning.
+1. **`length_penalty` removed** - This parameter is only valid for beam search, not sampling. Since we use `do_sample=True`, it was being ignored and causing the warning.
 
-2. ✅ **DialoGPT-large now loads** - Changed the CLI's argparse default from `'microsoft/DialoGPT-small'` to `None`, so it now respects the `DIALOGPT_MODEL_NAME` setting from your .env file.
+2. **DialoGPT-large now loads** - Changed the CLI's argparse default from `'microsoft/DialoGPT-small'` to `None`, so it now respects the `DIALOGPT_MODEL_NAME` setting from your .env file.
 
 Now when you run the chatbot, it will:
 - Use **DialoGPT-large** (better quality, but slower and requires ~1.5GB download on first run)
@@ -3854,11 +3836,11 @@ python -m src.interfaces.cli.mistral_chatbot_cli
 4. **Quality**: Much better than DialoGPT - no gibberish, coherent long conversations
 
 **What Mistral offers over DialoGPT:**
-- ✅ Better instruction following
-- ✅ Longer, more coherent responses  
-- ✅ No gibberish degradation
-- ✅ Handles slang/informal language properly
-- ✅ 4096 token context (vs 1024 for DialoGPT)
+- Better instruction following
+- Longer, more coherent responses  
+- No gibberish degradation
+- Handles slang/informal language properly
+- 4096 token context (vs 1024 for DialoGPT)
 
 Try it out! The download will take a few minutes, but once cached, subsequent runs are instant.
 
@@ -3900,9 +3882,9 @@ Using "Multi-Replace String in Files"
 ```
 Excellent! CUDA is now configured. Your setup:
 
-✅ **GPU**: NVIDIA GeForce RTX 3050 Laptop GPU  
-✅ **PyTorch**: 2.5.1+cu121 (CUDA 12.1)  
-✅ **Configuration**: Both DialoGPT and Mistral set to use CUDA  
+**GPU**: NVIDIA GeForce RTX 3050 Laptop GPU  
+**PyTorch**: 2.5.1+cu121 (CUDA 12.1)  
+**Configuration**: Both DialoGPT and Mistral set to use CUDA  
 
 **Performance improvements you'll see:**
 - **DialoGPT-large**: ~10-20x faster response generation
@@ -4029,11 +4011,11 @@ python -m src.interfaces.cli.mistral_chatbot_cli
 ```
 
 **What changed:**
-- ✅ Removed old 14GB Mistral-7B cache
-- ✅ Configured 4-bit NF4 quantization (best quality 4-bit method)
-- ✅ Will download ~3.5GB instead of 14GB
-- ✅ Fits entirely in your 4GB VRAM
-- ✅ Expected response time: 5-15 seconds (vs 1-3 minutes before)
+- Removed old 14GB Mistral-7B cache
+- Configured 4-bit NF4 quantization (best quality 4-bit method)
+- Will download ~3.5GB instead of 14GB
+- Fits entirely in your 4GB VRAM
+- Expected response time: 5-15 seconds (vs 1-3 minutes before)
 
 The download will start automatically when you run the CLI. Should take just a few minutes!
 
@@ -4085,10 +4067,10 @@ Please check your configuration and ensure you have enough memory/disk space.
 
 GitHub Copilot: The issue is that Mistral-7B is too large even with 4-bit quantization for your 4GB VRAM. Let me switch you to **Phi-2** instead - it's a 2.7B parameter model from Microsoft that:
 
-- ✅ Fits easily in 4GB VRAM
-- ✅ Excellent quality (rivals GPT-3.5 on many tasks)
-- ✅ Fast responses (1-3 seconds)
-- ✅ Better than DialoGPT, more practical than Mistral-7B 
+- Fits easily in 4GB VRAM
+- Excellent quality (rivals GPT-3.5 on many tasks)
+- Fast responses (1-3 seconds)
+- Better than DialoGPT, more practical than Mistral-7B 
 
 Using "Multi-Replace String in Files"
 
@@ -4107,12 +4089,12 @@ Using "Multi-Replace String in Files"
 Perfect! Now you're using **Phi-2** instead. It's a much better fit for your hardware:
 
 **Phi-2 advantages:**
-- ✅ 2.7B parameters (vs Mistral's 7B)
-- ✅ Fits entirely in 4GB VRAM with FP16 (no quantization needed)
-- ✅ ~5GB download (one-time)
-- ✅ **1-3 second responses** (vs Mistral's 5-15 seconds or blocking)
-- ✅ Excellent quality - Microsoft trained it to rival GPT-3.5
-- ✅ Won't freeze your laptop
+- 2.7B parameters (vs Mistral's 7B)
+- Fits entirely in 4GB VRAM with FP16 (no quantization needed)
+- ~5GB download (one-time)
+- **1-3 second responses** (vs Mistral's 5-15 seconds or blocking)
+- Excellent quality - Microsoft trained it to rival GPT-3.5
+- Won't freeze your laptop
 
 Try it now:
 ```powershell
@@ -4223,13 +4205,13 @@ python -m src.interfaces.cli.neural_chatbot_cli
 ```
 
 **Changes made:**
-1. ✅ Renamed mistral_chatbot.py → neural_chatbot.py
-2. ✅ Renamed `mistral_chatbot_cli.py` → `neural_chatbot_cli.py`
-3. ✅ Renamed `MistralSettings` → `NeuralChatbotSettings`
-4. ✅ Changed env prefix `MISTRAL_` → `NEURAL_` in .env
-5. ✅ Fixed Phi-2 prompt format (simple `User:/Assistant:` instead of Mistral's `[INST]` format)
-6. ✅ Added `max_length=1024` to prevent infinite context
-7. ✅ Fixed response extraction to stop at next "User:" marker
+1. Renamed mistral_chatbot.py → neural_chatbot.py
+2. Renamed `mistral_chatbot_cli.py` → `neural_chatbot_cli.py`
+3. Renamed `MistralSettings` → `NeuralChatbotSettings`
+4. Changed env prefix `MISTRAL_` → `NEURAL_` in .env
+5. Fixed Phi-2 prompt format (simple `User:/Assistant:` instead of Mistral's `[INST]` format)
+6. Added `max_length=1024` to prevent infinite context
+7. Fixed response extraction to stop at next "User:" marker
 
 The chatbot should now respond quickly without freezing!
 
@@ -4301,7 +4283,7 @@ Read [](file:///c%3A/Users/Alecs/chatbot-project/.env#95-95), lines 95 to 115
 
 Perfect! Now let's test. The changes are complete:
 
-**✅ What's been implemented:**
+**What's been implemented:**
 
 1. **Benchmarking added:**
    - Response time in seconds
@@ -4449,7 +4431,7 @@ Using "Replace String in File"
 ```
 Perfect! Now all fixes are in place:
 
-**✅ Fixed:**
+**Fixed:**
 
 1. **Hallucination prevention:**
    - Added `stop_strings` parameter to generation (stops at "Let's", "Scenario:", etc.)
@@ -4555,7 +4537,7 @@ Bot: Goodbye! It was great talking with you!
 
 GitHub Copilot: Excellent! The improvements are working perfectly:
 
-**✅ What's working well:**
+**What's working well:**
 
 1. **No hallucinations** - The Phi-2 specific stop patterns prevented the educational scenarios/puzzles
 2. **Relevant responses** - Answered about Romanian ("Salve"), psychotherapy, and DASS questionnaire accurately

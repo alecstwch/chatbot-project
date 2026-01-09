@@ -1,12 +1,48 @@
 \section{Related Work}
 \label{sec:related_work}
 
-State of the art (SOTA) on your chosen theme, short history, recent related results
+This section reviews prior research on conversational agents, organizing work into three themes: chatbot technology evolution, healthcare applications, and architectural comparisons.
 
-\begin{itemize}
-    \item \href{https://scholar.google.com/}{Google Scholar}: search for author, paper name, topic ...; look at year of publication (more recent - better), number of citations (more - better), publication venue (preferably a top conference or journal)
-    \item \href{https://aclanthology.org/}{ACL Anthology}
-    \item \href{https://paperswithcode.com/}{paperswithcode}
-\end{itemize}
+\subsection{Chatbot Technology Evolution}
 
-You can cite papers like this \cite{vaswani_2017}.
+Adamopoulou and Moussiades~\cite{adamopoulou2020overview} provide a comprehensive survey of chatbot technology from ELIZA (1966) to modern transformer-based systems. They categorize chatbots along two dimensions: \textit{goal-oriented} vs. \textit{open-domain}, and \textit{rule-based} vs. \textit{learning-based}. The authors identify four key NLP techniques used in modern chatbots: pattern matching (e.g., AIML), structured knowledge bases (e.g., ontologies), statistical methods (e.g., Naive Bayes), and neural networks (e.g., sequence-to-sequence models).
+
+Their analysis shows a clear trend toward hybrid approaches that combine rule-based safety guardrails with neural generation for fluency. However, they note a gap in systematic comparisons of these architectural choices on the same task and dataset. Our work addresses this gap by directly comparing rule-based (AIML), purely neural (DialoGPT), and hybrid (Intent + GPT-2) architectures using identical evaluation protocols.
+
+Devlin et al.~\cite{devlin2019bert} introduced BERT (Bidirectional Encoder Representations from Transformers), which revolutionized NLP through pre-training on masked language modeling. While BERT itself is not a generative model, it inspired numerous dialogue systems that use BERT embeddings for context understanding. Our hybrid architecture leverages BERT-based intent classification (via BART-MNLI) to guide GPT-2 generation.
+
+\subsection{Healthcare Conversational Agents}
+
+Laranjo et al.~\cite{laranjo2018conversational} conducted a systematic review of 17 randomized controlled trials evaluating conversational agents for healthcare. They found that chatbots significantly improved health outcomes in 14 of 17 studies, with effect sizes ranging from small (Cohen's d=0.2) to large (d=0.8). Key success factors included personalization, empathetic language, and domain-specific knowledge integration.
+
+However, Laranjo et al. also identified critical limitations. Most studies used rule-based chatbots with limited conversational depth, and user engagement dropped sharply after initial interactions. Only 2 of 17 studies reported conversation retention beyond 4 weeks. The authors call for more sophisticated dialogue systems that can handle diverse user inputs and sustain engagement.
+
+Our work responds to this call by evaluating neural and hybrid models that learn from data rather than relying solely on predefined rules. We specifically measure empathy and engagement metrics to assess suitability for sustained healthcare interactions.
+
+Fitzpatrick et al.~\cite{fitzpatrick2017delivering} demonstrated that Woebot, a fully automated chatbot delivering cognitive behavioral therapy, significantly reduced depression and anxiety in a randomized trial of 70 participants. Woebot used a hybrid approach: rule-based conversation flow for therapeutic protocols combined with NLP for user input understanding.
+
+This work validates the clinical potential of conversational agents but also highlights risks. The authors emphasize the need for transparent error handling, since mental health chatbots can cause harm if they provide inappropriate advice. Our error analysis framework directly addresses this by categorizing failure modes and identifying high-risk scenarios (e.g., crisis intervention misclassification).
+
+\subsection{Architectural Comparisons}
+
+Zhang et al.~\cite{zhang2020dialogpt} introduced DialoGPT, a GPT-2 model fine-tuned on 147 million Reddit conversation turns. They demonstrated that DialoGPT outperforms prior work on automatic metrics (perplexity, BLEU) and human evaluations (relevance, informativeness) for open-domain chitchat.
+
+However, DialoGPT's training on Reddit introduces challenges for domain-specific applications. The model occasionally generates informal, sarcastic, or inappropriate responses unsuitable for professional contexts like healthcare. Zhang et al. acknowledge this limitation but do not systematically compare DialoGPT with rule-based or hybrid alternatives.
+
+Our work extends this by: (1) fine-tuning DialoGPT on domain-specific mental health conversations, (2) comparing it against rule-based and hybrid baselines, and (3) conducting detailed error analysis to quantify failure modes.
+
+Radford et al.~\cite{radford2019language} introduced GPT-2, demonstrating that unsupervised pre-training on large text corpora produces models capable of zero-shot task transfer. While GPT-2 was not designed for dialogue, subsequent work has shown it can be adapted for conversational AI through prompt engineering and fine-tuning.
+
+Our hybrid architecture builds on this by combining GPT-2's generation capabilities with explicit intent conditioning. This addresses GPT-2's tendency to generate generic responses by providing task-specific guidance (the predicted intent).
+
+\subsection{Gap in Literature}
+
+While prior work has explored chatbot technology (Adamopoulou~\cite{adamopoulou2020overview}), healthcare applications (Laranjo~\cite{laranjo2018conversational}), and specific neural models (DialoGPT~\cite{zhang2020dialogpt}, GPT-2~\cite{radford2019language}), we identify three critical gaps:
+
+\textbf{Lack of Direct Architectural Comparisons.} Most studies evaluate a single architecture in isolation. There is limited work systematically comparing rule-based, neural, and hybrid approaches on identical datasets using comprehensive metrics. Our work fills this gap by benchmarking three representative architectures.
+
+\textbf{Insufficient Error Analysis.} Prior work reports aggregate metrics (accuracy, BLEU) but rarely analyzes \textit{why} models fail. We address this through a detailed error taxonomy and failure pattern detection, providing actionable insights for improving chatbot safety.
+
+\textbf{Limited Explainability.} Neural dialogue models are often treated as black boxes. Our application of LIME to intent classification provides interpretable explanations for model decisions, addressing the transparency requirements identified by Laranjo et al.~\cite{laranjo2018conversational}.
+
+By addressing these gaps, our work contributes both empirical comparisons and methodological tools for the conversational AI community.

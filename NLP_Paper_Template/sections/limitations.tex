@@ -1,4 +1,50 @@
 \section*{Limitations}
 \label{sec:limitations}
 
-Present the limitations of your work that are open to future investigation. For example: what languages does it work for (and why)? Is it scalable? Does it require large GPU resources?
+While this work provides valuable insights into conversational agent architectures, several limitations should be acknowledged:
+
+\subsection*{Dataset Constraints}
+
+\textbf{English-Only:} Our evaluation is limited to English conversations. The findings may not generalize to other languages with different linguistic structures, cultural norms around mental health discussion, or resource availability for NLP tools.
+
+\textbf{Dataset Size:} With 14,352 conversation pairs, our combined dataset is modest compared to industrial chatbot training sets (millions of conversations). Larger datasets could improve neural model performance, particularly for handling rare intents or edge cases.
+
+\textbf{Domain Coverage:} While we combine mental health counseling and daily dialog datasets, the conversations are relatively short (12.3 word inputs, 15.7 word responses on average). Real therapeutic sessions involve longer, more complex multi-turn exchanges that may exhibit different error patterns.
+
+\textbf{Data Source Bias:} The Daily Dialog dataset was collected from English learning websites and may reflect non-native speaker language patterns. The Mental Health Counseling dataset source is limited and may not represent diverse demographic groups or presentation styles.
+
+\subsection*{Model Scope}
+
+\textbf{Small Models:} We evaluated small-to-medium models (117M-406M parameters) to demonstrate CPU-only feasibility. Larger models like GPT-3.5 (175B parameters) or recent open-source alternatives (LLaMA-2-70B) likely offer better performance but were beyond our computational budget.
+
+\textbf{Zero-Shot Intent Classification:} Our hybrid architecture uses BART-MNLI for zero-shot intent classification without fine-tuning on in-domain intent labels. A supervised intent classifier trained on mental health-specific intents would likely achieve higher accuracy.
+
+\textbf{Static Models:} All models were trained once and evaluated on a fixed test set. We did not explore online learning, where models adapt based on user interactions, or reinforcement learning from human feedback (RLHF) used in modern dialogue systems like ChatGPT.
+
+\subsection*{Evaluation Limitations}
+
+\textbf{No Human Evaluation:} Our evaluation relies entirely on automatic metrics (BLEU, ROUGE, accuracy). While these are well-established, they correlate imperfectly with human judgments of response quality, empathy, and therapeutic appropriateness. A user study with mental health professionals would provide critical validation.
+
+\textbf{Single Reference Responses:} Generation metrics (BLEU, ROUGE) compare outputs to single reference responses. In reality, many valid responses exist for each input. Multi-reference evaluation or learned metrics (e.g., BERTScore) would be more robust.
+
+\textbf{Simulated Evaluation:} We did not deploy chatbots in real therapeutic contexts. Actual deployment could reveal challenges not captured in offline metrics, such as user frustration with repetitive responses or decreased engagement over time.
+
+\textbf{Error Detection Validity:} Our automated error categorization (7 categories) relies on heuristics (e.g., BERT similarity for coherence, sentiment analysis for empathy). Manual annotation of a subset would provide ground truth validation for these categories.
+
+\subsection*{Computational Constraints}
+
+\textbf{CPU-Only Experiments:} All experiments were conducted on CPU (Intel Core i7, 16GB RAM) without GPU acceleration. This enabled us to demonstrate feasibility for resource-constrained deployments but limited our ability to explore larger models or extensive hyperparameter search.
+
+\textbf{Single Run per Configuration:} Due to computational constraints, we report single-run results for model training (with the exception of 5-fold cross-validation for final evaluation). Multiple random seed experiments would provide more robust estimates of model variance.
+
+\textbf{Limited Hyperparameter Search:} We used standard hyperparameters (learning rate: 5e-5, batch size: 8) based on prior work. Grid search or Bayesian optimization could potentially improve performance but was computationally prohibitive.
+
+\subsection*{Generalizability}
+
+\textbf{Mental Health Focus:} Our evaluation focuses on mental health conversations. Findings may not transfer to other dialogue domains (e.g., customer service, education, entertainment) with different success criteria and error tolerance.
+
+\textbf{Clinical Validity:} While we measure empathy and coherence, we do not assess actual therapeutic effectiveness (e.g., symptom reduction, user well-being improvement). Clinical validation would require longitudinal studies with licensed mental health professionals.
+
+\textbf{Safety Analysis:} Our error analysis identifies failure modes but does not quantify potential harm (e.g., how often crisis interventions are missed, whether misclassifications could escalate distress). Risk assessment would be critical before real-world deployment.
+
+Despite these limitations, our work provides a rigorous comparative evaluation of chatbot architectures using well-established methods, and the identified limitations offer clear directions for future research.

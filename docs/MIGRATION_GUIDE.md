@@ -133,9 +133,9 @@ Most methods unchanged, but note:
 
 ## Breaking Changes
 
-[WARNING] **Class renamed**: `TextPreprocessor` → `TextPreprocessingService`  
-[WARNING] **Import path changed**: `src.data.preprocessor` → `src.domain.services.text_preprocessor`  
-[WARNING] **DataFrame helper**: Now manual (will be in infrastructure layer later)
+**Class renamed**: `TextPreprocessor` → `TextPreprocessingService`  
+**Import path changed**: `src.data.preprocessor` → `src.domain.services.text_preprocessor`  
+**DataFrame helper**: Now manual (will be in infrastructure layer later)
 
 ## Migration Checklist
 

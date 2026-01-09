@@ -139,18 +139,18 @@ class DialogGPTChatbot:
 
 ### 2. 12-Factor App Compliance
 
-[DONE] **I. Codebase**: One codebase tracked in Git  
-[DONE] **II. Dependencies**: Explicit in requirements.txt  
-[DONE] **III. Config**: Environment variables (.env)  
-[DONE] **IV. Backing Services**: Attachable resources  
-[DONE] **V. Build, Release, Run**: Strict separation  
-[DONE] **VI. Processes**: Stateless execution  
-[DONE] **VII. Port Binding**: Self-contained services  
-[DONE] **VIII. Concurrency**: Scale via processes  
-[DONE] **IX. Disposability**: Fast startup/shutdown  
-[DONE] **X. Dev/Prod Parity**: Keep environments similar  
-[DONE] **XI. Logs**: Event streams to stdout  
-[DONE] **XII. Admin Processes**: One-off admin tasks  
+**I. Codebase**: One codebase tracked in Git  
+**II. Dependencies**: Explicit in requirements.txt  
+**III. Config**: Environment variables (.env)  
+**IV. Backing Services**: Attachable resources  
+**V. Build, Release, Run**: Strict separation  
+**VI. Processes**: Stateless execution  
+**VII. Port Binding**: Self-contained services  
+**VIII. Concurrency**: Scale via processes  
+**IX. Disposability**: Fast startup/shutdown  
+**X. Dev/Prod Parity**: Keep environments similar  
+**XI. Logs**: Event streams to stdout  
+**XII. Admin Processes**: One-off admin tasks  
 
 ### 3. Test Separation
 
@@ -161,7 +161,7 @@ src/domain/services/text_preprocessor.py  # Production code
 tests/unit/domain/test_text_preprocessor.py  # Tests
 ```
 
-## 🔧 Configuration
+##  Configuration
 
 All configuration via environment variables:
 
@@ -244,7 +244,7 @@ preprocessor = TextPreprocessingService(
 )
 ```
 
-## 📦 Dependencies
+##  Dependencies
 
 Core packages:
 - **nltk**: Text preprocessing
@@ -264,7 +264,7 @@ The old `src/data/preprocessor.py` has been migrated:
 - **Tests** → `tests/unit/domain/test_text_preprocessor.py`
 - **Config** → `.env` and `config/settings.py`
 
-## 📝 Development Workflow
+##  Development Workflow
 
 ### 1. Add New Feature
 
@@ -322,11 +322,11 @@ The 12-Factor structure makes deployment easy:
 4. Follow layer boundaries
 5. Update documentation
 
-## 📄 License
+##  License
 
 Academic project for NLP course.
 
 ---
 
-**Project Status**: [DONE] Production-Ready Architecture  
+**Project Status**: Production-Ready Architecture  
 **Last Updated**: January 5, 2026

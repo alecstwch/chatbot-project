@@ -46,7 +46,7 @@ def main():
         print("Loading intent classifier...")
         chatbot.initialize()
         
-        print("\n✓ All models loaded successfully!")
+        print("\nAll models loaded successfully!")
         print("\nThis chatbot uses a hybrid approach:")
         print("  1. Tries AIML pattern matching first (fast)")
         print("  2. Classifies your intent (depression, anxiety, etc.)")

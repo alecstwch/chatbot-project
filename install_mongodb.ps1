@@ -9,13 +9,13 @@ Write-Host "========================================`n" -ForegroundColor Cyan
 $mongoService = Get-Service -Name MongoDB -ErrorAction SilentlyContinue
 
 if ($mongoService) {
-    Write-Host "[OK] MongoDB is already installed!" -ForegroundColor Green
+    Write-Host "MongoDB is already installed!" -ForegroundColor Green
     Write-Host "Service Status: $($mongoService.Status)" -ForegroundColor Yellow
     
     if ($mongoService.Status -ne "Running") {
         Write-Host "`nStarting MongoDB service..." -ForegroundColor Yellow
         Start-Service -Name MongoDB
-        Write-Host "[OK] MongoDB started successfully!" -ForegroundColor Green
+        Write-Host "MongoDB started successfully!" -ForegroundColor Green
     }
 } else {
     Write-Host "[INFO] MongoDB not found. Installing..." -ForegroundColor Yellow
@@ -25,7 +25,7 @@ if ($mongoService) {
     winget install MongoDB.Server --accept-package-agreements --accept-source-agreements
     
     if ($LASTEXITCODE -eq 0) {
-        Write-Host "`n[OK] MongoDB installed successfully!" -ForegroundColor Green
+        Write-Host "`nMongoDB installed successfully!" -ForegroundColor Green
         
         # Wait a moment for service to be created
         Start-Sleep -Seconds 5
@@ -34,7 +34,7 @@ if ($mongoService) {
         Write-Host "`nStarting MongoDB service..." -ForegroundColor Yellow
         try {
             Start-Service -Name MongoDB -ErrorAction Stop
-            Write-Host "[OK] MongoDB service started!" -ForegroundColor Green
+            Write-Host "MongoDB service started!" -ForegroundColor Green
         } catch {
             Write-Host "[WARN] Could not start MongoDB service automatically" -ForegroundColor Yellow
             Write-Host "You may need to start it manually or reboot" -ForegroundColor Yellow
@@ -60,7 +60,7 @@ from pymongo import MongoClient
 try:
     client = MongoClient('mongodb://localhost:27017/', serverSelectionTimeoutMS=5000)
     client.admin.command('ping')
-    print('[OK] MongoDB connection successful!')
+    print('MongoDB connection successful!')
     print('MongoDB is ready to use.')
 except Exception as e:
     print(f'[ERROR] Could not connect: {e}')

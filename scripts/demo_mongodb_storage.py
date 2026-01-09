@@ -48,13 +48,13 @@ def demo_basic_storage():
     storage = ConversationStorageService()
     
     if not storage.initialize():
-        print("✗ Failed to connect to MongoDB")
+        print("Failed to connect to MongoDB")
         print("\nMake sure MongoDB is running:")
         print("  Option 1: docker run -d -p 27017:27017 mongo")
         print("  Option 2: Install MongoDB Community Edition\n")
         return False
     
-    print("✓ Connected to MongoDB\n")
+    print("Connected to MongoDB\n")
     
     # Start a session for user "alice"
     session_id = storage.start_session(
@@ -91,12 +91,12 @@ def demo_basic_storage():
     
     # End and save session
     storage.end_session()
-    print("✓ Session saved to MongoDB\n")
+    print("Session saved to MongoDB\n")
     
     # Retrieve user history
     print("Retrieving user history...")
     sessions = storage.get_user_history("alice", limit=5)
-    print(f"✓ Found {len(sessions)} session(s) for user 'alice'\n")
+    print(f"Found {len(sessions)} session(s) for user 'alice'\n")
     
     # Get user profile
     profile = storage.get_user_profile("alice")
@@ -135,12 +135,12 @@ def demo_intent_search():
             storage.log_bot_response(f"I understand your {intent}. Let's talk about it.")
         storage.end_session()
     
-    print("✓ Created test sessions\n")
+    print("Created test sessions\n")
     
     # Search by intent
     print("Searching for 'anxiety' conversations...")
     anxiety_sessions = storage.search_by_intent("anxiety")
-    print(f"✓ Found {len(anxiety_sessions)} session(s) with 'anxiety' intent\n")
+    print(f"Found {len(anxiety_sessions)} session(s) with 'anxiety' intent\n")
     
     for session in anxiety_sessions:
         print(f"  User: {session.user_name}")
@@ -191,13 +191,13 @@ def demo_with_chatbot():
     try:
         chatbot = AimlChatbot(aiml_dir=Path("data/knowledge_bases/aiml"))
         chatbot.load_aiml_files()
-        print("✓ AIML chatbot loaded")
+        print("AIML chatbot loaded")
         
         classifier = IntentClassificationService(domain="therapy_intents")
-        print("✓ Intent classifier loaded\n")
+        print("Intent classifier loaded\n")
         
     except Exception as e:
-        print(f"✗ Failed to load chatbot: {e}\n")
+        print(f"Failed to load chatbot: {e}\n")
         storage.shutdown()
         return False
     
@@ -238,7 +238,7 @@ def demo_with_chatbot():
     
     # End session
     storage.end_session()
-    print("✓ Session saved with intent tags\n")
+    print("Session saved with intent tags\n")
     
     # Show user profile
     profile = storage.get_user_profile(user_name)
@@ -275,12 +275,12 @@ def main():
         print("  ALL DEMOS COMPLETE")
         print("=" * 70)
         print("\nMongoDB Features Demonstrated:")
-        print("  ✓ User identification and session management")
-        print("  ✓ Intent classification and tagging")
-        print("  ✓ Conversation history storage")
-        print("  ✓ User profile tracking")
-        print("  ✓ Intent-based search")
-        print("  ✓ Analytics and statistics")
+        print("  User identification and session management")
+        print("  Intent classification and tagging")
+        print("  Conversation history storage")
+        print("  User profile tracking")
+        print("  Intent-based search")
+        print("  Analytics and statistics")
         print("\nNext Steps:")
         print("  - Explore MongoDB Compass to view stored data")
         print("  - Run: python scripts/demo_mongodb_queries.py")

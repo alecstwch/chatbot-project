@@ -1,8 +1,6 @@
 # Setup Notes for Chatbot Project
 
-## Environment Setup Completed [OK]
-
-**Date:** January 5, 2026  
+## Environment Setup Completed **Date:** January 5, 2026  
 **Python Version:** 3.11.9  
 **Virtual Environment:** `chatbot-env`
 
@@ -13,67 +11,65 @@
 ### Successfully Installed Packages
 
 #### Core NLP Libraries
-- [DONE] nltk 3.9.2
-- [DONE] spacy 3.8.11 (with en_core_web_sm model)
-- [DONE] transformers 4.57.3
-- [DONE] datasets 4.4.2
-- [DONE] torch 2.9.1
-- [DONE] tokenizers 0.22.1
+- nltk 3.9.2
+- spacy 3.8.11 (with en_core_web_sm model)
+- transformers 4.57.3
+- datasets 4.4.2
+- torch 2.9.1
+- tokenizers 0.22.1
 
 #### Traditional Chatbot
-- [DONE] python-aiml 0.9.3
-- [WARNING] ChatterBot - **NOT INSTALLED** (see note below)
+- python-aiml 0.9.3
+- ChatterBot - **NOT INSTALLED** (see note below)
 
 #### Machine Learning
-- [DONE] scikit-learn 1.8.0
-- [DONE] scipy 1.16.3
+- scikit-learn 1.8.0
+- scipy 1.16.3
 
 #### Data Processing
-- [DONE] pandas 2.3.3
-- [DONE] numpy 2.3.5
+- pandas 2.3.3
+- numpy 2.3.5
 
 #### Visualization
-- [DONE] matplotlib 3.10.8
-- [DONE] seaborn 0.13.2
-- [DONE] plotly 6.5.0
+- matplotlib 3.10.8
+- seaborn 0.13.2
+- plotly 6.5.0
 
 #### Explainability
-- [DONE] lime 0.2.0.1
-- [DONE] shap 0.50.0
+- lime 0.2.0.1
+- shap 0.50.0
 
 #### Jupyter & Development
-- [DONE] jupyter 1.1.1
-- [DONE] notebook 7.5.1
-- [DONE] ipywidgets 8.1.8
-- [DONE] jupyterlab 4.5.1
+- jupyter 1.1.1
+- notebook 7.5.1
+- ipywidgets 8.1.8
+- jupyterlab 4.5.1
 
 #### Additional NLP Models
-- [DONE] sentence-transformers 5.2.0
-- [DONE] gensim 4.4.0
+- sentence-transformers 5.2.0
+- gensim 4.4.0
 
 ---
 
 ## NLTK Data Downloaded
 
 The following NLTK packages have been downloaded:
-- [DONE] punkt (tokenization)
-- [DONE] stopwords (stopword removal)
-- [DONE] wordnet (lemmatization)
-- [DONE] averaged_perceptron_tagger (POS tagging)
-- [DONE] maxent_ne_chunker (named entity recognition)
-- [DONE] words (word lists)
+- punkt (tokenization)
+- stopwords (stopword removal)
+- wordnet (lemmatization)
+- averaged_perceptron_tagger (POS tagging)
+- maxent_ne_chunker (named entity recognition)
+- words (word lists)
 
 ---
 
 ## SpaCy Model Downloaded
 
-- [DONE] en_core_web_sm (English language model v3.8.0)
+- en_core_web_sm (English language model v3.8.0)
 
 ---
 
-## ChatterBot Status [WARNING]
-
-**ChatterBot is NOT installed** due to compatibility issues with Python 3.11.
+## ChatterBot Status **ChatterBot is NOT installed** due to compatibility issues with Python 3.11.
 
 ### Why ChatterBot Was Excluded
 
@@ -86,9 +82,9 @@ ChatterBot (1.0.8) has the following issues:
 ### Alternative Approaches for the Project
 
 According to your project plan, you need **3 model types**:
-1. [DONE] **Traditional/Rule-based:** Use **python-aiml** (already installed)
-2. [DONE] **Neural:** Use **DialoGPT/BlenderBot** via transformers (already installed)
-3. [DONE] **Transformer:** Use **DistilBERT/GPT-2** via transformers (already installed)
+1. **Traditional/Rule-based:** Use **python-aiml** (already installed)
+2. **Neural:** Use **DialoGPT/BlenderBot** via transformers (already installed)
+3. **Transformer:** Use **DistilBERT/GPT-2** via transformers (already installed)
 
 **You don't actually need ChatterBot!** The python-aiml package covers the rule-based approach, and the transformers library covers both neural and transformer approaches.
 
@@ -164,8 +160,7 @@ print(tokens)
 
 As per your QUICKSTART_7DAY.md plan:
 
-### Day 1 Tasks Completed [OK]
-- [x] Create environment (Python 3.11)
+### Day 1 Tasks Completed - [x] Create environment (Python 3.11)
 - [x] Install all libraries
 - [x] Download NLTK data
 - [x] Download spaCy model
@@ -231,6 +226,6 @@ matplotlib: 3.10.8
 
 ---
 
-**Setup Status:** [DONE] **COMPLETE AND READY TO USE**
+**Setup Status:** **COMPLETE AND READY TO USE**
 
 You can now proceed with Day 1 of your 7-day sprint! 

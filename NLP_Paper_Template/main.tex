@@ -4,11 +4,10 @@
 \documentclass[11pt]{article}
 \usepackage{ACL2023}
 
-\usepackage{hyperref}
-
 % Standard package includes
 \usepackage{times}
 \usepackage{latexsym}
+\usepackage{url}
 
 % For proper rendering and hyphenation of words containing Latin characters (including in bib files)
 \usepackage[T1]{fontenc}
@@ -26,10 +25,21 @@
 % the typewriter font.
 \usepackage{inconsolata}
 
+% Additional packages for tables and figures
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Hyperref should be loaded last (with few exceptions)
+\usepackage{hyperref}
+
 % If the title and author information does not fit in the area allocated, set <dim> to something 5cm or larger and uncomment the following:
 %\setlength\titlebox{<dim>}
 
-\title{Title}
+\title{Comparative Analysis of Conversational Agent Architectures: \\
+Rule-Based, Neural, and Hybrid Approaches}
 
 % To add another author use \And
 % To start a seperate ``row'' of authors use \AND
@@ -50,20 +60,18 @@
 \input{sections/introduction}
 \input{sections/related_work}
 \input{sections/methodology}
-\input{sections/future_work}
+\input{sections/results}
+\input{sections/discussion}
 \input{sections/conclusion}
 \input{sections/limitations}
 \input{sections/ethical_statement}
 \input{sections/acknowledgements}
 
-\bibliography{references}
-\bibliographystyle{acl_natbib}
-
 \appendix
 
-\section{Example Appendix}
-\label{sec:appendix}
+\input{sections/appendix}
 
-This is where you would add additional tables, formulas or results -- things that help the reader get an in-depth understanding of your research, but are not essential for understanding the method.
+\bibliography{references}
+\bibliographystyle{acl_natbib}
 
 \end{document}

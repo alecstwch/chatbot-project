@@ -30,23 +30,23 @@ def download_nltk_resources():
     for resource, category in resources:
         try:
             nltk.data.find(f'{category}/{resource}')
-            print(f"[OK] {resource:30} (already downloaded)")
+            print(f"{resource:30} (already downloaded)")
         except LookupError:
             print(f"⬇ {resource:30} (downloading...)")
             try:
                 nltk.download(resource, quiet=True)
-                print(f"[OK] {resource:30} (downloaded)")
+                print(f"{resource:30} (downloaded)")
             except Exception as e:
-                print(f"[FAIL] {resource:30} (failed: {e})")
+                print(f"{resource:30} (failed: {e})")
                 failed.append(resource)
     
     print("=" * 60)
     
     if failed:
-        print(f"\n[WARNING] Failed to download: {', '.join(failed)}")
+        print(f"\nFailed to download: {', '.join(failed)}")
         return False
     else:
-        print("\n[DONE] All NLTK resources downloaded successfully!")
+        print("\nAll NLTK resources downloaded successfully!")
         return True
 
 

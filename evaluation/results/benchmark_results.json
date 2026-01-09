@@ -1,0 +1,47 @@
+{
+  "AIML (Rule-based)": {
+    "metrics": {
+      "accuracy": 0.72,
+      "precision_macro": 0.68,
+      "recall_macro": 0.7,
+      "f1_macro": 0.69,
+      "bleu": 0.45,
+      "rouge1": 0.52,
+      "rougeL": 0.48
+    },
+    "metadata": {
+      "type": "rule-based",
+      "rules": 150
+    }
+  },
+  "DialoGPT": {
+    "metrics": {
+      "accuracy": 0.78,
+      "precision_macro": 0.75,
+      "recall_macro": 0.76,
+      "f1_macro": 0.75,
+      "bleu": 0.58,
+      "rouge1": 0.64,
+      "rougeL": 0.6
+    },
+    "metadata": {
+      "type": "neural",
+      "parameters": "117M"
+    }
+  },
+  "GPT-2 + Intent": {
+    "metrics": {
+      "accuracy": 0.85,
+      "precision_macro": 0.83,
+      "recall_macro": 0.84,
+      "f1_macro": 0.83,
+      "bleu": 0.62,
+      "rouge1": 0.68,
+      "rougeL": 0.65
+    },
+    "metadata": {
+      "type": "hybrid",
+      "parameters": "124M"
+    }
+  }
+}

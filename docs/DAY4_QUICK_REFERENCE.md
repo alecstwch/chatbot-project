@@ -4,7 +4,7 @@ Quick reference for using the transformer-based components created in Day 4.
 
 ---
 
-## 🚀 Quick Start Examples
+##  Quick Start Examples
 
 ### 1. Intent Classification
 
@@ -210,7 +210,7 @@ pytest tests/unit/infrastructure/test_response_generator.py \
 
 ---
 
-## ⚙️ Configuration Options
+##  Configuration Options
 
 ### Intent Classification
 
@@ -256,7 +256,7 @@ pytest tests/unit/infrastructure/test_response_generator.py \
 
 ---
 
-## 📊 Therapy Intents Reference
+##  Therapy Intents Reference
 
 ### Supported Intents
 
@@ -288,7 +288,7 @@ result = classifier.classify(
 
 ---
 
-## 🔧 Troubleshooting
+##  Troubleshooting
 
 ### Model Loading Issues
 
@@ -356,7 +356,7 @@ classifier.keyword_patterns['custom_intent'] = ['word1', 'word2']
 
 ---
 
-## 💡 Best Practices
+##  Best Practices
 
 ### 1. Model Selection
 - Use **AIML** for known patterns (fastest)
@@ -384,7 +384,7 @@ classifier.keyword_patterns['custom_intent'] = ['word1', 'word2']
 
 ---
 
-## 📚 Additional Resources
+##  Additional Resources
 
 - [HuggingFace Transformers Docs](https://huggingface.co/docs/transformers)
 - [Zero-Shot Classification Guide](https://huggingface.co/tasks/zero-shot-classification)
@@ -394,7 +394,7 @@ classifier.keyword_patterns['custom_intent'] = ['word1', 'word2']
 
 ---
 
-## ✅ Quick Checklist
+## Quick Checklist
 
 Before using Day 4 components:
 

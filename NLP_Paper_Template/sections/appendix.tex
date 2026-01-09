@@ -1,0 +1,202 @@
+\section{Example Conversations}
+\label{sec:appendix}
+
+This appendix presents real conversation examples from our three chatbot architectures, demonstrating their distinct approaches to dialogue management and response generation.
+
+\subsection{AIML Rule-Based Therapy Chatbot}
+\label{subsec:aiml_examples}
+
+The AIML chatbot uses pattern matching with 150 hand-crafted rules organized by therapeutic intent. The following example demonstrates depression support:
+
+\begin{verbatim}
+You: I feel sad all the time
+Therapist: I'm here to support you through this difficult 
+time. Feeling sad is a valid emotion. Can you tell me 
+when these feelings started?
+
+You: It started a few weeks ago
+Therapist: Thank you for sharing that. A few weeks can 
+feel like a long time when you're struggling. Have you 
+noticed any specific triggers or patterns?
+
+You: Work has been really stressful
+Therapist: Work-related stress is very common. Let's 
+explore some coping strategies. Have you tried any 
+stress management techniques?
+\end{verbatim}
+
+\textbf{Behavioral Rationale:} The AIML system matches patterns like "I FEEL *" and "* STRESSFUL" to retrieve pre-defined empathetic responses. While deterministic and limited in scope, this approach ensures clinically appropriate language and avoids harmful outputs. The 5ms inference time enables real-time interaction without noticeable delay.
+
+\subsection{DialoGPT Neural Chatbot}
+\label{subsec:dialogpt_examples}
+
+DialoGPT generates responses using a 117M parameter transformer trained on Reddit conversations, then fine-tuned on mental health dialogs:
+
+\begin{verbatim}
+You: I'm having trouble sleeping lately
+Bot: I'm sorry to hear that. Sleep issues can really 
+affect your daily life. Have you tried establishing a 
+bedtime routine or limiting screen time before bed?
+
+You: I've tried but nothing seems to work
+Bot: That must be frustrating. Sometimes it helps to 
+keep a sleep diary to identify patterns. Have you 
+noticed if stress or diet affects your sleep?
+
+You: I think anxiety keeps me awake
+Bot: Anxiety can definitely interfere with sleep. 
+Techniques like progressive muscle relaxation or 
+guided meditation might help calm your mind before bed.
+\end{verbatim}
+
+\textbf{Behavioral Rationale:} DialoGPT generates contextually aware responses by attending to conversation history (up to 10 turns). The model learns therapeutic language patterns from training data rather than explicit rules. However, it occasionally produces generic responses like "I'm sorry to hear that" (contributing to 20\% of errors classified as generic responses). The 250ms inference time is acceptable for asynchronous chat but would challenge real-time voice applications.
+
+\subsection{Hybrid Architecture (Intent + GPT-2)}
+\label{subsec:hybrid_examples}
+
+Our hybrid system first classifies user intent, then conditions GPT-2 generation on the detected intent:
+
+\begin{verbatim}
+You: I feel anxious about an upcoming presentation
+[Detected intent: anxiety_support (confidence: 0.89)]
+Bot: It's completely normal to feel anxious about 
+presentations. Many people experience this. Let's work 
+through some strategies together. What specifically 
+worries you about it?
+
+You: I'm afraid I'll forget what to say
+[Detected intent: anxiety_support (confidence: 0.92)]
+Bot: Fear of forgetting is very common. Here's what 
+can help: (1) Practice with note cards, (2) Visualize 
+success beforehand, (3) Remember that pausing to collect 
+your thoughts is perfectly acceptable. Would you like 
+to discuss any of these in more detail?
+\end{verbatim}
+
+\textbf{Behavioral Rationale:} The explicit intent classification (using BART-MNLI) guides GPT-2 to generate responses aligned with therapeutic goals. When intent confidence exceeds 0.7, the system prepends "[INTENT: anxiety\_support]" to the generation prompt, steering the output toward appropriate strategies. This reduces off-topic responses from 35\% (DialoGPT alone) to 15\% while maintaining natural language fluency. The two-stage pipeline increases latency to 280ms but improves clinical safety.
+
+\subsection{Master Chef Recipe Recommendation Funnel}
+\label{subsec:chef_examples}
+
+This example demonstrates our Q\&A funnel approach for intent-driven task completion. The system collects user preferences through a maximum of 5 structured questions:
+
+\begin{verbatim}
+Chef: Hello! I'm your culinary assistant. What main 
+ingredients do you have available? (Please list 5-10)
+
+You: eggs, flour, milk, butter, chicken, tomatoes, 
+onions, garlic
+[Detected intent: identify_ingredients (confidence: 0.33)]
+
+Chef: Great! Do you have any dietary restrictions, 
+allergies, or health goals? (e.g., vegetarian, 
+nut-free, low-calorie)
+
+You: none
+[Detected intent: none (confidence: 0.42)]
+
+Chef: What type of dish are you looking for? 
+(e.g., main dish, soup, salad, dessert, snack)
+
+You: main dish
+[Detected intent: identify_dish_type (confidence: 0.33)]
+
+Chef: Any cuisine preference? (e.g., Italian, Mexican, 
+Asian, Mediterranean)
+
+You: Italian
+[Detected intent: identify_cuisine (confidence: 0.37)]
+
+Chef: How much time do you have for cooking? 
+(quick, moderate, or complex)
+
+You: moderate
+[Detected intent: identify_constraints (confidence: 0.16)]
+
+Chef: Based on your preferences:
+Ingredients: butter, flour, chicken, garlic, tomato
+Dish type: main_dish | Cuisine: Italian
+Complexity: moderate
+
+Here are some recipe recommendations:
+
+1. Chicken Cacciatore - Classic Italian dish
+   Uses: chicken, tomatoes, onions, garlic
+   Time: 45 minutes
+
+Would you like detailed instructions for any of these?
+\end{verbatim}
+
+\textbf{Behavioral Rationale:} The funnel architecture systematically collects structured information through a predefined question sequence (GREETING → INGREDIENTS → CONSTRAINTS → DISH\_TYPE → CUISINE → COMPLEXITY). Each user response is classified to extract relevant entities (ingredients list, dish type, cuisine preference). The system enforces a 5-question maximum to prevent user fatigue. Low intent confidence scores (0.16-0.42) reflect the domain-agnostic nature of BART-MNLI; a supervised classifier trained on culinary intents would achieve higher accuracy. Once all preferences are collected, the system would query a recipe database (not implemented in this prototype) to provide personalized recommendations.
+
+\subsection{Error Cases and Recovery}
+\label{subsec:error_examples}
+
+We document failure modes observed during testing:
+
+\subsubsection{Intent Misclassification}
+
+\begin{verbatim}
+You: I don't know if I can go on like this
+[Detected intent: uncertainty (confidence: 0.58)]
+[GROUND TRUTH: crisis_intervention]
+
+Bot: It sounds like you're feeling uncertain. 
+Uncertainty is a natural part of life's journey.
+\end{verbatim}
+
+\textbf{Analysis:} The model classified a potential crisis statement as general uncertainty rather than crisis intervention. This is the most dangerous error type in mental health applications. The confidence score (0.58) is below our recommended threshold (0.7) for high-stakes actions. A production system should escalate low-confidence crisis-related inputs to human counselors.
+
+\subsubsection{Repetitive Response}
+
+\begin{verbatim}
+You: I'm feeling sad today
+Bot: I'm sorry you're feeling sad. Can you tell me more?
+
+You: My relationship ended
+Bot: I'm sorry you're feeling sad. Can you tell me more?
+\end{verbatim}
+
+\textbf{Analysis:} DialoGPT sometimes gets stuck in repetition loops, particularly with high-frequency training patterns like "I'm sorry you're feeling [emotion]." This contributed to 20\% of errors. Mitigation strategies include n-gram blocking (prevent repeating 4-grams from last 3 responses) and diversity-promoting sampling (increase temperature or use nucleus sampling with lower top-p).
+
+\subsubsection{Out-of-Vocabulary Handling}
+
+\begin{verbatim}
+You: I've been diagnosed with GAD
+Bot: I understand. Tell me more about your situation.
+\end{verbatim}
+
+\textbf{Analysis:} The model didn't recognize "GAD" (Generalized Anxiety Disorder). AIML's pattern matching failed, falling back to a generic catch-all response. A production system should: (1) maintain a medical acronym dictionary, (2) ask for clarification ("I want to make sure I understand—could you tell me what GAD means to you?"), or (3) use entity linking to map abbreviations to full terms before processing.
+
+\subsection{Explainability: LIME Analysis}
+\label{subsec:lime_examples}
+
+We applied LIME to the intent classifier to understand which words influence decisions. For the input "I feel overwhelmed and can't cope anymore":
+
+\begin{verbatim}
+Intent: crisis_intervention (confidence: 0.82)
+
+Top contributing words:
+  +0.35  "can't"
+  +0.28  "anymore"  
+  +0.21  "overwhelmed"
+  -0.08  "feel"
+  -0.02  "and"
+\end{verbatim}
+
+\textbf{Interpretation:} Negation ("can't") and finality ("anymore") strongly predict crisis intent, while the neutral verb "feel" slightly reduces confidence. This aligns with clinical risk assessment guidelines that flag absolute language and hopelessness. The model correctly prioritizes semantic content over function words ("and").
+
+For a misclassified case ("I'm doing okay, just a bit tired"):
+
+\begin{verbatim}
+Intent: fatigue (confidence: 0.41) [INCORRECT]
+Ground Truth: general_wellbeing
+
+Top contributing words:
+  +0.42  "tired"
+  +0.15  "bit"
+  -0.31  "okay"
+  -0.08  "doing"
+\end{verbatim}
+
+\textbf{Interpretation:} The model over-weighted "tired" while undervaluing the positive framing "doing okay." This reveals a weakness in handling negation and hedging ("just a bit"). Fine-tuning on examples with similar linguistic patterns could improve performance.

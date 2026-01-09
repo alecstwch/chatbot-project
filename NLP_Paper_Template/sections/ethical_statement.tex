@@ -1,6 +1,84 @@
 \section*{Ethical Statement}
 \label{sec:ethical_statement}
 
-What unethical uses could there be for your research? Considering the nature of your project, do you think it's possible to have included any biases? How?
+The development and deployment of conversational agents for mental health support raises significant ethical considerations. We address these concerns across four dimensions: clinical responsibility, privacy and data protection, bias and fairness, and transparency.
 
-Did you take any measures to prevent / combat bias? How do you recommend others use your research to avoid them? What is your personal opinion on the matter?
+\subsection*{Clinical Responsibility and Safety}
+
+\textbf{Not a Replacement for Professional Care:} We emphasize that the chatbot systems evaluated in this work are research prototypes and \textbf{NOT} substitutes for licensed mental health professionals. They should be viewed as complementary tools for psychoeducation, self-reflection, or preliminary emotional support, not as therapeutic interventions.
+
+\textbf{Crisis Intervention Limitations:} Our error analysis revealed that 60\% of errors stem from intent misclassification, including potentially dangerous scenarios where crisis intervention needs are misclassified as general emotional support. Any real-world deployment \textbf{MUST} include:
+\begin{itemize}
+    \item Explicit disclaimers upon first interaction
+    \item Crisis detection safeguards that escalate to human counselors or emergency services
+    \item Regular auditing of conversations flagged as high-risk
+    \item User consent acknowledging limitations
+\end{itemize}
+
+\textbf{Potential for Harm:} Inappropriate responses in mental health contexts can exacerbate distress, provide harmful advice, or delay necessary professional intervention. Our repetitive response detection (20\% of errors) and generic response identification (20\% of errors) highlight failure modes that could frustrate vulnerable users. Developers must implement robust safety mechanisms before deployment.
+
+\subsection*{Privacy and Data Protection}
+
+\textbf{Sensitive Data:} Mental health conversations contain highly sensitive personal information including trauma history, suicidal ideation, substance use, and relationship details. Any deployment must comply with healthcare privacy regulations (HIPAA in the US, GDPR in Europe).
+
+\textbf{Data Collection Practices:} We used publicly available datasets (Mental Health Counseling Conversations, Daily Dialog) that were previously anonymized. However, future work collecting new conversation data must:
+\begin{itemize}
+    \item Obtain informed consent with clear explanations of data usage
+    \item Anonymize conversations by removing personally identifiable information
+    \item Implement secure storage with encryption
+    \item Provide users with data deletion rights
+    \item Limit data retention to necessary periods
+\end{itemize}
+
+\textbf{Model Training Risks:} Language models can memorize and regurgitate training data \cite{carlini2021extracting}. Mental health chatbots must be evaluated for memorization risks to prevent leaking user confidences. Differential privacy techniques or federated learning could mitigate this risk.
+
+\subsection*{Bias and Fairness}
+
+\textbf{Demographic Bias:} Our models were trained on datasets that may not represent diverse populations across age, gender, race, socioeconomic status, and cultural backgrounds. Mental health conversations vary significantly across cultures (e.g., collectivist vs. individualist approaches to emotional expression, stigma levels), and models trained primarily on Western, English-speaking data may perform poorly or provide culturally inappropriate advice for other groups.
+
+\textbf{Language and Dialect Bias:} By focusing exclusively on English, we exclude the majority of the world's population. Even within English, our models may exhibit bias toward standard dialects, potentially discriminating against speakers of African American Vernacular English (AAVE), Indian English, or other varieties.
+
+\textbf{Topic Bias:} The Mental Health Counseling dataset emphasizes anxiety and depression. Other conditions (e.g., schizophrenia, bipolar disorder, autism spectrum disorder) are underrepresented, which could lead to inadequate support for these users.
+
+\textbf{Mitigation Strategies:} To combat bias, we recommend:
+\begin{itemize}
+    \item Auditing model performance across demographic groups (accuracy stratified by age, gender, race when ethical and feasible)
+    \item Expanding training data to include diverse voices and cultural contexts
+    \item Involving mental health professionals from varied backgrounds in evaluation
+    \item Implementing bias detection tools (e.g., testing for sentiment disparities across protected attributes)
+    \item Providing multilingual support to increase accessibility
+\end{itemize}
+
+\subsection*{Transparency and Accountability}
+
+\textbf{Model Explainability:} Our application of LIME to intent classification provides local explanations for individual predictions. We advocate for continued research on interpretability to help users understand why a chatbot responded in a particular way. This is especially important in mental health, where users may question or distrust AI advice.
+
+\textbf{Open Science:} We commit to open-sourcing our code, evaluation framework, and error analysis toolkit. Transparency enables community scrutiny, identifies vulnerabilities, and accelerates safer AI development. However, we will NOT release trained models publicly due to potential misuse risks (deploying uncertified mental health bots without safety guardrails).
+
+\textbf{Accountability Mechanisms:} Developers deploying mental health chatbots must establish clear accountability:
+\begin{itemize}
+    \item Designated responsible parties for monitoring system behavior
+    \item Incident response protocols for harmful interactions
+    \item User feedback mechanisms (report inappropriate responses)
+    \item Regular audits by mental health ethics boards
+    \item Liability insurance and legal compliance with medical device regulations (where applicable)
+\end{itemize}
+
+\subsection*{Dual-Use Concerns}
+
+While our research aims to democratize mental health support, the same technologies could be misused for:
+\begin{itemize}
+    \item \textbf{Manipulation:} Conversational agents could exploit vulnerable individuals for commercial gain (e.g., upselling unnecessary services, collecting sensitive data for advertising).
+    \item \textbf{Surveillance:} Employers or governments could use mental health chatbots to monitor employees or citizens without consent.
+    \item \textbf{Deception:} Users might be misled about whether they are interacting with a human or AI, undermining informed consent.
+\end{itemize}
+
+We condemn these uses and call for regulatory frameworks governing mental health AI systems.
+
+\subsection*{Environmental Impact}
+
+Training neural models, even relatively small ones (117M-406M parameters), consumes significant energy. Our CPU-only experiments have minimal carbon footprint compared to GPU clusters, but scaling to production would increase environmental impact. We encourage practitioners to consider energy-efficient architectures (e.g., model distillation, quantization) and carbon offset programs.
+
+\subsection*{Personal Stance}
+
+As researchers, we believe conversational AI has transformative potential to address the global mental health crisis, where over 1 billion people lack access to care \cite{who2022mental}. However, this potential can only be realized through rigorous safety evaluation, ethical deployment practices, and collaboration with mental health professionals. Technology alone is insufficient—human oversight, regulatory guardrails, and cultural sensitivity are equally essential. We hope this work contributes to responsible AI development in this critical domain.

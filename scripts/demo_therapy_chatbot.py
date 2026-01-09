@@ -40,9 +40,9 @@ def main():
     try:
         aiml_bot = AimlChatbot(aiml_dir=Path("data/knowledge_bases/aiml"))
         num_files = aiml_bot.load_aiml_files()
-        print(f"✓ Loaded {num_files} AIML files")
+        print(f"Loaded {num_files} AIML files")
     except Exception as e:
-        print(f"✗ Error loading AIML: {e}")
+        print(f"Error loading AIML: {e}")
         return
     
     # Initialize intent classifier
@@ -50,10 +50,10 @@ def main():
     try:
         intent_classifier = IntentClassificationService(domain="therapy_intents")
         info = intent_classifier.get_domain_info()
-        print(f"✓ Intent classifier ready ({info['num_intents']} intents)")
+        print(f"Intent classifier ready ({info['num_intents']} intents)")
         print(f"  Intents: {', '.join(info['intent_labels'][:5])}...\n")
     except Exception as e:
-        print(f"✗ Error loading intent classifier: {e}")
+        print(f"Error loading intent classifier: {e}")
         return
     
     print("Ready! Start chatting...\n")

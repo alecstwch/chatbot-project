@@ -1,0 +1,100 @@
+\begin{thebibliography}{12}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{Adamopoulou and Moussiades(2020)}]{adamopoulou2020overview}
+Eleni Adamopoulou and Lefteris Moussiades. 2020.
+\newblock An overview of chatbot technology.
+\newblock \emph{IFIP International Conference on Artificial Intelligence
+  Applications and Innovations}, pages 373--383.
+
+\bibitem[{Banerjee and Lavie(2005)}]{banerjee2005meteor}
+Satanjeev Banerjee and Alon Lavie. 2005.
+\newblock \href {https://aclanthology.org/W05-0909/} {Meteor: An automatic
+  metric for mt evaluation with improved correlation with human judgments}.
+\newblock In \emph{Proceedings of the ACL Workshop on Intrinsic and Extrinsic
+  Evaluation Measures for Machine Translation and/or Summarization}, pages
+  65--72.
+
+\bibitem[{Carlini et~al.(2021)Carlini, Tramer, Wallace, Jagielski,
+  Herbert-Voss, Lee, Roberts, Brown, Song, Erlingsson
+  et~al.}]{carlini2021extracting}
+Nicholas Carlini, Florian Tramer, Eric Wallace, Matthew Jagielski, Ariel
+  Herbert-Voss, Katherine Lee, Adam Roberts, Tom Brown, Dawn Song, Ulfar
+  Erlingsson, et~al. 2021.
+\newblock \href {https://arxiv.org/abs/2012.07805} {Extracting training data
+  from large language models}.
+\newblock \emph{30th USENIX Security Symposium (USENIX Security 21)}, pages
+  2633--2650.
+
+\bibitem[{Devlin et~al.(2019)Devlin, Chang, Lee, and
+  Toutanova}]{devlin2019bert}
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019.
+\newblock \href {https://arxiv.org/abs/1810.04805} {Bert: Pre-training of deep
+  bidirectional transformers for language understanding}.
+\newblock In \emph{Proceedings of the 2019 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies, Volume 1 (Long and Short Papers)}, pages 4171--4186.
+
+\bibitem[{Fitzpatrick et~al.(2017)Fitzpatrick, Darcy, and
+  Vierhile}]{fitzpatrick2017delivering}
+Kathleen~Kara Fitzpatrick, Alison Darcy, and Molly Vierhile. 2017.
+\newblock Delivering cognitive behavior therapy to young adults with symptoms
+  of depression and anxiety using a fully automated conversational agent
+  (woebot): a randomized controlled trial.
+\newblock volume~4, page e19. JMIR Publications.
+
+\bibitem[{Laranjo et~al.(2018)Laranjo, Dunn, Tong, Kocaballi, Chen, Bashir,
+  Surian, Gallego, Magrabi, Lau et~al.}]{laranjo2018conversational}
+Liliana Laranjo, Adam~G Dunn, Huong~Ly Tong, Ahmet~Baki Kocaballi, Jessica
+  Chen, Rabia Bashir, Didi Surian, Blanca Gallego, Farah Magrabi, Annie~YS Lau,
+  et~al. 2018.
+\newblock Conversational agents in healthcare: a systematic review.
+\newblock \emph{Journal of the American Medical Informatics Association},
+  25(9):1248--1258.
+
+\bibitem[{Lin(2004)}]{lin2004rouge}
+Chin-Yew Lin. 2004.
+\newblock \href {https://aclanthology.org/W04-1013/} {Rouge: A package for
+  automatic evaluation of summaries}.
+\newblock In \emph{Text Summarization Branches Out}, pages 74--81.
+
+\bibitem[{Papineni et~al.(2002)Papineni, Roukos, Ward, and
+  Zhu}]{papineni2002bleu}
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu. 2002.
+\newblock \href {https://aclanthology.org/P02-1040/} {Bleu: a method for
+  automatic evaluation of machine translation}.
+\newblock In \emph{Proceedings of the 40th Annual Meeting of the Association
+  for Computational Linguistics}, pages 311--318.
+
+\bibitem[{Radford et~al.(2019)Radford, Wu, Child, Luan, Amodei, and
+  Sutskever}]{radford2019language}
+Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya
+  Sutskever. 2019.
+\newblock \href
+  {https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf}
+  {Language models are unsupervised multitask learners}.
+\newblock \emph{OpenAI blog}, 1(8):9.
+
+\bibitem[{Ribeiro et~al.(2016)Ribeiro, Singh, and Guestrin}]{ribeiro2016should}
+Marco~Tulio Ribeiro, Sameer Singh, and Carlos Guestrin. 2016.
+\newblock \href {https://arxiv.org/abs/1602.04938} {"why should i trust you?"
+  explaining the predictions of any classifier}.
+\newblock In \emph{Proceedings of the 22nd ACM SIGKDD International Conference
+  on Knowledge Discovery and Data Mining}, pages 1135--1144.
+
+\bibitem[{{World Health Organization}(2022)}]{who2022mental}
+{World Health Organization}. 2022.
+\newblock \href
+  {https://www.who.int/publications/i/item/WHO-2019-nCoV-Sci_Brief-Mental_health-2022.1}
+  {Mental health and covid-19: Early evidence of the pandemic's impact}.
+
+\bibitem[{Zhang et~al.(2020)Zhang, Sun, Galley, Chen, Brockett, Gao, Gao, Liu,
+  and Dolan}]{zhang2020dialogpt}
+Yizhe Zhang, Siqi Sun, Michel Galley, Yen-Chun Chen, Chris Brockett, Xiang Gao,
+  Jianfeng Gao, Jingjing Liu, and Bill Dolan. 2020.
+\newblock \href {https://arxiv.org/abs/1911.00536} {Dialogpt: Large-scale
+  generative pre-training for conversational response generation}.
+\newblock In \emph{Proceedings of the 58th Annual Meeting of the Association
+  for Computational Linguistics: System Demonstrations}, pages 270--278.
+
+\end{thebibliography}

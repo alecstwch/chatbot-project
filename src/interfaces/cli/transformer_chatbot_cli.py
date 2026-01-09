@@ -46,7 +46,7 @@ def main():
         print("Loading intent classifier...")
         chatbot.load_models()
         
-        print("\n✓ All models loaded successfully!")
+        print("\nAll models loaded successfully!")
         print("\nThis chatbot features:")
         print("  • DialoGPT for natural conversation")
         print("  • Intent classification for context awareness")
