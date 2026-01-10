@@ -165,3 +165,5 @@ requirements_full.txt
 # Ignore old structure files (migration)
 # ============================================================
 src/data/preprocessor.py.backup
+
+data/qdrant_db
