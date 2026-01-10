@@ -1,33 +1,36 @@
 """
-Mistral-7B-based conversational chatbot.
+Gemini 2.5 Flash-based conversational chatbot.
 
-This module implements a neural conversational chatbot using Mistral-7B-Instruct model.
-Mistral-7B is a state-of-the-art open model with excellent instruction-following capabilities.
+This module implements a neural conversational chatbot using Google's Gemini 2.5 Flash API.
+Gemini is a state-of-the-art model with excellent instruction-following and conversational capabilities.
 """
 
 import logging
 import time
+import os
 from typing import Optional, List, Tuple
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
+
+from dotenv import load_dotenv
+from google import genai
+from google.genai import types
 
 from src.infrastructure.config.chatbot_settings import NeuralChatbotSettings
 
+# Load .env file
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
 
 class NeuralChatbot:
     """
-    Neural conversational chatbot using modern language models.
+    Neural conversational chatbot using Google Gemini 2.5 Flash API.
     
-    This chatbot supports various neural models (Phi-2, GPT-2, etc.) for generating
-    high-quality conversational responses.
+    This chatbot uses Google's Gemini API for generating high-quality
+    conversational responses without requiring local model downloads.
     
     Attributes:
-        model_name: HuggingFace model identifier
-        tokenizer: Model tokenizer
-        model: Neural language model
+        model_name: Gemini model identifier
         conversation_history: List of conversation turns
         max_history_turns: Maximum number of conversation turns to keep
     """
@@ -36,15 +39,15 @@ class NeuralChatbot:
         self,
         settings: Optional[NeuralChatbotSettings] = None,
         model_name: Optional[str] = None,
-        device: Optional[str] = None
+        device: Optional[str] = None  # Kept for backward compatibility, not used
     ):
         """
-        Initialize neural chatbot.
+        Initialize Gemini chatbot.
         
         Args:
             settings: Neural chatbot configuration settings (12-Factor App compliant)
-            model_name: HuggingFace model identifier (overrides settings)
-            device: Device to run model on (overrides settings)
+            model_name: Gemini model identifier (overrides settings)
+            device: Deprecated parameter, kept for backward compatibility
         """
         # Load settings from config or use defaults
         self.settings = settings or NeuralChatbotSettings()
@@ -52,126 +55,55 @@ class NeuralChatbot:
         # Allow parameter overrides
         self.model_name = model_name or self.settings.model_name
         
-        # Handle device selection
-        if device:
-            self.device = device
-        elif self.settings.device == "auto":
-            self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        else:
-            self.device = self.settings.device
+        # Device not needed for API calls but kept for compatibility
+        self.device = "api"
         
-        self.tokenizer: Optional[AutoTokenizer] = None
-        self.model: Optional[AutoModelForCausalLM] = None
+        self.client: Optional[genai.Client] = None
+        self.chat_history: List[types.Content] = []
         self.conversation_history: List[dict] = []
         self._initialized = False
         self.last_response_time: float = 0.0
         self.last_tokens_generated: int = 0
         self.last_tokens_per_sec: float = 0.0
         
-        logger.info(f"Mistral chatbot initialized with model: {self.model_name}")
-        logger.info(f"Using device: {self.device}")
+        logger.info(f"Gemini chatbot initialized with model: {self.model_name}")
         logger.info(f"Settings: temp={self.settings.temperature}, max_tokens={self.settings.max_new_tokens}")
     
     def load_model(self) -> None:
         """
-        Load the Phi-2 model and tokenizer from HuggingFace.
+        Initialize the Gemini API client.
         
-        Note: Supports both FP16 (5.4GB) and 8-bit quantization (2.7GB).
-        First download ~5GB.
+        Configures the API key and creates the client instance.
+        No download required - uses API calls.
         
         Raises:
-            RuntimeError: If model loading fails
+            RuntimeError: If API initialization fails or API key is missing
         """
         try:
-            logger.info(f"Loading model: {self.model_name}")
-            logger.info(f"Cache directory: {self.settings.cache_dir}")
-            logger.info(f"Device: {self.device}")
+            logger.info(f"Initializing Gemini API with model: {self.model_name}")
             
-            use_8bit = getattr(self.settings, 'use_8bit_quantization', False)
-            
-            if use_8bit and self.device == "cuda":
-                logger.info("Loading Phi-2 with 8-bit quantization (~2.7GB VRAM)...")
-            elif self.device == "cuda":
-                logger.info("Loading Phi-2 with FP16 (~5.4GB VRAM)...")
-            else:
-                logger.info("Loading Phi-2 on CPU (slow but works)...")
-            
-            logger.info("First download will be ~5GB. This may take several minutes...")
-            
-            self.tokenizer = AutoTokenizer.from_pretrained(
-                self.model_name,
-                cache_dir=self.settings.cache_dir,
-                trust_remote_code=True
+            # Get API key from settings or environment
+            api_key = (
+                self.settings.api_key or 
+                os.environ.get("GEMINI_API_KEY") or 
+                os.environ.get("GOOGLE_API_KEY") or
+                os.environ.get("NEURAL_API_KEY")
             )
             
-            # Load model based on device and quantization settings
-            if self.device == "cuda":
-                if use_8bit:
-                    # 8-bit quantization - fits in 4GB VRAM
-                    quantization_config = BitsAndBytesConfig(
-                        load_in_8bit=True,
-                        llm_int8_threshold=6.0
-                    )
-                    logger.info("Using 8-bit quantization for optimal 4GB VRAM fit...")
-                    self.model = AutoModelForCausalLM.from_pretrained(
-                        self.model_name,
-                        cache_dir=self.settings.cache_dir,
-                        quantization_config=quantization_config,
-                        device_map="auto",
-                        trust_remote_code=True
-                    )
-                else:
-                    # FP16 precision - may offload to CPU if > 4GB
-                    logger.info("Using FP16 precision (may offload to CPU)...")
-                    self.model = AutoModelForCausalLM.from_pretrained(
-                        self.model_name,
-                        cache_dir=self.settings.cache_dir,
-                        dtype=torch.float16,
-                        device_map="auto",
-                        trust_remote_code=True
-                    )
-            else:
-                # CPU mode - full precision (no device_map needed for CPU)
-                logger.warning("Running on CPU - generation will be slow. GPU recommended.")
-                self.model = AutoModelForCausalLM.from_pretrained(
-                    self.model_name,
-                    cache_dir=self.settings.cache_dir,
-                    trust_remote_code=True
+            if not api_key:
+                raise RuntimeError(
+                    "Gemini API key not found. Set GEMINI_API_KEY or GOOGLE_API_KEY in your .env file."
                 )
-                self.model = self.model.to('cpu')
             
-            # Set padding token
-            if self.tokenizer.pad_token is None:
-                self.tokenizer.pad_token = self.tokenizer.eos_token
-            
-            self.model.eval()
+            # Create the client
+            self.client = genai.Client(api_key=api_key)
             
             self._initialized = True
-            logger.info("Model loaded successfully")
+            logger.info("Gemini API initialized successfully")
             
         except Exception as e:
-            logger.error(f"Failed to load model: {e}")
-            raise RuntimeError(f"Model loading failed: {e}")
-    
-    def _format_conversation(self) -> str:
-        """
-        Format conversation history for Phi-2 (simple conversational format).
-        
-        Returns:
-            Formatted conversation string
-        """
-        if not self.conversation_history:
-            return ""
-        
-        # Phi-2 uses simple conversational format:
-        # User: message\nAssistant: response\n
-        formatted = ""
-        for turn in self.conversation_history:
-            formatted += f"User: {turn['user']}\n"
-            if turn.get('assistant'):
-                formatted += f"Assistant: {turn['assistant']}\n"
-        
-        return formatted
+            logger.error(f"Failed to initialize Gemini API: {e}")
+            raise RuntimeError(f"Gemini API initialization failed: {e}")
     
     def get_response(
         self,
@@ -179,17 +111,17 @@ class NeuralChatbot:
         temperature: Optional[float] = None,
         top_p: Optional[float] = None,
         top_k: Optional[int] = None,
-        repetition_penalty: Optional[float] = None
+        repetition_penalty: Optional[float] = None  # Not used for Gemini but kept for compatibility
     ) -> str:
         """
-        Generate a response to user input.
+        Generate a response to user input using Gemini API.
         
         Args:
             user_input: User's message
             temperature: Sampling temperature (uses config default if None)
             top_p: Nucleus sampling parameter (uses config default if None)
             top_k: Top-k sampling parameter (uses config default if None)
-            repetition_penalty: Penalty for repeating tokens (uses config default if None)
+            repetition_penalty: Not used for Gemini API, kept for compatibility
             
         Returns:
             Generated response string
@@ -198,101 +130,62 @@ class NeuralChatbot:
             RuntimeError: If model is not initialized
         """
         if not self._initialized:
-            raise RuntimeError("Model not loaded. Call load_model() first.")
+            raise RuntimeError("Model not initialized. Call load_model() first.")
         
         if not user_input or not user_input.strip():
             return "I didn't catch that. Could you say that again?"
-        
-        # Use settings defaults if parameters not provided
-        temperature = temperature if temperature is not None else self.settings.temperature
-        top_p = top_p if top_p is not None else self.settings.top_p
-        top_k = top_k if top_k is not None else self.settings.top_k
-        repetition_penalty = repetition_penalty if repetition_penalty is not None else self.settings.repetition_penalty
         
         try:
             # Start timing
             start_time = time.time()
             
-            # Add user input to history
+            # Add user input to local history
             self.conversation_history.append({'user': user_input})
             
             # Keep only recent history
             if len(self.conversation_history) > self.settings.max_history_turns:
                 self.conversation_history = self.conversation_history[-self.settings.max_history_turns:]
             
-            # Format conversation
-            conversation = self._format_conversation()
-            prompt = conversation + "Assistant:"
-            
-            # Tokenize
-            inputs = self.tokenizer(
-                prompt,
-                return_tensors="pt",
-                padding=True,
-                truncation=True,
-                max_length=1024  # Limit context to prevent memory issues
+            # Add user message to chat history
+            self.chat_history.append(
+                types.Content(role="user", parts=[types.Part(text=user_input)])
             )
             
-            # Move to device
-            inputs = {k: v.to(self.device) for k, v in inputs.items()}
-            input_token_count = inputs['input_ids'].shape[1]
+            # Create generation config
+            gen_config = types.GenerateContentConfig(
+                temperature=temperature if temperature is not None else self.settings.temperature,
+                top_p=top_p if top_p is not None else self.settings.top_p,
+                top_k=top_k if top_k is not None else self.settings.top_k,
+                max_output_tokens=self.settings.max_new_tokens,
+            )
             
             # Generate response
-            with torch.no_grad():
-                # Phi-2 specific: Add stop strings to prevent educational scenario hallucinations
-                if "phi-2" in self.model_name.lower():
-                    outputs = self.model.generate(
-                        **inputs,
-                        max_new_tokens=self.settings.max_new_tokens,
-                        temperature=temperature,
-                        top_p=top_p,
-                        top_k=top_k,
-                        repetition_penalty=repetition_penalty,
-                        do_sample=True,
-                        pad_token_id=self.tokenizer.eos_token_id,
-                        eos_token_id=self.tokenizer.eos_token_id,
-                        stop_strings=["\n\n\n", "User:", "Let's", "Now let's", "Scenario:"],
-                        tokenizer=self.tokenizer
-                    )
-                else:
-                    outputs = self.model.generate(
-                        **inputs,
-                        max_new_tokens=self.settings.max_new_tokens,
-                        temperature=temperature,
-                        top_p=top_p,
-                        top_k=top_k,
-                        repetition_penalty=repetition_penalty,
-                        do_sample=True,
-                        pad_token_id=self.tokenizer.eos_token_id,
-                        eos_token_id=self.tokenizer.eos_token_id
-                    )
+            response = self.client.models.generate_content(
+                model=self.model_name,
+                contents=self.chat_history,
+                config=gen_config,
+            )
             
-            # Calculate tokens generated
-            output_token_count = outputs.shape[1]
-            tokens_generated = output_token_count - input_token_count
+            # Extract response text
+            response_text = response.text.strip()
             
-            # Decode response
-            full_response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+            # Add assistant response to chat history
+            self.chat_history.append(
+                types.Content(role="model", parts=[types.Part(text=response_text)])
+            )
             
-            # Extract only the new assistant response
-            # Remove the prompt from the output
-            response = full_response[len(prompt):].strip()
-            
-            # Clean up - stop at next "User:" if model continues
-            if "User:" in response:
-                response = response.split("User:")[0].strip()
-            
-            # Phi-2 specific: Stop at common hallucination patterns
-            if "phi-2" in self.model_name.lower():
-                stop_markers = ["\n\nLet's", "\n\nNow let's", "\n\nScenario:", "\n\nImagine", "\n\n1)"]
-                for marker in stop_markers:
-                    if marker in response:
-                        response = response.split(marker)[0].strip()
-                        break
-            
-            # End timing and calculate metrics
+            # Calculate timing metrics
             end_time = time.time()
             response_time = end_time - start_time
+            
+            # Estimate tokens
+            tokens_generated = 0
+            if hasattr(response, 'usage_metadata') and response.usage_metadata:
+                tokens_generated = getattr(response.usage_metadata, 'candidates_token_count', 0)
+            if tokens_generated == 0:
+                # Rough estimate: ~4 characters per token
+                tokens_generated = len(response_text) // 4
+            
             tokens_per_sec = tokens_generated / response_time if response_time > 0 else 0
             
             # Store benchmark data
@@ -303,16 +196,18 @@ class NeuralChatbot:
             logger.info(f"Response generated in {response_time:.2f}s ({tokens_generated} tokens, {tokens_per_sec:.2f} tok/s)")
             
             # Update history with assistant response
-            self.conversation_history[-1]['assistant'] = response
+            self.conversation_history[-1]['assistant'] = response_text
             
-            return response or "I'm not sure how to respond to that."
+            return response_text or "I'm not sure how to respond to that."
             
         except Exception as e:
             logger.error(f"Error generating response: {e}")
             # Remove the failed turn from history
             if self.conversation_history and 'assistant' not in self.conversation_history[-1]:
                 self.conversation_history.pop()
-            return "Sorry, I encountered an error. Could you rephrase that?"
+            if self.chat_history and self.chat_history[-1].role == "user":
+                self.chat_history.pop()
+            return f"Sorry, I encountered an error: {str(e)}"
     
     def chat(self, user_input: str, **kwargs) -> str:
         """
@@ -334,6 +229,7 @@ class NeuralChatbot:
         Clears the chat history to start a fresh conversation.
         """
         self.conversation_history = []
+        self.chat_history = []
         logger.debug("Conversation history reset")
     
     def is_ready(self) -> bool:
@@ -341,9 +237,9 @@ class NeuralChatbot:
         Check if the chatbot is ready to use.
         
         Returns:
-            True if model is loaded and ready
+            True if API is initialized and ready
         """
-        return self._initialized and self.model is not None and self.tokenizer is not None
+        return self._initialized and self.client is not None
     
     def get_conversation_length(self) -> int:
         """

@@ -73,7 +73,7 @@ class DialoGPTSettings(BaseSettings):
 
 
 class NeuralChatbotSettings(BaseSettings):
-    """Neural chatbot configuration (supports Phi-2, GPT-2, etc.)."""
+    """Neural chatbot configuration (uses Google Gemini API)."""
     
     model_config = SettingsConfigDict(
         env_prefix="NEURAL_",
@@ -84,8 +84,13 @@ class NeuralChatbotSettings(BaseSettings):
     )
     
     model_name: str = Field(
-        default="mistralai/Mistral-7B-Instruct-v0.2",
-        description="HuggingFace model identifier"
+        default="gemini-2.5-flash",
+        description="Gemini model identifier"
+    )
+    
+    api_key: str = Field(
+        default="",
+        description="Gemini API key (can also use GEMINI_API_KEY or GOOGLE_API_KEY env vars)"
     )
     
     max_history_turns: int = Field(
@@ -94,12 +99,12 @@ class NeuralChatbotSettings(BaseSettings):
     )
     
     max_context_length: int = Field(
-        default=4096,
-        description="Maximum context length in tokens"
+        default=1000000,
+        description="Maximum context length in tokens (Gemini 2.5 Flash supports 1M tokens)"
     )
     
     max_new_tokens: int = Field(
-        default=150,
+        default=2048,
         description="Maximum number of new tokens to generate"
     )
     
@@ -118,7 +123,7 @@ class NeuralChatbotSettings(BaseSettings):
     )
     
     top_k: int = Field(
-        default=50,
+        default=40,
         ge=0,
         description="Top-k sampling (0 = disabled)"
     )
@@ -127,27 +132,27 @@ class NeuralChatbotSettings(BaseSettings):
         default=1.1,
         ge=1.0,
         le=2.0,
-        description="Penalty for repeating tokens"
+        description="Penalty for repeating tokens (not used for Gemini API)"
     )
     
     cache_dir: str = Field(
         default="models/cache",
-        description="Directory to cache downloaded models"
+        description="Directory to cache downloaded models (not used for API)"
     )
     
     use_8bit_quantization: bool = Field(
-        default=True,
-        description="Use 8-bit quantization to fit in limited VRAM"
+        default=False,
+        description="Not used for Gemini API (kept for compatibility)"
     )
     
     vram_size_gb: int = Field(
-        default=4,
-        description="GPU VRAM size in GB (for display purposes)"
+        default=0,
+        description="Not used for Gemini API (kept for compatibility)"
     )
     
     device: str = Field(
-        default="auto",
-        description="Device to run model on (auto/cpu/cuda)"
+        default="api",
+        description="Device mode (api for Gemini cloud)"
     )
 
 

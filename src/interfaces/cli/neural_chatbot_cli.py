@@ -1,8 +1,8 @@
 """
-Command-line interface for the Mistral-7B conversational chatbot.
+Command-line interface for the Gemini 2.5 Flash conversational chatbot.
 
-This CLI provides an interactive conversation interface for the Mistral-7B-based chatbot,
-supporting high-quality natural conversations.
+This CLI provides an interactive conversation interface for the Gemini-based chatbot,
+supporting high-quality natural conversations via Google's API.
 """
 
 import sys
@@ -42,21 +42,11 @@ class NeuralChatbotCLI:
     def print_welcome(self) -> None:
         """Display welcome message and instructions."""
         print("\n" + "=" * 60)
-        print("  Phi-2 Conversational Bot")
+        print("  Gemini 2.5 Flash Conversational Bot")
         print("=" * 60)
         print("\nWelcome! Let's have an intelligent conversation.")
-        print("\nUsing Microsoft Phi-2 (2.7B parameters).")
-        
-        device = self.chatbot.settings.device
-        vram_gb = self.chatbot.settings.vram_size_gb
-        use_8bit = self.chatbot.settings.use_8bit_quantization
-        
-        # Display VRAM info only for GPU
-        if device == "cuda" or (device == "auto" and self.chatbot.device == "cuda"):
-            if use_8bit:
-                print(f"Optimized for {vram_gb}GB VRAM with 8-bit quantization.")
-            else:
-                print(f"Running in FP16 mode ({vram_gb}GB VRAM).")
+        print(f"\nUsing Google Gemini ({self.chatbot.model_name}).")
+        print("Powered by Google's API - no local model download required.")
         
         print("\nType 'quit', 'exit', or 'bye' to end the conversation.")
         print("Type 'help' for more commands.")
@@ -129,17 +119,17 @@ class NeuralChatbotCLI:
         """Run the interactive chat loop."""
         self.print_welcome()
         
-        # Load model
-        print("Loading Phi-2 conversational chatbot...")
+        # Initialize API
+        print("Connecting to Gemini API...")
         print(f"Model: {self.chatbot.model_name}")
         print(f"Settings: temp={self.chatbot.settings.temperature}, max_tokens={self.chatbot.settings.max_new_tokens}")
         
         try:
             self.chatbot.load_model()
-            print("Model loaded successfully!\n")
+            print("Connected to Gemini API successfully!\n")
         except Exception as e:
-            print(f"\nError loading model: {e}")
-            print("Please check your configuration and ensure you have enough memory/disk space.")
+            print(f"\nError connecting to Gemini API: {e}")
+            print("Please check your API key configuration (GEMINI_API_KEY or GOOGLE_API_KEY environment variable).")
             return
         
         self.running = True
@@ -185,13 +175,13 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(
-        description='Neural Conversational Chatbot CLI (Phi-2)'
+        description='Neural Conversational Chatbot CLI (Gemini 2.5 Flash)'
     )
     parser.add_argument(
         '--model',
         type=str,
         default=None,
-        help='Model variant to use (overrides NEURAL_MODEL_NAME in .env)'
+        help='Gemini model to use (default: gemini-2.5-flash)'
     )
     
     args = parser.parse_args()

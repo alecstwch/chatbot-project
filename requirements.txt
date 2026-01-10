@@ -60,6 +60,9 @@ sentence-transformers==5.2.0
 gensim==4.4.0
 huggingface-hub==0.36.0
 
+# Google Gemini API
+google-genai>=1.0.0
+
 # Utilities
 tqdm==4.67.1
 requests==2.32.5
