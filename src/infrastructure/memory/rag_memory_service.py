@@ -198,7 +198,9 @@ class RAGMemoryService:
         assistant_message: str,
         session_id: Optional[str] = None,
         user_intent: Optional[str] = None,
-        emotion_data: Optional[Dict[str, Any]] = None
+        emotion_data: Optional[Dict[str, Any]] = None,
+        behavior_patterns: Optional[List[str]] = None,
+        next_question: Optional[str] = None
     ) -> tuple:
         """
         Store both user and assistant messages from a conversation turn.
@@ -210,11 +212,13 @@ class RAGMemoryService:
             session_id: Optional session identifier
             user_intent: Optional detected intent for user message
             emotion_data: Optional emotion analysis data for user message
+            behavior_patterns: Optional list of detected behavior patterns
+            next_question: Optional follow-up question suggested by assistant
 
         Returns:
             Tuple of (user_message_id, assistant_message_id)
         """
-        # Prepare metadata with emotion data
+        # Prepare metadata with emotion data and behavior patterns
         user_metadata = {}
         if emotion_data:
             user_metadata["emotion"] = emotion_data.get("primary_emotion")
@@ -222,6 +226,11 @@ class RAGMemoryService:
             user_metadata["emotion_intensity"] = emotion_data.get("intensity")
             user_metadata["sentiment"] = emotion_data.get("sentiment")
             user_metadata["emotion_keywords"] = emotion_data.get("keywords", [])
+
+        # Add behavior patterns to user metadata
+        if behavior_patterns:
+            user_metadata["behavior_patterns"] = behavior_patterns
+            logger.debug(f"Storing {len(behavior_patterns)} behavior patterns for user message")
 
         user_msg_id = self.store_message(
             user_id=user_id,
@@ -232,11 +241,18 @@ class RAGMemoryService:
             metadata=user_metadata if user_metadata else None
         )
 
+        # Prepare assistant metadata with next question
+        assistant_metadata = {}
+        if next_question:
+            assistant_metadata["next_question"] = next_question
+            logger.debug(f"Storing next_question for assistant message")
+
         assistant_msg_id = self.store_message(
             user_id=user_id,
             message=assistant_message,
             role="assistant",
-            session_id=session_id
+            session_id=session_id,
+            metadata=assistant_metadata if assistant_metadata else None
         )
 
         return user_msg_id, assistant_msg_id
@@ -471,6 +487,157 @@ class RAGMemoryService:
 
         except Exception as e:
             logger.error(f"Failed to search by emotion: {e}")
+            return []
+
+    def search_by_behavior_pattern(
+        self,
+        user_id: str,
+        behavior_pattern: str,
+        top_k: int = 10
+    ) -> List[Dict[str, Any]]:
+        """
+        Search messages by detected behavior pattern.
+
+        IMPORTANT: This method filters by BOTH user_id AND behavior_pattern to ensure
+        data isolation between patients.
+
+        Args:
+            user_id: User identifier (REQUIRED for data isolation)
+            behavior_pattern: Behavior pattern to filter by (e.g., "social_withdrawal")
+            top_k: Maximum results
+
+        Returns:
+            List of matching messages from the specified user only
+        """
+        if not self._initialized:
+            raise RuntimeError("RAG Memory Service not initialized.")
+
+        try:
+            # Build filter - MUST include user_id for data isolation
+            # This ensures we only retrieve messages from THIS patient, not all patients
+            filter_conditions = [
+                FieldCondition(key="user_id", match=MatchValue(value=user_id)),
+                FieldCondition(key="behavior_patterns", match=MatchValue(value=behavior_pattern))
+            ]
+
+            query_filter = Filter(must=filter_conditions)
+
+            # Use scroll to get all matching points
+            results, _ = self.client.scroll(
+                collection_name=self.collection_name,
+                scroll_filter=query_filter,
+                limit=top_k,
+                with_payload=True
+            )
+
+            logger.debug(
+                f"Retrieved {len(results)} messages for user '{user_id}' "
+                f"with behavior_pattern='{behavior_pattern}' (data isolation enforced)"
+            )
+
+            return [
+                {
+                    "id": r.id,
+                    "content": r.payload.get("text", ""),
+                    "role": r.payload.get("role"),
+                    "behavior_patterns": r.payload.get("behavior_patterns", []),
+                    "emotion": r.payload.get("emotion"),
+                    "emotion_intensity": r.payload.get("emotion_intensity"),
+                    "timestamp": r.payload.get("timestamp", ""),
+                }
+                for r in results
+            ]
+
+        except Exception as e:
+            logger.error(f"Failed to search by behavior pattern: {e}")
+            return []
+
+    def retrieve_by_behavior_pattern_context(
+        self,
+        user_id: str,
+        query: str,
+        target_pattern: Optional[str] = None,
+        top_k: int = 5,
+        min_similarity: float = 0.4
+    ) -> List[Dict[str, Any]]:
+        """
+        Retrieve messages with semantic similarity AND optional behavior pattern filter.
+
+        IMPORTANT: This method ALWAYS filters by user_id to ensure data isolation
+        between patients. Even when filtering by behavior pattern, you will ONLY get messages
+        from the specified user.
+
+        This is useful for finding similar behavioral patterns from the past.
+        For example, finding past times the user exhibited similar behaviors.
+
+        Args:
+            user_id: User identifier (REQUIRED - ensures patient data isolation)
+            query: Current message to find similar contexts for
+            target_pattern: Optional behavior pattern to filter by
+            top_k: Maximum results
+            min_similarity: Minimum similarity threshold
+
+        Returns:
+            List of relevant past messages from the specified user only,
+            with behavior pattern metadata
+        """
+        if not self._initialized:
+            raise RuntimeError("RAG Memory Service not initialized.")
+
+        top_k = top_k or self.settings.search_limit
+
+        try:
+            # Create query embedding
+            query_embedding = self.embedder.encode(query).tolist()
+
+            # Build filter - user_id is ALWAYS required for data isolation
+            # This ensures we only search within THIS patient's messages
+            filter_conditions = [
+                FieldCondition(key="user_id", match=MatchValue(value=user_id))
+            ]
+
+            # Add behavior pattern filter if specified (still scoped to this user only)
+            if target_pattern:
+                filter_conditions.append(
+                    FieldCondition(key="behavior_patterns", match=MatchValue(value=target_pattern))
+                )
+
+            # Search using query_points
+            results = self.client.query_points(
+                collection_name=self.collection_name,
+                query=query_embedding,
+                query_filter=Filter(must=filter_conditions) if filter_conditions else None,
+                limit=top_k,
+                with_payload=True
+            )
+
+            # Format results with behavior pattern metadata
+            relevant_messages = []
+            for result in results.points:
+                similarity = result.score
+
+                if similarity >= min_similarity:
+                    relevant_messages.append({
+                        "id": result.id,
+                        "content": result.payload.get("text", ""),
+                        "role": result.payload.get("role", "user"),
+                        "similarity": similarity,
+                        "behavior_patterns": result.payload.get("behavior_patterns", []),
+                        "emotion": result.payload.get("emotion"),
+                        "emotion_confidence": result.payload.get("emotion_confidence"),
+                        "timestamp": result.payload.get("timestamp"),
+                        "session_id": result.payload.get("session_id"),
+                    })
+
+            logger.debug(
+                f"Retrieved {len(relevant_messages)} messages for user '{user_id}' "
+                f"with behavior_pattern filter='{target_pattern or 'all'}' "
+                f"(data isolation enforced)"
+            )
+            return relevant_messages
+
+        except Exception as e:
+            logger.error(f"Failed to retrieve by behavior pattern context: {e}")
             return []
 
     def retrieve_by_emotion_context(
@@ -725,6 +892,10 @@ class RAGMemoryService:
                     "emotion_intensity": r.payload.get("emotion_intensity"),
                     "sentiment": r.payload.get("sentiment"),
                     "emotion_keywords": r.payload.get("emotion_keywords", []),
+                    # Behavior pattern metadata
+                    "behavior_patterns": r.payload.get("behavior_patterns", []),
+                    # Next question (for assistant messages)
+                    "next_question": r.payload.get("next_question"),
                 }
                 for r in results
             ]
@@ -778,6 +949,10 @@ class RAGMemoryService:
                     "emotion_intensity": r.payload.get("emotion_intensity"),
                     "sentiment": r.payload.get("sentiment"),
                     "emotion_keywords": r.payload.get("emotion_keywords", []),
+                    # Behavior pattern metadata
+                    "behavior_patterns": r.payload.get("behavior_patterns", []),
+                    # Next question (for assistant messages)
+                    "next_question": r.payload.get("next_question"),
                 }
                 for r in results
             ]

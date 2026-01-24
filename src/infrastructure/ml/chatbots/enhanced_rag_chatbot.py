@@ -24,6 +24,7 @@ from src.infrastructure.memory.rag_memory_service import RAGMemoryService
 from src.infrastructure.memory.enhanced_prompt_builder import EnhancedPromptBuilder, TherapyEnhancedPromptBuilder
 from src.infrastructure.database.patient_repository import PatientRepository, PatientProfile
 from src.domain.services.emotion_detection_service import EmotionDetectionService
+from src.domain.services.behavior_pattern_service import BehaviorPatternService, BehaviorPattern
 
 load_dotenv()
 
@@ -49,7 +50,8 @@ class EnhancedRAGChatbot:
         model_name: Optional[str] = None,
         user_id: str = "default_user",
         user_name: Optional[str] = None,
-        use_therapy_mode: bool = True
+        use_therapy_mode: bool = True,
+        initial_message: Optional[str] = None
     ):
         """
         Initialize enhanced RAG chatbot.
@@ -62,6 +64,7 @@ class EnhancedRAGChatbot:
             user_id: User identifier
             user_name: User display name
             use_therapy_mode: Use therapy-optimized prompts
+            initial_message: Custom initial greeting/question
         """
         # Load settings
         self.settings = settings or NeuralChatbotSettings()
@@ -80,6 +83,7 @@ class EnhancedRAGChatbot:
         self.rag_memory: Optional[RAGMemoryService] = None
         self.patient_repo: Optional[PatientRepository] = None
         self.emotion_service: Optional[EmotionDetectionService] = None
+        self.behavior_pattern_service: Optional[BehaviorPatternService] = None
 
         # Choose prompt builder
         if use_therapy_mode:
@@ -97,15 +101,22 @@ class EnhancedRAGChatbot:
         self.chat_history: List[types.Content] = []
         self.conversation_history: List[Dict[str, str]] = []
         self.current_session_id: Optional[str] = None
+        self.initial_message = initial_message
 
         # State flags
         self._initialized = False
         self._rag_enabled = False
         self._mongodb_enabled = False
 
+        # Model context window (Gemini 2.0 Flash: 1,048,576 tokens)
+        self.max_context_window: int = 1_048_576
+
         # Metrics
         self.last_response_time: float = 0.0
-        self.last_tokens_generated: int = 0
+        self.last_input_tokens: int = 0
+        self.last_output_tokens: int = 0
+        self.last_total_tokens: int = 0
+        self.last_context_usage_percent: float = 0.0
         self.last_tokens_per_sec: float = 0.0
         self.last_context_items: int = 0
 
@@ -133,6 +144,10 @@ class EnhancedRAGChatbot:
             # Initialize emotion detection
             self.emotion_service = EmotionDetectionService()
             logger.info("Emotion detection service initialized")
+
+            # Initialize behavior pattern detection
+            self.behavior_pattern_service = BehaviorPatternService()
+            logger.info("Behavior pattern detection service initialized")
 
             # Initialize RAG memory
             logger.info("Initializing RAG memory service...")
@@ -223,6 +238,17 @@ class EnhancedRAGChatbot:
             logger.debug(f"Detected emotion: {emotion_data['primary_emotion']} "
                         f"(confidence: {emotion_data['confidence']:.2f})")
 
+            # Step 1b: Detect behavior patterns
+            detected_patterns = []
+            if self.behavior_pattern_service:
+                detected_patterns = self.behavior_pattern_service.detect_patterns(
+                    user_input,
+                    emotion_data.get('primary_emotion')
+                )
+                if detected_patterns:
+                    logger.debug(f"Detected {len(detected_patterns)} behavior patterns: "
+                               f"{[p.pattern_type.value for p in detected_patterns]}")
+
             # Step 2: Get patient profile
             patient_profile = None
             if self._mongodb_enabled:
@@ -303,10 +329,38 @@ class EnhancedRAGChatbot:
             # Step 8: Parse JSON response
             parsed_response = self.prompt_builder.parse_llm_response(response_text)
 
+            # Step 8b: Override with keyword-detected behavior patterns
+            # The BehaviorPatternService (keyword-based) patterns take priority over LLM detection
+            # This ensures consistent, rule-based pattern tracking in MongoDB
+            if detected_patterns:
+                # Use the highest confidence detected pattern for the response
+                top_pattern = detected_patterns[0]
+                parsed_response["behavior_update"] = {
+                    "pattern_type": top_pattern.pattern_type.value,
+                    "description": top_pattern.description,
+                    "severity": top_pattern.severity.value,
+                    "confidence": top_pattern.confidence,
+                    "indicators": top_pattern.indicators,
+                    "associated_emotions": [emotion_data.get('primary_emotion')] if emotion_data.get('primary_emotion') else [],
+                    "detection_method": "keyword_based"
+                }
+                logger.debug(f"Using keyword-detected pattern in response: {top_pattern.pattern_type.value} (confidence: {top_pattern.confidence:.2f})")
+
             # Step 9: Update conversation history (short-term memory)
             self.chat_history.append(current_message_content)
+
+            # Include next_question in the stored history if present
+            response_text = parsed_response["response"]
+            next_question = parsed_response.get("next_question", "")
+            if next_question:
+                # Append the next question to the response in history
+                # This gives context to the LLM about what question was asked
+                response_with_next = f"{response_text}\n\nFollow-up question: {next_question}"
+            else:
+                response_with_next = response_text
+
             self.chat_history.append(
-                types.Content(role="model", parts=[types.Part(text=parsed_response["response"])])
+                types.Content(role="model", parts=[types.Part(text=response_with_next)])
             )
 
             # Trim history if needed (keep last 10 turns to manage context window)
@@ -315,12 +369,20 @@ class EnhancedRAGChatbot:
 
             # Step 10: Store in RAG memory with emotion metadata (long-term memory)
             if store_in_memory and self._rag_enabled:
+                # Extract behavior patterns from detected patterns
+                behavior_pattern_list = [p.pattern_type.value for p in detected_patterns] if detected_patterns else []
+
+                # Get next question from response
+                next_question = parsed_response.get("next_question", "")
+
                 self.rag_memory.store_conversation_turn(
                     user_id=self.user_id,
                     user_message=user_input,
                     assistant_message=parsed_response["response"],
                     session_id=self.current_session_id,
-                    emotion_data=emotion_data
+                    emotion_data=emotion_data,
+                    behavior_patterns=behavior_pattern_list if behavior_pattern_list else None,
+                    next_question=next_question if next_question else None
                 )
 
             # Step 11: Update patient profile
@@ -329,28 +391,36 @@ class EnhancedRAGChatbot:
                 if emotion_summary:
                     self.patient_repo.update_emotion_summary(self.user_id, emotion_summary)
 
-                # Add session note
+                # Add session note with behavior patterns
+                behavior_info = ""
+                if detected_patterns:
+                    patterns_str = ", ".join([p.pattern_type.value for p in detected_patterns[:3]])
+                    behavior_info = f", Patterns: {patterns_str}"
+
                 self.patient_repo.add_session_note(
                     user_id=self.user_id,
                     note=f"Emotion: {emotion_data['primary_emotion']}, "
-                         f"Sentiment: {emotion_data['sentiment']}",
+                         f"Sentiment: {emotion_data['sentiment']}"
+                         f"{behavior_info}",
                     emotion_data=emotion_data
                 )
 
-                # Update behavior pattern if detected
-                if parsed_response.get("behavior_update"):
+                # Store behavior patterns detected by keyword-based service in MongoDB
+                # These patterns are detected by the BehaviorPatternService, not the LLM
+                if detected_patterns:
                     from src.infrastructure.database.patient_repository import BehaviorPattern
-                    behavior_data = parsed_response["behavior_update"]
-                    behavior_pattern = BehaviorPattern(
-                        pattern_type=behavior_data.get("pattern_type", "unknown"),
-                        description=behavior_data.get("description", ""),
-                        frequency=1,
-                        first_detected=time.time().__str__(),
-                        last_detected=time.time().__str__(),
-                        severity=behavior_data.get("severity", "mild"),
-                        associated_emotions=behavior_data.get("associated_emotions", [])
-                    )
-                    self.patient_repo.add_behavior_pattern(self.user_id, behavior_pattern)
+                    for pattern in detected_patterns:
+                        behavior_pattern = BehaviorPattern(
+                            pattern_type=pattern.pattern_type.value,
+                            description=pattern.description,
+                            frequency=1,
+                            first_detected=time.time().__str__(),
+                            last_detected=time.time().__str__(),
+                            severity=pattern.severity.value,
+                            associated_emotions=[emotion_data.get('primary_emotion')] if emotion_data.get('primary_emotion') else []
+                        )
+                        self.patient_repo.add_behavior_pattern(self.user_id, behavior_pattern)
+                        logger.debug(f"Stored behavior pattern in MongoDB: {pattern.pattern_type.value} ({pattern.severity.value})")
 
                 # Update risk level if changed
                 risk_assessment = parsed_response.get("risk_assessment", {})
@@ -370,19 +440,37 @@ class EnhancedRAGChatbot:
             end_time = time.time()
             self.last_response_time = end_time - start_time
 
+            # Extract token counts from Gemini usage metadata
             if hasattr(response, 'usage_metadata') and response.usage_metadata:
-                self.last_tokens_generated = getattr(response.usage_metadata, 'candidates_token_count', 0)
+                # prompt_token_count = input tokens sent to the model
+                self.last_input_tokens = getattr(response.usage_metadata, 'prompt_token_count', 0)
+                # candidates_token_count = output tokens generated
+                self.last_output_tokens = getattr(response.usage_metadata, 'candidates_token_count', 0)
+                # total_token_count = sum of both
+                self.last_total_tokens = getattr(response.usage_metadata, 'total_token_count',
+                                                  self.last_input_tokens + self.last_output_tokens)
             else:
-                self.last_tokens_generated = len(response_text) // 4
+                # Fallback: estimate based on text length
+                self.last_input_tokens = len(system_prompt) // 4 + len(user_input) // 4
+                self.last_output_tokens = len(response_text) // 4
+                self.last_total_tokens = self.last_input_tokens + self.last_output_tokens
 
+            # Calculate context window usage percentage
+            self.last_context_usage_percent = (
+                (self.last_total_tokens / self.max_context_window) * 100
+                if self.max_context_window > 0 else 0
+            )
+
+            # Calculate tokens per second (based on output tokens)
             self.last_tokens_per_sec = (
-                self.last_tokens_generated / self.last_response_time
+                self.last_output_tokens / self.last_response_time
                 if self.last_response_time > 0 else 0
             )
 
             logger.info(
-                f"Response generated in {self.last_response_time:.2f}s "
-                f"({self.last_tokens_generated} tokens)"
+                f"Response generated in {self.last_response_time:.2f}s - "
+                f"Input: {self.last_input_tokens} | Output: {self.last_output_tokens} | "
+                f"Total: {self.last_total_tokens} tokens ({self.last_context_usage_percent:.4f}% of {self.max_context_window:,} context window)"
             )
 
             return parsed_response
@@ -457,13 +545,244 @@ class EnhancedRAGChatbot:
         """Check if MongoDB is enabled."""
         return self._mongodb_enabled
 
+    def get_initial_greeting(self) -> str:
+        """
+        Get the initial greeting/question for starting a conversation.
+
+        Returns:
+            Initial greeting message
+        """
+        if self.initial_message:
+            return self.initial_message
+
+        # Default therapy-focused greeting
+        if self.user_name:
+            return f"Hi {self.user_name}! I'm here to listen and support you. How are you feeling today?"
+
+        # Default general greeting
+        return "Hello! I'm here to support you. How are you feeling right now?"
+
     def get_benchmark_stats(self) -> Tuple[float, int, float]:
-        """Get performance stats."""
-        return (self.last_response_time, self.last_tokens_generated, self.last_tokens_per_sec)
+        """
+        Get performance stats.
+
+        Returns:
+            Tuple of (response_time, total_tokens, tokens_per_second)
+        """
+        return (self.last_response_time, self.last_total_tokens, self.last_tokens_per_sec)
+
+    def get_token_stats(self) -> Dict[str, Any]:
+        """
+        Get detailed token statistics.
+
+        Returns:
+            Dictionary with input_tokens, output_tokens, total_tokens,
+            context_usage_percent, max_context_window
+        """
+        return {
+            "input_tokens": self.last_input_tokens,
+            "output_tokens": self.last_output_tokens,
+            "total_tokens": self.last_total_tokens,
+            "context_usage_percent": round(self.last_context_usage_percent, 4),
+            "max_context_window": self.max_context_window
+        }
 
     def get_last_context_count(self) -> int:
         """Get last context count."""
         return self.last_context_items
+
+    def search_behavior_pattern(
+        self,
+        pattern_type: str,
+        min_confidence: float = 0.3
+    ) -> Optional[Dict[str, Any]]:
+        """
+        Search for historical occurrences of a behavior pattern in RAG.
+
+        Args:
+            pattern_type: The pattern type to search for (e.g., "social_withdrawal")
+            min_confidence: Minimum confidence threshold for detection
+
+        Returns:
+            Pattern history dictionary or None if no matches found
+        """
+        if not self._rag_enabled or not self.behavior_pattern_service:
+            return None
+
+        try:
+            # Convert string to enum
+            pattern_enum = BehaviorPattern(pattern_type)
+
+            # Get all user messages from RAG
+            all_messages = self.rag_memory.get_all_user_messages(self.user_id, limit=200)
+
+            if not all_messages:
+                return None
+
+            # Search for pattern history
+            pattern_history = self.behavior_pattern_service.search_pattern_history(
+                rag_messages=all_messages,
+                pattern_type=pattern_enum,
+                min_confidence=min_confidence
+            )
+
+            return pattern_history.to_dict() if pattern_history else None
+
+        except ValueError:
+            logger.error(f"Invalid pattern type: {pattern_type}")
+            return None
+        except Exception as e:
+            logger.error(f"Failed to search behavior pattern: {e}")
+            return None
+
+    def get_trending_behavior_patterns(
+        self,
+        days: int = 7
+    ) -> List[Dict[str, Any]]:
+        """
+        Get behavior patterns that have increased in frequency recently.
+
+        Args:
+            days: Number of days to look back
+
+        Returns:
+            List of trending patterns
+        """
+        if not self._rag_enabled or not self.behavior_pattern_service:
+            return []
+
+        try:
+            # Get recent user messages from RAG
+            all_messages = self.rag_memory.get_all_user_messages(self.user_id, limit=200)
+
+            if not all_messages:
+                return []
+
+            # Get trending patterns
+            trending = self.behavior_pattern_service.get_trending_patterns(
+                rag_messages=all_messages,
+                days=days
+            )
+
+            return trending
+
+        except Exception as e:
+            logger.error(f"Failed to get trending patterns: {e}")
+            return []
+
+    def detect_behavior_patterns(
+        self,
+        message: str,
+        emotion: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Detect behavior patterns in a message (without storing).
+
+        Args:
+            message: The message to analyze
+            emotion: Optional emotion to add context
+
+        Returns:
+            List of detected pattern dictionaries
+        """
+        if not self.behavior_pattern_service:
+            return []
+
+        try:
+            detections = self.behavior_pattern_service.detect_patterns(message, emotion)
+            return [d.to_dict() for d in detections]
+
+        except Exception as e:
+            logger.error(f"Failed to detect behavior patterns: {e}")
+            return []
+
+    def compare_behavior_patterns(self) -> Dict[str, Any]:
+        """
+        Compare current behavior patterns with historical baseline.
+
+        Returns:
+            Comparison analysis dictionary
+        """
+        if not self._rag_enabled or not self.behavior_pattern_service:
+            return {}
+
+        try:
+            # Get all user messages from RAG
+            all_messages = self.rag_memory.get_all_user_messages(self.user_id, limit=200)
+
+            if not all_messages:
+                return {}
+
+            # Compare patterns
+            comparison = self.behavior_pattern_service.compare_patterns(
+                rag_messages=all_messages,
+                user_id=self.user_id
+            )
+
+            return comparison
+
+        except Exception as e:
+            logger.error(f"Failed to compare behavior patterns: {e}")
+            return {}
+
+    def search_by_behavior_pattern(
+        self,
+        behavior_pattern: str,
+        top_k: int = 10
+    ) -> List[Dict[str, Any]]:
+        """
+        Search for past messages by behavior pattern.
+
+        Args:
+            behavior_pattern: Pattern to search for (e.g., "social_withdrawal")
+            top_k: Maximum results
+
+        Returns:
+            List of matching messages from this user only
+        """
+        if not self._rag_enabled:
+            return []
+
+        try:
+            return self.rag_memory.search_by_behavior_pattern(
+                user_id=self.user_id,
+                behavior_pattern=behavior_pattern,
+                top_k=top_k
+            )
+        except Exception as e:
+            logger.error(f"Failed to search by behavior pattern: {e}")
+            return []
+
+    def retrieve_by_behavior_pattern_context(
+        self,
+        query: str,
+        target_pattern: Optional[str] = None,
+        top_k: int = 5
+    ) -> List[Dict[str, Any]]:
+        """
+        Retrieve messages with semantic similarity and optional behavior pattern filter.
+
+        Args:
+            query: Current message to find similar contexts for
+            target_pattern: Optional behavior pattern to filter by
+            top_k: Maximum results
+
+        Returns:
+            List of relevant past messages
+        """
+        if not self._rag_enabled:
+            return []
+
+        try:
+            return self.rag_memory.retrieve_by_behavior_pattern_context(
+                user_id=self.user_id,
+                query=query,
+                target_pattern=target_pattern,
+                top_k=top_k
+            )
+        except Exception as e:
+            logger.error(f"Failed to retrieve by behavior pattern context: {e}")
+            return []
 
     def shutdown(self) -> None:
         """Shutdown all services."""

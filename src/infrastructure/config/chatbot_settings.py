@@ -84,7 +84,7 @@ class NeuralChatbotSettings(BaseSettings):
     )
     
     model_name: str = Field(
-        default="gemini-2.5-flash",
+        default="gemini-2.5-flash-lite",
         description="Gemini model identifier"
     )
     

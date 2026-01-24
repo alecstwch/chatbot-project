@@ -31,7 +31,8 @@ class RAGChatbotCLI:
         user_name: Optional[str] = None,
         use_therapy_mode: bool = False,
         use_local_qdrant: bool = True,
-        use_enhanced_mode: bool = True
+        use_enhanced_mode: bool = True,
+        initial_message: Optional[str] = None
     ):
         """
         Initialize the CLI with RAG chatbot.
@@ -42,6 +43,7 @@ class RAGChatbotCLI:
             use_therapy_mode: Use therapy-optimized prompts
             use_local_qdrant: Use local file storage instead of server
             use_enhanced_mode: Use enhanced mode with MongoDB and emotion detection
+            initial_message: Custom initial greeting/question
         """
         # Load settings
         settings = NeuralChatbotSettings()
@@ -68,7 +70,8 @@ class RAGChatbotCLI:
                 mongodb_settings=mongodb_settings,
                 user_id=user_id,
                 user_name=user_name,
-                use_therapy_mode=use_therapy_mode
+                use_therapy_mode=use_therapy_mode,
+                initial_message=initial_message
             )
         else:
             # Standard RAG mode
@@ -129,6 +132,8 @@ class RAGChatbotCLI:
         if self.use_enhanced_mode:
             print("  emotions - View emotion history")
             print("  profile  - View patient profile")
+            print("  patterns - View behavior pattern analysis")
+            print("  trends   - View trending behavior patterns")
         print("  memory   - View memory statistics")
         print("  quit     - Exit the chatbot")
         print("\n" + "-" * 70 + "\n")
@@ -208,6 +213,16 @@ class RAGChatbotCLI:
         if command == 'profile':
             if self.use_enhanced_mode:
                 self.show_patient_profile()
+            return False
+
+        if command == 'patterns':
+            if self.use_enhanced_mode:
+                self.show_behavior_patterns()
+            return False
+
+        if command == 'trends':
+            if self.use_enhanced_mode:
+                self.show_trending_patterns()
             return False
 
         if command == 'clear':
@@ -544,6 +559,76 @@ class RAGChatbotCLI:
 
         print("=" * 50 + "\n")
 
+    def show_behavior_patterns(self) -> None:
+        """Display behavior pattern comparison analysis."""
+        if not self.use_enhanced_mode or not hasattr(self.chatbot, 'compare_behavior_patterns'):
+            print("\n⚠️  Behavior pattern analysis not available in this mode.\n")
+            return
+
+        comparison = self.chatbot.compare_behavior_patterns()
+
+        if not comparison or comparison.get("error"):
+            print("\n📭 No behavior pattern data available yet.\n")
+            return
+
+        print("\n" + "=" * 70)
+        print("Behavior Pattern Analysis")
+        print("=" * 70)
+
+        total_messages = comparison.get("total_messages_analyzed", 0)
+        print(f"\nTotal Messages Analyzed: {total_messages}")
+
+        pattern_counts = comparison.get("pattern_counts", {})
+        if pattern_counts:
+            print(f"\nPattern Frequencies:")
+            for pattern, count in sorted(pattern_counts.items(), key=lambda x: x[1], reverse=True):
+                print(f"  • {pattern}: {count} occurrences")
+
+        pattern_percentages = comparison.get("pattern_percentages", {})
+        if pattern_percentages:
+            print(f"\nPattern Distribution (% of messages):")
+            for pattern, pct in sorted(pattern_percentages.items(), key=lambda x: x[1], reverse=True):
+                print(f"  • {pattern}: {pct:.1f}%")
+
+        dominant_patterns = comparison.get("dominant_patterns", {})
+        if dominant_patterns:
+            print(f"\n🎯 Dominant Patterns (>10% of messages):")
+            for pattern, pct in sorted(dominant_patterns.items(), key=lambda x: x[1], reverse=True):
+                print(f"  • {pattern}: {pct:.1f}%")
+
+        print("=" * 70 + "\n")
+
+    def show_trending_patterns(self) -> None:
+        """Display trending behavior patterns."""
+        if not self.use_enhanced_mode or not hasattr(self.chatbot, 'get_trending_behavior_patterns'):
+            print("\n⚠️  Trending patterns not available in this mode.\n")
+            return
+
+        trends = self.chatbot.get_trending_behavior_patterns(days=7)
+
+        if not trends:
+            print("\n📭 No trending patterns detected in the last 7 days.\n")
+            return
+
+        print("\n" + "=" * 70)
+        print(f"Trending Behavior Patterns (Last 7 Days)")
+        print("=" * 70)
+
+        for i, trend in enumerate(trends, 1):
+            pattern = trend.get("pattern_type", "unknown")
+            frequency = trend.get("frequency", 0)
+            severity = trend.get("avg_severity", "mild")
+            days = trend.get("period_days", 7)
+
+            severity_emoji = {"mild": "🟢", "moderate": "🟡", "severe": "🔴"}
+            emoji = severity_emoji.get(severity, "⚪")
+
+            print(f"\n{i}. {pattern.replace('_', ' ').title()}")
+            print(f"   Frequency: {frequency} times in {days} days")
+            print(f"   Avg Severity: {emoji} {severity.upper()}")
+
+        print("\n" + "=" * 70 + "\n")
+
     def run(self) -> None:
         """Run the interactive chat loop."""
         self.print_welcome()
@@ -555,11 +640,17 @@ class RAGChatbotCLI:
         try:
             self.chatbot.load_model()
             print("✅ Chatbot ready!\n")
+
+            # Display initial greeting
+            if hasattr(self.chatbot, 'get_initial_greeting'):
+                greeting = self.chatbot.get_initial_greeting()
+                print(f"🤖 Bot: {greeting}\n")
+
         except Exception as e:
             print(f"\n❌ Error loading chatbot: {e}")
             print("Please check your configuration and API keys.")
             return
-        
+
         self.running = True
         
         while self.running:
@@ -574,7 +665,7 @@ class RAGChatbotCLI:
                 commands = ['quit', 'exit', 'bye', 'help', 'reset',
                            'history', 'search', 'memory', 'data', 'alldata', 'forget', 'clear']
                 if self.use_enhanced_mode:
-                    commands.extend(['emotions', 'profile'])
+                    commands.extend(['emotions', 'profile', 'patterns', 'trends'])
 
                 if user_input.lower() in commands:
                     if self.process_command(user_input):
@@ -590,6 +681,7 @@ class RAGChatbotCLI:
 
                     # Get stats
                     resp_time, tokens, tok_per_sec = self.chatbot.get_benchmark_stats()
+                    token_stats = self.chatbot.get_token_stats()
                     context_count = self.chatbot.get_last_context_count()
 
                     # Display response
@@ -628,7 +720,8 @@ class RAGChatbotCLI:
 
                     # Display metrics
                     memory_indicator = f"📚 {context_count}" if context_count > 0 else "📝 0"
-                    print(f"\n[{resp_time:.2f}s | {tokens} tokens | {memory_indicator} memories]\n")
+                    context_pct = token_stats.get('context_usage_percent', 0)
+                    print(f"\n[{resp_time:.2f}s | 📥 {token_stats['input_tokens']} | 📤 {token_stats['output_tokens']} | 📊 {token_stats['total_tokens']} tokens | 📈 {context_pct}% context | {memory_indicator} memories]\n")
 
                     # Save to local history
                     self.conversation_history.append((user_input, response_text))
@@ -639,6 +732,7 @@ class RAGChatbotCLI:
 
                     # Get stats
                     resp_time, tokens, tok_per_sec = self.chatbot.get_benchmark_stats()
+                    token_stats = self.chatbot.get_token_stats()
                     context_count = self.chatbot.get_last_context_count()
 
                     # Display response
@@ -646,7 +740,8 @@ class RAGChatbotCLI:
 
                     # Display metrics
                     memory_indicator = f"📚 {context_count}" if context_count > 0 else "📝 0"
-                    print(f"[{resp_time:.2f}s | {tokens} tokens | {memory_indicator} memories used]\n")
+                    context_pct = token_stats.get('context_usage_percent', 0)
+                    print(f"[{resp_time:.2f}s | 📥 {token_stats['input_tokens']} | 📤 {token_stats['output_tokens']} | 📊 {token_stats['total_tokens']} tokens | 📈 {context_pct}% context | {memory_indicator} memories used]\n")
 
                     # Save to local history
                     self.conversation_history.append((user_input, response))
@@ -717,6 +812,12 @@ def main():
         action='store_true',
         help='Use standard RAG mode without MongoDB and emotion detection'
     )
+    parser.add_argument(
+        '--initial-message',
+        type=str,
+        default="Hello! How can I assist you today?",
+        help='Custom initial greeting/question for the chatbot'
+    )
 
     args = parser.parse_args()
 
@@ -734,7 +835,8 @@ def main():
         user_name=args.user_name,
         use_therapy_mode=args.therapy,
         use_local_qdrant=not args.qdrant_server,
-        use_enhanced_mode=use_enhanced
+        use_enhanced_mode=use_enhanced,
+        initial_message=args.initial_message
     )
     cli.run()
 
