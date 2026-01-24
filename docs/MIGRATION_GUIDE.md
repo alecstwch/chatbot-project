@@ -2,7 +2,7 @@
 
 ## Quick Reference: Where Did Everything Go?
 
-### Old Location → New Location
+### Old Location  New Location
 
 ```
 OLD: src/data/preprocessor.py
@@ -133,8 +133,8 @@ Most methods unchanged, but note:
 
 ## Breaking Changes
 
-**Class renamed**: `TextPreprocessor` → `TextPreprocessingService`  
-**Import path changed**: `src.data.preprocessor` → `src.domain.services.text_preprocessor`  
+**Class renamed**: `TextPreprocessor`  `TextPreprocessingService`  
+**Import path changed**: `src.data.preprocessor`  `src.domain.services.text_preprocessor`  
 **DataFrame helper**: Now manual (will be in infrastructure layer later)
 
 ## Migration Checklist

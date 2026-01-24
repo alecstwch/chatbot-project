@@ -37,7 +37,6 @@ def test_imports():
             print(f"{name} - {e}")
             failed.append(name)
     
-    print(f"\n{'='*50}")
     if not failed:
         print("ALL PACKAGES IMPORTED SUCCESSFULLY!")
     else:
@@ -213,7 +212,6 @@ def main():
     failed = sum(1 for _, r in results if r is False)
     skipped = sum(1 for _, r in results if r is None)
     
-    print(f"\n{'='*50}")
     print(f"Total: {passed} passed, {failed} failed, {skipped} skipped")
     
     if failed == 0:

@@ -11,7 +11,6 @@ import ssl
 
 def print_step(step_num, description):
     """Print formatted step indicator"""
-    print(f"\n{'='*60}")
     print(f"STEP {step_num}: {description}")
     print(f"{'='*60}\n")
 
@@ -244,7 +243,6 @@ def print_next_steps():
     """Print next steps for the user"""
     print("\n" + "="*60)
     print(" SETUP COMPLETE! ")
-    print("="*60)
     print("\n NEXT STEPS:\n")
     print("1. Activate your environment:")
     print("   conda activate chatbot")
@@ -267,14 +265,14 @@ def print_next_steps():
 def main():
     """Main setup function"""
     print("""
-    ╔═══════════════════════════════════════════════════════════╗
-    ║                                                           ║
-    ║       7-DAY CHATBOT PROJECT - AUTOMATED SETUP            ║
-    ║                                                           ║
-    ║   This script will set up your environment for rapid     ║
-    ║   development of two chatbots using NLP techniques       ║
-    ║                                                           ║
-    ╚═══════════════════════════════════════════════════════════╝
+    
+                                                               
+           7-DAY CHATBOT PROJECT - AUTOMATED SETUP            
+                                                               
+       This script will set up your environment for rapid     
+       development of two chatbots using NLP techniques       
+                                                               
+    
     """)
     
     try:

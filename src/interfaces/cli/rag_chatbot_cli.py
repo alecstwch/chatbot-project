@@ -87,44 +87,42 @@ class RAGChatbotCLI:
         """Display welcome message and instructions."""
         print("\n" + "=" * 70)
         if self.use_enhanced_mode:
-            print("  🧠 Enhanced RAG Chatbot (Patient Data + Emotion Tracking)")
+            print("  Enhanced RAG Chatbot (Patient Data + Emotion Tracking)")
         else:
-            print("  🧠 RAG-Enhanced Conversational Bot")
-        print("=" * 70)
+            print("  RAG-Enhanced Conversational Bot")
 
         mode = "Therapy Support" if self.use_therapy_mode else "General Conversation"
         print(f"\nMode: {mode}")
         print(f"User: {self.user_name or self.user_id}")
 
         if self.use_enhanced_mode:
-            print(f"✨ Enhanced Mode: Emotion detection + MongoDB patient files")
+            print(f" Enhanced Mode: Emotion detection + MongoDB patient files")
             if hasattr(self.chatbot, 'is_mongodb_enabled') and self.chatbot.is_mongodb_enabled():
                 profile = self.chatbot.get_patient_profile()
                 if profile:
-                    print(f"👤 Patient Profile: Loaded")
+                    print(f" Patient Profile: Loaded")
                     if profile.get('risk_level'):
-                        risk_emojis = {"low": "🟢", "medium": "🟡", "high": "🟠", "critical": "🔴"}
-                        print(f"   Risk Level: {risk_emojis.get(profile['risk_level'], '⚪')} {profile['risk_level'].upper()}")
+                        risk_emojis = {"low": "🟢", "medium": "", "high": "🟠", "critical": ""}
+                        print(f"   Risk Level: {risk_emojis.get(profile['risk_level'], '')} {profile['risk_level'].upper()}")
                     if profile.get('total_conversations', 0) > 0:
                         print(f"   Previous Sessions: {profile['total_conversations']}")
 
         if self.chatbot.is_rag_enabled():
             stats = self.chatbot.get_memory_stats()
-            print(f"📚 Memory: {stats.get('message_count', 0)} stored messages")
+            print(f" Memory: {stats.get('message_count', 0)} stored messages")
         else:
-            print("⚠️  Memory: Disabled (Qdrant not connected)")
+            print(" Memory: Disabled (Qdrant not connected)")
 
         print("\n" + "-" * 70)
         if self.use_enhanced_mode:
             print("This chatbot provides:")
-            print("  • Emotion detection and tracking")
-            print("  • Behavior pattern analysis")
-            print("  • Personalized responses using past context")
-            print("  • Patient profile management")
+            print("  - Emotion detection and tracking")
+            print("  - Behavior pattern analysis")
+            print("  - Personalized responses using past context")
+            print("  - Patient profile management")
         else:
             print("This chatbot remembers your past conversations and uses them")
             print("to provide personalized, context-aware responses.")
-        print("-" * 70)
 
         print("\nCommands:")
         print("  help     - Show all commands")
@@ -142,7 +140,6 @@ class RAGChatbotCLI:
         """Display available commands."""
         print("\n" + "=" * 50)
         print("Available Commands")
-        print("=" * 50)
         print("  help      - Show this help message")
         print("  reset     - Clear current conversation (keeps memory)")
         print("  history   - Show current conversation history")
@@ -168,7 +165,7 @@ class RAGChatbotCLI:
         command = user_input.lower().strip()
         
         if command in ['quit', 'exit', 'bye']:
-            print("\n🤖 Goodbye! Your memories are saved for next time!")
+            print("\n Goodbye! Your memories are saved for next time!")
             return True
         
         if command == 'help':
@@ -178,7 +175,7 @@ class RAGChatbotCLI:
         if command == 'reset':
             self.chatbot.reset()
             self.conversation_history = []
-            print("\n✅ Conversation cleared. Memory preserved.\n")
+            print("\n Conversation cleared. Memory preserved.\n")
             return False
         
         if command == 'history':
@@ -235,12 +232,11 @@ class RAGChatbotCLI:
     def print_history(self) -> None:
         """Display conversation history."""
         if not self.conversation_history:
-            print("\n📝 No conversation history yet.\n")
+            print("\n No conversation history yet.\n")
             return
         
         print("\n" + "=" * 50)
         print("Current Conversation")
-        print("=" * 50)
         for i, (user_msg, bot_msg) in enumerate(self.conversation_history, 1):
             print(f"\n[{i}] You: {user_msg}")
             print(f"    Bot: {bot_msg}")
@@ -249,10 +245,10 @@ class RAGChatbotCLI:
     def search_memory(self) -> None:
         """Interactive memory search."""
         if not self.chatbot.is_rag_enabled():
-            print("\n⚠️  Memory is not enabled.\n")
+            print("\n Memory is not enabled.\n")
             return
         
-        print("\n🔍 Search your conversation history")
+        print("\n Search your conversation history")
         query = input("Enter topic to search (e.g., 'anxiety', 'work stress'): ").strip()
         
         if not query:
@@ -262,10 +258,10 @@ class RAGChatbotCLI:
         results = self.chatbot.search_memory(query, top_k=5)
         
         if not results:
-            print(f"\n📭 No results found for '{query}'.\n")
+            print(f"\n No results found for '{query}'.\n")
             return
         
-        print(f"\n📚 Found {len(results)} relevant messages:\n")
+        print(f"\n Found {len(results)} relevant messages:\n")
         for i, item in enumerate(results, 1):
             role = "You" if item.get("role") == "user" else "Bot"
             content = item.get("content", "")[:100]
@@ -279,15 +275,14 @@ class RAGChatbotCLI:
         
         print("\n" + "=" * 50)
         print("Memory Statistics")
-        print("=" * 50)
         
         if stats.get("enabled"):
-            print(f"  Status: ✅ Enabled")
+            print(f"  Status: Enabled")
             print(f"  User ID: {stats.get('user_id')}")
             print(f"  Stored Messages: {stats.get('message_count', 0)}")
             print(f"  Collection: {stats.get('collection')}")
         else:
-            print("  Status: ❌ Disabled")
+            print("  Status: Disabled")
             print("  Reason: Qdrant not connected")
         
         print("=" * 50 + "\n")
@@ -295,19 +290,18 @@ class RAGChatbotCLI:
     def show_stored_data(self) -> None:
         """Display all stored conversations in a readable format."""
         if not self.chatbot.is_rag_enabled():
-            print("\n⚠️  Memory is not enabled.\n")
+            print("\n Memory is not enabled.\n")
             return
         
         messages = self.chatbot.rag_memory.get_all_user_messages(self.user_id, limit=100)
         
         if not messages:
-            print("\n📭 No stored conversations found.\n")
+            print("\n No stored conversations found.\n")
             return
         
         print("\n" + "=" * 70)
-        print(f"📚 Stored Conversations for: {self.user_id}")
+        print(f" Stored Conversations for: {self.user_id}")
         print(f"   Total messages: {len(messages)}")
-        print("=" * 70)
         
         # Group by session
         sessions = {}
@@ -318,8 +312,8 @@ class RAGChatbotCLI:
             sessions[session_id].append(msg)
         
         for session_id, session_messages in sessions.items():
-            print(f"\n┌─ Session: {session_id}... ({len(session_messages)} messages)")
-            print("│")
+            print(f"\n Session: {session_id}... ({len(session_messages)} messages)")
+            print("")
             
             for msg in session_messages:
                 role = msg.get("role", "user")
@@ -343,46 +337,43 @@ class RAGChatbotCLI:
                 
                 # Format role
                 if role == "user":
-                    role_icon = "👤 You"
+                    role_icon = " You"
                 else:
-                    role_icon = "🤖 Bot"
+                    role_icon = " Bot"
                 
-                print(f"│  [{time_str}] {role_icon}: {text}")
+                print(f"  [{time_str}] {role_icon}: {text}")
                 
                 # Show vector info
                 vector_dim = msg.get("vector_dim", 0)
                 vector_preview = msg.get("vector_preview", [])
                 if vector_preview:
                     preview_str = ", ".join(f"{v:.3f}" for v in vector_preview[:3])
-                    print(f"│     📊 Vector: [{preview_str}, ...] ({vector_dim} dims)")
+                    print(f"     Vector: [{preview_str}, ...] ({vector_dim} dims)")
             
-            print("│")
-            print("└" + "─" * 50)
+            print("")
+            print("" + "" * 50)
         
-        print("\n" + "=" * 70)
-        print("💡 Tip: Use 'search' to find specific topics")
-        print("=" * 70 + "\n")
+        print(" Tip: Use 'search' to find specific topics")
     
     def show_all_data(self) -> None:
         """Display ALL stored conversations from all users (admin/debug)."""
         if not self.chatbot.is_rag_enabled():
-            print("\n⚠️  Memory is not enabled.\n")
+            print("\n Memory is not enabled.\n")
             return
         
         messages = self.chatbot.rag_memory.get_all_messages(limit=200)
         
         if not messages:
-            print("\n📭 No stored data found in Qdrant.\n")
+            print("\n No stored data found in Qdrant.\n")
             return
         
         # Count unique users
         users = set(msg.get("user_id", "unknown") for msg in messages)
         
         print("\n" + "=" * 70)
-        print(f"📚 ALL Data in Qdrant (Admin View)")
+        print(f" ALL Data in Qdrant (Admin View)")
         print(f"   Total messages: {len(messages)}")
         print(f"   Total users: {len(users)}")
-        print("=" * 70)
         
         # Group by user, then by session
         user_messages = {}
@@ -398,13 +389,11 @@ class RAGChatbotCLI:
         
         for user_id, sessions in user_messages.items():
             total_user_msgs = sum(len(msgs) for msgs in sessions.values())
-            print(f"\n{'─' * 70}")
-            print(f"👤 USER: {user_id} ({total_user_msgs} messages)")
-            print(f"{'─' * 70}")
+            print(f" USER: {user_id} ({total_user_msgs} messages)")
             
             for session_id, session_messages in sessions.items():
-                print(f"\n  ┌─ Session: {session_id}... ({len(session_messages)} messages)")
-                print("  │")
+                print(f"\n   Session: {session_id}... ({len(session_messages)} messages)")
+                print("  ")
                 
                 for msg in session_messages:
                     role = msg.get("role", "user")
@@ -427,55 +416,54 @@ class RAGChatbotCLI:
                         text = text[:47] + "..."
                     
                     # Format role
-                    role_icon = "💬" if role == "user" else "🤖"
+                    role_icon = "" if role == "user" else ""
                     
-                    print(f"  │  [{time_str}] {role_icon} {role}: {text}")
+                    print(f"    [{time_str}] {role_icon} {role}: {text}")
                     
                     # Show vector info
                     vector_dim = msg.get("vector_dim", 0)
                     vector_preview = msg.get("vector_preview", [])
                     if vector_preview:
                         preview_str = ", ".join(f"{v:.3f}" for v in vector_preview[:3])
-                        print(f"  │     📊 Vector: [{preview_str}, ...] ({vector_dim} dims)")
+                        print(f"       Vector: [{preview_str}, ...] ({vector_dim} dims)")
                 
-                print("  │")
-                print("  └" + "─" * 50)
+                print("  ")
+                print("  " + "" * 50)
         
         print("\n" + "=" * 70)
-        print("💡 This shows ALL data from ALL users in Qdrant")
+        print(" This shows ALL data from ALL users in Qdrant")
         print("=" * 70 + "\n")
     
     def forget_user_data(self) -> None:
         """Delete all user data from memory."""
         if not self.chatbot.is_rag_enabled():
-            print("\n⚠️  Memory is not enabled.\n")
+            print("\n Memory is not enabled.\n")
             return
         
-        confirm = input("\n⚠️  This will delete ALL your stored conversations. Type 'DELETE' to confirm: ")
+        confirm = input("\n This will delete ALL your stored conversations. Type 'DELETE' to confirm: ")
         
         if confirm == "DELETE":
             if self.chatbot.rag_memory.delete_user_data(self.user_id):
-                print("✅ All your data has been deleted.\n")
+                print(" All your data has been deleted.\n")
             else:
-                print("❌ Failed to delete data.\n")
+                print(" Failed to delete data.\n")
         else:
             print("Cancelled.\n")
 
     def show_emotion_summary(self) -> None:
         """Display emotion summary for enhanced mode."""
         if not self.use_enhanced_mode or not hasattr(self.chatbot, 'get_emotion_summary'):
-            print("\n⚠️  Emotion tracking not available in this mode.\n")
+            print("\n Emotion tracking not available in this mode.\n")
             return
 
         summary = self.chatbot.get_emotion_summary()
 
         if not summary:
-            print("\n📭 No emotion data available yet.\n")
+            print("\n No emotion data available yet.\n")
             return
 
         print("\n" + "=" * 50)
         print("Emotion Summary")
-        print("=" * 50)
 
         if summary.get("most_common_emotion"):
             print(f"Most Common Emotion: {summary['most_common_emotion']}")
@@ -502,18 +490,17 @@ class RAGChatbotCLI:
     def show_patient_profile(self) -> None:
         """Display patient profile information."""
         if not self.use_enhanced_mode or not hasattr(self.chatbot, 'get_patient_profile'):
-            print("\n⚠️  Patient profile not available in this mode.\n")
+            print("\n Patient profile not available in this mode.\n")
             return
 
         profile = self.chatbot.get_patient_profile()
 
         if not profile:
-            print("\n📭 No patient profile found.\n")
+            print("\n No patient profile found.\n")
             return
 
         print("\n" + "=" * 50)
         print("Patient Profile")
-        print("=" * 50)
 
         if profile.get("name"):
             print(f"Name: {profile['name']}")
@@ -546,8 +533,8 @@ class RAGChatbotCLI:
                 print(f"  - {pattern_type}: {severity} severity ({frequency} occurrences)")
 
         risk_level = profile.get("risk_level", "low")
-        risk_emojis = {"low": "🟢", "medium": "🟡", "high": "🟠", "critical": "🔴"}
-        print(f"\nRisk Level: {risk_emojis.get(risk_level, '⚪')} {risk_level.upper()}")
+        risk_emojis = {"low": "🟢", "medium": "", "high": "🟠", "critical": ""}
+        print(f"\nRisk Level: {risk_emojis.get(risk_level, '')} {risk_level.upper()}")
 
         if profile.get("total_conversations", 0) > 0:
             print(f"Total Sessions: {profile['total_conversations']}")
@@ -562,18 +549,17 @@ class RAGChatbotCLI:
     def show_behavior_patterns(self) -> None:
         """Display behavior pattern comparison analysis."""
         if not self.use_enhanced_mode or not hasattr(self.chatbot, 'compare_behavior_patterns'):
-            print("\n⚠️  Behavior pattern analysis not available in this mode.\n")
+            print("\n Behavior pattern analysis not available in this mode.\n")
             return
 
         comparison = self.chatbot.compare_behavior_patterns()
 
         if not comparison or comparison.get("error"):
-            print("\n📭 No behavior pattern data available yet.\n")
+            print("\n No behavior pattern data available yet.\n")
             return
 
         print("\n" + "=" * 70)
         print("Behavior Pattern Analysis")
-        print("=" * 70)
 
         total_messages = comparison.get("total_messages_analyzed", 0)
         print(f"\nTotal Messages Analyzed: {total_messages}")
@@ -582,37 +568,36 @@ class RAGChatbotCLI:
         if pattern_counts:
             print(f"\nPattern Frequencies:")
             for pattern, count in sorted(pattern_counts.items(), key=lambda x: x[1], reverse=True):
-                print(f"  • {pattern}: {count} occurrences")
+                print(f"  - {pattern}: {count} occurrences")
 
         pattern_percentages = comparison.get("pattern_percentages", {})
         if pattern_percentages:
             print(f"\nPattern Distribution (% of messages):")
             for pattern, pct in sorted(pattern_percentages.items(), key=lambda x: x[1], reverse=True):
-                print(f"  • {pattern}: {pct:.1f}%")
+                print(f"  - {pattern}: {pct:.1f}%")
 
         dominant_patterns = comparison.get("dominant_patterns", {})
         if dominant_patterns:
-            print(f"\n🎯 Dominant Patterns (>10% of messages):")
+            print(f"\n Dominant Patterns (>10% of messages):")
             for pattern, pct in sorted(dominant_patterns.items(), key=lambda x: x[1], reverse=True):
-                print(f"  • {pattern}: {pct:.1f}%")
+                print(f"  - {pattern}: {pct:.1f}%")
 
         print("=" * 70 + "\n")
 
     def show_trending_patterns(self) -> None:
         """Display trending behavior patterns."""
         if not self.use_enhanced_mode or not hasattr(self.chatbot, 'get_trending_behavior_patterns'):
-            print("\n⚠️  Trending patterns not available in this mode.\n")
+            print("\n Trending patterns not available in this mode.\n")
             return
 
         trends = self.chatbot.get_trending_behavior_patterns(days=7)
 
         if not trends:
-            print("\n📭 No trending patterns detected in the last 7 days.\n")
+            print("\n No trending patterns detected in the last 7 days.\n")
             return
 
         print("\n" + "=" * 70)
         print(f"Trending Behavior Patterns (Last 7 Days)")
-        print("=" * 70)
 
         for i, trend in enumerate(trends, 1):
             pattern = trend.get("pattern_type", "unknown")
@@ -620,8 +605,8 @@ class RAGChatbotCLI:
             severity = trend.get("avg_severity", "mild")
             days = trend.get("period_days", 7)
 
-            severity_emoji = {"mild": "🟢", "moderate": "🟡", "severe": "🔴"}
-            emoji = severity_emoji.get(severity, "⚪")
+            severity_emoji = {"mild": "🟢", "moderate": "", "severe": ""}
+            emoji = severity_emoji.get(severity, "")
 
             print(f"\n{i}. {pattern.replace('_', ' ').title()}")
             print(f"   Frequency: {frequency} times in {days} days")
@@ -634,20 +619,20 @@ class RAGChatbotCLI:
         self.print_welcome()
         
         # Load model
-        print("🔄 Loading RAG chatbot...")
+        print(" Loading RAG chatbot...")
         print(f"   Model: {self.chatbot.model_name}")
         
         try:
             self.chatbot.load_model()
-            print("✅ Chatbot ready!\n")
+            print(" Chatbot ready!\n")
 
             # Display initial greeting
             if hasattr(self.chatbot, 'get_initial_greeting'):
                 greeting = self.chatbot.get_initial_greeting()
-                print(f"🤖 Bot: {greeting}\n")
+                print(f" Bot: {greeting}\n")
 
         except Exception as e:
-            print(f"\n❌ Error loading chatbot: {e}")
+            print(f"\n Error loading chatbot: {e}")
             print("Please check your configuration and API keys.")
             return
 
@@ -673,7 +658,7 @@ class RAGChatbotCLI:
                     continue
 
                 # Get bot response
-                print("🤖 Thinking...", end='\r')
+                print(" Thinking...", end='\r')
 
                 if self.use_enhanced_mode:
                     # Enhanced mode returns structured JSON
@@ -695,33 +680,33 @@ class RAGChatbotCLI:
 
                     # Display next question
                     if next_question:
-                        print(f"\n💬 {next_question}")
+                        print(f"\n {next_question}")
 
                     # Display emotion info
                     if emotion_update:
                         emotion = emotion_update.get("primary_emotion", "neutral")
                         intensity = emotion_update.get("intensity", "low")
-                        print(f"\n📊 Detected Emotion: {emotion} ({intensity} intensity)")
+                        print(f"\n Detected Emotion: {emotion} ({intensity} intensity)")
 
                     # Display behavior pattern update
                     if behavior_update:
                         pattern_type = behavior_update.get("pattern_type", "")
                         severity = behavior_update.get("severity", "")
-                        print(f"\n⚠️  Pattern Detected: {pattern_type} ({severity} severity)")
+                        print(f"\n Pattern Detected: {pattern_type} ({severity} severity)")
 
                     # Display risk assessment
                     if risk_assessment:
                         level = risk_assessment.get("level", "low")
-                        risk_emojis = {"low": "🟢", "medium": "🟡", "high": "🟠", "critical": "🔴"}
-                        emoji = risk_emojis.get(level, "⚪")
-                        print(f"\n{emoji} Risk Assessment: {level.upper()}")
+                        risk_emojis = {"low": "🟢", "medium": "", "high": "🟠", "critical": ""}
+                        emoji = risk_emojis.get(level, "")
+                        print(f"\n {emoji} Risk Assessment: {level.upper()}")
                         if risk_assessment.get("reasoning"):
                             print(f"   Reasoning: {risk_assessment['reasoning']}")
 
                     # Display metrics
-                    memory_indicator = f"📚 {context_count}" if context_count > 0 else "📝 0"
+                    memory_indicator = f"Context count {context_count}" if context_count > 0 else " 0"
                     context_pct = token_stats.get('context_usage_percent', 0)
-                    print(f"\n[{resp_time:.2f}s | 📥 {token_stats['input_tokens']} | 📤 {token_stats['output_tokens']} | 📊 {token_stats['total_tokens']} tokens | 📈 {context_pct}% context | {memory_indicator} memories]\n")
+                    print(f"\n[{resp_time:.2f}s | Input tokens {token_stats['input_tokens']} | Output tokens {token_stats['output_tokens']} | Total tokens {token_stats['total_tokens']} | Context {context_pct}% | {memory_indicator} memories]\n")
 
                     # Save to local history
                     self.conversation_history.append((user_input, response_text))
@@ -739,21 +724,21 @@ class RAGChatbotCLI:
                     print(f"Bot: {response}")
 
                     # Display metrics
-                    memory_indicator = f"📚 {context_count}" if context_count > 0 else "📝 0"
+                    memory_indicator = f"Context count {context_count}" if context_count > 0 else " 0"
                     context_pct = token_stats.get('context_usage_percent', 0)
-                    print(f"[{resp_time:.2f}s | 📥 {token_stats['input_tokens']} | 📤 {token_stats['output_tokens']} | 📊 {token_stats['total_tokens']} tokens | 📈 {context_pct}% context | {memory_indicator} memories used]\n")
+                    print(f"[{resp_time:.2f}s | Input tokens {token_stats['input_tokens']} | Output tokens {token_stats['output_tokens']} | Total tokens {token_stats['total_tokens']} tokens | Context  {context_pct}% context | {memory_indicator} memories used]\n")
 
                     # Save to local history
                     self.conversation_history.append((user_input, response))
                 
             except KeyboardInterrupt:
-                print("\n\n🤖 Interrupted. Goodbye!")
+                print("\n\n Interrupted. Goodbye!")
                 break
             except EOFError:
-                print("\n\n🤖 End of input. Goodbye!")
+                print("\n\n End of input. Goodbye!")
                 break
             except Exception as e:
-                print(f"\n❌ Error: {e}")
+                print(f"\n Error: {e}")
                 print("Type 'quit' to exit or continue chatting.\n")
         
         # Cleanup

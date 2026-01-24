@@ -417,4 +417,4 @@ start main.pdf  # Windows
 ---
 
 **Day 6 Status:** 33% Complete (4/11 sections)  
-**Next:** Write Methodology (2h) → Related Work (2h) → Remaining sections (2h)
+**Next:** Write Methodology (2h)  Related Work (2h)  Remaining sections (2h)

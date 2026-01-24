@@ -351,7 +351,7 @@ Metrics calculated correctly
 Error analysis functional  
 Export formats working  
 JSON serialization fixed  
-️ LIME explainability requires model.load_model() call (minor - model lazy loads)
+ LIME explainability requires model.load_model() call (minor - model lazy loads)
 
 ---
 

@@ -20,9 +20,7 @@ load_dotenv()
 
 def demo_rag_memory():
     """Demonstrate RAG memory service independently."""
-    print("=" * 60)
     print("RAG Memory Service Demo")
-    print("=" * 60)
     
     from src.infrastructure.memory.rag_memory_service import RAGMemoryService
     from src.infrastructure.config.qdrant_settings import QdrantSettings
@@ -37,10 +35,10 @@ def demo_rag_memory():
     memory = RAGMemoryService(settings=settings)
     
     if not memory.initialize():
-        print("❌ Failed to initialize. Is Qdrant running?")
+        print(" Failed to initialize. Is Qdrant running?")
         return False
     
-    print("✅ RAG memory service initialized")
+    print(" RAG memory service initialized")
     
     # Store some demo messages
     print("\n2. Storing demo conversation history...")
@@ -67,7 +65,7 @@ def demo_rag_memory():
         )
         print(f"  Stored: [{role}] {text[:50]}...")
     
-    print(f"\n✅ Stored {len(messages)} messages")
+    print(f"\n Stored {len(messages)} messages")
     
     # Search by semantic similarity
     print("\n3. Testing semantic search...")
@@ -80,7 +78,7 @@ def demo_rag_memory():
     ]
     
     for query in queries:
-        print(f"\n🔍 Query: '{query}'")
+        print(f"\n Query: '{query}'")
         results = memory.retrieve_relevant_context(
             user_id=demo_user,
             query=query,
@@ -92,11 +90,11 @@ def demo_rag_memory():
     
     # Show message count
     count = memory.get_user_message_count(demo_user)
-    print(f"\n📊 Total messages for user: {count}")
+    print(f"\n Total messages for user: {count}")
     
     # Cleanup
     memory.shutdown()
-    print("\n✅ Demo complete!")
+    print("\n Demo complete!")
     return True
 
 
@@ -104,11 +102,10 @@ def demo_rag_chatbot():
     """Demonstrate full RAG chatbot."""
     print("\n" + "=" * 60)
     print("RAG Chatbot Demo")
-    print("=" * 60)
     
     # Check for API key
     if not os.environ.get("GEMINI_API_KEY") and not os.environ.get("GOOGLE_API_KEY"):
-        print("\n⚠️  No Gemini API key found.")
+        print("\n  No Gemini API key found.")
         print("Set GEMINI_API_KEY in your .env file to test the full chatbot.")
         return False
     
@@ -131,14 +128,14 @@ def demo_rag_chatbot():
     
     try:
         chatbot.load_model()
-        print("✅ RAG chatbot ready!")
+        print(" RAG chatbot ready!")
     except Exception as e:
-        print(f"❌ Failed to initialize: {e}")
+        print(f" Failed to initialize: {e}")
         return False
     
     # Show memory stats
     stats = chatbot.get_memory_stats()
-    print(f"\n📚 Memory contains {stats.get('message_count', 0)} messages")
+    print(f"\n Memory contains {stats.get('message_count', 0)} messages")
     
     # Test a query that should use past context
     print("\n2. Testing context-aware response...")
@@ -147,20 +144,20 @@ def demo_rag_chatbot():
     
     response = chatbot.get_response("I'm feeling stressed today")
     
-    print(f"🤖 Response: {response}")
-    print(f"\n📊 Used {chatbot.get_last_context_count()} context items from memory")
+    print(f" Response: {response}")
+    print(f"\n Used {chatbot.get_last_context_count()} context items from memory")
     
     # Cleanup
     chatbot.shutdown()
-    print("\n✅ RAG chatbot demo complete!")
+    print("\n RAG chatbot demo complete!")
     return True
 
 
 def main():
     """Run all demos."""
-    print("\n" + "🧠" * 30)
+    print("\n" + "" * 30)
     print("\n  RAG (Retrieval-Augmented Generation) Demo")
-    print("\n" + "🧠" * 30)
+    print("\n" + "" * 30)
     
     # Demo 1: RAG Memory Service
     demo_rag_memory()
@@ -170,7 +167,6 @@ def main():
     
     print("\n" + "=" * 60)
     print("Next Steps:")
-    print("=" * 60)
     print("""
 1. Run the interactive RAG chatbot:
    python -m src.interfaces.cli.rag_chatbot_cli --user-id myname

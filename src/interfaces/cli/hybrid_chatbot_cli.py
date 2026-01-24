@@ -25,10 +25,8 @@ logger = logging.getLogger(__name__)
 def main():
     """Run hybrid chatbot CLI."""
     try:
-        print("=" * 70)
         print("HYBRID THERAPY CHATBOT")
         print("Combining AIML Pattern Matching + GPT-2 Generation")
-        print("=" * 70)
         print("\nInitializing chatbot (this may take a minute)...\n")
         
         # Create hybrid chatbot
@@ -59,7 +57,6 @@ def main():
         # Show statistics
         print("\n" + "=" * 70)
         print("SESSION STATISTICS")
-        print("=" * 70)
         stats = chatbot.get_statistics()
         print(f"Total queries: {stats['total_queries']}")
         if stats['total_queries'] > 0:

@@ -254,10 +254,8 @@ class TransformerEnhancedChatbot:
         if not self._initialized:
             raise RuntimeError("Models not loaded. Call load_models() first.")
         
-        print("=" * 60)
         print("Transformer-Enhanced Chatbot")
         print("DialoGPT + Intent Classification")
-        print("=" * 60)
         print("\nBot: Hi! I'm here to chat. How can I help you today?")
         print("(Type 'quit', 'exit', or 'bye' to end the conversation)")
         print("(Type 'reset' to start a new conversation)")

@@ -60,13 +60,13 @@ Refactored chatbot project to follow **Domain-Driven Design (DDD)** and **12-Fac
 **Configuration Structure:**
 ```
 config/model_configs/
-├── therapy_intents/
-│   ├── intents.yaml      # Intent definitions
-│   └── keywords.yaml     # Keyword patterns
-└── chef_intents/
-    ├── intents.yaml      # Chef-specific intents
-    ├── keywords.yaml     # Recipe keywords
-    └── ingredients.yaml  # Ingredient database
+ therapy_intents/
+    intents.yaml      # Intent definitions
+    keywords.yaml     # Keyword patterns
+ chef_intents/
+     intents.yaml      # Chef-specific intents
+     keywords.yaml     # Recipe keywords
+     ingredients.yaml  # Ingredient database
 ```
 
 ---
@@ -159,7 +159,7 @@ config/model_configs/
 
 **Contents:**
 - Keywords for all chef intents
-- Ingredient aliases (e.g., "chicken breast" → "chicken")
+- Ingredient aliases (e.g., "chicken breast"  "chicken")
 - Number words for parsing (one, two, couple, few)
 - Measurement units (volume, weight, count)
 - Cuisine-specific terminology
@@ -172,10 +172,10 @@ config/model_configs/
 **Architecture:**
 ```
 NeuralChatbot
-├── NeuralLanguageModel (Infrastructure)
-│   └── Model loading, tokenization, generation
-└── ConversationEngine (Domain)
-    └── Conversation logic, history, formatting
+ NeuralLanguageModel (Infrastructure)
+    Model loading, tokenization, generation
+ ConversationEngine (Domain)
+     Conversation logic, history, formatting
 ```
 
 **Benefits:**
@@ -211,60 +211,60 @@ NeuralChatbot
 ## Architecture Diagram
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    PRESENTATION LAYER                        │
-│  (CLI interfaces, API endpoints)                            │
-└─────────────────────────────────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│                     DOMAIN LAYER                             │
-│                                                              │
-│  ┌──────────────────────┐  ┌────────────────────────────┐  │
-│  │ ConversationEngine   │  │ IntentClassificationService │  │
-│  │  - Conversation logic│  │  - Intent detection         │  │
-│  │  - History mgmt      │  │  - Config-driven            │  │
-│  │  - Formatters        │  │                             │  │
-│  └──────────────────────┘  └────────────────────────────┘  │
-│                                                              │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │ ChefIntentClassifier                                 │   │
-│  │  - Q&A Funnel (max 5 questions)                      │   │
-│  │  - Recipe context collection                         │   │
-│  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│                  INFRASTRUCTURE LAYER                        │
-│                                                              │
-│  ┌────────────────────────────────────────────────────┐    │
-│  │ NeuralLanguageModel                                 │    │
-│  │  - Model loading (HuggingFace)                      │    │
-│  │  - Tokenization                                     │    │
-│  │  - Device management (CPU/CUDA)                     │    │
-│  │  - Quantization (8-bit, FP16)                       │    │
-│  └────────────────────────────────────────────────────┘    │
-│                                                              │
-│  ┌────────────────────────────────────────────────────┐    │
-│  │ NeuralChatbot (DDD version)                         │    │
-│  │  - Composes ConversationEngine + NeuralLangModel    │    │
-│  └────────────────────────────────────────────────────┘    │
-└─────────────────────────────────────────────────────────────┘
-                           │
-                           ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   CONFIGURATION LAYER                        │
-│                                                              │
-│  config/model_configs/                                       │
-│  ├── therapy_intents/                                        │
-│  │   ├── intents.yaml       (11 therapy intents)            │
-│  │   └── keywords.yaml      (keyword patterns)              │
-│  └── chef_intents/                                           │
-│      ├── intents.yaml       (10 chef intents + funnel)      │
-│      ├── keywords.yaml      (recipe keywords)               │
-│      └── ingredients.yaml   (100+ ingredients)              │
-└─────────────────────────────────────────────────────────────┘
+
+                    PRESENTATION LAYER                        
+  (CLI interfaces, API endpoints)                            
+
+                           
+                           
+
+                     DOMAIN LAYER                             
+                                                              
+      
+   ConversationEngine      IntentClassificationService   
+    - Conversation logic    - Intent detection           
+    - History mgmt          - Config-driven              
+    - Formatters                                         
+      
+                                                              
+     
+   ChefIntentClassifier                                    
+    - Q&A Funnel (max 5 questions)                         
+    - Recipe context collection                            
+     
+
+                           
+                           
+
+                  INFRASTRUCTURE LAYER                        
+                                                              
+      
+   NeuralLanguageModel                                     
+    - Model loading (HuggingFace)                          
+    - Tokenization                                         
+    - Device management (CPU/CUDA)                         
+    - Quantization (8-bit, FP16)                           
+      
+                                                              
+      
+   NeuralChatbot (DDD version)                             
+    - Composes ConversationEngine + NeuralLangModel        
+      
+
+                           
+                           
+
+                   CONFIGURATION LAYER                        
+                                                              
+  config/model_configs/                                       
+   therapy_intents/                                        
+      intents.yaml       (11 therapy intents)            
+      keywords.yaml      (keyword patterns)              
+   chef_intents/                                           
+       intents.yaml       (10 chef intents + funnel)      
+       keywords.yaml      (recipe keywords)               
+       ingredients.yaml   (100+ ingredients)              
+
 ```
 
 ---

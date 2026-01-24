@@ -168,7 +168,7 @@ Guidelines:
         if not retrieved_context:
             return ""
         
-        lines = ["📚 Relevant information from past conversations:"]
+        lines = [" Relevant information from past conversations:"]
         
         for i, item in enumerate(retrieved_context[:self.max_context_items], 1):
             content = item.get("content", "")
@@ -198,7 +198,7 @@ Guidelines:
             lines.append("".join(line_parts))
             
             if intent:
-                lines.append(f"     → Topic: {intent}")
+                lines.append(f"      Topic: {intent}")
         
         return "\n".join(lines)
     
@@ -213,7 +213,7 @@ Guidelines:
         # Take only the most recent turns
         recent = conversation_history[-self.max_history_turns:]
         
-        lines = ["💬 Recent conversation:"]
+        lines = [" Recent conversation:"]
         
         for turn in recent:
             user_msg = turn.get("user", "")

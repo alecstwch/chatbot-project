@@ -36,7 +36,6 @@ class ChatbotCLI:
         """Print welcome message."""
         print("\n" + "="*60)
         print(f"  {self.chatbot_name}")
-        print("="*60)
         print("\nWelcome! I'm here to listen and help.")
         print("Type 'quit', 'exit', or 'bye' to end the conversation.")
         print("Type 'help' for more commands.")

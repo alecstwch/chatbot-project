@@ -43,7 +43,6 @@ class GeneralChatbotCLI:
         """Display welcome message and instructions."""
         print("\n" + "=" * 60)
         print("  General Conversational Bot (DialoGPT)")
-        print("=" * 60)
         print("\nWelcome! Let's have a friendly conversation.")
         print("\nNote: DialoGPT-small has limited conversational ability.")
         print("For better results, use DialoGPT-medium or -large:")
@@ -70,7 +69,6 @@ class GeneralChatbotCLI:
         
         print("\n" + "-" * 60)
         print("Conversation History:")
-        print("-" * 60)
         for i, (user_msg, bot_msg) in enumerate(self.conversation_history, 1):
             print(f"\n[{i}] You: {user_msg}")
             print(f"    Bot: {bot_msg}")

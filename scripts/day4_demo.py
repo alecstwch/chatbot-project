@@ -41,7 +41,6 @@ def print_header(title: str):
     """Print a formatted section header."""
     print("\n" + "=" * 80)
     print(f"  {title}")
-    print("=" * 80)
 
 
 def demo_aiml_chatbot():
@@ -183,7 +182,7 @@ def demo_hybrid_chatbot():
     """Demonstrate hybrid chatbot (AIML + GPT-2)."""
     print_header("MODEL 3A: HYBRID CHATBOT (AIML + GPT-2 + Intent)")
     print("\nCombines AIML patterns with GPT-2 generation")
-    print("Strategy: AIML first → Intent classification → GPT-2 fallback\n")
+    print("Strategy: AIML first  Intent classification  GPT-2 fallback\n")
     
     try:
         # Initialize hybrid bot
@@ -267,7 +266,6 @@ def main():
     print("\n" + "=" * 80)
     print("  DAY 4 DEMONSTRATION: ALL THREE MODEL TYPES")
     print("  Showcasing Traditional, Neural, and Transformer Approaches")
-    print("=" * 80)
     
     print("\nThis demo will show:")
     print("  1. AIML (Traditional/Rule-Based)")
@@ -279,7 +277,6 @@ def main():
     
     print("\n" + "=" * 80)
     print("Starting demos...")
-    print("=" * 80)
     
     # Run all demos
     try:

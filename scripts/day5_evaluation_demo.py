@@ -88,7 +88,6 @@ def demo_intent_classification_metrics():
     metrics = IntentClassificationMetrics.calculate_metrics(y_true, y_pred, labels)
     
     print("Classification Metrics:")
-    print("-" * 60)
     for metric_name, value in metrics.items():
         print(f"  {metric_name:25s}: {value:.4f}")
     
@@ -104,7 +103,6 @@ def demo_intent_classification_metrics():
     
     # Detailed report
     print("\nClassification Report:")
-    print("-" * 60)
     report = IntentClassificationMetrics.get_classification_report(y_true, y_pred, labels)
     print(report)
 
@@ -131,7 +129,6 @@ def demo_response_generation_metrics():
     ]
     
     print("Sample Data:")
-    print("-" * 60)
     for i, (ref, cand) in enumerate(zip(references, candidates), 1):
         print(f"{i}. Reference: {ref}")
         print(f"   Generated: {cand}")
@@ -160,7 +157,6 @@ def demo_response_generation_metrics():
     # All metrics together
     print("\nAll Metrics Combined:")
     all_metrics = gen_metrics.calculate_all_metrics(references, candidates)
-    print("-" * 60)
     for metric, score in all_metrics.items():
         print(f"  {metric:15s}: {score:.4f}")
 
@@ -377,7 +373,6 @@ def demo_model_explainability():
         # Explain each prediction
         for i, text in enumerate(texts, 1):
             print(f"Example {i}: '{text}'")
-            print("-" * 60)
             
             explanation = explainer.explain_prediction(
                 text,
@@ -469,7 +464,6 @@ def demo_model_comparison():
     
     # Rankings
     print("\n\nRankings by F1 Score:")
-    print("-" * 60)
     rankings = benchmark.get_rankings('f1_macro')
     for model_name, score, rank in rankings:
         print(f"  #{rank} {model_name:25s}: {score:.4f}")
@@ -526,7 +520,6 @@ def demo_cross_validation():
     # Statistics
     stats = cv_analyzer.calculate_statistics()
     print("\nDetailed Statistics:")
-    print("-" * 70)
     for metric, stat in stats.items():
         print(f"{metric:15s}: {stat['mean']:.4f} ± {stat['std']:.4f} "
               f"(range: [{stat['min']:.4f}, {stat['max']:.4f}])")
@@ -569,17 +562,14 @@ def demo_comprehensive_evaluation():
     
     # Display results
     print("INTENT CLASSIFICATION:")
-    print("-" * 60)
     for metric, value in results['intent_classification'].items():
         print(f"  {metric:25s}: {value:.4f}")
     
     print("\nRESPONSE GENERATION:")
-    print("-" * 60)
     for metric, value in results['response_generation'].items():
         print(f"  {metric:25s}: {value:.4f}")
     
     print("\nDIALOGUE QUALITY:")
-    print("-" * 60)
     for metric, value in results['dialogue_quality'].items():
         print(f"  {metric:25s}: {value:.4f}")
     
@@ -614,15 +604,14 @@ def main():
     """Run all evaluation demos."""
     print("\n" + "=" * 80)
     print("  DAY 5: COMPREHENSIVE CHATBOT EVALUATION & ANALYSIS")
-    print("=" * 80)
     print("\nThis demo showcases:")
-    print("  • Intent classification metrics (accuracy, precision, recall, F1)")
-    print("  • Response generation metrics (BLEU, ROUGE, METEOR)")
-    print("  • Dialogue quality metrics (diversity, length)")
-    print("  • Error analysis and failure pattern detection")
-    print("  • Model explainability (LIME)")
-    print("  • Multi-model comparison and benchmarking")
-    print("  • Cross-validation analysis")
+    print("   Intent classification metrics (accuracy, precision, recall, F1)")
+    print("   Response generation metrics (BLEU, ROUGE, METEOR)")
+    print("   Dialogue quality metrics (diversity, length)")
+    print("   Error analysis and failure pattern detection")
+    print("   Model explainability (LIME)")
+    print("   Multi-model comparison and benchmarking")
+    print("   Cross-validation analysis")
     
     try:
         demo_intent_classification_metrics()
@@ -638,9 +627,9 @@ def main():
         print_section("EVALUATION COMPLETE!")
         print("All evaluation modules demonstrated successfully.")
         print("\nGenerated outputs:")
-        print("  • evaluation/results/benchmark_results.json")
-        print("  • evaluation/results/benchmark_results.csv")
-        print("  • evaluation/results/comprehensive_evaluation.json")
+        print("   evaluation/results/benchmark_results.json")
+        print("   evaluation/results/benchmark_results.csv")
+        print("   evaluation/results/comprehensive_evaluation.json")
         print("\nDay 5 evaluation infrastructure is ready for use!")
         
     except Exception as e:

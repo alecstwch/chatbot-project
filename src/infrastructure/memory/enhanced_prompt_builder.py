@@ -114,7 +114,7 @@ Your approach:
         """Format patient profile information."""
         sections = []
 
-        sections.append("📋 PATIENT PROFILE:")
+        sections.append(" PATIENT PROFILE:")
 
         if profile.get("name"):
             sections.append(f"Name: {profile['name']}")
@@ -155,7 +155,7 @@ Your approach:
 
     def _format_behavior_patterns(self, patterns: List[Dict[str, Any]]) -> str:
         """Format detected behavior patterns."""
-        lines = ["\n🔍 DETECTED BEHAVIOR PATTERNS:"]
+        lines = ["\n DETECTED BEHAVIOR PATTERNS:"]
 
         if not patterns:
             lines.append("  No significant patterns detected yet.")
@@ -167,7 +167,7 @@ Your approach:
             severity = pattern.get("severity", "unknown")
             frequency = pattern.get("frequency", 0)
 
-            lines.append(f"\n  ⚠️  {pattern_type.replace('_', ' ').title()}")
+            lines.append(f"\n    {pattern_type.replace('_', ' ').title()}")
             lines.append(f"     Description: {description}")
             lines.append(f"     Severity: {severity} | Occurrences: {frequency}")
 
@@ -181,7 +181,7 @@ Your approach:
         retrieved_context: List[Dict[str, Any]]
     ) -> str:
         """Format retrieved context with emotion metadata."""
-        lines = ["\n💭 RELEVANT PAST CONVERSATIONS:"]
+        lines = ["\n RELEVANT PAST CONVERSATIONS:"]
 
         for i, item in enumerate(retrieved_context[:self.max_context_items], 1):
             content = item.get("content", "")[:150]
@@ -217,7 +217,7 @@ Your approach:
 
     def _format_emotion_summary(self, summary: Dict[str, Any]) -> str:
         """Format emotion analysis summary."""
-        lines = ["\n📊 EMOTION ANALYSIS:"]
+        lines = ["\n EMOTION ANALYSIS:"]
 
         most_common = summary.get("most_common_emotion", "neutral")
         lines.append(f"Most Common Emotion: {most_common}")
@@ -256,7 +256,7 @@ Your approach:
 
     def _get_response_format_instructions(self) -> str:
         """Instructions for JSON response format."""
-        return """\n📝 RESPONSE FORMAT:
+        return """\n RESPONSE FORMAT:
 
 You MUST respond with valid JSON in this exact format:
 

@@ -85,40 +85,40 @@ Day 4 has been **successfully completed** with all transformer components implem
 
 ---
 
-## 🏗️ Architecture Overview
+##  Architecture Overview
 
 ### Complete System Structure
 
 ```
 Chatbot System (Day 4)
-├── Traditional (AIML) Day 2
-│   ├── Pattern matching
-│   └── Fast, deterministic
-│
-├── Neural (DialoGPT) Day 3
-│   ├── Pre-trained conversation model
-│   └── Context-aware responses
-│
-└── Transformer (NEW) Day 4
-    ├── Intent Classification
-    │   ├── Zero-shot (BART-MNLI)
-    │   ├── Keyword fallback
-    │   └── 8 therapy intents
-    │
-    ├── Response Generation
-    │   ├── GPT-2 language model
-    │   ├── Therapy prompting
-    │   └── Configurable parameters
-    │
-    ├── Hybrid Approach
-    │   ├── AIML first (fast)
-    │   ├── Intent classification
-    │   └── GPT-2 fallback
-    │
-    └── Enhanced DialoGPT
-        ├── Base DialoGPT
-        ├── Intent awareness
-        └── Adaptive generation
+ Traditional (AIML) Day 2
+    Pattern matching
+    Fast, deterministic
+
+ Neural (DialoGPT) Day 3
+    Pre-trained conversation model
+    Context-aware responses
+
+ Transformer (NEW) Day 4
+     Intent Classification
+        Zero-shot (BART-MNLI)
+        Keyword fallback
+        8 therapy intents
+    
+     Response Generation
+        GPT-2 language model
+        Therapy prompting
+        Configurable parameters
+    
+     Hybrid Approach
+        AIML first (fast)
+        Intent classification
+        GPT-2 fallback
+    
+     Enhanced DialoGPT
+         Base DialoGPT
+         Intent awareness
+         Adaptive generation
 ```
 
 ---
@@ -129,9 +129,9 @@ Chatbot System (Day 4)
 
 ```
 Intent Classifier Tests: 20/21 PASSING (95%)
-├── Initialization: 3/3 ├── Keyword Classification: 7/7 ├── Model Loading: 2/3 (1 mock issue - code works)
-├── Batch Processing: 1/1 ├── Keyword Retrieval: 3/3 └── Status Checking: 2/2 Response Generator Tests: 17/17 PASSING (100%)*
-├── Configuration: 2/2 ├── Initialization: 2/2 ├── Model Loading: 3/3 ├── Response Generation: 3/3 ├── Therapy Responses: 2/2 ├── Multiple Responses: 1/1 ├── Error Handling: 2/2 └── Status Checking: 2/2 *All tests use proper mocking
+ Initialization: 3/3  Keyword Classification: 7/7  Model Loading: 2/3 (1 mock issue - code works)
+ Batch Processing: 1/1  Keyword Retrieval: 3/3  Status Checking: 2/2 Response Generator Tests: 17/17 PASSING (100%)*
+ Configuration: 2/2  Initialization: 2/2  Model Loading: 3/3  Response Generation: 3/3  Therapy Responses: 2/2  Multiple Responses: 1/1  Error Handling: 2/2  Status Checking: 2/2 *All tests use proper mocking
 ```
 
 ### Code Coverage
@@ -214,7 +214,7 @@ print(f"Strategy: {result['metadata']['strategy']}")
 ### Innovative Features
 
 1. **Zero-Shot Learning** - No training data required for intent classification
-2. **Multi-Strategy Fallback** - AIML → Intent → GPT-2 → Keyword → Fallback
+2. **Multi-Strategy Fallback** - AIML  Intent  GPT-2  Keyword  Fallback
 3. **Adaptive Generation** - Generation parameters adjust based on intent
 4. **Usage Analytics** - Track which strategies are used
 5. **Conversation History** - Full tracking for analysis
@@ -313,7 +313,7 @@ print(f"Strategy: {result['metadata']['strategy']}")
 
 ---
 
-## 🎉 Success Metrics
+##  Success Metrics
 
 | Metric | Target | Achieved | Status |
 |--------|--------|----------|--------|
@@ -328,7 +328,7 @@ print(f"Strategy: {result['metadata']['strategy']}")
 
 ---
 
-## 🏆 Day 4 Completion Statement
+##  Day 4 Completion Statement
 
 **Day 4 is officially COMPLETE and SUCCESSFUL.**
 

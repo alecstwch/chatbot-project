@@ -33,154 +33,154 @@
 
 ```
 chatbot-project/
-│
-├── .env.example                    # Example environment variables
-├── .gitignore                      # Git ignore rules
-├── README.md                       # Project documentation
-├── requirements.txt                # Python dependencies
-├── setup.py                        # Package installation
-├── pyproject.toml                  # Modern Python project config
-│
-├── config/                         # Configuration files (12-factor)
-│   ├── __init__.py
-│   ├── settings.py                 # Load from environment
-│   ├── logging.yml                 # Logging configuration
-│   └── model_configs/              # Model hyperparameters
-│       ├── aiml_config.yml
-│       ├── dialogpt_config.yml
-│       └── transformer_config.yml
-│
-├── src/                            # Application source code
-│   ├── __init__.py
-│   │
-│   ├── domain/                     # Domain Layer (Business Logic)
-│   │   ├── __init__.py
-│   │   ├── entities/               # Core entities
-│   │   │   ├── __init__.py
-│   │   │   ├── conversation.py    # Conversation entity
-│   │   │   ├── message.py         # Message entity
-│   │   │   └── user_profile.py    # User entity
-│   │   ├── value_objects/          # Immutable values
-│   │   │   ├── __init__.py
-│   │   │   ├── intent.py          # Intent classification result
-│   │   │   └── confidence.py      # Confidence score
-│   │   └── services/               # Domain services
-│   │       ├── __init__.py
-│   │       ├── text_preprocessor.py   # Pure preprocessing logic
-│   │       └── intent_classifier.py   # Intent classification
-│   │
-│   ├── application/                # Application Layer (Use Cases)
-│   │   ├── __init__.py
-│   │   ├── use_cases/              # Business workflows
-│   │   │   ├── __init__.py
-│   │   │   ├── process_user_message.py
-│   │   │   ├── train_chatbot.py
-│   │   │   └── evaluate_model.py
-│   │   └── dto/                    # Data Transfer Objects
-│   │       ├── __init__.py
-│   │       ├── message_dto.py
-│   │       └── response_dto.py
-│   │
-│   ├── infrastructure/             # Infrastructure Layer
-│   │   ├── __init__.py
-│   │   ├── repositories/           # Data access
-│   │   │   ├── __init__.py
-│   │   │   ├── conversation_repository.py
-│   │   │   └── dataset_repository.py
-│   │   ├── ml/                     # ML implementations
-│   │   │   ├── __init__.py
-│   │   │   ├── models/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── aiml_chatbot.py
-│   │   │   │   ├── dialogpt_chatbot.py
-│   │   │   │   └── transformer_chatbot.py
-│   │   │   ├── embeddings/
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── word2vec_embedder.py
-│   │   │   │   └── bert_embedder.py
-│   │   │   └── training/
-│   │   │       ├── __init__.py
-│   │   │       ├── trainer.py
-│   │   │       └── evaluator.py
-│   │   ├── external/               # External services
-│   │   │   ├── __init__.py
-│   │   │   ├── huggingface_client.py
-│   │   │   └── openai_client.py
-│   │   └── persistence/            # Data storage
-│   │       ├── __init__.py
-│   │       ├── file_storage.py
-│   │       └── cache_manager.py
-│   │
-│   └── interfaces/                 # Interface Layer (Adapters)
-│       ├── __init__.py
-│       ├── cli/                    # Command-line interface
-│       │   ├── __init__.py
-│       │   └── chatbot_cli.py
-│       ├── api/                    # REST API (if needed)
-│       │   ├── __init__.py
-│       │   └── routes.py
-│       └── notebooks/              # Jupyter notebooks (exploratory)
-│           └── README.md
-│
-├── tests/                          # All tests separate from src
-│   ├── __init__.py
-│   ├── conftest.py                 # Pytest configuration
-│   │
-│   ├── unit/                       # Unit tests
-│   │   ├── __init__.py
-│   │   ├── domain/
-│   │   │   ├── test_text_preprocessor.py
-│   │   │   └── test_intent_classifier.py
-│   │   ├── application/
-│   │   │   └── test_use_cases.py
-│   │   └── infrastructure/
-│   │       └── test_models.py
-│   │
-│   ├── integration/                # Integration tests
-│   │   ├── __init__.py
-│   │   └── test_chatbot_pipeline.py
-│   │
-│   └── e2e/                        # End-to-end tests
-│       ├── __init__.py
-│       └── test_full_conversation.py
-│
-├── notebooks/                      # Research notebooks (12-factor: dev only)
-│   ├── 01_Data_Exploration.ipynb
-│   ├── 02_Preprocessing_Experiments.ipynb
-│   ├── 03_Model_Training.ipynb
-│   └── 04_Evaluation_Analysis.ipynb
-│
-├── data/                           # Data directory (12-factor: external)
-│   ├── raw/                        # Original datasets
-│   ├── processed/                  # Cleaned data
-│   ├── embeddings/                 # Pre-computed embeddings
-│   └── .gitkeep
-│
-├── models/                         # Saved models (12-factor: artifacts)
-│   ├── aiml/
-│   ├── dialogpt/
-│   ├── transformer/
-│   └── .gitkeep
-│
-├── logs/                           # Application logs (12-factor: streams)
-│   └── .gitkeep
-│
-├── scripts/                        # Utility scripts
-│   ├── download_datasets.py
-│   ├── train_all_models.py
-│   └── setup_nltk_data.py
-│
-├── docs/                           # Documentation
-│   ├── architecture.md
-│   ├── api_reference.md
-│   └── deployment.md
-│
-└── paper/                          # LaTeX paper (academic deliverable)
-    ├── main.tex
-    ├── sections/
-    ├── figures/
-    ├── references.bib
-    └── acl2023.sty
+
+ .env.example                    # Example environment variables
+ .gitignore                      # Git ignore rules
+ README.md                       # Project documentation
+ requirements.txt                # Python dependencies
+ setup.py                        # Package installation
+ pyproject.toml                  # Modern Python project config
+
+ config/                         # Configuration files (12-factor)
+    __init__.py
+    settings.py                 # Load from environment
+    logging.yml                 # Logging configuration
+    model_configs/              # Model hyperparameters
+        aiml_config.yml
+        dialogpt_config.yml
+        transformer_config.yml
+
+ src/                            # Application source code
+    __init__.py
+   
+    domain/                     # Domain Layer (Business Logic)
+       __init__.py
+       entities/               # Core entities
+          __init__.py
+          conversation.py    # Conversation entity
+          message.py         # Message entity
+          user_profile.py    # User entity
+       value_objects/          # Immutable values
+          __init__.py
+          intent.py          # Intent classification result
+          confidence.py      # Confidence score
+       services/               # Domain services
+           __init__.py
+           text_preprocessor.py   # Pure preprocessing logic
+           intent_classifier.py   # Intent classification
+   
+    application/                # Application Layer (Use Cases)
+       __init__.py
+       use_cases/              # Business workflows
+          __init__.py
+          process_user_message.py
+          train_chatbot.py
+          evaluate_model.py
+       dto/                    # Data Transfer Objects
+           __init__.py
+           message_dto.py
+           response_dto.py
+   
+    infrastructure/             # Infrastructure Layer
+       __init__.py
+       repositories/           # Data access
+          __init__.py
+          conversation_repository.py
+          dataset_repository.py
+       ml/                     # ML implementations
+          __init__.py
+          models/
+             __init__.py
+             aiml_chatbot.py
+             dialogpt_chatbot.py
+             transformer_chatbot.py
+          embeddings/
+             __init__.py
+             word2vec_embedder.py
+             bert_embedder.py
+          training/
+              __init__.py
+              trainer.py
+              evaluator.py
+       external/               # External services
+          __init__.py
+          huggingface_client.py
+          openai_client.py
+       persistence/            # Data storage
+           __init__.py
+           file_storage.py
+           cache_manager.py
+   
+    interfaces/                 # Interface Layer (Adapters)
+        __init__.py
+        cli/                    # Command-line interface
+           __init__.py
+           chatbot_cli.py
+        api/                    # REST API (if needed)
+           __init__.py
+           routes.py
+        notebooks/              # Jupyter notebooks (exploratory)
+            README.md
+
+ tests/                          # All tests separate from src
+    __init__.py
+    conftest.py                 # Pytest configuration
+   
+    unit/                       # Unit tests
+       __init__.py
+       domain/
+          test_text_preprocessor.py
+          test_intent_classifier.py
+       application/
+          test_use_cases.py
+       infrastructure/
+           test_models.py
+   
+    integration/                # Integration tests
+       __init__.py
+       test_chatbot_pipeline.py
+   
+    e2e/                        # End-to-end tests
+        __init__.py
+        test_full_conversation.py
+
+ notebooks/                      # Research notebooks (12-factor: dev only)
+    01_Data_Exploration.ipynb
+    02_Preprocessing_Experiments.ipynb
+    03_Model_Training.ipynb
+    04_Evaluation_Analysis.ipynb
+
+ data/                           # Data directory (12-factor: external)
+    raw/                        # Original datasets
+    processed/                  # Cleaned data
+    embeddings/                 # Pre-computed embeddings
+    .gitkeep
+
+ models/                         # Saved models (12-factor: artifacts)
+    aiml/
+    dialogpt/
+    transformer/
+    .gitkeep
+
+ logs/                           # Application logs (12-factor: streams)
+    .gitkeep
+
+ scripts/                        # Utility scripts
+    download_datasets.py
+    train_all_models.py
+    setup_nltk_data.py
+
+ docs/                           # Documentation
+    architecture.md
+    api_reference.md
+    deployment.md
+
+ paper/                          # LaTeX paper (academic deliverable)
+     main.tex
+     sections/
+     figures/
+     references.bib
+     acl2023.sty
 ```
 
 ---
@@ -323,8 +323,8 @@ settings = Settings()
 ## Migration from Current Structure
 
 Current files will be reorganized:
-- `src/data/preprocessor.py` → `src/domain/services/text_preprocessor.py` (logic only)
-- Tests from `preprocessor.py` → `tests/unit/domain/test_text_preprocessor.py`
+- `src/data/preprocessor.py`  `src/domain/services/text_preprocessor.py` (logic only)
+- Tests from `preprocessor.py`  `tests/unit/domain/test_text_preprocessor.py`
 - Notebooks stay in `notebooks/` for research
 
 ---

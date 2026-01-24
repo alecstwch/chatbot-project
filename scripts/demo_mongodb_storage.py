@@ -29,18 +29,16 @@ def print_header():
     """Print demo header."""
     print("\n" + "=" * 70)
     print("  MONGODB CONVERSATION STORAGE DEMO")
-    print("=" * 70)
     print("\nFeatures:")
-    print("  • Store conversations with user identification")
-    print("  • Tag messages with intent classification")
-    print("  • Track user statistics and history")
-    print("  • Query conversations by intent")
+    print("   Store conversations with user identification")
+    print("   Tag messages with intent classification")
+    print("   Track user statistics and history")
+    print("   Query conversations by intent")
     print("\n" + "-" * 70 + "\n")
 
 
 def demo_basic_storage():
     """Demo: Basic conversation storage."""
-    print("=" * 70)
     print("Demo 1: Basic Conversation Storage")
     print("=" * 70 + "\n")
     
@@ -271,9 +269,7 @@ def main():
         # Demo 4: Integrated chatbot
         demo_with_chatbot()
         
-        print("=" * 70)
         print("  ALL DEMOS COMPLETE")
-        print("=" * 70)
         print("\nMongoDB Features Demonstrated:")
         print("  User identification and session management")
         print("  Intent classification and tagging")

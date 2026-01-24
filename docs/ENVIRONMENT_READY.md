@@ -124,7 +124,7 @@ According to your [QUICKSTART_7DAY.md](QUICKSTART_7DAY.md):
 
 ---
 
-## 🆘 Need Help?
+##  Need Help?
 
 ### If packages don't import
 ```powershell

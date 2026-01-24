@@ -43,7 +43,6 @@ class NeuralChatbotCLI:
         """Display welcome message and instructions."""
         print("\n" + "=" * 60)
         print("  Gemini 2.5 Flash Conversational Bot")
-        print("=" * 60)
         print("\nWelcome! Let's have an intelligent conversation.")
         print(f"\nUsing Google Gemini ({self.chatbot.model_name}).")
         print("Powered by Google's API - no local model download required.")
@@ -109,7 +108,6 @@ class NeuralChatbotCLI:
         
         print("\n" + "=" * 60)
         print("Conversation History")
-        print("=" * 60)
         for i, (user_msg, bot_msg) in enumerate(self.conversation_history, 1):
             print(f"\n[{i}] You: {user_msg}")
             print(f"    Bot: {bot_msg}")

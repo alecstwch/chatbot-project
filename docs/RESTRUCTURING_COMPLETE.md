@@ -230,7 +230,7 @@ PROJECT_STRUCTURE.md       # Architecture details
 
 ---
 
-## 🆚 Before vs After
+##  Before vs After
 
 ### Before
 ```

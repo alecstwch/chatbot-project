@@ -17,9 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import logging
 logging.basicConfig(level=logging.INFO)
 
-print("=" * 70)
 print("DDD REFACTORING - CONFIGURATION TEST")
-print("=" * 70)
 
 # Test 1: Load therapy intent configuration
 print("\n1. Testing therapy intent configuration loading...")
@@ -95,7 +93,7 @@ try:
     
     for text in test_inputs:
         result = therapy_classifier._keyword_classify(text)
-        print(f"   - '{text[:30]}...' → {result.intent} ({result.confidence:.2f})")
+        print(f"   - '{text[:30]}...'  {result.intent} ({result.confidence:.2f})")
     
     print(f"   Keyword classification working")
     
@@ -171,7 +169,6 @@ except Exception as e:
 
 print("\n" + "=" * 70)
 print("ALL TESTS PASSED ")
-print("=" * 70)
 print("\nDDD refactoring successful!")
 print("\nKey achievements:")
 print("  Configuration externalized to YAML files")

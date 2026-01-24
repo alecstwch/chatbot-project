@@ -29,9 +29,7 @@ logger = logging.getLogger(__name__)
 
 def main():
     """Run chef chatbot demo."""
-    print("=" * 70)
     print("MASTER CHEF RECIPE RECOMMENDATION DEMO")
-    print("=" * 70)
     print("\nThis demo shows the conversational Q&A funnel for recipe recommendation.")
     print("Maximum 5 questions to collect your preferences.\n")
     
@@ -47,7 +45,6 @@ def main():
     chef.load_model()
     
     print("Chef assistant ready!\n")
-    print("=" * 70)
     
     # Demo conversation with all 5 questions
     demo_responses = [
@@ -86,9 +83,7 @@ def main():
         question_count += 1
         
         if funnel_complete:
-            print("=" * 70)
             print("RECIPE RECOMMENDATIONS COMPLETE")
-            print("=" * 70)
             
             # Show collected context
             context = chef.get_context()
@@ -97,11 +92,11 @@ def main():
             
             # Show detailed breakdown
             print("Detailed Preferences:")
-            print(f"  • Ingredients: {', '.join(context.ingredients) if context.ingredients else 'Not specified'}")
-            print(f"  • Dish Type: {context.dish_type or 'Not specified'}")
-            print(f"  • Dietary Constraints: {', '.join(context.constraints) if context.constraints else 'None'}")
-            print(f"  • Cuisine: {context.cuisine or 'Not specified'}")
-            print(f"  • Complexity: {context.complexity or 'Not specified'}")
+            print(f"   Ingredients: {', '.join(context.ingredients) if context.ingredients else 'Not specified'}")
+            print(f"   Dish Type: {context.dish_type or 'Not specified'}")
+            print(f"   Dietary Constraints: {', '.join(context.constraints) if context.constraints else 'None'}")
+            print(f"   Cuisine: {context.cuisine or 'Not specified'}")
+            print(f"   Complexity: {context.complexity or 'Not specified'}")
             print()
             
             # In a real app, this would query a recipe database
@@ -112,9 +107,9 @@ def main():
             print("4. Rank by cuisine preference and complexity")
             print("5. Provide step-by-step cooking instructions")
             print("\nExample Recommendations:")
-            print("  🍝 Gluten-Free Italian Chicken Primavera (Medium)")
-            print("  🥘 Italian Chicken & Tomato Risotto (Medium)")
-            print("  🍗 Garlic Butter Chicken with Roasted Vegetables (Medium)\n")
+            print("   Gluten-Free Italian Chicken Primavera (Medium)")
+            print("   Italian Chicken & Tomato Risotto (Medium)")
+            print("   Garlic Butter Chicken with Roasted Vegetables (Medium)\n")
             
             break
     

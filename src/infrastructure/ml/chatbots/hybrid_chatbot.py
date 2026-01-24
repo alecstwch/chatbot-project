@@ -229,10 +229,8 @@ class HybridChatbot:
         if not self._initialized:
             raise RuntimeError("Chatbot not initialized. Call initialize() first.")
         
-        print("=" * 60)
         print("Hybrid Therapy Chatbot")
         print("Combining AIML patterns with GPT-2 generation")
-        print("=" * 60)
         print("\nTherapist: Hello! I'm here to listen. How are you feeling today?")
         print("(Type 'quit', 'exit', or 'bye' to end the conversation)")
         print()

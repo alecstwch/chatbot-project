@@ -1,9 +1,7 @@
-# ============================================================
 # CHATBOT PROJECT REQUIREMENTS
 # Python Version: 3.12.10
 # Last Updated: January 7, 2026
 # Environment: chatbot-env
-# ============================================================
 
 # Core NLP Libraries
 nltk==3.9.2
@@ -97,9 +95,7 @@ coverage==7.13.1
 # Syntax Highlighting (for LaTeX/Paper)
 pygments==2.19.2
 
-# ============================================================
 # ADDITIONAL DEPENDENCIES (automatically installed)
-# ============================================================
 # The following are installed automatically as dependencies
 # of the packages above. Listed here for reference:
 #
@@ -113,11 +109,8 @@ pygments==2.19.2
 #
 # Run: pip freeze > requirements_full.txt
 # for complete list with exact versions
-# ============================================================
 
-# ============================================================
 # NLTK DATA PACKAGES (install separately after requirements)
-# ============================================================
 # Run these commands to download required NLTK data:
 #
 # python -c "import nltk; nltk.download('punkt')"
@@ -131,10 +124,6 @@ pygments==2.19.2
 #
 # Or download all at once (takes longer):
 # python -c "import nltk; nltk.download('all')"
-# ============================================================
 
-# ============================================================
 # SPACY MODEL (install separately after requirements)
-# ============================================================
 # python -m spacy download en_core_web_sm
-# ============================================================

@@ -22,11 +22,10 @@ def print_header():
     """Print welcome header."""
     print("\n" + "=" * 70)
     print("  THERAPY CHATBOT - Intent-Aware Conversation")
-    print("=" * 70)
     print("\nThis chatbot combines:")
-    print("  • AIML pattern matching for therapy responses")
-    print("  • Intent classification to understand emotional states")
-    print("  • 11 therapy intents (depression, anxiety, stress, etc.)")
+    print("   AIML pattern matching for therapy responses")
+    print("   Intent classification to understand emotional states")
+    print("   11 therapy intents (depression, anxiety, stress, etc.)")
     print("\nType 'quit' to exit\n")
     print("-" * 70 + "\n")
 

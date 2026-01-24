@@ -10,10 +10,10 @@ This project follows **Domain-Driven Design (DDD)** with clean separation of con
 
 ```
 src/
-├── domain/           # Core business logic (pure, no dependencies)
-├── application/      # Use cases and workflows
-├── infrastructure/   # External concerns (ML, DB, APIs)
-└── interfaces/       # User-facing adapters (CLI, API)
+ domain/           # Core business logic (pure, no dependencies)
+ application/      # Use cases and workflows
+ infrastructure/   # External concerns (ML, DB, APIs)
+ interfaces/       # User-facing adapters (CLI, API)
 ```
 
 ##  Quick Start
@@ -61,47 +61,47 @@ pytest --cov=src --cov-report=html
 
 ```
 chatbot-project/
-│
-├── config/                      # Configuration (12-Factor)
-│   ├── settings.py             # Environment-based settings
-│   └── logging.yml             # Logging configuration
-│
-├── src/                        # Application source
-│   ├── domain/                 # Business Logic Layer
-│   │   ├── entities/          # Domain entities
-│   │   ├── value_objects/     # Immutable value objects
-│   │   └── services/          # Domain services
-│   │       └── text_preprocessor.py  # ← Preprocessing logic
-│   │
-│   ├── application/            # Application Layer
-│   │   ├── use_cases/         # Business workflows
-│   │   └── dto/               # Data transfer objects
-│   │
-│   ├── infrastructure/         # Infrastructure Layer
-│   │   ├── ml/                # ML implementations
-│   │   │   ├── models/       # AIML, DialoGPT, Transformers
-│   │   │   ├── embeddings/   # Word2Vec, BERT
-│   │   │   └── training/     # Training logic
-│   │   ├── repositories/      # Data access
-│   │   └── external/          # External APIs
-│   │
-│   └── interfaces/             # Interface Layer
-│       ├── cli/               # Command-line interface
-│       └── api/               # REST API
-│
-├── tests/                      # All tests (separate!)
-│   ├── unit/                  # Unit tests
-│   │   └── domain/
-│   │       └── test_text_preprocessor.py  # ← Tests here!
-│   ├── integration/           # Integration tests
-│   └── e2e/                   # End-to-end tests
-│
-├── notebooks/                  # Research notebooks
-├── data/                       # Data storage (gitignored)
-├── models/                     # Trained models (gitignored)
-├── logs/                       # Application logs (gitignored)
-├── scripts/                    # Utility scripts
-└── docs/                       # Documentation
+
+ config/                      # Configuration (12-Factor)
+    settings.py             # Environment-based settings
+    logging.yml             # Logging configuration
+
+ src/                        # Application source
+    domain/                 # Business Logic Layer
+       entities/          # Domain entities
+       value_objects/     # Immutable value objects
+       services/          # Domain services
+           text_preprocessor.py  # ← Preprocessing logic
+   
+    application/            # Application Layer
+       use_cases/         # Business workflows
+       dto/               # Data transfer objects
+   
+    infrastructure/         # Infrastructure Layer
+       ml/                # ML implementations
+          models/       # AIML, DialoGPT, Transformers
+          embeddings/   # Word2Vec, BERT
+          training/     # Training logic
+       repositories/      # Data access
+       external/          # External APIs
+   
+    interfaces/             # Interface Layer
+        cli/               # Command-line interface
+        api/               # REST API
+
+ tests/                      # All tests (separate!)
+    unit/                  # Unit tests
+       domain/
+           test_text_preprocessor.py  # ← Tests here!
+    integration/           # Integration tests
+    e2e/                   # End-to-end tests
+
+ notebooks/                  # Research notebooks
+ data/                       # Data storage (gitignored)
+ models/                     # Trained models (gitignored)
+ logs/                       # Application logs (gitignored)
+ scripts/                    # Utility scripts
+ docs/                       # Documentation
 ```
 
 ##  Key Principles
@@ -183,7 +183,7 @@ batch_size = settings.batch_size  # Type-safe!
 preprocessing_config = settings.get_preprocessing_config()
 ```
 
-## 🧪 Testing
+##  Testing
 
 ### Run Tests
 
@@ -260,9 +260,9 @@ See [requirements.txt](requirements.txt) for full list.
 
 The old `src/data/preprocessor.py` has been migrated:
 
-- **Code** → `src/domain/services/text_preprocessor.py`
-- **Tests** → `tests/unit/domain/test_text_preprocessor.py`
-- **Config** → `.env` and `config/settings.py`
+- **Code**  `src/domain/services/text_preprocessor.py`
+- **Tests**  `tests/unit/domain/test_text_preprocessor.py`
+- **Config**  `.env` and `config/settings.py`
 
 ##  Development Workflow
 
@@ -300,7 +300,7 @@ from config import settings
 value = settings.new_config_value
 ```
 
-## 🚢 Deployment
+##  Deployment
 
 The 12-Factor structure makes deployment easy:
 
@@ -314,7 +314,7 @@ The 12-Factor structure makes deployment easy:
 - [12-Factor Principles](PROJECT_STRUCTURE.md#12-factor-app-implementation)
 - [Testing Guide](pytest.ini) - Test configuration
 
-## 🤝 Contributing
+##  Contributing
 
 1. Write tests first (TDD)
 2. Keep domain logic pure

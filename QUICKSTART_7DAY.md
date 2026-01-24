@@ -921,7 +921,7 @@ See [DAY6.md](docs/DAY6.md) for complete details.
 **1. Code Cleanup**
 - Updated `scripts/clean_unicode.py` to remove AI markers
 - Removed all unicode symbols (checkmarks, crosses, etc.)
-- Removed text markers ([DONE], [IN PROGRESS], etc.)
+- Removed text markers (, , etc.)
 - Cleaned 37 files across the project
 
 **2. Paper Review**

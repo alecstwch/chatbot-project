@@ -26,10 +26,8 @@ logger = logging.getLogger(__name__)
 def main():
     """Run transformer-enhanced chatbot CLI."""
     try:
-        print("=" * 70)
         print("TRANSFORMER-ENHANCED CHATBOT")
         print("DialoGPT + Intent Classification")
-        print("=" * 70)
         print("\nInitializing chatbot (this may take a minute)...\n")
         
         # Load settings
@@ -48,10 +46,10 @@ def main():
         
         print("\nAll models loaded successfully!")
         print("\nThis chatbot features:")
-        print("  • DialoGPT for natural conversation")
-        print("  • Intent classification for context awareness")
-        print("  • Adaptive response generation")
-        print("  • Conversation history tracking")
+        print("   DialoGPT for natural conversation")
+        print("   Intent classification for context awareness")
+        print("   Adaptive response generation")
+        print("   Conversation history tracking")
         print()
         
         # Start chat
@@ -60,7 +58,6 @@ def main():
         # Show conversation summary
         print("\n" + "=" * 70)
         print("CONVERSATION SUMMARY")
-        print("=" * 70)
         history = chatbot.get_conversation_history()
         print(f"Total turns: {len(history)}")
         

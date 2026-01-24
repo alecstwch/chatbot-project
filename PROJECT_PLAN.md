@@ -1090,70 +1090,70 @@ pdflatex main.tex
 
 ```
 chatbot-project/
-├── config/
-│   ├── __init__.py
-│   ├── settings.py           # Pydantic settings (12-Factor App)
-│   └── logging.yml           # Logging configuration
-├── src/
-│   ├── __init__.py
-│   ├── domain/               # Domain Layer (DDD)
-│   │   ├── __init__.py
-│   │   ├── entities/         # Domain entities
-│   │   ├── value_objects/    # Value objects
-│   │   ├── services/         # Domain services
-│   │   │   ├── __init__.py
-│   │   │   └── text_preprocessor.py  # COMPLETE (171 lines)
-│   │   └── repositories/     # Repository interfaces
-│   ├── application/          # Application Layer
-│   │   ├── __init__.py
-│   │   ├── use_cases/        # Use cases
-│   │   └── dto/              # Data Transfer Objects
-│   ├── infrastructure/       # Infrastructure Layer
-│   │   ├── __init__.py
-│   │   ├── ml/
-│   │   │   ├── models/       # ML model implementations
-│   │   │   └── embeddings/   # Embedding implementations
-│   │   ├── persistence/      # Data persistence
-│   │   └── external/         # External services
-│   └── interfaces/           # Interface Layer
-│       ├── __init__.py
-│       ├── cli/              # CLI interface
-│       └── api/              # REST API (optional)
-├── tests/
-│   ├── __init__.py
-│   ├── unit/
-│   │   ├── __init__.py
-│   │   └── domain/
-│   │       ├── __init__.py
-│   │       └── test_text_preprocessor.py  # 27 tests, 100% coverage
-│   ├── integration/
-│   ├── e2e/
-│   └── conftest.py           # Pytest fixtures
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   └── external/
-├── models/                   # Trained models
-├── logs/                     # Application logs
-├── notebooks/                # Jupyter notebooks
-├── scripts/
-│   ├── setup_nltk_data.py   # COMPLETE
-│   └── train.py
-├── NLP_Paper_Template/       # LaTeX paper
-│   ├── main.tex
-│   ├── sections/
-│   └── references.bib
-├── .env.example              # Environment template
-├── .env                      # Active config (git-ignored)
-├── .gitignore                # COMPLETE
-├── pytest.ini                # Pytest configuration
-├── requirements.txt          # Updated with actual versions
-├── setup.py
-├── README.md
-├── README_NEW_STRUCTURE.md   # DDD documentation
-├── PROJECT_STRUCTURE.md      # Architecture guide
-├── MIGRATION_GUIDE.md        # Migration instructions
-└── RESTRUCTURING_COMPLETE.md # Completion summary
+ config/
+    __init__.py
+    settings.py           # Pydantic settings (12-Factor App)
+    logging.yml           # Logging configuration
+ src/
+    __init__.py
+    domain/               # Domain Layer (DDD)
+       __init__.py
+       entities/         # Domain entities
+       value_objects/    # Value objects
+       services/         # Domain services
+          __init__.py
+          text_preprocessor.py  # COMPLETE (171 lines)
+       repositories/     # Repository interfaces
+    application/          # Application Layer
+       __init__.py
+       use_cases/        # Use cases
+       dto/              # Data Transfer Objects
+    infrastructure/       # Infrastructure Layer
+       __init__.py
+       ml/
+          models/       # ML model implementations
+          embeddings/   # Embedding implementations
+       persistence/      # Data persistence
+       external/         # External services
+    interfaces/           # Interface Layer
+        __init__.py
+        cli/              # CLI interface
+        api/              # REST API (optional)
+ tests/
+    __init__.py
+    unit/
+       __init__.py
+       domain/
+           __init__.py
+           test_text_preprocessor.py  # 27 tests, 100% coverage
+    integration/
+    e2e/
+    conftest.py           # Pytest fixtures
+ data/
+    raw/
+    processed/
+    external/
+ models/                   # Trained models
+ logs/                     # Application logs
+ notebooks/                # Jupyter notebooks
+ scripts/
+    setup_nltk_data.py   # COMPLETE
+    train.py
+ NLP_Paper_Template/       # LaTeX paper
+    main.tex
+    sections/
+    references.bib
+ .env.example              # Environment template
+ .env                      # Active config (git-ignored)
+ .gitignore                # COMPLETE
+ pytest.ini                # Pytest configuration
+ requirements.txt          # Updated with actual versions
+ setup.py
+ README.md
+ README_NEW_STRUCTURE.md   # DDD documentation
+ PROJECT_STRUCTURE.md      # Architecture guide
+ MIGRATION_GUIDE.md        # Migration instructions
+ RESTRUCTURING_COMPLETE.md # Completion summary
 ```
 
 ---

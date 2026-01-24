@@ -4,9 +4,9 @@ We need to create a new project for a course called Foundations of NLP.
 Below is the project summary. Latter on I will provide you the scientific article.
 
     47. Conversational agent / chatbot
-        ◦ Ideas: implement a chit-chat bot, customer support bot, Alexa-style bot, robot therapist… , optional: integrate with Google API for complete app including speech module
-        ◦ Papers: An Overview of Chatbot Technology, Chatbot for university related FAQs, Conversational agents in healthcare: a systematic review | Journal of the American Medical Informatics Association | Oxford Academic, https://www.academia.edu/download/61052907/reportmedical_chatbot20191028-44031-hq2g2a.pdf  
-        ◦ Examples: Amazon Alexa, Google Assistant, Eliza, a chatbot therapist, https://www.talktopoppy.com/  
+        * Ideas: implement a chit-chat bot, customer support bot, Alexa-style bot, robot therapist… , optional: integrate with Google API for complete app including speech module
+        * Papers: An Overview of Chatbot Technology, Chatbot for university related FAQs, Conversational agents in healthcare: a systematic review | Journal of the American Medical Informatics Association | Oxford Academic, https://www.academia.edu/download/61052907/reportmedical_chatbot20191028-44031-hq2g2a.pdf  
+        * Examples: Amazon Alexa, Google Assistant, Eliza, a chatbot therapist, https://www.talktopoppy.com/  
 
     The project requirelemnts are attached to this prompt.
     We will need to to the following in order to give you the context:
@@ -833,7 +833,7 @@ Collecting soupsieve>=1.6.1 (from beautifulsoup4->nbconvert->jupyter)
 Collecting arrow>=0.15.0 (from isoduration->jsonschema[format-nongpl]>=4.18.0->jupyter-events>=0.11.0->jupyter-server<3,>=2.4.0->jupyterlab->jupyter)
   Downloading arrow-1.4.0-py3-none-any.whl.metadata (7.7 kB)
 Downloading nltk-3.9.2-py3-none-any.whl (1.5 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 16.0 MB/s  0:00:00
+    1.5/1.5 MB 16.0 MB/s  0:00:00
 Using cached transformers-4.57.3-py3-none-any.whl (12.0 MB)
 Using cached huggingface_hub-0.36.0-py3-none-any.whl (566 kB)
 Using cached tokenizers-0.22.1-cp39-abi3-win_amd64.whl (2.7 MB)
@@ -846,19 +846,19 @@ Using cached httpcore-1.0.9-py3-none-any.whl (78 kB)
 Downloading multiprocess-0.70.18-py312-none-any.whl (150 kB)
 Using cached scikit_learn-1.8.0-cp312-cp312-win_amd64.whl (8.0 MB)
 Downloading pandas-2.3.3-cp312-cp312-win_amd64.whl (11.0 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.0/11.0 MB 42.9 MB/s  0:00:00
+    11.0/11.0 MB 42.9 MB/s  0:00:00
 Downloading matplotlib-3.10.8-cp312-cp312-win_amd64.whl (8.1 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.1/8.1 MB 55.9 MB/s  0:00:00
+    8.1/8.1 MB 55.9 MB/s  0:00:00
 Using cached seaborn-0.13.2-py3-none-any.whl (294 kB)
 Downloading plotly-6.5.0-py3-none-any.whl (9.9 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.9/9.9 MB 61.7 MB/s  0:00:00
+    9.9/9.9 MB 61.7 MB/s  0:00:00
 Downloading shap-0.50.0-cp312-cp312-win_amd64.whl (549 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 549.3/549.3 kB 17.9 MB/s  0:00:00
+    549.3/549.3 kB 17.9 MB/s  0:00:00
 Downloading slicer-0.0.8-py3-none-any.whl (15 kB)
 Using cached jupyter-1.1.1-py2.py3-none-any.whl (2.7 kB)
 Downloading sentence_transformers-5.2.0-py3-none-any.whl (493 kB)
 Downloading gensim-4.4.0-cp312-cp312-win_amd64.whl (24.4 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 24.4/24.4 MB 40.7 MB/s  0:00:00
+    24.4/24.4 MB 40.7 MB/s  0:00:00
 Downloading aiohttp-3.13.3-cp312-cp312-win_amd64.whl (455 kB)
 Downloading multidict-6.7.0-cp312-cp312-win_amd64.whl (46 kB)
 Downloading yarl-1.22.0-cp312-cp312-win_amd64.whl (87 kB)
@@ -868,7 +868,7 @@ Using cached attrs-25.4.0-py3-none-any.whl (67 kB)
 Downloading contourpy-1.3.3-cp312-cp312-win_amd64.whl (226 kB)
 Using cached cycler-0.12.1-py3-none-any.whl (8.3 kB)
 Downloading fonttools-4.61.1-cp312-cp312-win_amd64.whl (2.3 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 66.4 MB/s  0:00:00
+    2.3/2.3 MB 66.4 MB/s  0:00:00
 Downloading frozenlist-1.8.0-cp312-cp312-win_amd64.whl (44 kB)
 Using cached h11-0.16.0-py3-none-any.whl (37 kB)
 Using cached idna-3.11-py3-none-any.whl (71 kB)
@@ -877,17 +877,17 @@ Downloading kiwisolver-1.4.9-cp312-cp312-win_amd64.whl (73 kB)
 Downloading narwhals-2.14.0-py3-none-any.whl (430 kB)
 Using cached networkx-3.6.1-py3-none-any.whl (2.1 MB)
 Downloading numba-0.63.1-cp312-cp312-win_amd64.whl (2.8 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.8/2.8 MB 52.9 MB/s  0:00:00
+    2.8/2.8 MB 52.9 MB/s  0:00:00
 Downloading numpy-2.3.5-cp312-cp312-win_amd64.whl (12.8 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.8/12.8 MB 57.4 MB/s  0:00:00
+    12.8/12.8 MB 57.4 MB/s  0:00:00
 Downloading llvmlite-0.46.0-cp312-cp312-win_amd64.whl (38.1 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 38.1/38.1 MB 51.5 MB/s  0:00:00
+    38.1/38.1 MB 51.5 MB/s  0:00:00
 Using cached packaging-25.0-py3-none-any.whl (66 kB)
 Downloading pillow-12.1.0-cp312-cp312-win_amd64.whl (7.0 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.0/7.0 MB 62.1 MB/s  0:00:00
+    7.0/7.0 MB 62.1 MB/s  0:00:00
 Downloading propcache-0.4.1-cp312-cp312-win_amd64.whl (41 kB)
 Downloading pyarrow-22.0.0-cp312-cp312-win_amd64.whl (28.0 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 28.0/28.0 MB 55.4 MB/s  0:00:00
+    28.0/28.0 MB 55.4 MB/s  0:00:00
 Downloading pyparsing-3.3.1-py3-none-any.whl (121 kB)
 Using cached python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
 Using cached pytz-2025.2-py2.py3-none-any.whl (509 kB)
@@ -899,7 +899,7 @@ Using cached urllib3-2.6.2-py3-none-any.whl (131 kB)
 Using cached certifi-2026.1.4-py3-none-any.whl (152 kB)
 Using cached safetensors-0.7.0-cp38-abi3-win_amd64.whl (341 kB)
 Downloading scikit_image-0.26.0-cp312-cp312-win_amd64.whl (11.9 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.9/11.9 MB 62.3 MB/s  0:00:00
+    11.9/11.9 MB 62.3 MB/s  0:00:00
 Using cached imageio-2.37.2-py3-none-any.whl (317 kB)
 Using cached lazy_loader-0.4-py3-none-any.whl (12 kB)
 Using cached scipy-1.16.3-cp312-cp312-win_amd64.whl (38.6 MB)
@@ -920,7 +920,7 @@ Using cached filelock-3.20.2-py3-none-any.whl (16 kB)
 Using cached ipykernel-7.1.0-py3-none-any.whl (117 kB)
 Using cached comm-0.2.3-py3-none-any.whl (7.3 kB)
 Downloading debugpy-1.8.19-cp312-cp312-win_amd64.whl (5.3 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.3/5.3 MB 40.5 MB/s  0:00:00
+    5.3/5.3 MB 40.5 MB/s  0:00:00
 Using cached ipython-9.8.0-py3-none-any.whl (621 kB)
 Using cached prompt_toolkit-3.0.52-py3-none-any.whl (391 kB)
 Using cached decorator-5.2.1-py3-none-any.whl (9.2 kB)
@@ -942,14 +942,14 @@ Using cached tornado-6.5.4-cp39-abi3-win_amd64.whl (446 kB)
 Using cached traitlets-5.14.3-py3-none-any.whl (85 kB)
 Downloading ipywidgets-8.1.8-py3-none-any.whl (139 kB)
 Downloading jupyterlab_widgets-3.0.16-py3-none-any.whl (914 kB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 914.9/914.9 kB 40.8 MB/s  0:00:00
+    914.9/914.9 kB 40.8 MB/s  0:00:00
 Downloading widgetsnbextension-4.0.15-py3-none-any.whl (2.2 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 41.2 MB/s  0:00:00
+    2.2/2.2 MB 41.2 MB/s  0:00:00
 Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
 Using cached markupsafe-3.0.3-cp312-cp312-win_amd64.whl (15 kB)
 Using cached jupyter_console-6.6.3-py3-none-any.whl (24 kB)
 Downloading jupyterlab-4.5.1-py3-none-any.whl (12.4 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.4/12.4 MB 55.6 MB/s  0:00:00
+    12.4/12.4 MB 55.6 MB/s  0:00:00
 Using cached jupyter_server-2.17.0-py3-none-any.whl (388 kB)
 Downloading jupyterlab_server-2.28.0-py3-none-any.whl (59 kB)
 Using cached argon2_cffi-25.1.0-py3-none-any.whl (14 kB)
@@ -974,7 +974,7 @@ Using cached pandocfilters-1.5.1-py2.py3-none-any.whl (8.7 kB)
 Using cached prometheus_client-0.23.1-py3-none-any.whl (61 kB)
 Using cached python_json_logger-4.0.0-py3-none-any.whl (15 kB)
 Downloading pywinpty-3.0.2-cp312-cp312-win_amd64.whl (2.1 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 38.0 MB/s  0:00:00
+    2.1/2.1 MB 38.0 MB/s  0:00:00
 Using cached referencing-0.37.0-py3-none-any.whl (26 kB)
 Using cached rfc3986_validator-0.1.1-py2.py3-none-any.whl (4.2 kB)
 Using cached rfc3987_syntax-1.1.0-py3-none-any.whl (8.0 kB)
@@ -996,7 +996,7 @@ Using cached isoduration-20.11.0-py3-none-any.whl (11 kB)
 Downloading arrow-1.4.0-py3-none-any.whl (68 kB)
 Using cached jupyterlab_pygments-0.3.0-py3-none-any.whl (15 kB)
 Downloading notebook-7.5.1-py3-none-any.whl (14.5 MB)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 14.5/14.5 MB 53.6 MB/s  0:00:00
+    14.5/14.5 MB 53.6 MB/s  0:00:00
 Using cached pure_eval-0.2.3-py3-none-any.whl (11 kB)
 Using cached pycparser-2.23-py3-none-any.whl (118 kB)
 Using cached rfc3339_validator-0.1.4-py2.py3-none-any.whl (3.5 kB)
@@ -1013,59 +1013,12 @@ Building wheels for collected packages: lime, python-aiml
   Stored in directory: c:\users\alecs\appdata\local\pip\cache\wheels\d4\34\05\c1b92f9583b8fa5cb65a2acd95f020e314cb599054e4682f33
 Successfully built lime python-aiml
 Installing collected packages: webencodings, pytz, pure-eval, mpmath, fastjsonschema, xxhash, wrapt, widgetsnbextension, websocket-client, webcolors, wcwidth, urllib3, uri-template, tzdata, typing-extensions, traitlets, tornado, tinycss2, threadpoolctl, sympy, soupsieve, slicer, six, setuptools, send2trash, safetensors, rpds-py, rfc3986-validator, regex, pyzmq, pyyaml, pywinpty, python-json-logger, pyparsing, pygments, pycparser, pyarrow, psutil, propcache, prometheus-client, platformdirs, pillow, parso, pandocfilters, packaging, numpy, networkx, nest-asyncio, narwhals, multidict, mistune, MarkupSafe, llvmlite, lark, kiwisolver, jupyterlab_widgets, jupyterlab-pygments, jsonpointer, json5, joblib, idna, h11, fsspec, frozenlist, fqdn, fonttools, filelock, executing, dill, defusedxml, decorator, debugpy, cycler, comm, colorama, cloudpickle, charset_normalizer, certifi, bleach, babel, attrs, async-lru, asttokens, aiohappyeyeballs, yarl, tqdm, tifffile, terminado, stack_data, smart_open, scipy, rfc3987-syntax, rfc3339-validator, requests, referencing, python-dateutil, python-aiml, prompt_toolkit, plotly, numba, multiprocess, matplotlib-inline, lazy-loader, jupyter-core, jinja2, jedi, ipython-pygments-lexers, imageio, httpcore, contourpy, click, cffi, beautifulsoup4, anyio, aiosignal, torch, scikit-learn, scikit-image, pandas, nltk, matplotlib, jupyter-server-terminals, jupyter-client, jsonschema-specifications, ipython, huggingface-hub, httpx, gensim, arrow, argon2-cffi-bindings, aiohttp, tokenizers, shap, seaborn, lime, jsonschema, isoduration, ipywidgets, ipykernel, argon2-cffi, transformers, nbformat, jupyter-console, datasets, sentence-transformers, nbclient, jupyter-events, nbconvert, jupyter-server, notebook-shim, jupyterlab-server, jupyter-lsp, jupyterlab, notebook, jupyter
-   ━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━  55/155 [jupyterlab_widgets]ERROR: Could not install packages due to an OSError: [Errno 2] No such file or directory: 'C:\\Users\\Alecs\\Documents\\FMI 2025-2027\\an 1\\sem 1\\FNLP\\project\\chatbot-env\\share\\jupyter\\labextensions\\@jupyter-widgets\\jupyterlab-manager\\static\\vendors-node_modules_d3-color_src_color_js-node_modules_d3-format_src_defaultLocale_js-node_m-09b215.2643c43f22ad111f4f82.js'        
+     55/155 [jupyterlab_widgets]ERROR: Could not install packages due to an OSError: [Errno 2] No such file or directory: 'C:\\Users\\Alecs\\Documents\\FMI 2025-2027\\an 1\\sem 1\\FNLP\\project\\chatbot-env\\share\\jupyter\\labextensions\\@jupyter-widgets\\jupyterlab-manager\\static\\vendors-node_modules_d3-color_src_color_js-node_modules_d3-format_src_defaultLocale_js-node_m-09b215.2643c43f22ad111f4f82.js'        
 HINT: This error might have occurred since this system does not have Windows Long Path support enabled. You can find information on how to enable this at https://pip.pypa.io/warnings/enable-long-paths
 
 (chatbot-env) PS C:\Users\Alecs\Documents\FMI 2025-2027\an 1\sem 1\FNLP\project>
 (chatbot-env) PS C:\Users\Alecs\Documents\FMI 2025-2027\an 1\sem 1\FNLP\project>
 (chatbot-env) PS C:\Users\Alecs\Documents\FMI 2025-2027\an 1\sem 1\FNLP\project>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 GitHub Copilot: The installation is failing due to **Windows Long Path limitation** - your project path is too long:
@@ -1274,7 +1227,7 @@ I've successfully set up your chatbot-env virtual environment with **Python 3.11
 - **Development:** Jupyter, notebook, ipywidgets
 - **Additional:** sentence-transformers, gensim
 
-### ️ ChatterBot Note
+###  ChatterBot Note
 
 **ChatterBot was excluded** due to incompatibility with Python 3.11+. However, **you don't need it!** Your project requires 3 model types, all covered:
 
@@ -1310,7 +1263,7 @@ You're ready to start **Day 1** of your 7-day chatbot sprint! According to your 
 - [ ] Quick EDA
 - [ ] Data preprocessing
 
-**Your environment is 100% ready to use! 🎉**
+**Your environment is 100% ready to use! **
 
 Made changes.
 
@@ -1419,7 +1372,7 @@ Done! I've updated requirements.txt to include all the required NLTK data packag
 `punkt_tab` - New tokenizer (NLTK 3.9+)
 `omw-1.4` - Open Multilingual Wordnet (for lemmatization)
 
-Plus all the other essential packages. Now anyone setting up your environment will know exactly what NLTK data to download! 🎉
+Plus all the other essential packages. Now anyone setting up your environment will know exactly what NLTK data to download! 
 
 Made changes.
 
@@ -1558,7 +1511,7 @@ Excellent! Now let's run the tests to verify everything works:
 
 Ran terminal command: .\chatbot-env\Scripts\Activate.ps1; pytest tests/unit/domain/test_text_preprocessor.py -v
 
-Perfect! 🎉 All 27 tests passed with **100% code coverage**! Now let's create a final summary document: 
+Perfect!  All 27 tests passed with **100% code coverage**! Now let's create a final summary document: 
 
 Created [](file:///c%3A/Users/Alecs/chatbot-project/RESTRUCTURING_COMPLETE.md)
 
@@ -1627,34 +1580,34 @@ I've successfully restructured your chatbot project following **Domain-Driven De
 
 ---
 
-## 📁 New Structure
+##  New Structure
 
 ```
 chatbot-project/
-├── config/                    # 12-Factor Configuration
-│   ├── settings.py           # Type-safe settings
-│   └── logging.yml           # Logging config
-├── src/
-│   ├── domain/               # Business Logic (Pure)
-│   │   └── services/
-│   │       └── text_preprocessor.py
-│   ├── application/          # Use Cases
-│   ├── infrastructure/       # ML, APIs, Storage
-│   └── interfaces/           # CLI, API
-├── tests/                    # All Tests (Separated!)
-│   ├── unit/
-│   │   └── domain/
-│   │       └── test_text_preprocessor.py
-│   ├── integration/
-│   └── e2e/
-├── data/                     # Data (gitignored)
-├── models/                   # Models (gitignored)
-├── logs/                     # Logs (gitignored)
-├── scripts/                  # Utility scripts
-│   └── setup_nltk_data.py
-├── .env                      # Your settings (gitignored)
-├── .env.example              # Template
-└── .gitignore               # Proper exclusions
+ config/                    # 12-Factor Configuration
+    settings.py           # Type-safe settings
+    logging.yml           # Logging config
+ src/
+    domain/               # Business Logic (Pure)
+       services/
+           text_preprocessor.py
+    application/          # Use Cases
+    infrastructure/       # ML, APIs, Storage
+    interfaces/           # CLI, API
+ tests/                    # All Tests (Separated!)
+    unit/
+       domain/
+           test_text_preprocessor.py
+    integration/
+    e2e/
+ data/                     # Data (gitignored)
+ models/                   # Models (gitignored)
+ logs/                     # Logs (gitignored)
+ scripts/                  # Utility scripts
+    setup_nltk_data.py
+ .env                      # Your settings (gitignored)
+ .env.example              # Template
+ .gitignore               # Proper exclusions
 ```
 
 ---
@@ -1736,17 +1689,17 @@ Professional quality
 
 1. **Start using the new structure** for all new code
 2. **Follow the architecture** when adding features:
-   - Domain logic → domain
-   - Use cases → application
-   - ML models → ml
-   - Tests → tests
+   - Domain logic  domain
+   - Use cases  application
+   - ML models  ml
+   - Tests  tests
 3. **Configure your environment** by editing .env
 4. **Keep tests separate** from production code
 5. **Use type-safe config** from `settings`
 
 ---
 
-**Your project is now production-ready with industry-standard architecture! 🎉**
+**Your project is now production-ready with industry-standard architecture! **
 
 All three goals accomplished:
 1. Created directory structure
@@ -1813,7 +1766,7 @@ Based on my analysis:
 - Save datasets locally to data/therapy and data/dialogs
 - Quick EDA (exploratory data analysis with visualizations)
 
-### **Day 2 (Psychotherapy Bot - AIML)** - ~40% Complete 🟡
+### **Day 2 (Psychotherapy Bot - AIML)** - ~40% Complete 
 
 **Completed:**
 - AIML knowledge base created (therapy.aiml and general.aiml exist with 363 lines)
@@ -1974,40 +1927,40 @@ Write-Host "   FOLDER REORGANIZATION COMPLETE" -ForegroundColor Green
 Write-Host "========================================`n" -ForegroundColor Green
 
 Write-Host "Moved Folders:" -ForegroundColor Cyan
-Write-Host "  • aiml_files/ → data/knowledge_bases/aiml/"
-Write-Host "  • labs/ → notebooks/labs/"
-Write-Host "  • MDs/ → docs/research_papers/"
+Write-Host "   aiml_files/  data/knowledge_bases/aiml/"
+Write-Host "   labs/  notebooks/labs/"
+Write-Host "   MDs/  docs/research_papers/"
 
 Write-Host "`nMoved Documentation to docs/:" -ForegroundColor Cyan
-Write-Host "  • ENVIRONMENT_READY.md"
-Write-Host "  • SETUP_NOTES.md"
-Write-Host "  • MIGRATION_GUIDE.md"
-Write-Host "  • PROJECT_STRUCTURE.md"
-Write-Host "  • RESTRUCTURING_COMPLETE.md"
-Write-Host "  • QUICK_REFERENCE.md"
+Write-Host "   ENVIRONMENT_READY.md"
+Write-Host "   SETUP_NOTES.md"
+Write-Host "   MIGRATION_GUIDE.md"
+Write-Host "   PROJECT_STRUCTURE.md"
+Write-Host "   RESTRUCTURING_COMPLETE.md"
+Write-Host "   QUICK_REFERENCE.md"
 
 Write-Host "`nRoot Directory Now Contains:" -ForegroundColor Cyan
-Get-ChildItem "." -Filter "*.md" | Select-Object -ExpandProperty Name | ForEach-Object { Write-Host "  • $_" }
+Get-ChildItem "." -Filter "*.md" | Select-Object -ExpandProperty Name | ForEach-Object { Write-Host "   $_" }
 
 Write-Host "`nUpdated Files:" -ForegroundColor Cyan
-Write-Host "  • .gitignore (added data/knowledge_bases/ exception)"
-Write-Host "  • README.md (updated structure diagram)"
+Write-Host "   .gitignore (added data/knowledge_bases/ exception)"
+Write-Host "   README.md (updated structure diagram)"
 
-Write-Host "`n📁 Current Structure:" -ForegroundColor Yellow
-Write-Host "  ├─ config/"
-Write-Host "  ├─ data/"
-Write-Host "  │  ├─ knowledge_bases/aiml/ (therapy.aiml, general.aiml)"
-Write-Host "  │  ├─ raw/"
-Write-Host "  │  ├─ processed/"
-Write-Host "  │  └─ external/"
-Write-Host "  ├─ docs/"
-Write-Host "  │  ├─ research_papers/ (5 paper folders)"
-Write-Host "  │  └─ *.md (6 documentation files)"
-Write-Host "  ├─ notebooks/"
-Write-Host "  │  └─ labs/"
-Write-Host "  ├─ src/ (DDD layers)"
-Write-Host "  ├─ tests/"
-Write-Host "  └─ [other project folders]"
+Write-Host "`n Current Structure:" -ForegroundColor Yellow
+Write-Host "   config/"
+Write-Host "   data/"
+Write-Host "     knowledge_bases/aiml/ (therapy.aiml, general.aiml)"
+Write-Host "     raw/"
+Write-Host "     processed/"
+Write-Host "     external/"
+Write-Host "   docs/"
+Write-Host "     research_papers/ (5 paper folders)"
+Write-Host "     *.md (6 documentation files)"
+Write-Host "   notebooks/"
+Write-Host "     labs/"
+Write-Host "   src/ (DDD layers)"
+Write-Host "   tests/"
+Write-Host "   [other project folders]"
 
 Write-Host "`n Benefits:" -ForegroundColor Magenta
 Write-Host "  Cleaner root directory"
@@ -2023,14 +1976,14 @@ Write-Host "`n========================================`n" -ForegroundColor Green
 ## What Changed:
 
 ### **Folders Moved:**
-1. **`aiml_files/`** → **aiml**
+1. **`aiml_files/`**  **aiml**
    - therapy.aiml - general.aiml - Reason: AIML files are domain knowledge/data, not code (12-Factor App principle)
 
-2. **`labs/`** → **labs**
+2. **`labs/`**  **labs**
    - All lab notebooks now together with other notebooks
    - Better organization for Jupyter content
 
-3. **`MDs/`** → **research_papers**
+3. **`MDs/`**  **research_papers**
    - 5 research paper folders with markdown and images
    - Clearer documentation structure
 
@@ -2063,7 +2016,7 @@ Only essential user-facing files remain:
 **Better Discovery** - Related files grouped logically
 **Professional Structure** - Production-ready organization
 
-All paths are now properly organized according to industry best practices! 🎉
+All paths are now properly organized according to industry best practices! 
 
 Made changes.
 
@@ -2168,31 +2121,31 @@ Write-Host "  29 unit tests for AIML chatbot (88% coverage)"
 Write-Host "  Therapy chatbot ready to run"
 
 Write-Host "`n TEST RESULTS:" -ForegroundColor Yellow
-Write-Host "  • Total tests: 75 (all passing )"
-Write-Host "  • Dataset loader: 21 tests, 100% coverage"
-Write-Host "  • EDA service: 25 tests, 98% coverage"
-Write-Host "  • AIML chatbot: 29 tests, 88% coverage"
+Write-Host "   Total tests: 75 (all passing )"
+Write-Host "   Dataset loader: 21 tests, 100% coverage"
+Write-Host "   EDA service: 25 tests, 98% coverage"
+Write-Host "   AIML chatbot: 29 tests, 88% coverage"
 
-Write-Host "`n📁 NEW FILES CREATED:" -ForegroundColor Magenta
+Write-Host "`n NEW FILES CREATED:" -ForegroundColor Magenta
 Write-Host "  Infrastructure Layer:"
-Write-Host "    • src/infrastructure/data/dataset_loader.py"
-Write-Host "    • src/infrastructure/ml/chatbots/aiml_chatbot.py"
+Write-Host "     src/infrastructure/data/dataset_loader.py"
+Write-Host "     src/infrastructure/ml/chatbots/aiml_chatbot.py"
 Write-Host "`n  Application Layer:"
-Write-Host "    • src/application/analysis/eda_service.py"
+Write-Host "     src/application/analysis/eda_service.py"
 Write-Host "`n  Interface Layer:"
-Write-Host "    • src/interfaces/cli/chatbot_cli.py"
+Write-Host "     src/interfaces/cli/chatbot_cli.py"
 Write-Host "`n  Tests:"
-Write-Host "    • tests/unit/infrastructure/test_dataset_loader.py"
-Write-Host "    • tests/unit/infrastructure/test_aiml_chatbot.py"
-Write-Host "    • tests/unit/application/test_eda_service.py"
+Write-Host "     tests/unit/infrastructure/test_dataset_loader.py"
+Write-Host "     tests/unit/infrastructure/test_aiml_chatbot.py"
+Write-Host "     tests/unit/application/test_eda_service.py"
 
 Write-Host "`n KEY FEATURES:" -ForegroundColor Green
-Write-Host "  • HuggingFace dataset downloading and caching"
-Write-Host "  • Comprehensive EDA with statistics and plots"
-Write-Host "  • AIML-based therapy chatbot (363 patterns)"
-Write-Host "  • Interactive CLI with commands (help, reset, history)"
-Write-Host "  • Full DDD architecture compliance"
-Write-Host "  • 12-Factor App principles (data/code separation)"
+Write-Host "   HuggingFace dataset downloading and caching"
+Write-Host "   Comprehensive EDA with statistics and plots"
+Write-Host "   AIML-based therapy chatbot (363 patterns)"
+Write-Host "   Interactive CLI with commands (help, reset, history)"
+Write-Host "   Full DDD architecture compliance"
+Write-Host "   12-Factor App principles (data/code separation)"
 
 Write-Host "`n READY TO USE:" -ForegroundColor Green
 Write-Host "  Run chatbot: python -m src.interfaces.cli.chatbot_cli"
@@ -2205,7 +2158,7 @@ Ran terminal command: pytest tests/unit/domain/test_text_preprocessor.py tests/u
 
 Perfect! Let's create a final summary:
 
-## 🎉 Day 1 & Day 2 Complete!
+##  Day 1 & Day 2 Complete!
 
 ### Summary of Completion:
 
@@ -2268,7 +2221,7 @@ eda = EDAService(output_dir=Path("data/analysis"))
 report = eda.generate_full_report(dataset, "TherapyData")
 ```
 
-### 📁 Project Structure Updated:
+###  Project Structure Updated:
 - All folders properly organized (DDD + 12-Factor)
 - AIML files in data/knowledge_bases/aiml/
 - Research papers in docs/research_papers/
@@ -2288,15 +2241,12 @@ data\knowledge_bases\aiml\general.aiml:2:38: not well-formed (invalid token)
 FATAL PARSE ERROR in file data\knowledge_bases\aiml\therapy.aiml:
 data\knowledge_bases\aiml\therapy.aiml:2:38: not well-formed (invalid token)
 Loading data\knowledge_bases\aiml\general.aiml...Loading data\knowledge_bases\aiml\therapy.aiml...
-============================================================
   Therapy Bot
-============================================================
 
 Welcome! I'm here to listen and help.
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 You:
 
@@ -2341,15 +2291,12 @@ Loading therapy chatbot...
 Loading data\knowledge_bases\aiml\general.aiml...done (0.06 seconds)
 Loading data\knowledge_bases\aiml\therapy.aiml...done (0.00 seconds)
 
-============================================================
   Therapy Bot
-============================================================
 
 Welcome! I'm here to listen and help.
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 You: Hello
 Therapy Bot: Hello! I'm glad you reached out. How can I support you today?
@@ -2405,17 +2352,17 @@ Using "Replace String in File"
 ```
 Now let's test the improved chatbot: 
 
-Ran terminal command: Write-Host "`n=== Testing Enhanced Therapy Chatbot ===`n" -ForegroundColor Green; Write-Host "The chatbot now has:" -ForegroundColor Cyan; Write-Host "  • More specific pattern matching" ; Write-Host "  • Proactive therapeutic questions"; Write-Host "  • Better handling of common responses"; Write-Host "  • 5 varied fallback responses (not just one)"; Write-Host "  • Patterns for positive feelings"; Write-Host "  • Work/family/relationship triggers"; Write-Host "`nTry phrases like:" -ForegroundColor Yellow; Write-Host "  - 'I am feeling good'"; Write-Host "  - 'nothing special'"; Write-Host "  - 'I don't know'"; Write-Host "  - 'about what'"; Write-Host "  - Talk about work, family, or relationships"; Write-Host "`nThe bot will now ask more engaging questions!`n" -ForegroundColor Green
+Ran terminal command: Write-Host "`n=== Testing Enhanced Therapy Chatbot ===`n" -ForegroundColor Green; Write-Host "The chatbot now has:" -ForegroundColor Cyan; Write-Host "   More specific pattern matching" ; Write-Host "   Proactive therapeutic questions"; Write-Host "   Better handling of common responses"; Write-Host "   5 varied fallback responses (not just one)"; Write-Host "   Patterns for positive feelings"; Write-Host "   Work/family/relationship triggers"; Write-Host "`nTry phrases like:" -ForegroundColor Yellow; Write-Host "  - 'I am feeling good'"; Write-Host "  - 'nothing special'"; Write-Host "  - 'I don't know'"; Write-Host "  - 'about what'"; Write-Host "  - Talk about work, family, or relationships"; Write-Host "`nThe bot will now ask more engaging questions!`n" -ForegroundColor Green
 
 Perfect! Now the chatbot has been significantly improved. Here's what changed:
 
 ## Enhancements Made:
 
 ### **1. Better Pattern Matching:**
-- **Positive feelings**: "I am feeling good" → asks what's going well
-- **Uncertainty**: "I don't know" → reassures and asks what's on their mind
+- **Positive feelings**: "I am feeling good"  asks what's going well
+- **Uncertainty**: "I don't know"  reassures and asks what's on their mind
 - **Common phrases**: "nothing special", "maybe", "yes", "no"
-- **Follow-up**: "about what" → guides them to topics
+- **Follow-up**: "about what"  guides them to topics
 
 ### **2. Proactive Questioning:**
 Instead of just "I'm listening," the bot now:
@@ -2425,11 +2372,11 @@ Instead of just "I'm listening," the bot now:
 - Offers topic suggestions
 
 ### **3. Wildcard Patterns:**
-- `I AM *` → reflects back and asks about impact
-- `I FEEL *` → asks what's behind the feeling  
-- `* WORK *` → explores work stress
-- `* FAMILY *` → discusses family dynamics
-- `* RELATIONSHIP *` → explores relationships
+- `I AM *`  reflects back and asks about impact
+- `I FEEL *`  asks what's behind the feeling  
+- `* WORK *`  explores work stress
+- `* FAMILY *`  discusses family dynamics
+- `* RELATIONSHIP *`  explores relationships
 
 ### **4. Varied Fallback Responses:**
 Instead of always saying "I'm listening," it now randomly selects from:
@@ -2464,7 +2411,7 @@ Made changes.
 
 User: Please remove all the unicode icons chars from all the files (source code and doc files). Also please remove all the markers that can lead to idea that this project was written by an AI.
 
-GitHub Copilot: Searched for regex `[📁🟡📅🎉️]`, 20 results
+GitHub Copilot: Searched for regex `[]`, 20 results
 
 Searched for regex `AI|GPT|Claude|assistant|generated|automatically`, 50 results
 
@@ -2477,7 +2424,7 @@ Now let me create a comprehensive cleanup script. I'll focus on the main project
 Ran terminal command: 
 # Count unicode characters in files
 $files = Get-ChildItem -Recurse -Include *.md,*.py -Exclude chatbot-env,marker-env,.pytest_cache,htmlcov,__pycache__ | Where-Object { $_.FullName -notmatch '(chatbot-env|marker-env|\.pytest_cache|htmlcov|__pycache__|\.egg-info)' }
-$unicodePattern = '[📁🟡📅🎉️]'
+$unicodePattern = '[]'
 $totalMatches = 0
 foreach ($file in $files) {
     $content = Get-Content $file.FullName -Raw -ErrorAction SilentlyContinue
@@ -2517,7 +2464,7 @@ Using "Replace String in File"
 ```
 Now let me verify the cleanup by checking a few of the files that were changed: 
 
-Searched for regex `[📁🟡📅🎉️]`, 14 results
+Searched for regex `[]`, 14 results
 
 There are still some unicode characters in files that weren't processed. Let me update the cleanup script to include PowerShell files and handle all remaining cases: 
 
@@ -2565,7 +2512,7 @@ Using "Multi-Replace String in Files"
 ```
 Now let me verify all unicode characters are removed: 
 
-Searched for regex `[📁🟡📅🎉️🗓️🏗️⏭️]`, no results
+Searched for regex `[]`, no results
 
 Perfect! Now let me run tests to make sure everything still works: 
 
@@ -2581,7 +2528,7 @@ Done! I've successfully removed all unicode icons and AI-generation markers from
 
 **Unicode cleanup:**
 - Removed/replaced emojis in 15 files
-- Replaced with , with , ️ with , etc.
+- Replaced with , with ,  with , etc.
 - Removed decorative emojis from documentation headings
 
 **AI markers cleanup:**
@@ -2603,15 +2550,12 @@ Loading therapy chatbot...
 Loading data\knowledge_bases\aiml\general.aiml...done (0.06 seconds)
 Loading data\knowledge_bases\aiml\therapy.aiml...done (0.00 seconds)
 
-============================================================
   Therapy Bot
-============================================================
 
 Welcome! I'm here to listen and help.
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 You: Hello
 Therapy Bot: Hi there! Welcome. What brings you here today?
@@ -2761,24 +2705,21 @@ User: Please analyze the interactions and improve it:
 
 (chatbot-env) PS C:\Users\Alecs\chatbot-project> python -m src.interfaces.cli.general_chatbot_cli
 
-============================================================
   General Conversational Bot (DialoGPT)
-============================================================
 
 Welcome! Let's have a friendly conversation.
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 Loading DialoGPT conversational chatbot...
-tokenizer_config.json: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 614/614 [00:00<?, ?B/s]
+tokenizer_config.json: 100%|| 614/614 [00:00<?, ?B/s]
 vocab.json: 1.04MB [00:00, 63.2MB/s]
 merges.txt: 456kB [00:00, 118MB/s]
-config.json: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 641/641 [00:00<?, ?B/s]
+config.json: 100%|| 641/641 [00:00<?, ?B/s]
 Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
-model.safetensors: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 351M/351M [00:05<00:00, 67.6MB/s]
-generation_config.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 124/124 [00:00<?, ?B/s]
+model.safetensors: 100%|| 351M/351M [00:05<00:00, 67.6MB/s]
+generation_config.json: 100%|| 124/124 [00:00<?, ?B/s]
 Model loaded successfully!
 
 You: Howdy!
@@ -2909,15 +2850,12 @@ User: It blocked:
 
 (chatbot-env) PS C:\Users\Alecs\chatbot-project> python -m src.interfaces.cli.general_chatbot_cli
 
-============================================================
   General Conversational Bot (DialoGPT)
-============================================================
 
 Welcome! Let's have a friendly conversation.
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 Loading DialoGPT conversational chatbot...
 Model loaded successfully!
@@ -2968,15 +2906,12 @@ User: Now the conversation is very weird:
 
 (chatbot-env) PS C:\Users\Alecs\chatbot-project> python -m src.interfaces.cli.general_chatbot_cli
 
-============================================================
   General Conversational Bot (DialoGPT)
-============================================================
 
 Welcome! Let's have a friendly conversation.
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 Loading DialoGPT conversational chatbot...
 Model loaded successfully!
@@ -3041,15 +2976,12 @@ User: Please move all file tuning params ourside of the code (with respect of 12
 
 (chatbot-env) PS C:\Users\Alecs\chatbot-project> python -m src.interfaces.cli.general_chatbot_cli
 
-============================================================
   General Conversational Bot (DialoGPT)
-============================================================
 
 Welcome! Let's have a friendly conversation.
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 Loading DialoGPT conversational chatbot...
 Model loaded successfully!
@@ -3208,15 +3140,12 @@ Something is not quite ok:
 
 (chatbot-env) PS C:\Users\Alecs\chatbot-project> python -m src.interfaces.cli.general_chatbot_cli
 
-============================================================
   General Conversational Bot (DialoGPT)
-============================================================
 
 Welcome! Let's have a friendly conversation.
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 Loading DialoGPT conversational chatbot...
 Model loaded successfully!
@@ -3298,15 +3227,12 @@ User: the responses are still very tangent to the conversation/questions:
 
 (chatbot-env) PS C:\Users\Alecs\chatbot-project> python -m src.interfaces.cli.general_chatbot_cli                                                                                                                                    
 
-============================================================
   General Conversational Bot (DialoGPT)
-============================================================
 
 Welcome! Let's have a friendly conversation.
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 Loading DialoGPT conversational chatbot...
 Model loaded successfully!
@@ -3393,9 +3319,7 @@ User: With the small model I also saw a warning I guess:
 
 (chatbot-env) PS C:\Users\Alecs\chatbot-project> python -m src.interfaces.cli.general_chatbot_cli
 
-============================================================
   General Conversational Bot (DialoGPT)
-============================================================
 
 Welcome! Let's have a friendly conversation.
 
@@ -3406,7 +3330,6 @@ For better results, use DialoGPT-medium or -large:
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 Loading DialoGPT conversational chatbot...
 Model: microsoft/DialoGPT-small
@@ -3435,9 +3358,7 @@ but with no luck:
 
 (chatbot-env) PS C:\Users\Alecs\chatbot-project> python -m src.interfaces.cli.general_chatbot_cli
 
-============================================================
   General Conversational Bot (DialoGPT)
-============================================================
 
 Welcome! Let's have a friendly conversation.
 
@@ -3448,7 +3369,6 @@ For better results, use DialoGPT-medium or -large:
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 Loading DialoGPT conversational chatbot...
 Model: microsoft/DialoGPT-small
@@ -3600,9 +3520,7 @@ User: The responses seems to have limited size:
 
 (chatbot-env) PS C:\Users\Alecs\chatbot-project> python -m src.interfaces.cli.general_chatbot_cli                                                                                                                                    
 
-============================================================
   General Conversational Bot (DialoGPT)
-============================================================
 
 Welcome! Let's have a friendly conversation.
 
@@ -3613,7 +3531,6 @@ For better results, use DialoGPT-medium or -large:
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 Loading DialoGPT conversational chatbot...
 Model: microsoft/DialoGPT-large
@@ -3690,9 +3607,7 @@ User: Please analyze this chat:
 
 (chatbot-env) PS C:\Users\Alecs\chatbot-project> python -m src.interfaces.cli.general_chatbot_cli
 
-============================================================
   General Conversational Bot (DialoGPT)
-============================================================
 
 Welcome! Let's have a friendly conversation.
 
@@ -3703,7 +3618,6 @@ For better results, use DialoGPT-medium or -large:
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 Loading DialoGPT conversational chatbot...
 Model: microsoft/DialoGPT-large
@@ -3723,7 +3637,7 @@ You: So when I began to write slang, you comute to gibrish, correct?
 Bot: Lol oO rihcohr ohboto 0no amnt wome uio qdi nafmy fobw efotline 3 4 1'Bop 5 8 leatl chtab L O1 im lit
 
 You: Seems so.
-Bot: H Am bad Is an H0 C UYA E Ablade Q2 WATX bye � v8 M guess T3n Next point Faxe inq Gax K7 Nbe jB smby xx Rap X 10nd
+Bot: H Am bad Is an H0 C UYA E Ablade Q2 WATX bye  v8 M guess T3n Next point Faxe inq Gax K7 Nbe jB smby xx Rap X 10nd
 
 You: Are you working for Boeing?
 Bot: S brout BRT bar end Y bet intj th amp 6 mid game BTOMM S back af best triangle h5th LOL JHYAY This guy hackin test open combo topboxed brik edit Good what baybayler
@@ -3907,7 +3821,7 @@ GitHub Copilot: Yes, unfortunately that's expected with your hardware. Here's wh
 **Your GPU**: RTX 3050 Laptop = 4GB VRAM  
 **Mistral-7B needs**: ~14GB in FP16 (half precision)
 
-Even with `device_map="auto"`, most of the model stays in system RAM, and data constantly shuffles between RAM ↔ VRAM, which is very slow.
+Even with `device_map="auto"`, most of the model stays in system RAM, and data constantly shuffles between RAM  VRAM, which is very slow.
 
 **How long is it taking?** (Typical times for your GPU)
 - First token: 30-60 seconds
@@ -4058,8 +3972,8 @@ User: It still uploads Mistral 7B Instruct. Please update the config file too:
 Loading Mistral-7B conversational chatbot...
 Model: mistralai/Mistral-7B-Instruct-v0.2
 Settings: temp=0.7, max_tokens=150
-Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 3/3 [02:14<00:00, 44.90s/it]
-generation_config.json: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 111/111 [00:00<?, ?B/s]
+Loading checkpoint shards: 100%|| 3/3 [02:14<00:00, 44.90s/it]
+generation_config.json: 100%|| 111/111 [00:00<?, ?B/s]
 Failed to load Mistral model: Tensor.item() cannot be called on meta tensors
 
 Error loading model: Model loading failed: Tensor.item() cannot be called on meta tensors
@@ -4110,9 +4024,7 @@ Please also investigate why the chatbot freezes:
 
 (chatbot-env) PS C:\Users\Alecs\chatbot-project> python -m src.interfaces.cli.mistral_chatbot_cli
 
-============================================================
   Phi-2 Conversational Bot
-============================================================
 
 Welcome! Let's have an intelligent conversation.
 
@@ -4123,7 +4035,6 @@ Response time: 1-3 seconds per message.
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 Loading Phi-2 conversational chatbot...
 Model: microsoft/phi-2
@@ -4133,17 +4044,17 @@ vocab.json: 798kB [00:00, 64.7MB/s]
 merges.txt: 456kB [00:00, 105MB/s]
 tokenizer.json: 2.11MB [00:00, 136MB/s]
 added_tokens.json: 1.08kB [00:00, ?B/s]
-special_tokens_map.json: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 99.0/99.0 [00:00<?, ?B/s]
-config.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 735/735 [00:00<00:00, 1.21MB/s]
+special_tokens_map.json: 100%|| 99.0/99.0 [00:00<?, ?B/s]
+config.json: 100%|| 735/735 [00:00<00:00, 1.21MB/s]
 `torch_dtype` is deprecated! Use `dtype` instead!
 model.safetensors.index.json: 35.7kB [00:00, ?B/s]
 Fetching 2 files:   0%|                                                                                                                                    | 0/2 [00:00<?, ?it/s]Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
 Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
-model-00002-of-00002.safetensors: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████| 564M/564M [00:18<00:00, 31.3MB/s]
-model-00001-of-00002.safetensors: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████| 5.00G/5.00G [01:33<00:00, 53.2MB/s]
-Fetching 2 files: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [01:35<00:00, 47.58s/it] 
-Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:01<00:00,  1.24it/s]
-generation_config.json: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 124/124 [00:00<?, ?B/s]
+model-00002-of-00002.safetensors: 100%|| 564M/564M [00:18<00:00, 31.3MB/s]
+model-00001-of-00002.safetensors: 100%|| 5.00G/5.00G [01:33<00:00, 53.2MB/s]
+Fetching 2 files: 100%|| 2/2 [01:35<00:00, 47.58s/it] 
+Loading checkpoint shards: 100%|| 2/2 [00:01<00:00,  1.24it/s]
+generation_config.json: 100%|| 124/124 [00:00<?, ?B/s]
 Some parameters are on the meta device because they were offloaded to the cpu.
 Model loaded successfully!
 
@@ -4205,10 +4116,10 @@ python -m src.interfaces.cli.neural_chatbot_cli
 ```
 
 **Changes made:**
-1. Renamed mistral_chatbot.py → neural_chatbot.py
-2. Renamed `mistral_chatbot_cli.py` → `neural_chatbot_cli.py`
-3. Renamed `MistralSettings` → `NeuralChatbotSettings`
-4. Changed env prefix `MISTRAL_` → `NEURAL_` in .env
+1. Renamed mistral_chatbot.py  neural_chatbot.py
+2. Renamed `mistral_chatbot_cli.py`  `neural_chatbot_cli.py`
+3. Renamed `MistralSettings`  `NeuralChatbotSettings`
+4. Changed env prefix `MISTRAL_`  `NEURAL_` in .env
 5. Fixed Phi-2 prompt format (simple `User:/Assistant:` instead of Mistral's `[INST]` format)
 6. Added `max_length=1024` to prevent infinite context
 7. Fixed response extraction to stop at next "User:" marker
@@ -4226,7 +4137,7 @@ GitHub Copilot: The slowness is due to **model offloading to CPU**. That warning
 **The problem:**
 - Phi-2 in FP16: ~5.4GB
 - Your RTX 3050 VRAM: 4GB
-- Result: Model split between GPU + CPU → constant slow data transfers
+- Result: Model split between GPU + CPU  constant slow data transfers
 
 **Your hardware isn't weak, but:**
 - RTX 3050 Laptop = 4GB VRAM (entry-level mobile GPU)
@@ -4293,7 +4204,7 @@ Perfect! Now let's test. The changes are complete:
 
 2. **8-bit quantization enabled:**
    - Set `NEURAL_USE_8BIT_QUANTIZATION=true` in .env
-   - Reduces VRAM from 5.4GB → 2.7GB
+   - Reduces VRAM from 5.4GB  2.7GB
    - Should fit entirely in your 4GB VRAM now
 
 3. **CPU testing mode ready:**
@@ -4353,7 +4264,7 @@ User: Here is the output:
 Model: microsoft/phi-2
 Settings: temp=0.7, max_tokens=150
 Running on CPU - generation will be slow. GPU recommended.
-Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:04<00:00,  2.06s/it] 
+Loading checkpoint shards: 100%|| 2/2 [00:04<00:00,  2.06s/it] 
 Model loaded successfully!
 
 You: Hello!
@@ -4486,9 +4397,7 @@ User: This is way better:
 
 (marker-env) PS C:\Users\Alecs\chatbot-project> python -m src.interfaces.cli.neural_chatbot_cli
 
-============================================================
   Phi-2 Conversational Bot
-============================================================
 
 Welcome! Let's have an intelligent conversation.
 
@@ -4498,13 +4407,12 @@ Response time: 1-3 seconds per message.
 Type 'quit', 'exit', or 'bye' to end the conversation.
 Type 'help' for more commands.
 
-------------------------------------------------------------
 
 Loading Phi-2 conversational chatbot...
 Model: microsoft/phi-2
 Settings: temp=0.7, max_tokens=150
 Running on CPU - generation will be slow. GPU recommended.
-Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:03<00:00,  1.53s/it]
+Loading checkpoint shards: 100%|| 2/2 [00:03<00:00,  1.53s/it]
 Model loaded successfully!
 
 You: Hello!
@@ -4559,7 +4467,7 @@ python -m src.interfaces.cli.neural_chatbot_cli
 
 You should see:
 - **10-20x faster** responses (~15-30 tok/s vs 1.5-1.8 tok/s)
-- Response time drops from 10-70s → 1-5s
+- Response time drops from 10-70s  1-5s
 - "Optimized for 4GB VRAM with 8-bit quantization" message
 - Same quality, just much faster
 

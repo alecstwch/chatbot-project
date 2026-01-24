@@ -113,30 +113,30 @@ print(f"Funnel complete: {context.is_complete()}")
 
 ```
 config/model_configs/
-├── therapy_intents/
-│   ├── intents.yaml          # Intent definitions
-│   │   - 11 therapy intents
-│   │   - Crisis detection
-│   │   - Response templates
-│   │
-│   └── keywords.yaml          # Keyword patterns
-│       - Primary keywords
-│       - Secondary keywords
-│       - Phrases
-│
-└── chef_intents/
-    ├── intents.yaml           # Chef intent definitions
-    │   - 10 chef intents
-    │   - 5 funnel stages
-    │   - 8 dish types
-    │   - 13 cuisines
-    │
-    ├── keywords.yaml          # Recipe keywords
-    │   - Ingredient keywords
-    │   - Constraint keywords
-    │   - Number words
-    │
-    └── ingredients.yaml       # Ingredient database
+ therapy_intents/
+    intents.yaml          # Intent definitions
+      - 11 therapy intents
+      - Crisis detection
+      - Response templates
+   
+    keywords.yaml          # Keyword patterns
+       - Primary keywords
+       - Secondary keywords
+       - Phrases
+
+ chef_intents/
+     intents.yaml           # Chef intent definitions
+       - 10 chef intents
+       - 5 funnel stages
+       - 8 dish types
+       - 13 cuisines
+    
+     keywords.yaml          # Recipe keywords
+       - Ingredient keywords
+       - Constraint keywords
+       - Number words
+    
+     ingredients.yaml       # Ingredient database
         - 8 categories
         - 100+ ingredients
         - Allergen info
@@ -150,7 +150,7 @@ config/model_configs/
 ### DDD (Domain-Driven Design)
 - **Clear Boundaries** - Domain logic separate from infrastructure
 - **Ubiquitous Language** - ConversationTurn, IntentPrediction, RecipeContext
-- **Layered Architecture** - Domain → Infrastructure
+- **Layered Architecture** - Domain  Infrastructure
 - **Dependency Inversion** - Depends on protocols, not implementations
 
 ### 12-Factor App

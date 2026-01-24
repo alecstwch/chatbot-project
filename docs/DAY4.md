@@ -16,54 +16,54 @@
 
 ---
 
-## 📁 Files Created
+##  Files Created
 
 ### Domain Layer (Services)
 ```
 src/domain/services/
-├── intent_classifier.py          # Intent classification with zero-shot learning
-└── text_preprocessor.py          # (Already exists from Day 2)
+ intent_classifier.py          # Intent classification with zero-shot learning
+ text_preprocessor.py          # (Already exists from Day 2)
 ```
 
 ### Infrastructure Layer (Models & Chatbots)
 ```
 src/infrastructure/ml/
-├── models/
-│   └── response_generator.py     # GPT-2 response generation
-└── chatbots/
-    ├── aiml_chatbot.py            # (Already exists from Day 2)
-    ├── dialogpt_chatbot.py        # (Already exists from Day 3)
-    ├── hybrid_chatbot.py          # NEW: AIML + GPT-2 + Intent
-    └── transformer_enhanced_chatbot.py  # NEW: DialoGPT + Intent
+ models/
+    response_generator.py     # GPT-2 response generation
+ chatbots/
+     aiml_chatbot.py            # (Already exists from Day 2)
+     dialogpt_chatbot.py        # (Already exists from Day 3)
+     hybrid_chatbot.py          # NEW: AIML + GPT-2 + Intent
+     transformer_enhanced_chatbot.py  # NEW: DialoGPT + Intent
 ```
 
 ### Interface Layer (CLI)
 ```
 src/interfaces/cli/
-├── chatbot_cli.py                 # (Already exists - AIML)
-├── neural_chatbot_cli.py          # (Already exists - DialoGPT)
-├── hybrid_chatbot_cli.py          # NEW: Hybrid chatbot CLI
-└── transformer_chatbot_cli.py     # NEW: Enhanced chatbot CLI
+ chatbot_cli.py                 # (Already exists - AIML)
+ neural_chatbot_cli.py          # (Already exists - DialoGPT)
+ hybrid_chatbot_cli.py          # NEW: Hybrid chatbot CLI
+ transformer_chatbot_cli.py     # NEW: Enhanced chatbot CLI
 ```
 
 ### Tests
 ```
 tests/unit/
-├── domain/
-│   └── test_intent_classifier.py  # Intent classification tests
-└── infrastructure/
-    └── test_response_generator.py # Response generation tests
+ domain/
+    test_intent_classifier.py  # Intent classification tests
+ infrastructure/
+     test_response_generator.py # Response generation tests
 ```
 
 ### Scripts
 ```
 scripts/
-└── day4_demo.py                   # Comprehensive demo of all 3 model types
+ day4_demo.py                   # Comprehensive demo of all 3 model types
 ```
 
 ---
 
-## 🏗️ Architecture Overview
+##  Architecture Overview
 
 ### 1. Intent Classification Service
 
@@ -201,7 +201,7 @@ bot.reset_conversation()
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 ### Unit Tests Created
 
@@ -245,7 +245,7 @@ pytest tests/unit/infrastructure/test_response_generator.py --cov=src/infrastruc
 
 ---
 
-## 🎮 Demo Script
+##  Demo Script
 
 **Run the comprehensive demo:**
 ```bash
@@ -336,25 +336,25 @@ python -m src.interfaces.cli.transformer_chatbot_cli
 ### Updated Project Structure
 ```
 src/
-├── domain/
-│   └── services/
-│       ├── text_preprocessor.py    Day 2
-│       └── intent_classifier.py    Day 4
-├── infrastructure/
-│   └── ml/
-│       ├── models/
-│       │   └── response_generator.py  Day 4
-│       └── chatbots/
-│           ├── aiml_chatbot.py        Day 2
-│           ├── dialogpt_chatbot.py    Day 3
-│           ├── hybrid_chatbot.py      Day 4
-│           └── transformer_enhanced_chatbot.py  Day 4
-└── interfaces/
-    └── cli/
-        ├── chatbot_cli.py             Day 2
-        ├── neural_chatbot_cli.py      Day 3
-        ├── hybrid_chatbot_cli.py      Day 4
-        └── transformer_chatbot_cli.py Day 4
+ domain/
+    services/
+        text_preprocessor.py    Day 2
+        intent_classifier.py    Day 4
+ infrastructure/
+    ml/
+        models/
+           response_generator.py  Day 4
+        chatbots/
+            aiml_chatbot.py        Day 2
+            dialogpt_chatbot.py    Day 3
+            hybrid_chatbot.py      Day 4
+            transformer_enhanced_chatbot.py  Day 4
+ interfaces/
+     cli/
+         chatbot_cli.py             Day 2
+         neural_chatbot_cli.py      Day 3
+         hybrid_chatbot_cli.py      Day 4
+         transformer_chatbot_cli.py Day 4
 ```
 
 ### Dependencies Used

@@ -18,58 +18,58 @@ This repository contains the implementation of **two conversational agents** bui
 ##  Repository Structure
 
 ```
-├── config/                    # Configuration (12-Factor App)
-│   ├── settings.py            # Type-safe settings with Pydantic
-│   └── logging.yml            # Logging configuration
-├── data/
-│   ├── raw/                   # Original datasets
-│   │   ├── therapy/           # Mental health counseling data
-│   │   └── dialogs/           # Daily dialog data
-│   ├── processed/             # Preprocessed datasets
-│   ├── external/              # External data sources
-│   └── knowledge_bases/       # AIML and rule-based knowledge
-│       └── aiml/              # AIML files (therapy.aiml, general.aiml)
-├── docs/                      # Documentation
-│   ├── research_papers/       # Papers from MDs folder
-│   ├── PROJECT_STRUCTURE.md   # Architecture documentation
-│   ├── MIGRATION_GUIDE.md     # Restructuring guide
-│   ├── RESTRUCTURING_COMPLETE.md
-│   ├── QUICK_REFERENCE.md
-│   ├── ENVIRONMENT_READY.md
-│   └── SETUP_NOTES.md
-├── notebooks/                 # Jupyter notebooks
-│   └── labs/                  # Lab notebooks from course
-├── src/                       # Source code (DDD layers)
-│   ├── domain/                # Domain layer
-│   │   └── services/
-│   │       └── text_preprocessor.py  # Complete with tests
-│   ├── application/           # Application layer
-│   ├── infrastructure/        # Infrastructure layer
-│   └── interfaces/            # Interface layer (CLI/API)
-├── tests/                     # Test suite (separated from code)
-│   ├── unit/
-│   │   └── domain/
-│   │       └── test_text_preprocessor.py  # 27 tests, 100% coverage
-│   ├── integration/
-│   ├── e2e/
-│   └── conftest.py
-├── models/                    # Trained model checkpoints
-├── logs/                      # Application logs
-├── scripts/                   # Utility scripts
-│   └── setup_nltk_data.py     # NLTK data setup
-├── NLP_Paper_Template/        # LaTeX paper
-│   ├── main.tex
-│   ├── sections/
-│   └── references.bib
-├── .env.example               # Environment template
-├── .gitignore                 # Git ignore rules
-├── pytest.ini                 # Pytest configuration
-├── requirements.txt           # Python dependencies
-├── setup.py                   # Package setup
-├── PROJECT_PLAN.md            # Detailed project plan
-├── QUICKSTART_7DAY.md         # Day-by-day guide
-├── README_NEW_STRUCTURE.md    # DDD architecture overview
-└── README.md                  # This file
+ config/                    # Configuration (12-Factor App)
+    settings.py            # Type-safe settings with Pydantic
+    logging.yml            # Logging configuration
+ data/
+    raw/                   # Original datasets
+       therapy/           # Mental health counseling data
+       dialogs/           # Daily dialog data
+    processed/             # Preprocessed datasets
+    external/              # External data sources
+    knowledge_bases/       # AIML and rule-based knowledge
+        aiml/              # AIML files (therapy.aiml, general.aiml)
+ docs/                      # Documentation
+    research_papers/       # Papers from MDs folder
+    PROJECT_STRUCTURE.md   # Architecture documentation
+    MIGRATION_GUIDE.md     # Restructuring guide
+    RESTRUCTURING_COMPLETE.md
+    QUICK_REFERENCE.md
+    ENVIRONMENT_READY.md
+    SETUP_NOTES.md
+ notebooks/                 # Jupyter notebooks
+    labs/                  # Lab notebooks from course
+ src/                       # Source code (DDD layers)
+    domain/                # Domain layer
+       services/
+           text_preprocessor.py  # Complete with tests
+    application/           # Application layer
+    infrastructure/        # Infrastructure layer
+    interfaces/            # Interface layer (CLI/API)
+ tests/                     # Test suite (separated from code)
+    unit/
+       domain/
+           test_text_preprocessor.py  # 27 tests, 100% coverage
+    integration/
+    e2e/
+    conftest.py
+ models/                    # Trained model checkpoints
+ logs/                      # Application logs
+ scripts/                   # Utility scripts
+    setup_nltk_data.py     # NLTK data setup
+ NLP_Paper_Template/        # LaTeX paper
+    main.tex
+    sections/
+    references.bib
+ .env.example               # Environment template
+ .gitignore                 # Git ignore rules
+ pytest.ini                 # Pytest configuration
+ requirements.txt           # Python dependencies
+ setup.py                   # Package setup
+ PROJECT_PLAN.md            # Detailed project plan
+ QUICKSTART_7DAY.md         # Day-by-day guide
+ README_NEW_STRUCTURE.md    # DDD architecture overview
+ README.md                  # This file
 ```
 
 ##  Quick Start
@@ -233,7 +233,7 @@ print(response)
 # Output: Contextual response from DialoGPT
 ```
 
-## 🧪 Running Tests
+##  Running Tests
 
 ```bash
 # Run all notebooks
@@ -256,7 +256,7 @@ python src/evaluation/metrics.py
 | DialoGPT | TBD | TBD | TBD |
 | Hybrid | TBD | TBD | TBD |
 
-## 🤝 Contributing
+##  Contributing
 
 This is a course project. Team members:
 - [Member 1 Name]
@@ -264,11 +264,11 @@ This is a course project. Team members:
 - [Member 3 Name] (if applicable)
 - [Member 4 Name] (if applicable)
 
-## 📜 License
+##  License
 
 This project is for educational purposes. Code is provided as-is for reference.
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Course: Foundations of NLP
 - Instructor: Zăvelcă Miruna-Andreea
@@ -276,7 +276,7 @@ This project is for educational purposes. Code is provided as-is for reference.
 - Models: Microsoft (DialoGPT), Google (DistilBERT)
 - Papers referenced in Related Work section
 
-## 📞 Contact
+##  Contact
 
 For questions about this project, please contact [your email].
 
@@ -291,6 +291,6 @@ For questions about this project, please contact [your email].
 
 ---
 
-**Status**: 🚧 In Development  
+**Status**:  In Development  
 **Last Updated**: January 5, 2026  
 **Version**: 1.0

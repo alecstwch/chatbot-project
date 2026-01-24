@@ -25,7 +25,7 @@ print(f"All scores: {result.all_scores}")
 texts = ["I feel sad", "Hello there", "I'm stressed"]
 results = classifier.batch_classify(texts)
 for text, result in zip(texts, results):
-    print(f"{text} → {result.intent}")
+    print(f"{text}  {result.intent}")
 
 # Get keywords for an intent
 keywords = classifier.get_intent_keywords('anxiety')
@@ -151,7 +151,7 @@ bot.reset_conversation()
 
 ---
 
-## 🎮 Running CLI Interfaces
+##  Running CLI Interfaces
 
 ### AIML Chatbot (Traditional)
 ```bash
@@ -180,7 +180,7 @@ python scripts/day4_demo.py
 
 ---
 
-## 🧪 Running Tests
+##  Running Tests
 
 ### Test Intent Classifier
 ```bash

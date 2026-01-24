@@ -20,13 +20,10 @@ from src.domain.services.error_analysis import (
     FailurePatternDetector
 )
 
-print("=" * 80)
 print("  ERROR ANALYSIS MODULE TEST")
-print("=" * 80)
 
 # Test 1: ErrorAnalyzer
 print("\n1. Testing ErrorAnalyzer...")
-print("-" * 80)
 
 analyzer = ErrorAnalyzer()
 
@@ -95,7 +92,6 @@ for case in test_cases:
 # Get error distribution
 print("\n" + "=" * 80)
 print("Error Distribution:")
-print("-" * 80)
 distribution = analyzer.get_error_distribution()
 for error_type, count in distribution.items():
     print(f"  {error_type:30s}: {count:2d}")
@@ -103,7 +99,6 @@ for error_type, count in distribution.items():
 # Get most common errors
 print("\n" + "=" * 80)
 print("Most Common Errors:")
-print("-" * 80)
 common_errors = analyzer.get_most_common_errors(top_n=5)
 for error_type, count in common_errors:
     print(f"  {error_type:30s}: {count} occurrences")
@@ -111,7 +106,6 @@ for error_type, count in common_errors:
 # Low confidence errors
 print("\n" + "=" * 80)
 print("Low Confidence Errors (< 0.7):")
-print("-" * 80)
 low_conf = analyzer.get_low_confidence_errors(threshold=0.7)
 print(f"Found {len(low_conf)} errors with confidence < 0.7")
 for error in low_conf:
@@ -124,7 +118,6 @@ print(analyzer.generate_error_report())
 # Export to dict
 print("\n" + "=" * 80)
 print("Exporting errors to structured format...")
-print("-" * 80)
 errors_dict = analyzer.export_errors_to_dict()
 print(f"Exported {len(errors_dict)} errors")
 print(f"\nFirst error example:")
@@ -136,11 +129,9 @@ print(f"  Type: {errors_dict[0]['error_type']}")
 # Test 2: FailurePatternDetector
 print("\n\n" + "=" * 80)
 print("2. Testing FailurePatternDetector...")
-print("-" * 80)
 
 # Test OOV detection
 print("\nOOV Word Detection:")
-print("-" * 80)
 
 failed_inputs = [
     "Hello there friend",
@@ -164,7 +155,6 @@ for inp, words in oov_words.items():
 # Test repetitive responses
 print("\n" + "=" * 80)
 print("Repetitive Response Detection:")
-print("-" * 80)
 
 responses = [
     "I can help you",
@@ -184,7 +174,6 @@ for response, count in repetitive.items():
 # Test length anomalies
 print("\n" + "=" * 80)
 print("Length Anomaly Detection:")
-print("-" * 80)
 
 inputs = [
     "Hi",
@@ -214,5 +203,4 @@ for inp, resp, ratio in anomalies:
 
 print("\n" + "=" * 80)
 print("ALL TESTS PASSED!")
-print("=" * 80)
 print("\nError Analysis module is working correctly!")
