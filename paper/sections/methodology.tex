@@ -1,0 +1,439 @@
+\section{Methodology}
+\label{sec:methodology}
+
+This section describes the implementation details of three distinct chatbot architectures developed for mental health support conversations. We describe the datasets used for reference, the preprocessing pipeline implemented, and how each chatbot was built.
+
+\subsection{Datasets Used}
+\label{subsec:datasets}
+
+While we did not perform formal evaluation, we utilized public datasets to guide the development of our chatbots, particularly for understanding the domain of mental health conversations.
+
+\subsubsection{Mental Health Counseling Conversations Dataset}
+
+\textbf{Source}: Hugging Face (Amod/mental\_health\_counseling\_conversations)
+
+This dataset contains therapeutic conversation pairs between counselors and clients, covering topics such as anxiety, depression, trauma, relationships, and stress management. These conversations served as reference material for crafting AIML patterns and understanding appropriate response styles for mental health support.
+
+\subsubsection{DailyDialog Dataset}
+
+\textbf{Source}: Hugging Face (daily\_dialog)
+
+This dataset provides general conversational contexts across 10 topics (ordinary life, school, travel, health, work, entertainment, etc.), with human-annotated emotions and dialog acts. This was used to understand conversational patterns beyond clinical settings.
+
+\subsection{Text Preprocessing Pipeline}
+\label{subsec:preprocessing}
+
+We implemented a preprocessing pipeline using NLTK to standardize text input, particularly important for the AIML pattern matching system.
+
+\subsubsection{Pipeline Implementation}
+
+The preprocessing pipeline consists of the following stages:
+
+\textbf{1. Text Cleaning}
+\begin{itemize}
+    \item Remove URLs, HTML tags, email addresses using regular expressions
+    \item Remove special characters while preserving alphanumeric characters and basic punctuation (.!?')
+    \item Normalize whitespace
+\end{itemize}
+
+\textbf{2. Tokenization}
+\begin{itemize}
+    \item Method: NLTK's \texttt{word\_tokenize}
+    \item Handles contractions appropriately (e.g., "don't" $\rightarrow$ "do not")
+\end{itemize}
+
+\textbf{3. Normalization}
+\begin{itemize}
+    \item Convert all tokens to lowercase for consistent pattern matching
+    \item Preserve negation words ("not", "no", "never") which are critical for sentiment
+\end{itemize}
+
+\textbf{4. Stopword Removal}
+\begin{itemize}
+    \item Base: NLTK's English stopword list
+    \item Customization: Retain contrast markers ("but", "however") and intensity modifiers ("very", "really")
+    \item Critical for mental health: Preserving negations and intensifiers
+\end{itemize}
+
+\textbf{5. Lemmatization}
+\begin{itemize}
+    \item Method: WordNet lemmatizer
+    \item Reduces words to base forms (e.g., "running" $\rightarrow$ "run", "felt" $\rightarrow$ "feel")
+    \item Chosen over stemming to preserve semantic meaning
+\end{itemize}
+
+The preprocessing module is located at \texttt{src/domain/services/text\_preprocessor.py} and includes unit tests ensuring 100\% coverage with 27 tests.
+
+\subsection{Chatbot Architecture 1: AIML Rule-Based System}
+\label{subsec:aiml}
+
+\subsubsection{Overview}
+
+The AIML (Artificial Intelligence Markup Language) chatbot represents a traditional rule-based approach to conversation. It uses pattern-response pairs defined in XML files to match user input and generate predetermined responses.
+
+\subsubsection{Implementation Details}
+
+\textbf{File Structure}:
+\begin{itemize}
+    \item Implementation: \texttt{src/infrastructure/ml/chatbots/aiml\_chatbot.py}
+    \item Knowledge base: \texttt{data/knowledge\_bases/aiml/}
+    \item Therapy patterns: \texttt{therapy.aiml}
+    \item General patterns: \texttt{general.aiml}
+\end{itemize}
+
+\textbf{Key Components}:
+
+\begin{verbatim}
+class AimlChatbot:
+    def __init__(self, aiml_dir: Optional[Path] = None)
+    def load_aiml_files(self, file_pattern: str = "*.aiml") -> int
+    def get_response(self, user_input: str) -> str
+\end{verbatim}
+
+\textbf{AIML Pattern Structure}:
+
+Each AIML file contains \texttt{<category>} elements with \texttt{<pattern>} and \texttt{<template>} pairs:
+
+\begin{verbatim}
+<category>
+    <pattern>I FEEL *</pattern>
+    <template>It's okay to feel <star/>.
+      Can you tell me more about what's
+      triggering this?</template>
+</category>
+\end{verbatim}
+
+\textbf{Pattern Types Used}:
+\begin{enumerate}
+    \item \textbf{Exact match}: "HELLO" matches only "hello"
+    \item \textbf{Wildcard patterns}: "I FEEL *" matches any input starting with "I feel"
+    \item \textbf{Synonym reduction}: <srai> tag maps different patterns to same response
+\end{enumerate}
+
+\textbf{Example Rules from therapy.aiml}:
+
+\begin{itemize}
+    \item \textbf{Greeting}: "HELLO" $\rightarrow$ "Hello! I'm here to listen. How are you feeling today?"
+    \item \textbf{Depression}: "I AM DEPRESSED" $\rightarrow$ "I'm sorry to hear that you're feeling depressed. Depression can be very difficult. How long have you been feeling this way?"
+    \item \textbf{Crisis intervention}: "I WANT TO DIE" $\rightarrow$ Provides crisis hotline information
+\end{itemize}
+
+\textbf{Advantages of this Approach}:
+\begin{itemize}
+    \item \textbf{Deterministic}: Same input always produces same output
+    \item \textbf{Interpretable}: Rules can be reviewed and understood
+    \item \textbf{Fast}: Pattern matching is computationally inexpensive
+    \item \textbf{Controllable}: Responses are predefined, reducing risk of inappropriate outputs
+\end{itemize}
+
+\textbf{Limitations}:
+\begin{itemize}
+    \item \textbf{Limited coverage}: Can only respond to predefined patterns
+    \item \textbf{No learning}: Cannot improve from interactions
+    \item \textbf{Manual effort}: Each new pattern requires hand-crafting
+    \item \textbf{Brittle}: Slight variations in phrasing may not match
+\end{itemize}
+
+\subsection{Chatbot Architecture 2: DialoGPT Neural Model}
+\label{subsec:dialogpt}
+
+\subsubsection{Overview}
+
+DialoGPT (Dialogue Generative Pre-trained Transformer) is a neural language model developed by Microsoft Research, pre-trained on Reddit conversation threads. Our implementation uses this model to generate contextually appropriate responses without manual rule creation.
+
+\subsubsection{Implementation Details}
+
+\textbf{File Structure}:
+\begin{itemize}
+    \item Implementation: \texttt{src/infrastructure/ml/chatbots/dialogpt\_chatbot.py}
+    \item Model: \texttt{microsoft/DialoGPT-small} from HuggingFace
+    \item Configuration: \texttt{src/infrastructure/config/chatbot\_settings.py}
+\end{itemize}
+
+\textbf{Key Components}:
+
+\begin{verbatim}
+class DialoGPTChatbot:
+    def __init__(self, settings, model_name, max_length, device)
+    def load_model(self) -> None
+    def get_response(self, user_input: str) -> str
+    def reset(self) -> None
+\end{verbatim}
+
+\textbf{Model Architecture}:
+\begin{itemize}
+    \item Parameters: 117 million (small variant)
+    \item Architecture: 12 transformer layers, 12 attention heads
+    \item Hidden size: 768 dimensions
+    \item Pre-training data: 147 million Reddit conversation threads
+\end{itemize}
+
+\textbf{How It Works}:
+
+\begin{enumerate}
+    \item User input is tokenized using DialoGPT tokenizer
+    \item Input tokens are combined with conversation history
+    \item Model autoregressively generates response token-by-token
+    \item Nucleus sampling (top-p=0.9) balances diversity and coherence
+    \item Conversation history is maintained across turns for context
+\end{enumerate}
+
+\textbf{Configuration Parameters}:
+
+\begin{itemize}
+    \item \texttt{temperature}: Controls randomness (default: 0.7)
+    \item \texttt{top\_p}: Nucleus sampling threshold (default: 0.9)
+    \item \texttt{repetition\_penalty}: Reduces repetition (default: 1.0)
+    \item \texttt{max\_history\_length}: Maximum context length (default: 1000 tokens)
+    \item \texttt{device}: Automatically detects CUDA or uses CPU
+\end{itemize}
+
+\textbf{Conversation History Management}:
+
+The chatbot maintains conversation history as token IDs:
+\begin{itemize}
+    \item Each user response is appended to history
+    \item Each bot response is appended to history
+    \item History is truncated when exceeding \texttt{max\_length}
+    \item This enables multi-turn contextual conversations
+\end{itemize}
+
+\textbf{Advantages of this Approach}:
+\begin{itemize}
+    \item \textbf{No manual rules}: Learns from data, not hand-crafted patterns
+    \item \textbf{Contextual}: Maintains conversation history
+    \item \textbf{Flexible}: Can handle diverse inputs not seen during development
+    \item \textbf{Natural language}: Generates fluent, human-like responses
+\end{itemize}
+
+\textbf{Limitations}:
+\begin{itemize}
+    \item \textbf{Less controllable}: May generate unexpected responses
+    \item \textbf{Resource intensive}: Requires more computation than AIML
+    \item \textbf{No persistent memory}: Conversation history is session-based
+    \item \textbf{Potential hallucination}: May generate factually incorrect information
+\end{itemize}
+
+\subsection{Chatbot Architecture 3: RAG-Enhanced Transformer}
+\label{subsec:rag}
+
+\subsubsection{Overview}
+
+Our third architecture combines Retrieval-Augmented Generation (RAG) with a modern LLM to create a chatbot with persistent semantic memory. This system can recall relevant past conversations and maintain patient profiles across sessions.
+
+\subsubsection{Implementation Details}
+
+\textbf{File Structure}:
+\begin{itemize}
+    \item Implementation: \texttt{src/infrastructure/ml/chatbots/enhanced\_rag\_chatbot.py}
+    \item RAG memory: \texttt{src/infrastructure/memory/rag\_memory\_service.py}
+    \item Vector DB: Qdrant (local persistent storage)
+    \item LLM: Gemini 2.5 Flash API
+    \item Patient DB: MongoDB (optional)
+\end{itemize}
+
+\textbf{System Architecture}:
+
+The RAG system consists of multiple coordinated services:
+
+\begin{enumerate}
+    \item \textbf{Sentence-BERT Embeddings}: Converts text to 384-dimensional vectors
+    \item \textbf{Qdrant Vector Database}: Stores and retrieves conversations semantically
+    \item \textbf{Emotion Detection}: Keyword-based service detecting 12 emotions
+    \item \textbf{Behavior Pattern Recognition}: Detects 15 mental health patterns
+    \item \textbf{MongoDB}: Stores patient profiles and longitudinal data
+    \item \textbf{Gemini API}: Generates responses using retrieved context
+\end{enumerate}
+
+\textbf{Key Components}:
+
+\begin{verbatim}
+class EnhancedRAGChatbot:
+    def __init__(self, settings, qdrant_settings, mongodb_settings,
+                 model_name, user_id, use_therapy_mode)
+    def load_model(self) -> None
+    def get_response(self, user_input: str) -> Dict[str, Any]
+    def get_initial_greeting(self) -> str
+\end{verbatim}
+
+\textbf{Response Generation Pipeline}:
+
+When a user sends a message, the system follows these steps:
+
+\textbf{Stage 1: Emotion \& Pattern Detection}
+\begin{enumerate}
+    \item EmotionDetectionService analyzes input for 12 emotion types
+    \item BehaviorPatternService detects 15 behavioral patterns
+    \item Returns primary emotion, confidence, intensity, and detected patterns
+\end{enumerate}
+
+\textbf{Stage 2: Context Retrieval}
+\begin{enumerate}
+    \item User input is embedded using Sentence-BERT (384-dim vector)
+    \item Qdrant performs semantic search for top-k similar past messages
+    \item Additional filtering by emotion and behavior patterns
+    \item All retrievals enforce strict user\_id filtering for privacy
+\end{enumerate}
+
+\textbf{Stage 3: Patient Profile Retrieval}
+\begin{enumerate}
+    \item MongoDB retrieves patient profile (if MongoDB enabled)
+    \item Includes: demographics, known triggers, treatment goals
+    \item Provides longitudinal context for personalization
+\end{enumerate}
+
+\textbf{Stage 4: Prompt Construction}
+\begin{enumerate}
+    \item EnhancedPromptBuilder assembles context from retrieved data
+    \item Includes: patient profile, emotion summary, relevant past conversations
+    \item Therapy-optimized prompts available for mental health context
+\end{enumerate}
+
+\textbf{Stage 5: LLM Generation}
+\begin{enumerate}
+    \item Gemini 2.5 Flash API generates response
+    \item Response parsed as JSON with structured fields
+    \item Extracts: response text, next question, behavior updates, risk assessment
+\end{enumerate}
+
+\textbf{Stage 6: Storage}
+\begin{enumerate}
+    \item Conversation turn stored in Qdrant with metadata
+    \item Metadata includes: user\_id, emotion, behavior\_patterns, next\_question
+    \item MongoDB updated with new behavior patterns and session notes
+    \item Patient profile updated with latest emotion and risk assessment
+\end{enumerate}
+
+\textbf{Data Isolation and Privacy}:
+
+All retrieval operations enforce strict patient data separation:
+\begin{itemize}
+    \item Every Qdrant query includes mandatory \texttt{user\_id} filter
+    \item Each patient's conversation history is completely isolated
+    \item MongoDB collections are scoped to individual user IDs
+    \item No cross-patient data access possible
+\end{itemize}
+
+\textbf{Emotion Detection Service}:
+
+Located at \texttt{src/domain/services/emotion\_detection\_service.py}
+
+\textbf{12 Emotion Categories}:
+\begin{itemize}
+    \item joy, sadness, anger, anxiety, fear, disgust
+    \item surprise, hope, gratitude, loneliness, frustration, confusion
+\end{itemize}
+
+\textbf{Detection Method}:
+\begin{itemize}
+    \item Keyword-based matching with 50-100 keywords per emotion
+    \item Negation handling ("not happy" correctly identified)
+    \item Intensity modifiers ("very sad" vs. "sad")
+    \item Confidence scoring based on keyword matches
+\end{itemize}
+
+\textbf{Behavior Pattern Recognition Service}:
+
+Located at \texttt{src/domain/services/behavior\_pattern\_service.py}
+
+\textbf{15 Behavior Patterns}:
+\begin{itemize}
+    \item social\_withdrawal, sleep\_disruption, mood\_swings
+    \item appetite\_change, anxiety\_increase, depression\_symptoms
+    \item self\_harm\_risk, substance\_use, irritability
+    \item concentration\_difficulty, hopelessness, agitation
+    \item fatigue, guilt, avoidance
+\end{itemize}
+
+\textbf{Detection Method}:
+\begin{itemize}
+    \item Keyword and phrase matching
+    \item Severity assessment: mild, moderate, severe
+    \item Confidence scoring
+    \item Historical pattern tracking via RAG search
+\end{itemize}
+
+\textbf{Advantages of RAG Approach}:
+\begin{itemize}
+    \item \textbf{Persistent memory}: Recalls relevant past conversations
+    \item \textbf{Personalization}: Tracks patient-specific patterns and progress
+    \item \textbf{Retrieval precision}: Semantic search finds relevant context
+    \item \textbf{Privacy}: Strict data isolation between patients
+    \item \textbf{Rich metadata}: Emotions, behavior patterns, risk levels tracked
+\end{itemize}
+
+\textbf{Limitations}:
+\begin{itemize}
+    \item \textbf{Complexity}: More components than simpler architectures
+    \item \textbf{Dependencies}: Requires Qdrant, MongoDB, Gemini API
+    \item \textbf{Latency}: Multiple service calls increase response time
+    \item \textbf{Setup}: More complex initial configuration
+\end{itemize}
+
+\subsection{Domain Services}
+\label{subsec:domain_services}
+
+\subsubsection{Text Preprocessor}
+
+Located at \texttt{src/domain/services/text\_preprocessor.py}
+
+Provides comprehensive text cleaning and normalization:
+\begin{itemize}
+    \item Removes URLs, HTML, special characters
+    \item Tokenizes using NLTK
+    \item Removes stopwords (with customizations)
+    \item Applies WordNet lemmatization
+    \item Includes 27 unit tests with 100\% coverage
+\end{itemize}
+
+\subsubsection{Emotion Detection Service}
+
+Located at \texttt{src/domain/services/emotion\_detection\_service.py}
+
+Keyword-based emotion analysis providing interpretable results:
+\begin{itemize}
+    \item 12 emotion categories with weighted keywords
+    \item Confidence and intensity scoring
+    \item Negation and modifier handling
+    \item Batch processing support
+\end{itemize}
+
+\subsubsection{Behavior Pattern Service}
+
+Located at \texttt{src/domain/services/behavior\_pattern\_service.py}
+
+Detects mental health behavioral patterns:
+\begin{itemize}
+    \item 15 patterns with severity levels
+    \item Keyword and phrase matching
+    \item Historical pattern search via RAG
+    \item Trending pattern analysis
+\end{itemize}
+
+\subsection{CLI Interface}
+\label{subsec:cli}
+
+All three chatbots are accessible via a unified command-line interface at \texttt{src/interfaces/cli/rag\_chatbot\_cli.py}.
+
+\textbf{Features}:
+\begin{itemize}
+    \item Mode selection: AIML, DialoGPT, or RAG-enhanced
+    \item Real-time conversation with metrics display
+    \item Commands: help, profile, patterns, trends, search, memory
+    \item Token usage tracking (input/output/total/context window percentage)
+    \item Response time monitoring
+\end{itemize}
+
+\textbf{Usage Example}:
+\begin{verbatim}
+python -m src.interfaces.cli.rag_chatbot_cli --mode enhanced --user-id patient_123
+\end{verbatim}
+
+The CLI provides structured JSON responses in enhanced mode, including:
+\begin{itemize}
+    \item Response text
+    \item Detected emotion and intensity
+    \item Behavior pattern updates
+    \item Risk assessment
+    \item Suggested next question
+\end{itemize}

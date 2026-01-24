@@ -32,7 +32,8 @@ class RAGChatbotCLI:
         use_therapy_mode: bool = False,
         use_local_qdrant: bool = True,
         use_enhanced_mode: bool = True,
-        initial_message: Optional[str] = None
+        initial_message: Optional[str] = None,
+        debug: bool = False
     ):
         """
         Initialize the CLI with RAG chatbot.
@@ -44,6 +45,7 @@ class RAGChatbotCLI:
             use_local_qdrant: Use local file storage instead of server
             use_enhanced_mode: Use enhanced mode with MongoDB and emotion detection
             initial_message: Custom initial greeting/question
+            debug: Show detailed diagnostic information (emotions, patterns, risk, metrics)
         """
         # Load settings
         settings = NeuralChatbotSettings()
@@ -58,6 +60,7 @@ class RAGChatbotCLI:
         self.user_id = user_id
         self.user_name = user_name
         self.use_therapy_mode = use_therapy_mode
+        self.debug = debug
         self.conversation_history: List[Tuple[str, str]] = []
         self.running = False
 
@@ -102,7 +105,7 @@ class RAGChatbotCLI:
                 if profile:
                     print(f" Patient Profile: Loaded")
                     if profile.get('risk_level'):
-                        risk_emojis = {"low": "🟢", "medium": "", "high": "🟠", "critical": ""}
+                        risk_emojis = {"low": "", "medium": "", "high": "", "critical": ""}
                         print(f"   Risk Level: {risk_emojis.get(profile['risk_level'], '')} {profile['risk_level'].upper()}")
                     if profile.get('total_conversations', 0) > 0:
                         print(f"   Previous Sessions: {profile['total_conversations']}")
@@ -533,7 +536,7 @@ class RAGChatbotCLI:
                 print(f"  - {pattern_type}: {severity} severity ({frequency} occurrences)")
 
         risk_level = profile.get("risk_level", "low")
-        risk_emojis = {"low": "🟢", "medium": "", "high": "🟠", "critical": ""}
+        risk_emojis = {"low": "", "medium": "", "high": "", "critical": ""}
         print(f"\nRisk Level: {risk_emojis.get(risk_level, '')} {risk_level.upper()}")
 
         if profile.get("total_conversations", 0) > 0:
@@ -605,7 +608,7 @@ class RAGChatbotCLI:
             severity = trend.get("avg_severity", "mild")
             days = trend.get("period_days", 7)
 
-            severity_emoji = {"mild": "🟢", "moderate": "", "severe": ""}
+            severity_emoji = {"mild": "", "moderate": "", "severe": ""}
             emoji = severity_emoji.get(severity, "")
 
             print(f"\n{i}. {pattern.replace('_', ' ').title()}")
@@ -682,31 +685,37 @@ class RAGChatbotCLI:
                     if next_question:
                         print(f"\n {next_question}")
 
-                    # Display emotion info
-                    if emotion_update:
-                        emotion = emotion_update.get("primary_emotion", "neutral")
-                        intensity = emotion_update.get("intensity", "low")
-                        print(f"\n Detected Emotion: {emotion} ({intensity} intensity)")
+                    # Add newline if not in debug mode
+                    if not self.debug:
+                        print()
 
-                    # Display behavior pattern update
-                    if behavior_update:
-                        pattern_type = behavior_update.get("pattern_type", "")
-                        severity = behavior_update.get("severity", "")
-                        print(f"\n Pattern Detected: {pattern_type} ({severity} severity)")
+                    # Display debug information if debug mode is enabled
+                    if self.debug:
+                        # Display emotion info
+                        if emotion_update:
+                            emotion = emotion_update.get("primary_emotion", "neutral")
+                            intensity = emotion_update.get("intensity", "low")
+                            print(f"\n Detected Emotion: {emotion} ({intensity} intensity)")
 
-                    # Display risk assessment
-                    if risk_assessment:
-                        level = risk_assessment.get("level", "low")
-                        risk_emojis = {"low": "🟢", "medium": "", "high": "🟠", "critical": ""}
-                        emoji = risk_emojis.get(level, "")
-                        print(f"\n {emoji} Risk Assessment: {level.upper()}")
-                        if risk_assessment.get("reasoning"):
-                            print(f"   Reasoning: {risk_assessment['reasoning']}")
+                        # Display behavior pattern update
+                        if behavior_update:
+                            pattern_type = behavior_update.get("pattern_type", "")
+                            severity = behavior_update.get("severity", "")
+                            print(f"\n Pattern Detected: {pattern_type} ({severity} severity)")
 
-                    # Display metrics
-                    memory_indicator = f"Context count {context_count}" if context_count > 0 else " 0"
-                    context_pct = token_stats.get('context_usage_percent', 0)
-                    print(f"\n[{resp_time:.2f}s | Input tokens {token_stats['input_tokens']} | Output tokens {token_stats['output_tokens']} | Total tokens {token_stats['total_tokens']} | Context {context_pct}% | {memory_indicator} memories]\n")
+                        # Display risk assessment
+                        if risk_assessment:
+                            level = risk_assessment.get("level", "low")
+                            risk_emojis = {"low": "", "medium": "", "high": "", "critical": ""}
+                            emoji = risk_emojis.get(level, "")
+                            print(f"\n {emoji} Risk Assessment: {level.upper()}")
+                            if risk_assessment.get("reasoning"):
+                                print(f"   Reasoning: {risk_assessment['reasoning']}")
+
+                        # Display metrics
+                        memory_indicator = f"Context count {context_count}" if context_count > 0 else " 0"
+                        context_pct = token_stats.get('context_usage_percent', 0)
+                        print(f"\n[{resp_time:.2f}s | Input tokens {token_stats['input_tokens']} | Output tokens {token_stats['output_tokens']} | Total tokens {token_stats['total_tokens']} | Context {context_pct}% | {memory_indicator} memories]\n")
 
                     # Save to local history
                     self.conversation_history.append((user_input, response_text))
@@ -723,10 +732,15 @@ class RAGChatbotCLI:
                     # Display response
                     print(f"Bot: {response}")
 
-                    # Display metrics
-                    memory_indicator = f"Context count {context_count}" if context_count > 0 else " 0"
-                    context_pct = token_stats.get('context_usage_percent', 0)
-                    print(f"[{resp_time:.2f}s | Input tokens {token_stats['input_tokens']} | Output tokens {token_stats['output_tokens']} | Total tokens {token_stats['total_tokens']} tokens | Context  {context_pct}% context | {memory_indicator} memories used]\n")
+                    # Add newline if not in debug mode
+                    if not self.debug:
+                        print()
+
+                    # Display metrics if debug mode is enabled
+                    if self.debug:
+                        memory_indicator = f"Context count {context_count}" if context_count > 0 else " 0"
+                        context_pct = token_stats.get('context_usage_percent', 0)
+                        print(f"[{resp_time:.2f}s | Input tokens {token_stats['input_tokens']} | Output tokens {token_stats['output_tokens']} | Total tokens {token_stats['total_tokens']} tokens | Context  {context_pct}% context | {memory_indicator} memories used]\n")
 
                     # Save to local history
                     self.conversation_history.append((user_input, response))
@@ -803,6 +817,11 @@ def main():
         default="Hello! How can I assist you today?",
         help='Custom initial greeting/question for the chatbot'
     )
+    parser.add_argument(
+        '--debug',
+        action='store_true',
+        help='Show detailed diagnostic information (emotions, patterns, risk assessment, metrics)'
+    )
 
     args = parser.parse_args()
 
@@ -821,7 +840,8 @@ def main():
         use_therapy_mode=args.therapy,
         use_local_qdrant=not args.qdrant_server,
         use_enhanced_mode=use_enhanced,
-        initial_message=args.initial_message
+        initial_message=args.initial_message,
+        debug=args.debug
     )
     cli.run()
 

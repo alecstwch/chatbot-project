@@ -1,0 +1,135 @@
+\section{Ethical Statement}
+\label{sec:ethical_statement}
+
+Development of mental health chatbots raises important ethical considerations that must be addressed explicitly.
+
+\subsection{Clinical Safety and Responsibility}
+
+\textbf{Not Clinical Tools}:
+\begin{itemize}
+    \item These chatbots are \textbf{not} clinical tools and should not be used as substitutes for professional mental health care
+    \item None of the implemented systems have been clinically validated or approved
+    \item Responses are generated based on patterns and training data, not clinical expertise
+    \item \textbf{Crisis situations require immediate human intervention}
+\end{itemize}
+
+\textbf{Crisis Resources}:
+Our AIML implementation includes crisis intervention patterns that provide crisis hotline information for expressions of self-harm or suicide. However:
+\begin{itemize}
+    \item Detection is keyword-based and may miss nuanced expressions
+    \item No verification that user follows through on contacting help
+    \item No escalation protocol to alert professionals or emergency contacts
+\end{itemize}
+
+\textbf{Recommendation}: Any deployment should include:
+\begin{itemize}
+    \item Clear disclaimers that this is not a clinical tool
+    \item Easy access to crisis resources
+    \item Mechanisms to connect users with human professionals
+    \item Age verification and parental consent for minors
+\end{itemize}
+
+\subsection{Privacy and Data Protection}
+
+\textbf{Data Sensitivity}:
+\begin{itemize}
+    \item Mental health conversations contain highly sensitive personal information
+    \item Users may share deeply personal thoughts, feelings, and experiences
+    \item This data could be harmful if disclosed or used inappropriately
+\end{itemize}
+
+\textbf{Our Implementation}:
+\begin{itemize}
+    \item RAG system enforces strict user\_id filtering for data isolation
+    \item Each patient's data is completely separated from others
+    \item MongoDB and Qdrant collections are scoped per user
+    \item No cross-patient data access is possible
+\end{itemize}
+
+\textbf{Remaining Concerns}:
+\begin{itemize}
+    \item Conversation logs are stored persistently
+    \item No data retention or deletion policies implemented
+    \item No encryption at rest for local databases
+    \item Gemini API calls transmit conversation content to Google
+\end{itemize}
+
+\textbf{Recommendations for Deployment}:
+\begin{itemize}
+    \item Implement data retention policies (e.g., automatic deletion after N days)
+    \item Provide easy mechanism for users to export or delete their data
+    \item Encrypt stored data at rest
+    \item Obtain informed consent for data collection
+    \item Comply with GDPR, HIPAA, or other applicable regulations
+\end{itemize}
+
+\subsection{Bias and Fairness}
+
+\textbf{Training Data Bias}:
+\begin{itemize}
+    \item DialoGPT trained on Reddit data reflects Reddit demographics and biases
+    \item Mental health datasets may not represent diverse populations
+    \item AIML patterns reflect author's cultural assumptions
+\end{itemize}
+
+\textbf{Potential Harms}:
+\begin{itemize}
+    \item Responses may not be culturally appropriate for all users
+    \item May not adequately address issues specific to marginalized groups
+    \item Language may not be accessible to users with lower health literacy
+\end{itemize}
+
+\textbf{Mitigation}:
+\begin{itemize}
+    \item Acknowledge limitations of training data
+    \item Involve diverse stakeholders in review and testing
+    \item Provide multiple ways for users to express concerns about responses
+\end{itemize}
+
+\subsection{Autonomy and Human Agency}
+
+\textbf{User Autonomy}:
+\begin{itemize}
+    \item Users should always have choice to engage or disengage
+    \item Systems should not manipulate or coerce users
+    \item Users should be informed about system limitations
+\end{itemize}
+
+\textbf{Transparency}:
+\begin{itemize}
+    \item Users should know they are interacting with an AI, not a human
+    \item Limitations of the system should be clearly communicated
+    \item Data collection and usage should be transparent
+\end{itemize}
+
+\subsection{Accessibility and Equity}
+
+\textbf{Access Concerns}:
+\begin{itemize}
+    \item CLI interface may not be accessible to users with disabilities
+    \item English-only language support excludes non-English speakers
+    \item Requires internet connection for RAG system (Gemini API)
+    \item May not work well on low-end devices or slow connections
+\end{itemize}
+
+\subsection{Professional Responsibility}
+
+\textbf{For Developers}:
+\begin{itemize}
+    \item Do not claim clinical efficacy without validation
+    \item Be transparent about system limitations
+    \item Implement appropriate safeguards for crisis content
+    \item Consult with mental health professionals in development
+\end{itemize}
+
+\textbf{For Researchers}:
+\begin{itemize}
+    \item Consider potential dual-use of technologies
+    \item Weigh benefits against potential harms
+    \item Publish limitations alongside capabilities
+    \item Engage with ethics boards for clinical applications
+\end{itemize}
+
+\subsection{Conclusion}
+
+These chatbots are educational and research tools, not clinical interventions. Any real-world deployment must carefully address the ethical concerns outlined above, particularly clinical safety, privacy protection, and appropriate transparency about system capabilities and limitations. Users in crisis should always be directed to appropriate professional resources.

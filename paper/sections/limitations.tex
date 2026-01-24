@@ -1,0 +1,133 @@
+\section{Limitations}
+\label{sec:limitations}
+
+This section outlines known limitations of the implemented systems and areas that require further development.
+
+\subsection{Evaluation Limitations}
+
+\textbf{No Formal Assessment}:
+\begin{itemize}
+    \item We did not perform systematic evaluation of response quality
+    \item No comparison metrics (BLEU, ROUGE, etc.) were collected
+    \item No human evaluation of empathy, appropriateness, or clinical safety
+    \item Performance characteristics are anecdotal rather than measured
+\end{itemize}
+
+This limits our ability to make definitive claims about the relative quality of responses from each architecture. Future work should include comprehensive evaluation using both automatic metrics and human assessment.
+
+\subsection{AIML Limitations}
+
+\textbf{Coverage}:
+\begin{itemize}
+    \item Limited to 150+ hand-crafted patterns
+    \item Cannot handle novel inputs outside predefined rules
+    \item Brittle to phrasing variations
+    \item Scaling requires significant manual effort
+\end{itemize}
+
+\textbf{Flexibility}:
+\begin{itemize}
+    \item Responses are static and predetermined
+    \item No adaptation to user preferences or patterns
+    \item No learning from interactions
+\end{itemize}
+
+\subsection{DialoGPT Limitations}
+
+\textbf{Memory}:
+\begin{itemize}
+    \item Session-based only, no persistence
+    \item Each conversation starts without context from past sessions
+    \item Cannot track patient progress or patterns over time
+\end{itemize}
+
+\textbf{Control}:
+\begin{itemize}
+    \item Limited control over generated responses
+    \item May generate inappropriate or clinically unsafe content
+    \item No domain-specific customization for mental health
+    \item Training on Reddit data may not transfer optimally to therapy
+\end{itemize}
+
+\textbf{Resource Requirements}:
+\begin{itemize}
+    \item 450MB model download required
+    \item CPU inference is slow (200-500ms)
+    \item GPU significantly improves speed but adds hardware requirement
+\end{itemize}
+
+\subsection{RAG-Enhanced Limitations}
+
+\textbf{Complexity}:
+\begin{itemize}
+    \item Multiple services increase failure modes
+    \item Requires Qdrant, MongoDB, and Gemini API
+    \item Setup and configuration more involved
+    \item Debugging distributed systems is challenging
+\end{itemize}
+
+\textbf{Dependencies}:
+\begin{itemize}
+    \item Requires external Gemini API (network dependency)
+    \item Qdrant and MongoDB must be properly configured
+    \item API rate limits and costs for production use
+    \item Data backup strategy required for persistent stores
+\end{itemize}
+
+\textbf{Domain Services}:
+\begin{itemize}
+    \item Emotion detection is keyword-based, may miss nuanced expressions
+    \item Behavior pattern recognition is rule-based, limited to predefined patterns
+    \item No learning or adaptation from new patterns
+    \item May not generalize across cultures or demographics
+\end{itemize}
+
+\subsection{General Limitations}
+
+\textbf{Clinical Safety}:
+\begin{itemize}
+    \item None of the systems are clinically validated
+    \item No professional review of response quality
+    \item Risk assessment is heuristic, not clinically grounded
+    \item Crisis detection exists but escalation protocols are not implemented
+\end{itemize}
+
+\textbf{Language Support}:
+\begin{itemize}
+    \item All systems designed for English only
+    \item No multi-language support
+    \item Cultural bias in training data and patterns
+\end{itemize}
+
+\textbf{Accessibility}:
+\begin{itemize}
+    \item CLI interface may not be accessible to all users
+    \item No GUI or web interface implemented
+    \item No support for alternative input methods (voice, etc.)
+\end{itemize}
+
+\subsection{Documentation Limitations}
+
+\textbf{Incomplete Coverage}:
+\begin{itemize}
+    \item Some code paths may not be fully documented
+    \item API documentation could be more comprehensive
+    \item Usage examples limited to CLI interface
+\end{itemize}
+
+\textbf{Testing}:
+\begin{itemize}
+    \item Limited test coverage beyond preprocessing
+    \item No integration tests for end-to-end workflows
+    \item No tests for data isolation guarantees
+\end{itemize}
+
+\subsection{Acknowledged Gaps}
+
+We acknowledge that this project focuses on implementation rather than evaluation. The systems demonstrate architectural approaches but do not provide evidence of their effectiveness or superiority. Future work should address:
+\begin{itemize}
+    \item Systematic evaluation of response quality
+    \item Clinical validation of safety and appropriateness
+    \item User studies measuring engagement and helpfulness
+    \item Comparison with baseline or commercial systems
+\end{itemize}

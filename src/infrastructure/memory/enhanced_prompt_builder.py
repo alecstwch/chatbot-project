@@ -137,14 +137,8 @@ Your approach:
                 sections.append(f"  - {goal}")
 
         if profile.get("risk_level"):
-            risk_emoji = {
-                "low": "🟢",
-                "medium": "🟡",
-                "high": "🟠",
-                "critical": "🔴"
-            }
             sections.append(
-                f"Current Risk Level: {risk_emoji.get(profile['risk_level'], '⚪')} "
+                f"Current Risk Level: {profile['risk_level']} "
                 f"{profile['risk_level'].upper()}"
             )
 
@@ -193,13 +187,11 @@ Your approach:
             # Format role
             if role == "user":
                 role_label = "User"
-                emotion_icon = self._get_emotion_icon(emotion)
             else:
                 role_label = "You"
-                emotion_icon = ""
 
             # Build entry
-            lines.append(f"\n  {i}. [{role_label}] {emotion_icon}")
+            lines.append(f"\n  {i}. [{role_label}]")
             lines.append(f"     \"{content}...\"")
 
             # Add emotion info if available
@@ -234,25 +226,6 @@ Your approach:
                         f"{sentiment.get('neutral', 0)} neutral")
 
         return "\n".join(lines)
-
-    def _get_emotion_icon(self, emotion: Optional[str]) -> str:
-        """Get emoji for emotion."""
-        emotion_icons = {
-            "joy": "😊",
-            "sadness": "😢",
-            "anger": "😠",
-            "anxiety": "😰",
-            "fear": "😨",
-            "disgust": "🤢",
-            "surprise": "😲",
-            "hope": "🌟",
-            "gratitude": "🙏",
-            "loneliness": "😔",
-            "frustration": "😤",
-            "confusion": "😕",
-            "neutral": "😐"
-        }
-        return emotion_icons.get(emotion, "")
 
     def _get_response_format_instructions(self) -> str:
         """Instructions for JSON response format."""

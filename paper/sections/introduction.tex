@@ -1,0 +1,69 @@
+\section{Introduction}
+\label{sec:introduction}
+
+Conversational agents have become increasingly important in various domains, with mental health support representing a particularly compelling application area. The global burden of mental disorders combined with shortages of mental health professionals creates an urgent need for accessible, scalable support systems. This project explores the evolution of chatbot architectures by implementing three distinct approaches: rule-based (AIML), neural (DialoGPT), and retrieval-augmented generation (RAG) with modern LLMs.
+
+\subsection{Motivation}
+
+This work is motivated by several key challenges in developing mental health chatbots:
+
+\begin{enumerate}
+    \item \textbf{Accessibility}: Mental health support remains inaccessible to many due to cost, location, and stigma. Chatbots can provide 24/7 availability and serve as a first point of contact.
+
+    \item \textbf{Architectural Understanding}: The field lacks accessible examples comparing different chatbot paradigms specifically for mental health applications. Most resources focus on general chit-chat rather than therapeutic dialogue.
+
+    \item \textbf{Memory and Personalization}: Effective therapy requires understanding patterns over time. Most simple chatbots lack persistent memory, limiting their ability to track progress or personalize responses.
+
+    \item \textbf{Implementation Complexity}: While modern approaches like RAG are powerful, resources explaining how to build these systems from scratch are limited.
+\end{enumerate}
+
+Our project addresses these challenges by implementing three architectures of increasing complexity, demonstrating trade-offs between simplicity, capability, and resource requirements.
+
+\subsection{Project Scope}
+
+This project implements and documents three conversational agent architectures:
+
+\textbf{1. AIML Rule-Based System}
+\begin{itemize}
+    \item Pattern-response matching using XML-based rules
+    \item Hand-crafted knowledge base for therapy and general conversation
+    \item Deterministic behavior with interpretable rules
+\end{itemize}
+
+\textbf{2. DialoGPT Neural Model}
+\begin{itemize}
+    \item Transformer-based neural language model
+    \item Pre-trained on Reddit conversations
+    \item Context-aware response generation with conversation history
+\end{itemize}
+
+\textbf{3. RAG-Enhanced Transformer}
+\begin{itemize}
+    \item Gemini 2.5 Flash API for generation
+    \item Qdrant vector database for semantic memory
+    \item MongoDB for patient profile management
+    \item Emotion detection and behavior pattern recognition services
+    \item Strict data isolation for privacy compliance
+\end{itemize}
+
+\subsection{Original Contributions}
+
+This project contributes the following to the chatbot development community:
+
+\begin{itemize}
+    \item \textbf{Complete Implementations}: Three fully functional chatbots demonstrating different architectural paradigms, with complete source code available.
+
+    \item \textbf{RAG for Mental Health}: A comprehensive RAG implementation specifically designed for mental health applications, including emotion detection, behavior pattern tracking, and patient profile management.
+
+    \item \textbf{Domain Services}: Keyword-based emotion detection (12 categories) and behavior pattern recognition (15 patterns) services that provide interpretable alternatives to neural approaches.
+
+    \item \textbf{Data Isolation}: Implementation of strict patient data separation using metadata filtering in vector databases and MongoDB, addressing privacy requirements.
+
+    \item \textbf{Documentation}: Comprehensive documentation of implementation choices, architecture decisions, and practical considerations for building mental health chatbots.
+
+    \item \textbf{CLI Interface}: Unified command-line interface supporting all three architectures with monitoring for token usage, response time, and memory statistics.
+\end{itemize}
+
+\subsection{Paper Organization}
+
+The remainder of this paper is organized as follows: Section~\ref{sec:methodology} describes the implementation details of all three chatbot architectures. Section~\ref{sec:discussion} discusses the trade-offs between approaches and practical considerations. Section~\ref{sec:limitations} outlines known limitations. Section~\ref{sec:ethical_statement} addresses ethical considerations for mental health chatbots. Section~\ref{sec:conclusion} concludes the paper.

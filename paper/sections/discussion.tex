@@ -1,0 +1,196 @@
+\section{Discussion}
+\label{sec:discussion}
+
+This section discusses the trade-offs between the three implemented architectures, practical considerations for deployment, and lessons learned from implementation.
+
+\subsection{Architectural Trade-offs}
+
+\subsubsection{Simplicity vs. Capability}
+
+\textbf{AIML} offers maximum simplicity and predictability:
+\begin{itemize}
+    \item Minimal dependencies (only AIML library)
+    \item Easy to understand and modify rules
+    \item Deterministic behavior aids debugging
+    \item Suitable for well-defined, narrow domains
+\end{itemize}
+
+However, simplicity comes at the cost of limited capability. Each new conversation pattern requires manual rule creation, making scaling labor-intensive. The system cannot handle variations outside predefined patterns.
+
+\textbf{DialoGPT} provides a middle ground:
+\begin{itemize}
+    \item No manual rule creation required
+    \item Handles diverse inputs through learned patterns
+    \item Conversation history enables contextual responses
+    \item Moderate complexity (single model, single API call)
+\end{itemize}
+
+The trade-off is reduced control over responses and the potential for unexpected or inappropriate outputs. Without persistent memory, each session starts fresh, limiting long-term personalization.
+
+\textbf{RAG-Enhanced} offers maximum capability:
+\begin{itemize}
+    \item Persistent semantic memory across sessions
+    \item Patient profile management for personalization
+    \item Emotion and behavior pattern tracking
+    \item Context retrieval enhances response relevance
+\end{itemize}
+
+The complexity is significantly higher: multiple services (Qdrant, MongoDB, Gemini), integration points, and failure modes. This architecture requires more development effort and operational expertise.
+
+\subsubsection{Resource Requirements}
+
+\begin{table}[h]
+\centering
+\caption{Resource Comparison of Three Architectures}
+\begin{tabular}{lccc}
+\toprule
+Resource & AIML & DialoGPT & RAG-Enhanced \\
+\midrule
+Python Dependencies & 1 & 5+ & 10+ \\
+External Services & 0 & 0 & 3 (Qdrant, MongoDB, Gemini) \\
+Model Storage & 0 MB & 450 MB & 0 (API) \\
+RAM (Idle) & 50 MB & 500 MB & 200 MB \\
+Latency & <10 ms & 200-500 ms & 500-1500 ms \\
+Setup Complexity & Low & Medium & High \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Privacy and Data Control}
+
+\textbf{AIML}:
+\begin{itemize}
+    \item No data persistence by default
+    \item No external API calls
+    \item Maximum privacy (stateless)
+\end{itemize}
+
+\textbf{DialoGPT}:
+\begin{itemize}
+    \item Session-based history (in-memory)
+    \item No cross-session persistence
+    \item No external dependencies after model download
+\end{itemize}
+
+\textbf{RAG-Enhanced}:
+\begin{itemize}
+    \item Persistent conversation storage
+    \item Requires careful privacy design
+    \item External API calls (Gemini)
+    \item Our implementation enforces strict user\_id filtering
+\end{itemize}
+
+\subsection{Implementation Considerations}
+
+\subsubsection{Embedding Model Selection}
+
+We chose Sentence-BERT (all-MiniLM-L6-v2) for semantic search after considering:
+
+\textbf{Alternatives Evaluated}:
+\begin{itemize}
+    \item OpenAI text-embedding-ada-002: Higher performance but requires API calls, privacy concerns
+    \item Universal Sentence Encoder: Larger model size (200MB vs. 80MB)
+\end{itemize}
+
+\textbf{Sentence-BERT Advantages}:
+\begin{itemize}
+    \item On-premise deployment (no patient data leaves system)
+    \item Small model size (80MB)
+    \item Fast inference (25ms per sentence)
+    \item Good semantic quality for mental health domain
+\end{itemize}
+
+\subsubsection{LLM Selection for RAG}
+
+We selected Gemini 2.5 Flash over alternatives:
+
+\textbf{Key Considerations}:
+\begin{itemize}
+    \item \textbf{Context Window}: 1M tokens enables full conversation history
+    \item \textbf{Cost}: Significantly cheaper than GPT-4 or Claude
+    \item \textbf{Speed}: Sub-second generation suitable for conversational use
+    \item \textbf{Safety}: Built-in safety filters for mental health content
+\end{itemize}
+
+\subsubsection{Preprocessing Choices}
+
+We implemented lemmatization rather than stemming:
+
+\textbf{Rationale}:
+\begin{itemize}
+    \item Preserves semantic meaning (running $\rightarrow$ run vs. running $\rightarrow$ runn)
+    \item Better for emotion detection keywords (felt $\rightarrow$ feel preserved)
+    \item Similar computational cost
+    \item Improves pattern matching for AIML
+\end{itemize}
+
+\subsection{Practical Deployment Considerations}
+
+\subsubsection{When to Use Each Architecture}
+
+\textbf{Use AIML when}:
+\begin{itemize}
+    \item Domain is narrow and well-defined
+    \item Predictability is critical
+    \item Resources are severely constrained
+    \item No need for learning from data
+\end{itemize}
+
+\textbf{Use DialoGPT when}:
+\begin{itemize}
+    \item Need contextual responses without persistence
+    \item Want simple neural approach
+    \item Can host model locally (no API dependencies)
+    \item Session-based use is sufficient
+\end{itemize}
+
+\textbf{Use RAG-Enhanced when}:
+\begin{itemize}
+    \item Need persistent memory across sessions
+    \item Patient tracking and personalization required
+    \item Emotion/behavior pattern monitoring needed
+    \item Can manage complex system architecture
+\end{itemize}
+
+\subsubsection{Development Experience}
+
+\textbf{AIML}:
+\begin{itemize}
+    \item Fastest initial development
+    \item Rule creation becomes tedious at scale
+    \item Easy to debug and test
+\end{itemize}
+
+\textbf{DialoGPT}:
+\begin{itemize}
+    \item Moderate setup time (model download)
+    \item Minimal ongoing development
+    \item Harder to debug unexpected outputs
+\end{itemize}
+
+\textbf{RAG-Enhanced}:
+\begin{itemize}
+    \item Highest initial development effort
+    \item Multiple integration points to maintain
+    \item Rich feature set justifies complexity for production use
+\end{itemize}
+
+\subsection{Code Organization and Architecture}
+
+We organized the codebase following Domain-Driven Design (DDD) principles:
+
+\textbf{Layer Separation}:
+\begin{itemize}
+    \item \texttt{src/domain}: Business logic and services (emotion detection, behavior patterns)
+    \item \texttt{src/infrastructure}: External integrations (Qdrant, MongoDB, Gemini)
+    \item \texttt{src/interfaces}: CLI and API interfaces
+    \item \texttt{src/application}: Orchestration between layers
+\end{itemize}
+
+\textbf{Benefits}:
+\begin{itemize}
+    \item Clear separation of concerns
+    \item Easy to swap components (e.g., change embedding model)
+    \item Testable domain logic independent of infrastructure
+    \item Configuration via environment variables (12-Factor App)
+\end{itemize}

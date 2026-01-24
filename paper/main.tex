@@ -1,0 +1,53 @@
+% This must be in the first 5 lines to tell arXiv to use pdfLaTeX
+\pdfoutput=1
+\documentclass[11pt]{article}
+\usepackage{ACL2023}
+
+% Standard package includes
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage{url}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{inconsolata}
+
+% Additional packages for tables, figures, and algorithms
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Hyperref should be loaded last
+\usepackage{hyperref}
+
+\title{Evolution of Conversational Agents: From Rule-Based Systems to \\ RAG-Enhanced Transformers for Mental Health Support}
+
+\author{Your Name \\ \texttt{your.email@domain.com}
+}
+
+\begin{document}
+\maketitle
+
+\input{sections/abstract}
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/methodology}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusion}
+\input{sections/limitations}
+\input{sections/ethical_statement}
+
+\appendix
+\input{sections/appendix}
+
+\bibliography{references}
+\bibliographystyle{acl_natbib}
+
+\end{document}

@@ -1,0 +1,10 @@
+\begin{abstract}
+\label{abstract}
+
+Mental health support systems face significant challenges including limited accessibility, resource constraints, and the need for 24/7 availability. This paper presents a comparative implementation study of three conversational agent architectures: (1) a traditional rule-based AIML system with hand-crafted pattern-response pairs, (2) a neural DialoGPT model for context-aware generation, and (3) a retrieval-augmented generation (RAG) system integrating Gemini 2.5 Flash, Qdrant vector database, and MongoDB for persistent patient profiles.
+
+We describe the complete implementation of each architecture, focusing on practical aspects of building mental health chatbots. The RAG system incorporates domain-specific services including emotion detection (12 categories), behavior pattern recognition (15 patterns), and strict patient data isolation for privacy compliance. We provide detailed documentation of the preprocessing pipeline, embedding model selection (Sentence-BERT), and integration patterns between components.
+
+This work contributes open-source implementations demonstrating the evolution from simple rule-based systems through neural models to modern RAG architectures, with comprehensive documentation of design decisions, implementation details, and practical considerations for mental health applications. The codebase is organized following Domain-Driven Design principles and includes a unified CLI interface supporting all three architectures.
+
+\end{abstract}

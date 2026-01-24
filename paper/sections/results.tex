@@ -1,0 +1,253 @@
+\section{Implementation Results}
+\label{sec:results}
+
+This section describes the three chatbot systems that were implemented, their components, and how they operate.
+
+\subsection{System Overview}
+
+We successfully implemented three complete conversational agents:
+
+\begin{table}[h]
+\centering
+\caption{Implemented Chatbot Architectures}
+\begin{tabular}{lccc}
+\toprule
+Feature & AIML & DialoGPT & RAG-Enhanced \\
+\midrule
+Pattern Matching & XML rules & Learned & Semantic search \\
+Memory & None & Session & Persistent \\
+Personalization & None & Limited & Profile-based \\
+Emotion Detection & No & No & Yes (12 types) \\
+Behavior Tracking & No & No & Yes (15 patterns) \\
+Patient Profiles & No & No & Yes (MongoDB) \\
+Context Window & Current input & Session history & Full history \\
+Dependencies & 1 library & 5+ libraries & 10+ services \\
+Code Location & aiml\_chatbot.py & dialogpt\_chatbot.py & enhanced\_rag\_chatbot.py \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{AIML System Implementation}
+
+\textbf{Knowledge Base}:
+\begin{itemize}
+    \item 150+ pattern-response rules across 2 AIML files
+    \item \texttt{therapy.aiml}: Mental health patterns (depression, anxiety, crisis)
+    \item \texttt{general.aiml}: General conversation (greetings, jokes, favorites)
+\end{itemize}
+
+\textbf{Pattern Types Implemented}:
+\begin{itemize}
+    \item Exact match: "HELLO", "HOW ARE YOU"
+    \item Wildcard: "I FEEL *", "I AM *"
+    \item Synonym reduction: Multiple patterns map to same response via \texttt{<srai>}
+    \item Random responses: Multiple options for variety
+\end{itemize}
+
+\textbf{Crisis Patterns}:
+\begin{itemize}
+    \item Detects: "I want to die", "I want to kill myself", "suicide"
+    \item Response: Provides crisis hotline (988, 1-800-273-8255)
+    \item Asks: "Can you tell me if you're in a safe place right now?"
+\end{itemize}
+
+\textbf{File Locations}:
+\begin{itemize}
+    \item Code: \texttt{src/infrastructure/ml/chatbots/aiml\_chatbot.py}
+    \item Rules: \texttt{data/knowledge_bases/aiml/}
+\end{itemize}
+
+\subsection{DialoGPT System Implementation}
+
+\textbf{Model Details}:
+\begin{itemize}
+    \item Model: \texttt{microsoft/DialoGPT-small}
+    \item Parameters: 117 million
+    \item Downloaded from HuggingFace Hub
+    \item Cached locally in \texttt{models/cache/}
+\end{itemize}
+
+\textbf{Generation Configuration}:
+\begin{itemize}
+    \item Temperature: 0.7 (controls randomness)
+    \item Top-p: 0.9 (nucleus sampling)
+    \item Repetition penalty: 1.0 (reduces repetition)
+    \item Max history: 1000 tokens
+\end{itemize}
+
+\textbf{Conversation Management}:
+\begin{itemize}
+    \item Maintains token-based history across turns
+    \item History truncated when exceeding max length
+    \item No persistence between sessions
+    \item Reset command clears history
+\end{itemize}
+
+\textbf{File Locations}:
+\begin{itemize}
+    \item Code: \texttt{src/infrastructure/ml/chatbots/dialogpt\_chatbot.py}
+    \item Settings: \texttt{src/infrastructure/config/chatbot\_settings.py}
+\end{itemize}
+
+\subsection{RAG-Enhanced System Implementation}
+
+\textbf{Component Architecture}:
+
+\begin{table}[h]
+\centering
+\caption{RAG System Components}
+\begin{tabular}{llc}
+\toprule
+Component & File & Purpose \\
+\midrule
+RAG Chatbot & enhanced\_rag\_chatbot.py & Main orchestration \\
+Memory Service & rag\_memory\_service.py & Qdrant integration \\
+Prompt Builder & enhanced\_prompt\_builder.py & Context assembly \\
+Emotion Service & emotion\_detection\_service.py & 12-emotion detector \\
+Pattern Service & behavior\_pattern\_service.py & 15-pattern detector \\
+Patient Repository & patient\_repository.py & MongoDB integration \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Response Generation Pipeline}:
+
+When a user message is received:
+
+\begin{enumerate}
+    \item \textbf{Analyze Input}: Emotion and behavior pattern detection
+    \item \textbf{Generate Embedding}: Sentence-BERT converts input to 384-dim vector
+    \item \textbf{Retrieve Context}: Qdrant semantic search with user\_id filter
+    \item \textbf{Load Profile}: MongoDB retrieves patient data (if enabled)
+    \item \textbf{Build Prompt}: Assemble context with therapy-optimized template
+    \item \textbf{Generate Response}: Gemini API creates response
+    \item \textbf{Parse JSON}: Extract structured fields from response
+    \item \textbf{Store Data}: Save turn to Qdrant, update MongoDB patterns
+\end{enumerate}
+
+\textbf{Token Tracking}:
+\begin{itemize}
+    \item Input tokens: Retrieved from Gemini usage\_metadata
+    \item Output tokens: Retrieved from Gemini usage\_metadata
+    \item Total tokens: Sum of both
+    \item Context window percentage: (total / 1,048,576) * 100
+    \item Displayed in CLI: \texttt{[1.23s | 📥 245 | 📤 89 | 📊 334 tokens | 📈 0.0318\% context]}
+\end{itemize}
+
+\textbf{Data Isolation Implementation}:
+
+All Qdrant retrievals enforce user\_id filtering:
+\begin{verbatim}
+# Example retrieval filter
+filter = Filter(
+    must=[
+        FieldCondition(key="user_id",
+                      match=MatchValue(value="patient_123")),
+        FieldCondition(key="emotion",
+                      match=MatchValue(value="anxiety"))
+    ]
+)
+\end{verbatim}
+
+This ensures Patient A cannot retrieve Patient B's conversations.
+
+\subsection{Domain Services Implementation}
+
+\subsubsection{Emotion Detection Service}
+
+\textbf{Location}: \texttt{src/domain/services/emotion\_detection\_service.py}
+
+\textbf{Implementation}:
+\begin{itemize}
+    \item 50-100 keywords per emotion category
+    \item Keyword weights for confidence scoring
+    \item Negation handling: "not happy" != "happy"
+    \item Intensity detection: "very sad" > "sad"
+\end{itemize}
+
+\textbf{Detection Example}:
+\begin{verbatim}
+Input: "I've been feeling really lonely and sad lately"
+
+Detected:
+  Primary Emotion: sadness
+  Confidence: 0.78
+  Intensity: medium
+  Sentiment: negative
+  Keywords: ["lonely", "sad", "lately"]
+\end{verbatim}
+
+\subsubsection{Behavior Pattern Service}
+
+\textbf{Location}: \texttt{src/domain/services/behavior\_pattern\_service.py}
+
+\textbf{Implementation}:
+\begin{itemize}
+    \item Keyword and phrase matching per pattern
+    \item Severity assessment based on confidence and keywords
+    \item Historical search via RAG (search\_pattern\_history)
+    \item Trending analysis (get\_trending\_patterns)
+\end{itemize}
+
+\textbf{Detection Example}:
+\begin{verbatim}
+Input: "I don't want to see anyone, just staying home alone"
+
+Detected:
+  Pattern: social_withdrawal
+  Confidence: 0.82
+  Severity: moderate
+  Indicators: ["don't want to see", "staying home alone"]
+\end{verbatim}
+
+\subsection{CLI Interface Implementation}
+
+\textbf{Location}: \texttt{src/interfaces/cli/rag\_chatbot\_cli.py}
+
+\textbf{Features}:
+\begin{itemize}
+    \item Unified interface for all three architectures
+    \item Real-time token usage display
+    \item Response time monitoring
+    \item Structured JSON output in enhanced mode
+    \item Commands: profile, patterns, trends, search, emotions
+\end{itemize}
+
+\textbf{Display Example} (Enhanced Mode):
+\begin{verbatim}
+User: I feel anxious about work
+
+Bot: [Response about work anxiety]
+
+📊 Detected Emotion: anxiety (medium intensity)
+⚠️  Pattern Detected: anxiety_increase (moderate severity)
+🟢 Risk Assessment: LOW
+   Reasoning: Anxiety detected but no crisis indicators
+
+💬 What specific work situations are troubling you?
+
+[1.45s | 📥 312 | 📤 98 | 📊 410 tokens |
+ 📈 0.0391% context | 📚 8 memories]
+\end{verbatim}
+
+\subsection{Code Quality and Organization}
+
+\textbf{Domain-Driven Design Structure}:
+\begin{itemize}
+    \item Domain layer: Business logic independent of infrastructure
+    \item Infrastructure layer: External integrations (APIs, databases)
+    \item Interface layer: CLI and user-facing components
+\end{itemize}
+
+\textbf{Testing}:
+\begin{itemize}
+    \item Text preprocessor: 27 unit tests, 100\% coverage
+    \item Location: \texttt{tests/unit/domain/test\_text\_preprocessor.py}
+\end{itemize}
+
+\textbf{Configuration}:
+\begin{itemize}
+    \item Environment variables via \texttt{python-dotenv}
+    \item Type-safe settings with Pydantic
+    \item 12-Factor App compliance
+\end{itemize}

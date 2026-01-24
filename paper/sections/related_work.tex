@@ -1,0 +1,64 @@
+\section{Related Work}
+\label{sec:related_work}
+
+This section provides context on relevant work in conversational AI, mental health chatbots, and retrieval-augmented generation.
+
+\subsection{Conversational AI Architectures}
+
+\subsubsection{Rule-Based Systems}
+
+Early conversational systems like ELIZA~\cite{weizenbaum1966eliza} demonstrated that simple pattern matching could create engaging conversations, despite no true understanding. AIML~\cite{wallace2009aiml} formalized this approach with XML-based pattern-response rules, enabling large knowledge bases like A.L.I.C.E. These systems remain in use due to their predictability and low resource requirements, though they cannot handle inputs outside predefined patterns.
+
+\subsubsection{Neural Dialogue Models}
+
+The introduction of sequence-to-sequence models~\cite{sutskever2014sequence} enabled data-driven dialogue generation. Models like DialoGPT~\cite{zhang2020dialogpt} adapted GPT-2 specifically for multi-turn conversations by pre-training on Reddit data. More recently, large language models (GPT-3, GPT-4, Claude) have dramatically improved response quality but raise concerns about cost, latency, and control.
+
+\subsubsection{Retrieval-Augmented Generation}
+
+RAG~\cite{lewis2020rag} combines parametric memory (neural models) with non-parametric memory (retrieval from external knowledge). This approach has been applied to dialogue systems to incorporate retrieved context into generation~\cite{gunrock2022}. Our implementation extends this to mental health with domain-specific services (emotion detection, behavior patterns) and patient profile management.
+
+\subsection{Mental Health Chatbots}
+
+\subsubsection{Woebot and Early Systems}
+
+Woebot~\cite{fitzpatrick2017woebot} demonstrated that CBT-based chatbots could provide accessible mental health support using rule-based approaches. Other systems like Wysa~\cite{aggarwal2020wysa} and Tess~\cite{mitchell2021mental} have shown positive user engagement, though most use proprietary architectures not publicly documented.
+
+\subsubsection{Clinical Evaluation}
+
+Several studies have evaluated chatbots for mental health~\cite{powell2020clinical, linden2021comparative}, finding generally positive user experiences but noting limitations in handling complex cases. Crisis intervention remains a significant concern~\cite{deshpande2021crisis}, with most systems providing resources but lacking true clinical assessment.
+
+\subsubsection{Open Challenges}
+
+Key challenges identified in prior work include:
+\begin{itemize}
+    \item Maintaining long-term engagement~\cite{virgine2021retention}
+    \item Handling crisis situations appropriately~\cite{dempsey2021crisis}
+    \item Personalization while maintaining privacy~\cite{fiske2019privacy}
+    \item Cultural and linguistic adaptation~\cite{sharma2020cultural}
+\end{itemize}
+
+Our RAG system addresses some of these through persistent memory and personalization, though crisis handling remains limited to keyword detection and resource provision.
+
+\subsection{Emotion Detection in Text}
+
+Emotion detection from text has been extensively studied using both keyword-based approaches~\cite{Mohammad2021} and neural methods~\cite{bostan2020emotion}. While transformer-based models achieve higher accuracy, keyword approaches offer interpretability that may be valuable in clinical contexts. Our keyword-based service provides this interpretability while maintaining reasonable performance.
+
+\subsection{Behavior Pattern Recognition}
+
+Identifying behavioral health patterns from text is less studied than general emotion detection. Some work has examined depression markers in social media~\cite{depression_choudhury2013social} and therapy transcripts~\cite{hashimoto2016therapy}. Our behavior pattern service implements rule-based detection of 15 patterns based on clinical terminology, though it lacks the validation of prior research systems.
+
+\subsection{Data Privacy in Health Chatbots}
+
+Privacy concerns are paramount in health applications~\cite{price2019privacy}. GDPR and HIPAA impose strict requirements on health data handling. Our implementation of user\_id filtering in all retrieval operations addresses data isolation requirements, though additional measures (encryption at rest, access logging, retention policies) would be needed for full compliance.
+
+\subsection{Our Contribution}
+
+Our work contributes to this landscape by:
+\begin{itemize}
+    \item Providing complete open-source implementations of three architectures
+    \item Demonstrating RAG specifically for mental health with domain services
+    \item Showing practical implementation of data isolation
+    \item Documenting design decisions for reproducibility
+\end{itemize}
+
+Unlike prior work focusing on evaluation of specific systems, we emphasize implementation details and architectural trade-offs to inform future development.

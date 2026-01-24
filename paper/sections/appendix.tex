@@ -1,0 +1,255 @@
+\section*{Appendix}
+\label{sec:appendix}
+
+\subsection{Code Repository Structure}
+
+The complete implementation is available with the following directory structure:
+
+\begin{verbatim}
+src/
+├── domain/                    # Domain layer
+│   ├── models/               # Business entities
+│   │   └── conversation.py
+│   └── services/             # Business logic
+│       ├── text_preprocessor.py
+│       ├── emotion_detection_service.py
+│       └── behavior_pattern_service.py
+├── infrastructure/           # Infrastructure layer
+│   ├── config/              # Configuration (12-Factor)
+│   │   ├── chatbot_settings.py
+│   │   ├── qdrant_settings.py
+│   │   └── mongodb_settings.py
+│   ├── ml/chatbots/         # Chatbot implementations
+│   │   ├── aiml_chatbot.py
+│   │   ├── dialogpt_chatbot.py
+│   │   ├── rag_chatbot.py
+│   │   └── enhanced_rag_chatbot.py
+│   ├── memory/              # RAG memory services
+│   │   ├── rag_memory_service.py
+│   │   └── enhanced_prompt_builder.py
+│   └── database/            # Database repositories
+│       └── patient_repository.py
+└── interfaces/              # Interface layer
+    └── cli/
+        └── rag_chatbot_cli.py
+
+data/knowledge_bases/aiml/   # AIML rule files
+├── therapy.aiml             # Mental health patterns
+└── general.aiml             # General conversation
+
+tests/                       # Test suite
+├── unit/domain/
+│   └── test_text_preprocessor.py
+└── conftest.py
+\end{verbatim}
+
+\subsection{Configuration Example}
+
+\textbf{.env file configuration}:
+
+\begin{verbatim}
+# Gemini API Configuration
+GEMINI_API_KEY=your_api_key_here
+GOOGLE_API_KEY=alternative_key
+
+# Qdrant Vector Database Configuration
+QDRANT_HOST=localhost
+QDRANT_PORT=6333
+QDRANT_COLLECTION=chatbot_memory
+
+# MongoDB Configuration
+MONGODB_URI=mongodb://localhost:27017/
+MONGODB_DATABASE=chatbot_patients
+
+# Chatbot Settings
+MODEL_NAME=gemini-2.0-flash-exp
+TEMPERATURE=0.7
+MAX_TOKENS=1000
+TOP_P=0.9
+\end{verbatim}
+
+\subsection{Running the Chatbots}
+
+\textbf{AIML Chatbot}:
+\begin{verbatim}
+python -m src.interfaces.cli.rag_chatbot_cli \\
+    --mode standard \\
+    --user-id patient_123
+\end{verbatim}
+
+\textbf{DialoGPT Chatbot}:
+\begin{verbatim}
+python -m src.interfaces.cli.rag_chatbot_cli \\
+    --mode neural \\
+    --user-id patient_123
+\end{verbatim}
+
+\textbf{RAG-Enhanced Chatbot}:
+\begin{verbatim}
+python -m src.interfaces.cli.rag_chatbot_cli \\
+    --mode enhanced \\
+    --user-id patient_123 \\
+    --therapy-mode
+\end{verbatim}
+
+\subsection{CLI Commands}
+
+The enhanced mode CLI supports the following commands:
+
+\begin{verbatim}
+help     - Show all available commands
+profile  - Display patient profile from MongoDB
+patterns - Show behavior pattern analysis
+trends   - Show trending behavior patterns (7-day)
+search   - Search past conversations
+emotions - View emotion history
+memory   - View memory statistics
+reset    - Clear conversation history
+quit     - Exit the chatbot
+\end{verbatim}
+
+\subsection{Example Conversation Flows}
+
+\textbf{AIML Example}:
+\begin{verbatim}
+User: I feel anxious
+Bot: Anxiety can feel very overwhelming.
+      What situations or thoughts are making
+      you feel anxious right now?
+
+User: I'm worried about my job
+Bot: Work stress is very common. Can you tell
+      me more about what specifically is
+      worrying you?
+\end{verbatim}
+
+\textbf{RAG-Enhanced Example (with metadata)}:
+\begin{verbatim}
+User: I've been feeling really lonely lately
+
+Bot Response: "I hear that you're experiencing
+loneliness. That's a difficult feeling to carry.
+Can you tell me more about what's happening
+in your life right now?"
+
+Metadata Displayed:
+  📊 Detected Emotion: sadness (medium intensity)
+  ⚠️  Pattern Detected: social_withdrawal (mild severity)
+  🟢 Risk Assessment: LOW
+
+[1.23s | 📥 245 | 📤 89 | 📊 334 tokens |
+ 📈 0.0318% context | 📚 5 memories]
+
+💬 What specific situations are making
+   you feel isolated?
+\end{verbatim}
+
+\subsection{Emotion Categories}
+
+The EmotionDetectionService detects 12 emotion categories:
+
+\begin{itemize}
+    \item \textbf{joy}: Happiness, pleasure, satisfaction
+    \item \textbf{sadness}: Grief, sorrow, unhappiness
+    \item \textbf{anger}: Frustration, irritation, rage
+    \item \textbf{anxiety}: Worry, nervousness, panic
+    \item \textbf{fear}: Phobias, apprehension, terror
+    \item \textbf{disgust}: Revulsion, aversion
+    \item \textbf{surprise}: Shock, amazement
+    \item \textbf{hope}: Optimism, expectation
+    \item \textbf{gratitude}: Appreciation, thankfulness
+    \item \textbf{loneliness}: Isolation, disconnection
+    \item \textbf{frustration}: Blocked goals, irritation
+    \item \textbf{confusion}: Uncertainty, puzzlement
+\end{itemize}
+
+Each detection includes:
+\begin{itemize}
+    \item Primary emotion
+    \item Confidence score (0-1)
+    \item Intensity level (low/medium/high)
+    \item Sentiment (positive/negative/neutral)
+    \item Keywords that triggered detection
+\end{itemize}
+
+\subsection{Behavior Pattern Categories}
+
+The BehaviorPatternService detects 15 mental health patterns:
+
+\begin{itemize}
+    \item social\_withdrawal
+    \item sleep\_disruption
+    \item mood\_swings
+    \item appetite\_change
+    \item anxiety\_increase
+    \item depression\_symptoms
+    \item self\_harm\_risk (critical)
+    \item substance\_use
+    \item irritability
+    \item concentration\_difficulty
+    \item hopelessness
+    \item agitation
+    \item fatigue
+    \item guilt
+    \item avoidance
+\end{itemize}
+
+Each pattern includes:
+\begin{itemize}
+    \item Pattern type
+    \item Confidence score
+    \item Severity (mild/moderate/severe)
+    \item Description
+    \item Keywords/phrases that triggered detection
+\end{itemize}
+
+\subsection{Data Models}
+
+\textbf{PatientProfile (MongoDB)}:
+\begin{verbatim}
+{
+    "user_id": "patient_123",
+    "name": "John Doe",
+    "created_at": "2026-01-24T10:00:00Z",
+    "demographics": {...},
+    "known_triggers": ["work stress", "social isolation"],
+    "treatment_goals": ["reduce anxiety", "improve sleep"],
+    "emotion_summary": {...},
+    "behavior_patterns": [...],
+    "risk_level": "medium",
+    "session_notes": [...]
+}
+\end{verbatim}
+
+\textbf{Qdrant Point Payload}:
+\begin{verbatim}
+{
+    "user_id": "patient_123",
+    "session_id": "session_456",
+    "role": "user",  # or "assistant"
+    "text": "I'm feeling anxious today",
+    "timestamp": "2026-01-24T10:05:00Z",
+    "emotion": "anxiety",
+    "emotion_confidence": 0.85,
+    "emotion_intensity": "medium",
+    "sentiment": "negative",
+    "behavior_patterns": ["anxiety_increase"],
+    "next_question": "What's making you feel anxious?"
+}
+\end{verbatim}
+
+\subsection{Dependencies}
+
+\textbf{Key Python Packages}:
+\begin{itemize}
+    \item \texttt{aiml}: Rule-based pattern matching
+    \item \texttt{transformers}: DialoGPT model and tokenizer
+    \item \texttt{qdrant-client}: Vector database client
+    \item \texttt{pymongo}: MongoDB client
+    \item \texttt{google-genai}: Gemini API client
+    \item \texttt{sentence-transformers}: Sentence-BERT embeddings
+    \item \texttt{nltk}: Text preprocessing
+    \item \texttt{python-dotenv}: Environment configuration
+\end{itemize}
+
+\textbf{Full dependency list}: See \texttt{requirements.txt} in the repository root.
