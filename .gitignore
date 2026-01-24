@@ -34,6 +34,7 @@ venv/
 ENV/
 env/
 .venv
+.envs/
 
 # ============================================================
 # 12-Factor: Environment Variables (NEVER commit!)
@@ -41,6 +42,9 @@ env/
 .env
 .env.local
 .env.*.local
+.env.chatbot
+.env.production
+.env.development
 
 # ============================================================
 # Data (12-Factor: Backing Services)
@@ -55,6 +59,20 @@ data/hf_cache/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !data/embeddings/.gitkeep
+
+# ============================================================
+# Vector Database Storage (Qdrant)
+# ============================================================
+qdrant_storage/
+data/qdrant_db/
+*.qdrant
+
+# ============================================================
+# MongoDB Data
+# ============================================================
+mongo_data/
+mongodb_data/
+*.mongod_lock
 
 # ============================================================
 # Models (12-Factor: Build Artifacts)
@@ -72,12 +90,23 @@ models/cache/*
 *.h5
 *.pkl
 *.pickle
+*.safetensors
+
+# ============================================================
+# Sentence Transformers & Embeddings Cache
+# ============================================================
+.cache/
+transformers_cache/
+sentence_transformers/
+*.bert
+*.roberta
 
 # ============================================================
 # Logs (12-Factor: Treat logs as streams)
 # ============================================================
 logs/
 *.log
+*.log.*
 
 # ============================================================
 # Jupyter Notebooks
@@ -99,24 +128,29 @@ logs/
 *.swo
 *~
 .DS_Store
+*.code-workspace
+.settings/
 
 # ============================================================
 # Testing
 # ============================================================
 .pytest_cache/
 .coverage
+.coverage.*
 htmlcov/
 .tox/
 .hypothesis/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+.pytest_cache/
 
 # ============================================================
 # Documentation Build
 # ============================================================
 docs/_build/
 docs/.doctrees/
+site/
 
 # ============================================================
 # LaTeX
@@ -141,6 +175,7 @@ temp/
 *.tmp
 *.bak
 *.swp
+*.cache
 
 # ============================================================
 # OS Files
@@ -148,12 +183,14 @@ temp/
 Thumbs.db
 .DS_Store
 desktop.ini
+.Spotlight-V100
+.Trashes
 
 # ============================================================
 # HuggingFace Cache
 # ============================================================
-.cache/
 transformers_cache/
+hub/
 
 # ============================================================
 # Generated Files
@@ -165,5 +202,30 @@ requirements_full.txt
 # Ignore old structure files (migration)
 # ============================================================
 src/data/preprocessor.py.backup
+*.backup
+*.old
 
-data/qdrant_db
+# ============================================================
+# Database Lock Files
+# ============================================================
+*.lock
+*.db-wal
+*.db-shm
+mongod.lock
+WiredTiger.lock
+storage.bson
+
+# ============================================================
+# Profiling & Benchmarking
+# ============================================================
+*.prof
+*.pstats
+profile/
+benchmarks/
+
+# ============================================================
+# PyCharm
+# ============================================================
+.idea/
+*.iml
+out/

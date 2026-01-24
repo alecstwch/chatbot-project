@@ -11,8 +11,10 @@ from pathlib import Path
 from typing import List, Tuple, Optional
 
 from src.infrastructure.ml.chatbots.rag_chatbot import RAGChatbot
+from src.infrastructure.ml.chatbots.enhanced_rag_chatbot import EnhancedRAGChatbot
 from src.infrastructure.config.chatbot_settings import NeuralChatbotSettings
 from src.infrastructure.config.qdrant_settings import QdrantSettings
+from src.infrastructure.config.mongodb_settings import MongoDBSettings
 
 
 class RAGChatbotCLI:
@@ -28,64 +30,105 @@ class RAGChatbotCLI:
         user_id: str = "default_user",
         user_name: Optional[str] = None,
         use_therapy_mode: bool = False,
-        use_local_qdrant: bool = True
+        use_local_qdrant: bool = True,
+        use_enhanced_mode: bool = True
     ):
         """
         Initialize the CLI with RAG chatbot.
-        
+
         Args:
             user_id: Unique user identifier for memory
             user_name: Display name for personalization
             use_therapy_mode: Use therapy-optimized prompts
             use_local_qdrant: Use local file storage instead of server
+            use_enhanced_mode: Use enhanced mode with MongoDB and emotion detection
         """
         # Load settings
         settings = NeuralChatbotSettings()
-        
+
         qdrant_settings = QdrantSettings()
         if use_local_qdrant:
             qdrant_settings.use_local_storage = True
             qdrant_settings.local_path = "./data/qdrant_db"
-        
-        # Initialize chatbot
-        self.chatbot = RAGChatbot(
-            settings=settings,
-            qdrant_settings=qdrant_settings,
-            user_id=user_id,
-            user_name=user_name,
-            use_therapy_mode=use_therapy_mode
-        )
-        
+
+        # Initialize chatbot based on mode
+        self.use_enhanced_mode = use_enhanced_mode
         self.user_id = user_id
         self.user_name = user_name
         self.use_therapy_mode = use_therapy_mode
         self.conversation_history: List[Tuple[str, str]] = []
         self.running = False
+
+        if use_enhanced_mode:
+            # Enhanced mode with MongoDB and emotion detection
+            mongodb_settings = MongoDBSettings()
+            self.chatbot = EnhancedRAGChatbot(
+                settings=settings,
+                qdrant_settings=qdrant_settings,
+                mongodb_settings=mongodb_settings,
+                user_id=user_id,
+                user_name=user_name,
+                use_therapy_mode=use_therapy_mode
+            )
+        else:
+            # Standard RAG mode
+            self.chatbot = RAGChatbot(
+                settings=settings,
+                qdrant_settings=qdrant_settings,
+                user_id=user_id,
+                user_name=user_name,
+                use_therapy_mode=use_therapy_mode
+            )
     
     def print_welcome(self) -> None:
         """Display welcome message and instructions."""
         print("\n" + "=" * 70)
-        print("  🧠 RAG-Enhanced Conversational Bot")
+        if self.use_enhanced_mode:
+            print("  🧠 Enhanced RAG Chatbot (Patient Data + Emotion Tracking)")
+        else:
+            print("  🧠 RAG-Enhanced Conversational Bot")
         print("=" * 70)
-        
+
         mode = "Therapy Support" if self.use_therapy_mode else "General Conversation"
         print(f"\nMode: {mode}")
         print(f"User: {self.user_name or self.user_id}")
-        
+
+        if self.use_enhanced_mode:
+            print(f"✨ Enhanced Mode: Emotion detection + MongoDB patient files")
+            if hasattr(self.chatbot, 'is_mongodb_enabled') and self.chatbot.is_mongodb_enabled():
+                profile = self.chatbot.get_patient_profile()
+                if profile:
+                    print(f"👤 Patient Profile: Loaded")
+                    if profile.get('risk_level'):
+                        risk_emojis = {"low": "🟢", "medium": "🟡", "high": "🟠", "critical": "🔴"}
+                        print(f"   Risk Level: {risk_emojis.get(profile['risk_level'], '⚪')} {profile['risk_level'].upper()}")
+                    if profile.get('total_conversations', 0) > 0:
+                        print(f"   Previous Sessions: {profile['total_conversations']}")
+
         if self.chatbot.is_rag_enabled():
             stats = self.chatbot.get_memory_stats()
             print(f"📚 Memory: {stats.get('message_count', 0)} stored messages")
         else:
             print("⚠️  Memory: Disabled (Qdrant not connected)")
-        
+
         print("\n" + "-" * 70)
-        print("This chatbot remembers your past conversations and uses them")
-        print("to provide personalized, context-aware responses.")
+        if self.use_enhanced_mode:
+            print("This chatbot provides:")
+            print("  • Emotion detection and tracking")
+            print("  • Behavior pattern analysis")
+            print("  • Personalized responses using past context")
+            print("  • Patient profile management")
+        else:
+            print("This chatbot remembers your past conversations and uses them")
+            print("to provide personalized, context-aware responses.")
         print("-" * 70)
-        
+
         print("\nCommands:")
         print("  help     - Show all commands")
         print("  search   - Search past conversations")
+        if self.use_enhanced_mode:
+            print("  emotions - View emotion history")
+            print("  profile  - View patient profile")
         print("  memory   - View memory statistics")
         print("  quit     - Exit the chatbot")
         print("\n" + "-" * 70 + "\n")
@@ -156,12 +199,22 @@ class RAGChatbotCLI:
         if command == 'forget':
             self.forget_user_data()
             return False
-        
+
+        if command == 'emotions':
+            if self.use_enhanced_mode:
+                self.show_emotion_summary()
+            return False
+
+        if command == 'profile':
+            if self.use_enhanced_mode:
+                self.show_patient_profile()
+            return False
+
         if command == 'clear':
             os.system('cls' if os.name == 'nt' else 'clear')
             self.print_welcome()
             return False
-        
+
         return False
     
     def print_history(self) -> None:
@@ -392,7 +445,105 @@ class RAGChatbotCLI:
                 print("❌ Failed to delete data.\n")
         else:
             print("Cancelled.\n")
-    
+
+    def show_emotion_summary(self) -> None:
+        """Display emotion summary for enhanced mode."""
+        if not self.use_enhanced_mode or not hasattr(self.chatbot, 'get_emotion_summary'):
+            print("\n⚠️  Emotion tracking not available in this mode.\n")
+            return
+
+        summary = self.chatbot.get_emotion_summary()
+
+        if not summary:
+            print("\n📭 No emotion data available yet.\n")
+            return
+
+        print("\n" + "=" * 50)
+        print("Emotion Summary")
+        print("=" * 50)
+
+        if summary.get("most_common_emotion"):
+            print(f"Most Common Emotion: {summary['most_common_emotion']}")
+
+        if summary.get("emotion_distribution"):
+            print("\nEmotion Distribution:")
+            for emotion, count in summary["emotion_distribution"].items():
+                print(f"  - {emotion}: {count} occurrences")
+
+        if summary.get("intensity_distribution"):
+            print("\nIntensity Distribution:")
+            for intensity, count in summary["intensity_distribution"].items():
+                print(f"  - {intensity}: {count} occurrences")
+
+        if summary.get("sentiment_distribution"):
+            sentiment = summary["sentiment_distribution"]
+            print(f"\nSentiment: {sentiment.get('positive', 0)} positive, "
+                  f"{sentiment.get('negative', 0)} negative, "
+                  f"{sentiment.get('neutral', 0)} neutral")
+
+        print(f"\nTotal Messages Analyzed: {summary.get('total_messages_analyzed', 0)}")
+        print("=" * 50 + "\n")
+
+    def show_patient_profile(self) -> None:
+        """Display patient profile information."""
+        if not self.use_enhanced_mode or not hasattr(self.chatbot, 'get_patient_profile'):
+            print("\n⚠️  Patient profile not available in this mode.\n")
+            return
+
+        profile = self.chatbot.get_patient_profile()
+
+        if not profile:
+            print("\n📭 No patient profile found.\n")
+            return
+
+        print("\n" + "=" * 50)
+        print("Patient Profile")
+        print("=" * 50)
+
+        if profile.get("name"):
+            print(f"Name: {profile['name']}")
+        print(f"User ID: {profile['user_id']}")
+
+        if profile.get("age"):
+            print(f"Age: {profile['age']}")
+
+        if profile.get("known_conditions"):
+            print(f"\nKnown Conditions:")
+            for condition in profile['known_conditions']:
+                print(f"  - {condition}")
+
+        if profile.get("medications"):
+            print(f"\nMedications:")
+            for med in profile['medications']:
+                print(f"  - {med}")
+
+        if profile.get("triggers"):
+            print(f"\nKnown Triggers:")
+            for trigger in profile['triggers']:
+                print(f"  - {trigger}")
+
+        if profile.get("behavior_patterns"):
+            print(f"\nDetected Behavior Patterns:")
+            for pattern in profile['behavior_patterns']:
+                pattern_type = pattern.get("pattern_type", "unknown")
+                severity = pattern.get("severity", "unknown")
+                frequency = pattern.get("frequency", 0)
+                print(f"  - {pattern_type}: {severity} severity ({frequency} occurrences)")
+
+        risk_level = profile.get("risk_level", "low")
+        risk_emojis = {"low": "🟢", "medium": "🟡", "high": "🟠", "critical": "🔴"}
+        print(f"\nRisk Level: {risk_emojis.get(risk_level, '⚪')} {risk_level.upper()}")
+
+        if profile.get("total_conversations", 0) > 0:
+            print(f"Total Sessions: {profile['total_conversations']}")
+
+        if profile.get("treatment_goals"):
+            print(f"\nTreatment Goals:")
+            for goal in profile['treatment_goals']:
+                print(f"  - {goal}")
+
+        print("=" * 50 + "\n")
+
     def run(self) -> None:
         """Run the interactive chat loop."""
         self.print_welcome()
@@ -420,29 +571,85 @@ class RAGChatbotCLI:
                     continue
                 
                 # Check for commands
-                if user_input.lower() in ['quit', 'exit', 'bye', 'help', 'reset', 
-                                          'history', 'search', 'memory', 'data', 'alldata', 'forget', 'clear']:
+                commands = ['quit', 'exit', 'bye', 'help', 'reset',
+                           'history', 'search', 'memory', 'data', 'alldata', 'forget', 'clear']
+                if self.use_enhanced_mode:
+                    commands.extend(['emotions', 'profile'])
+
+                if user_input.lower() in commands:
                     if self.process_command(user_input):
                         break
                     continue
-                
+
                 # Get bot response
                 print("🤖 Thinking...", end='\r')
-                response = self.chatbot.get_response(user_input)
-                
-                # Get stats
-                resp_time, tokens, tok_per_sec = self.chatbot.get_benchmark_stats()
-                context_count = self.chatbot.get_last_context_count()
-                
-                # Display response
-                print(f"Bot: {response}")
-                
-                # Display metrics
-                memory_indicator = f"📚 {context_count}" if context_count > 0 else "📝 0"
-                print(f"[{resp_time:.2f}s | {tokens} tokens | {memory_indicator} memories used]\n")
-                
-                # Save to local history
-                self.conversation_history.append((user_input, response))
+
+                if self.use_enhanced_mode:
+                    # Enhanced mode returns structured JSON
+                    response_data = self.chatbot.get_response(user_input)
+
+                    # Get stats
+                    resp_time, tokens, tok_per_sec = self.chatbot.get_benchmark_stats()
+                    context_count = self.chatbot.get_last_context_count()
+
+                    # Display response
+                    response_text = response_data.get("response", "")
+                    next_question = response_data.get("next_question", "")
+                    behavior_update = response_data.get("behavior_update")
+                    emotion_update = response_data.get("emotion_update")
+                    risk_assessment = response_data.get("risk_assessment", {})
+
+                    print(f"\nBot: {response_text}")
+
+                    # Display next question
+                    if next_question:
+                        print(f"\n💬 {next_question}")
+
+                    # Display emotion info
+                    if emotion_update:
+                        emotion = emotion_update.get("primary_emotion", "neutral")
+                        intensity = emotion_update.get("intensity", "low")
+                        print(f"\n📊 Detected Emotion: {emotion} ({intensity} intensity)")
+
+                    # Display behavior pattern update
+                    if behavior_update:
+                        pattern_type = behavior_update.get("pattern_type", "")
+                        severity = behavior_update.get("severity", "")
+                        print(f"\n⚠️  Pattern Detected: {pattern_type} ({severity} severity)")
+
+                    # Display risk assessment
+                    if risk_assessment:
+                        level = risk_assessment.get("level", "low")
+                        risk_emojis = {"low": "🟢", "medium": "🟡", "high": "🟠", "critical": "🔴"}
+                        emoji = risk_emojis.get(level, "⚪")
+                        print(f"\n{emoji} Risk Assessment: {level.upper()}")
+                        if risk_assessment.get("reasoning"):
+                            print(f"   Reasoning: {risk_assessment['reasoning']}")
+
+                    # Display metrics
+                    memory_indicator = f"📚 {context_count}" if context_count > 0 else "📝 0"
+                    print(f"\n[{resp_time:.2f}s | {tokens} tokens | {memory_indicator} memories]\n")
+
+                    # Save to local history
+                    self.conversation_history.append((user_input, response_text))
+
+                else:
+                    # Standard mode
+                    response = self.chatbot.get_response(user_input)
+
+                    # Get stats
+                    resp_time, tokens, tok_per_sec = self.chatbot.get_benchmark_stats()
+                    context_count = self.chatbot.get_last_context_count()
+
+                    # Display response
+                    print(f"Bot: {response}")
+
+                    # Display metrics
+                    memory_indicator = f"📚 {context_count}" if context_count > 0 else "📝 0"
+                    print(f"[{resp_time:.2f}s | {tokens} tokens | {memory_indicator} memories used]\n")
+
+                    # Save to local history
+                    self.conversation_history.append((user_input, response))
                 
             except KeyboardInterrupt:
                 print("\n\n🤖 Interrupted. Goodbye!")
@@ -499,20 +706,35 @@ def main():
         default=6333,
         help='Qdrant server port (default: 6333)'
     )
-    
+    parser.add_argument(
+        '--enhanced',
+        action='store_true',
+        default=True,
+        help='Use enhanced mode with MongoDB and emotion detection (default: True)'
+    )
+    parser.add_argument(
+        '--standard',
+        action='store_true',
+        help='Use standard RAG mode without MongoDB and emotion detection'
+    )
+
     args = parser.parse_args()
-    
+
     # Set Qdrant environment variables if using server
     if args.qdrant_server:
         os.environ['QDRANT_USE_LOCAL_STORAGE'] = 'false'
         os.environ['QDRANT_HOST'] = args.qdrant_host
         os.environ['QDRANT_PORT'] = str(args.qdrant_port)
-    
+
+    # Determine mode: enhanced (default) or standard
+    use_enhanced = not args.standard  # Enhanced is default, use --standard to disable
+
     cli = RAGChatbotCLI(
         user_id=args.user_id,
         user_name=args.user_name,
         use_therapy_mode=args.therapy,
-        use_local_qdrant=not args.qdrant_server
+        use_local_qdrant=not args.qdrant_server,
+        use_enhanced_mode=use_enhanced
     )
     cli.run()
 

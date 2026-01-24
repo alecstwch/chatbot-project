@@ -197,36 +197,48 @@ class RAGMemoryService:
         user_message: str,
         assistant_message: str,
         session_id: Optional[str] = None,
-        user_intent: Optional[str] = None
+        user_intent: Optional[str] = None,
+        emotion_data: Optional[Dict[str, Any]] = None
     ) -> tuple:
         """
         Store both user and assistant messages from a conversation turn.
-        
+
         Args:
             user_id: Unique user identifier
             user_message: User's message
             assistant_message: Assistant's response
             session_id: Optional session identifier
             user_intent: Optional detected intent for user message
-            
+            emotion_data: Optional emotion analysis data for user message
+
         Returns:
             Tuple of (user_message_id, assistant_message_id)
         """
+        # Prepare metadata with emotion data
+        user_metadata = {}
+        if emotion_data:
+            user_metadata["emotion"] = emotion_data.get("primary_emotion")
+            user_metadata["emotion_confidence"] = emotion_data.get("confidence")
+            user_metadata["emotion_intensity"] = emotion_data.get("intensity")
+            user_metadata["sentiment"] = emotion_data.get("sentiment")
+            user_metadata["emotion_keywords"] = emotion_data.get("keywords", [])
+
         user_msg_id = self.store_message(
             user_id=user_id,
             message=user_message,
             role="user",
             session_id=session_id,
-            intent=user_intent
+            intent=user_intent,
+            metadata=user_metadata if user_metadata else None
         )
-        
+
         assistant_msg_id = self.store_message(
             user_id=user_id,
             message=assistant_message,
             role="assistant",
             session_id=session_id
         )
-        
+
         return user_msg_id, assistant_msg_id
     
     def retrieve_relevant_context(
@@ -388,7 +400,221 @@ class RAGMemoryService:
         except Exception as e:
             logger.error(f"Failed to search by intent: {e}")
             return []
-    
+
+    def search_by_emotion(
+        self,
+        user_id: str,
+        emotion: str,
+        top_k: int = 10,
+        intensity: Optional[str] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        Search messages by detected emotion.
+
+        IMPORTANT: This method filters by BOTH user_id AND emotion to ensure
+        data isolation between patients. You will ONLY get messages from the
+        specified user, not all users with the same emotion.
+
+        Args:
+            user_id: User identifier (REQUIRED for data isolation)
+            emotion: Emotion to filter by (e.g., "joy", "sadness", "anxiety")
+            top_k: Maximum results
+            intensity: Optional intensity filter ("low", "medium", "high")
+
+        Returns:
+            List of matching messages from the specified user only
+        """
+        if not self._initialized:
+            raise RuntimeError("RAG Memory Service not initialized.")
+
+        try:
+            # Build filter - MUST include user_id for data isolation
+            # This ensures we only retrieve messages from THIS patient, not all patients
+            filter_conditions = [
+                FieldCondition(key="user_id", match=MatchValue(value=user_id)),
+                FieldCondition(key="emotion", match=MatchValue(value=emotion))
+            ]
+
+            if intensity:
+                filter_conditions.append(
+                    FieldCondition(key="emotion_intensity", match=MatchValue(value=intensity))
+                )
+
+            query_filter = Filter(must=filter_conditions)
+
+            # Use scroll to get all matching points
+            results, _ = self.client.scroll(
+                collection_name=self.collection_name,
+                scroll_filter=query_filter,
+                limit=top_k,
+                with_payload=True
+            )
+
+            logger.debug(
+                f"Retrieved {len(results)} messages for user '{user_id}' "
+                f"with emotion '{emotion}' (data isolation enforced)"
+            )
+
+            return [
+                {
+                    "id": r.id,
+                    "content": r.payload.get("text", ""),
+                    "role": r.payload.get("role"),
+                    "emotion": r.payload.get("emotion"),
+                    "emotion_confidence": r.payload.get("emotion_confidence"),
+                    "emotion_intensity": r.payload.get("emotion_intensity"),
+                    "sentiment": r.payload.get("sentiment"),
+                    "timestamp": r.payload.get("timestamp"),
+                }
+                for r in results
+            ]
+
+        except Exception as e:
+            logger.error(f"Failed to search by emotion: {e}")
+            return []
+
+    def retrieve_by_emotion_context(
+        self,
+        user_id: str,
+        query: str,
+        target_emotion: Optional[str] = None,
+        top_k: int = 5,
+        min_similarity: float = 0.4
+    ) -> List[Dict[str, Any]]:
+        """
+        Retrieve messages with semantic similarity AND optional emotion filter.
+
+        IMPORTANT: This method ALWAYS filters by user_id to ensure data isolation
+        between patients. Even when filtering by emotion, you will ONLY get messages
+        from the specified user, not all users with the same emotion.
+
+        This is useful for finding similar emotional states from the past.
+        For example, finding past times the user felt similarly to now.
+
+        Args:
+            user_id: User identifier (REQUIRED - ensures patient data isolation)
+            query: Current message to find similar contexts for
+            target_emotion: Optional emotion to filter by (finds similar past states
+                          for THIS USER ONLY)
+            top_k: Maximum results
+            min_similarity: Minimum similarity threshold
+
+        Returns:
+            List of relevant past messages from the specified user only,
+            with emotion metadata
+        """
+        if not self._initialized:
+            raise RuntimeError("RAG Memory Service not initialized.")
+
+        top_k = top_k or self.settings.search_limit
+
+        try:
+            # Create query embedding
+            query_embedding = self.embedder.encode(query).tolist()
+
+            # Build filter - user_id is ALWAYS required for data isolation
+            # This ensures we only search within THIS patient's messages
+            filter_conditions = [
+                FieldCondition(key="user_id", match=MatchValue(value=user_id))
+            ]
+
+            # Add emotion filter if specified (still scoped to this user only)
+            if target_emotion:
+                filter_conditions.append(
+                    FieldCondition(key="emotion", match=MatchValue(value=target_emotion))
+                )
+
+            # Search using query_points
+            results = self.client.query_points(
+                collection_name=self.collection_name,
+                query=query_embedding,
+                query_filter=Filter(must=filter_conditions) if filter_conditions else None,
+                limit=top_k,
+                with_payload=True
+            )
+
+            # Format results with emotion metadata
+            relevant_messages = []
+            for result in results.points:
+                similarity = result.score
+
+                if similarity >= min_similarity:
+                    relevant_messages.append({
+                        "id": result.id,
+                        "content": result.payload.get("text", ""),
+                        "role": result.payload.get("role", "user"),
+                        "similarity": similarity,
+                        "emotion": result.payload.get("emotion"),
+                        "emotion_confidence": result.payload.get("emotion_confidence"),
+                        "emotion_intensity": result.payload.get("emotion_intensity"),
+                        "sentiment": result.payload.get("sentiment"),
+                        "timestamp": result.payload.get("timestamp"),
+                        "session_id": result.payload.get("session_id"),
+                    })
+
+            logger.debug(
+                f"Retrieved {len(relevant_messages)} messages for user '{user_id}' "
+                f"with emotion filter='{target_emotion or 'all'}' "
+                f"(data isolation enforced)"
+            )
+            return relevant_messages
+
+        except Exception as e:
+            logger.error(f"Failed to retrieve by emotion context: {e}")
+            return []
+
+    def get_emotion_summary(
+        self,
+        user_id: str,
+        limit: int = 100
+    ) -> Dict[str, Any]:
+        """
+        Get emotion distribution summary for a user.
+
+        Args:
+            user_id: User identifier
+            limit: Maximum messages to analyze
+
+        Returns:
+            Dictionary with emotion statistics
+        """
+        if not self._initialized:
+            return {}
+
+        try:
+            # Get all user messages
+            messages = self.get_all_user_messages(user_id, limit=limit)
+
+            # Count emotions
+            emotion_counts = {}
+            intensity_counts = {}
+            sentiment_counts = {"positive": 0, "negative": 0, "neutral": 0}
+
+            for msg in messages:
+                # Emotion data is now at top level, not nested in metadata
+                emotion = msg.get("emotion")
+                if emotion:
+                    emotion_counts[emotion] = emotion_counts.get(emotion, 0) + 1
+
+                intensity = msg.get("emotion_intensity")
+                if intensity:
+                    intensity_counts[intensity] = intensity_counts.get(intensity, 0) + 1
+
+                sentiment = msg.get("sentiment")
+                if sentiment:
+                    sentiment_counts[sentiment] += 1
+
+            return {
+                "emotion_distribution": emotion_counts,
+                "intensity_distribution": intensity_counts,
+                "sentiment_distribution": sentiment_counts,
+                "total_messages_analyzed": len(messages)
+            }
+
+        except Exception as e:
+            logger.error(f"Failed to get emotion summary: {e}")
+            return {}
+
     def get_user_message_count(self, user_id: str) -> int:
         """
         Get total messages stored for a user.
@@ -493,6 +719,12 @@ class RAGMemoryService:
                     "timestamp": r.payload.get("timestamp", ""),
                     "session_id": r.payload.get("session_id", ""),
                     "intent": r.payload.get("intent"),
+                    # Emotion metadata (stored directly in payload)
+                    "emotion": r.payload.get("emotion"),
+                    "emotion_confidence": r.payload.get("emotion_confidence"),
+                    "emotion_intensity": r.payload.get("emotion_intensity"),
+                    "sentiment": r.payload.get("sentiment"),
+                    "emotion_keywords": r.payload.get("emotion_keywords", []),
                 }
                 for r in results
             ]
@@ -540,6 +772,12 @@ class RAGMemoryService:
                     "text": r.payload.get("text", ""),
                     "timestamp": r.payload.get("timestamp", ""),
                     "session_id": r.payload.get("session_id", ""),
+                    # Emotion metadata (stored directly in payload)
+                    "emotion": r.payload.get("emotion"),
+                    "emotion_confidence": r.payload.get("emotion_confidence"),
+                    "emotion_intensity": r.payload.get("emotion_intensity"),
+                    "sentiment": r.payload.get("sentiment"),
+                    "emotion_keywords": r.payload.get("emotion_keywords", []),
                 }
                 for r in results
             ]
